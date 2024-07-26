@@ -1,17 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NotFound from './Pages/404/NotFound';
+import Layout from './ThemeLayout/Layout';
+import Login from './Pages/Authentication/User/Login';
+import Signup from './Pages/Authentication/User/Signup';
+import UserDashboard from './Pages/Dashboard/UserDashboard';
+import FinishSignup from './Pages/Authentication/User/FinishSignup';
+import ForgotPassword from './Pages/Authentication/User/ForgotPassword';
+import VerifyCode from './Pages/Authentication/User/VerifyCode';
+import ConfirmPassword from './Pages/Authentication/User/ConfirmPassword';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/dashboard" element={<UserDashboard />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/finish-signup" element={<FinishSignup />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/verify-code" element={<VerifyCode />} />
+        <Route path="/confirm-password" element={<ConfirmPassword />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

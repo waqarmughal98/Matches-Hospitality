@@ -1,3 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* @font-face {
+  font-family: "JumperPERSONALUSEONLY-Regular";
+  src: local("JumperPERSONALUSEONLY-Regular"),
+       url("./assets/fonts/JumperPERSONALUSEONLY-Regular.ttf") format("truetype");
+} */
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
