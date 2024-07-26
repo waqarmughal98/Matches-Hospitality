@@ -2,7 +2,8 @@ import React from 'react'
 
 const Sidebar = () => {
   return (
-    <div><div class="hidden md:flex flex-col w-24 bg-gray-800 min-h-screen">
+    <div>
+        <div class="hidden md:flex flex-col w-24 bg-gray-800 min-h-screen">
     <div class="flex items-center justify-center h-[4.7rem] bg-gray-900">
         {/* <span class="text-white font-bold uppercase">Sidebar</span> */}
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-white" fill="none" viewBox="0 0 24 24"

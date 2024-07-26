@@ -1,6 +1,5 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
-import ProfileDropdown from '../Components/UiElements/Dropdowns';
 import Sidebar from '../Components/Menu/Sidebar';
 import Navbar from '../Components/Menu/Navbar';
 
