@@ -3,7 +3,14 @@ import AuthLayout from '../../../ThemeLayout/AuthLayout'
 import loginBanner from '../../../../src/assets/svgs/auth/codeBanner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
 import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
-const VerifyCode = () => {
+import { useNavigate } from 'react-router-dom'
+
+const VerifyCode = () => {   
+    const navigate = useNavigate()
+    const handleClick=()=>{
+        navigate('/confirm-password')
+    }
+
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
@@ -34,7 +41,7 @@ const VerifyCode = () => {
                             </div>
                         </div>
                         <div className='col-span-12'>
-                            <PrimaryButton size='large' color='green'>
+                            <PrimaryButton onClick={handleClick} size='large' color='green'>
                                 Confirm Code
                             </PrimaryButton>
                         </div>
