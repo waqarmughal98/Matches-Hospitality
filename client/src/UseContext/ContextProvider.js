@@ -9,11 +9,21 @@ export const ContextProvider = ({ children }) => {
     email : "",
     password : ""
   })
+  const [ forgetPassworddata, setforgetPassworddata] = useState({
+    email : "",
+    otp : "",
+    new_password : ""
+  })
 
 
   const signUpDetailsSetter = (e) =>{
     const { name , value } = e.target
     setSignUpDetails((pre)=>({...pre,[name]:value}))
+ }
+
+  const forgetPasswordsSetter = (e) =>{
+    const { name , value } = e.target
+    setforgetPassworddata((pre)=>({...pre,[name]:value}))
  }
   
  const isEmailValidate = (email) => {
@@ -37,7 +47,10 @@ export const ContextProvider = ({ children }) => {
         signUpDetails, 
         setSignUpDetails,
         signUpDetailsSetter,
-        isEmailValidate
+        isEmailValidate,
+        forgetPassworddata,
+        setforgetPassworddata,
+        forgetPasswordsSetter
       }}>
       {children}
     </AppContext.Provider>
