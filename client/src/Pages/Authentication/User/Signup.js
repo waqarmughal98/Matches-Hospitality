@@ -6,8 +6,23 @@ import { PrimaryButton, SecondaryButton, SSOButton } from '../../../Components/U
 import { LabelInput } from '../../../Components/UiElements/TextInputs'
 import google from '../../../../src/assets/svgs/auth/google.svg'
 import apple from '../../../../src/assets/svgs/auth/apple.svg'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../../../UseContext/ContextProvider'
+import { toast } from 'react-toastify';
 const Signup = () => {
+  const { signUpDetails,signUpDetailsSetter}  = useAppContext()
+  const navigate = useNavigate();
+  const handleClick = () => {
+
+    navigate('/finish-signup'); 
+    toast.success("so easy", {
+        autoClose: 2000,
+        hideProgressBar: true,
+        theme:'dark'
+      });
+
+  };
+
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
@@ -23,15 +38,13 @@ const Signup = () => {
                             Sign Up/Sign In
                         </div>
                         <div className='col-span-12'>
-                            <LabelInput label='Email Address' />
+                            <LabelInput name="email" value={signUpDetails.email}  onChange={(e)=>signUpDetailsSetter(e)} label='Email Address' />
                         </div>
                         <div className='col-span-12 pb-10'>
                             <div className='grid grid-cols-12 gap-5'>
                                 <div className='col-span-12'>
-                                    <PrimaryButton size='large' color='green'>
-                                        <Link to={'/finish-signup'}>
-                                        Get Started
-                                        </Link>
+                                    <PrimaryButton  onClick={handleClick}  disabled={!signUpDetails.email} size='large' color='green'>
+                                            Get Started
                                     </PrimaryButton>
                                 </div>
                                 <div className='col-span-12'>

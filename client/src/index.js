@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { ModalProvider } from './UseContext/ModalProvider';
+import { ContextProvider } from './UseContext/ContextProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ModalProvider>
+    <ContextProvider>
       <App />
-    </ModalProvider>
+    </ContextProvider>
   </React.StrictMode>
 );
 

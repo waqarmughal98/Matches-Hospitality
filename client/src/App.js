@@ -9,6 +9,8 @@ import FinishSignup from './Pages/Authentication/User/FinishSignup';
 import ForgotPassword from './Pages/Authentication/User/ForgotPassword';
 import VerifyCode from './Pages/Authentication/User/VerifyCode';
 import ConfirmPassword from './Pages/Authentication/User/ConfirmPassword';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -26,6 +28,7 @@ const App = () => {
         <Route path="/confirm-password" element={<ConfirmPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ToastContainer autoClose={2000} theme="dark"  hideProgressBar={true} />
     </BrowserRouter>
   );
 };

@@ -4,7 +4,9 @@ import loginBanner from '../../../../src/assets/svgs/auth/finishBanner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
 import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
 import { LabelInput } from '../../../Components/UiElements/TextInputs'
+import { useAppContext } from '../../../UseContext/ContextProvider'
 const FinishSignup = () => {
+    const {signUpDetails, signUpDetailsSetter} = useAppContext()
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
@@ -24,13 +26,13 @@ const FinishSignup = () => {
                                 <div className='col-span-12 text-sm text-white '>
                                     You’re creating an account with {" "}
                                     <span className='text-primaryGreen'>
-                                        xxxx@gmail.com
+                                         {signUpDetails.email}
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <div className='col-span-12'>
-                            <LabelInput label='Create Password' />
+                            <LabelInput name="password" value={signUpDetails.password} onChange={(e)=>signUpDetailsSetter(e)} label='Create Password' />
                         </div>
                         <div className='col-span-12'>
                             <PrimaryButton size='large' color='green'>

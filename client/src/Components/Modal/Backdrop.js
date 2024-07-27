@@ -1,8 +1,8 @@
 import React from 'react';
-import { useModal } from '../../UseContext/ModalProvider';
+import { useAppContext } from '../../UseContext/ContextProvider';
 
 const Backdrop = ({ children }) => {
-    const { isModalOpen, closeModal } = useModal();
+    const { isModalOpen, closeModal } = useAppContext();
     if (!isModalOpen) return null;
     return (
         <div className="absolute inset-0 z-50 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center h-full w-full">
