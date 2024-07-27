@@ -1,5 +1,4 @@
 import React from 'react'
-import { PrimaryButton } from '../../Components/UiElements/Buttons'
 import Packages from '../../Components/Dashboard/Packages'
 
 const UserDashboard = () => {

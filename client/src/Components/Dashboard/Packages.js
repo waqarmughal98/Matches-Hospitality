@@ -38,7 +38,7 @@ const Packages = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='lg:col-span-7 col-span-12 '>
+                        <div className='grid lg:col-span-7 col-span-12 '>
                             <div className='grid grid-cols-12 gap-5'>
                                 {packagesData.map((item, index) => {
                                     return (
