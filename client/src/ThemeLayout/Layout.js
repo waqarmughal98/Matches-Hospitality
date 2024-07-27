@@ -6,14 +6,14 @@ import Navbar from '../Components/Menu/Navbar';
 const Layout = () => {
     return (
         <div className='flex'>
-            <Sidebar />
+            <div className='min-w-24'>
+                <Sidebar />
+            </div>
             <div className='w-full'>
                 <Navbar />
                 <div className='p-10'>
                     {<Outlet />}
                 </div>
-            </div>
-            <div>
             </div>
         </div>
     );

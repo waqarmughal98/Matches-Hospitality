@@ -2,18 +2,29 @@ import React from 'react'
 import { Colors } from '../../utilities/Color';
 import backIcon from '../../../src/assets/svgs/auth/back-arrow.svg'
 import { useNavigate } from 'react-router-dom';
-export const PrimaryButton = ({ onClick, children, className = '', disabled = false, type = 'button' }) => {
+export const PrimaryButton = ({ onClick, children, className = '', disabled = false, type = 'button', size = 'full', color = "green" }) => {
   const buttonStyle = {
     backgroundColor: Colors.primaryBlack,
   };
+
+  const sizeClasses =
+    size === 'small' ? 'w-auto px-4 h-7 text-sm' :
+      size === 'medium' ? 'w-auto px-10 h-[3.5rem]' :
+        size === 'large' ? 'w-full h-12' :
+          '';
+
+  const bgColor =
+    color === 'green' ? 'bg-primaryGreen text-black' : 'text-white' ? 'bg-[#020202]' : ''
+
+
   return (
     <button
-    onClick={onClick}
-      className={`primaryBtn bg-primaryGreen w-full rounded-full text-black h-12 font-semibold ${className}`}
+      onClick={onClick}
+      className={`primaryBtn ${bgColor} rounded-full ${sizeClasses} ${className}`}
       disabled={disabled}
       type={type}
       style={buttonStyle}
-      >
+    >
       {children}
     </button>
   );

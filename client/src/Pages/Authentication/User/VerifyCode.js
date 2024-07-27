@@ -34,7 +34,7 @@ const VerifyCode = () => {
                             </div>
                         </div>
                         <div className='col-span-12'>
-                            <PrimaryButton>
+                            <PrimaryButton size='full' color='green'>
                                 Confirm Code
                             </PrimaryButton>
                         </div>

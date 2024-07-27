@@ -7,6 +7,7 @@ module.exports = {
         'primaryBlack': '#0D0D0D',
         'secondaryBlack': '#000000',
         'primaryGreen': '#88F67E',
+        'primaryBorder':'#313D4F'
       },
       fontSize: {
         'headerText': '2.5rem',

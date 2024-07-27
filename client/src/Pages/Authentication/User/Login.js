@@ -47,7 +47,7 @@ const Login = () => {
                                 <div className='col-span-12'>
                                     <div className='grid grid-cols-12 gap-3'>
                                         <div className='col-span-12'>
-                                            <PrimaryButton>
+                                            <PrimaryButton size='full' color='green'>
                                                 <Link to={'/dashboard'}>
                                                     Log in
                                                 </Link>
