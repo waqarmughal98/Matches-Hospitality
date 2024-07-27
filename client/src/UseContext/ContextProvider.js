@@ -60,6 +60,6 @@ export const ContextProvider = ({ children }) => {
       {children}
     </AppContext.Provider>
   );
-};
+}};
 
 export const useAppContext = () => useContext(AppContext);
