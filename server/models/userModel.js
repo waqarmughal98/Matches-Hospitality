@@ -4,9 +4,9 @@ const validateEmail = require('../utils/emailValidator');
 const UserSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: [true, 'Email is required'],
+    required: true,
     unique: [true, 'User with this email already exists'],
-    // validate: [validateEmail, 'Please enter a valid email'],
+    validate: [validateEmail, 'Please enter a valid email'],
   },
   password: {
     type: String,
