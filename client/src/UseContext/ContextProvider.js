@@ -14,7 +14,8 @@ export const ContextProvider = ({ children }) => {
     otp : "",
     new_password : ""
   })
-
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const signUpDetailsSetter = (e) =>{
     const { name , value } = e.target
@@ -34,9 +35,6 @@ export const ContextProvider = ({ children }) => {
   }
   return result
 };
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   return (
     <AppContext.Provider 
