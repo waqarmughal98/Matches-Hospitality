@@ -32,7 +32,7 @@ const ForgotPassword = () => {
                                     <LabelInput label='Enter your email address' />
                                 </div>
                                 <div className='col-span-12 pb-10'>
-                                    <PrimaryButton>
+                                    <PrimaryButton size='large' color='green'>
                                         Confirm email Address
                                     </PrimaryButton>
                                 </div>

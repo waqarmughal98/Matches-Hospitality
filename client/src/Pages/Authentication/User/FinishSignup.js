@@ -33,7 +33,7 @@ const FinishSignup = () => {
                             <LabelInput label='Create Password' />
                         </div>
                         <div className='col-span-12'>
-                            <PrimaryButton>
+                            <PrimaryButton size='large' color='green'>
                                 Create Account
                             </PrimaryButton>
                         </div>

@@ -28,7 +28,7 @@ const Signup = () => {
                         <div className='col-span-12 pb-10'>
                             <div className='grid grid-cols-12 gap-5'>
                                 <div className='col-span-12'>
-                                    <PrimaryButton>
+                                    <PrimaryButton size='large' color='green'>
                                         <Link to={'/finish-signup'}>
                                         Get Started
                                         </Link>
