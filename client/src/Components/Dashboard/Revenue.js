@@ -51,15 +51,15 @@ const Revenue = () => {
                                 <span className='text-[#00B69B] text-sm font-semibold'>Charge in 3 days</span>
                             </div>
                         </div>
-                        <div className='grid lg:col-span-9 col-span-12 justify-center rounded-lg bg-[#F7F6F6] p-5'>
+                        <div className='grid lg:col-span-9 col-span-12 justify-center rounded-lg bg-[#F7F6F6] px-5 py-4'>
                             <div className='grid grid-cols-10 sm:gap-x-5 gap-y-5'>
                                 {items.map((item, index) => (
                                     <div key={index} className='md:col-span-2 col-span-3'>
-                                        <div className='flex flex-col gap-5'>
+                                        <div className='flex flex-col gap-3'>
                                             <div
                                                 className={`h-3 w-full ${index === items.length - 1 ? 'bg-gray-400' : 'bg-primaryBlack'}`}
                                             ></div>
-                                            <div className='flex flex-col gap-1'>
+                                            <div className='flex flex-col'>
                                                 <span className='text-[#646464] text-xs'>Feb 24</span>
                                                 <h1 className='text-base font-semibold'>$320.00</h1>
                                             </div>
