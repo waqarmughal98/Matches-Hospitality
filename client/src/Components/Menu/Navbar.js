@@ -42,9 +42,9 @@ const Navbar = () => {
                         </div>
                         <div className='flex gap-5'>
                             <div className='text-white self-center grid grid-cols-3 gap-5'>
-                                <img src='assets/images/navbar/nav-mail.png' className='inline' alt='mail' width='20' />
-                                <img src='assets/images/navbar/nav-bell.png' className='inline' alt='bell' width='20' />
-                                <img src='assets/images/navbar/nav-heart.png' className='inline' alt='heart' width='20' />
+                                <img src='assets/images/navbar/home.svg' className='inline' alt='mail' width='20' />
+                                <img src='assets/images/navbar/home.svg' className='inline' alt='bell' width='20' />
+                                <img src='assets/images/navbar/home.svg' className='inline' alt='heart' width='20' />
                             </div>
                             <ProfileDropdown />
                         </div>

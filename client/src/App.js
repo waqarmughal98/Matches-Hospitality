@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NotFound from './Pages/404/NotFound';
 import Layout from './ThemeLayout/Layout';
 import Login from './Pages/Authentication/User/Login';
