@@ -1,8 +1,6 @@
 import React from 'react'
-import Packages from '../../Components/Dashboard/Packages'
-import Revenue from '../../Components/Dashboard/Revenue'
 
-const UserDashboard = () => {
+const Revenue = () => {
   const userData = [
     {
       users: 'Total User',
@@ -22,7 +20,6 @@ const UserDashboard = () => {
     }
   ]
   return (
-    <div className='text-white'>
       <div className='grid grid-cols-12 gap-8'>
         <div className='col-span-12 text-3xl font-semibold'>Users</div>
         <div className='col-span-12'>
@@ -61,11 +58,8 @@ const UserDashboard = () => {
             })}
           </div>
         </div>
-        <Packages />
-        <Revenue/>
-      </div>
     </div>
   )
 }
 
-export default UserDashboard
+export default Revenue

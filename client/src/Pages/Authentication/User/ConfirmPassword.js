@@ -35,7 +35,7 @@ const ConfirmPassword = () => {
                                     <LabelInput label='Confirm Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <PrimaryButton size='full' color='green'>
+                                    <PrimaryButton size='large' color='green'>
                                         Change Password
                                     </PrimaryButton>
                                 </div>
