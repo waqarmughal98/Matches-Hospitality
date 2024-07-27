@@ -5,36 +5,36 @@ const AppContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [ signUpDetails, setSignUpDetails] = useState({
-    email : "",
-    password : ""
+  const [signUpDetails, setSignUpDetails] = useState({
+    email: "",
+    password: ""
   })
 
 
-  const signUpDetailsSetter = (e) =>{
-    const { name , value } = e.target
-    setSignUpDetails((pre)=>({...pre,[name]:value}))
- }
-  
- const isEmailValidate = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const result = emailRegex.test(email);
-  if(!result){
-    toast.error("Invalid email format.")
+  const signUpDetailsSetter = (e) => {
+    const { name, value } = e.target
+    setSignUpDetails((pre) => ({ ...pre, [name]: value }))
   }
-  return result
-};
+
+  const isEmailValidate = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const result = emailRegex.test(email);
+    if (!result) {
+      toast.error("Invalid email format.")
+    }
+    return result
+  };
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <AppContext.Provider 
-      value={{ 
+    <AppContext.Provider
+      value={{
         isModalOpen,
         openModal,
         closeModal,
-        signUpDetails, 
+        signUpDetails,
         setSignUpDetails,
         signUpDetailsSetter,
         isEmailValidate
