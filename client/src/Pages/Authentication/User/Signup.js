@@ -8,19 +8,15 @@ import google from '../../../../src/assets/svgs/auth/google.svg'
 import apple from '../../../../src/assets/svgs/auth/apple.svg'
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../../UseContext/ContextProvider'
-import { toast } from 'react-toastify';
+
 const Signup = () => {
-  const { signUpDetails,signUpDetailsSetter}  = useAppContext()
+  const { signUpDetails,signUpDetailsSetter,isEmailValidate}  = useAppContext()
   const navigate = useNavigate();
+
   const handleClick = () => {
-
-    navigate('/finish-signup'); 
-    toast.success("so easy", {
-        autoClose: 2000,
-        hideProgressBar: true,
-        theme:'dark'
-      });
-
+    if(isEmailValidate(signUpDetails.email)){
+        navigate('/finish-signup'); 
+    }
   };
 
     return (

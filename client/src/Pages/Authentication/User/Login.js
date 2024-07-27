@@ -1,11 +1,54 @@
-import React from 'react'
+import React, {useState} from 'react'
 import AuthLayout from '../../../ThemeLayout/AuthLayout'
 import loginBanner from '../../../../src/assets/svgs/auth/loginBanner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
 import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
 import { LabelInput } from '../../../Components/UiElements/TextInputs'
 import { Link } from 'react-router-dom'
+import { URL } from '../../../utilities/ConstantData'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
+
 const Login = () => {
+    const [loginData, setLoginData] = useState({
+        email : "",
+        password : ""
+    })
+    const navigate = useNavigate()
+    const handleChange = (e) =>{
+        const { name , value } = e.target
+        setLoginData((pre)=>({
+            ...pre, [name]:value
+        }))
+    }
+
+    const handleLoginIn = async () => {
+        axios.post(`${URL}/login`, loginData)
+        .then((res)=>{
+            const userData = res.data.data;
+            localStorage.setItem('userData', JSON.stringify(userData));
+            toast.success("Login successfully!")
+            setTimeout(() => {
+                navigate("/dashboard/")
+            }, 1500);
+        })
+        .catch ((error)=> {
+            console.log(error)
+            const errors=error?.response?.data?.errors
+            if (typeof errors == 'string') {
+                toast.error(errors);
+            } else if (errors && Array.isArray(errors)) {
+                errors.forEach((err) => {
+                    toast.error(err.msg);
+                });
+            } else {
+                toast.error('An unknown error occurred.');
+            }
+        })
+    };
+
+
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
@@ -30,12 +73,12 @@ const Login = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-5'>
                                 <div className='col-span-12'>
-                                    <LabelInput label='Email Address' />
+                                    <LabelInput name="email" onChange={(e)=>handleChange(e)} label='Email Address' />
                                 </div>
                                 <div className='col-span-12'>
                                     <div className='grid grid-cols-12 gap-2'>
                                         <div className='col-span-12'>
-                                            <LabelInput label='Password' />
+                                            <LabelInput name="password" onChange={(e)=>handleChange(e)} label='Password' />
                                         </div>
                                         <div className='col-span-12 text-white text-xs text-right'>
                                             <Link to={'/forgot-password'}>
@@ -47,10 +90,8 @@ const Login = () => {
                                 <div className='col-span-12'>
                                     <div className='grid grid-cols-12 gap-3'>
                                         <div className='col-span-12'>
-                                            <PrimaryButton size='large' color='green'>
-                                                <Link to={'/dashboard'}>
+                                            <PrimaryButton onClick={handleLoginIn} size='large' color='green'>
                                                     Log in
-                                                </Link>
                                             </PrimaryButton>
                                         </div>
                                         <div className='col-span-12 text-white text-center'>

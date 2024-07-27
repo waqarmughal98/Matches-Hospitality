@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
+import { toast } from 'react-toastify';
 
 const AppContext = createContext();
 
@@ -15,6 +16,14 @@ export const ContextProvider = ({ children }) => {
     setSignUpDetails((pre)=>({...pre,[name]:value}))
  }
   
+ const isEmailValidate = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const result = emailRegex.test(email);
+  if(!result){
+    toast.error("Invalid email format.")
+  }
+  return result
+};
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -27,7 +36,8 @@ export const ContextProvider = ({ children }) => {
         closeModal,
         signUpDetails, 
         setSignUpDetails,
-        signUpDetailsSetter
+        signUpDetailsSetter,
+        isEmailValidate
       }}>
       {children}
     </AppContext.Provider>

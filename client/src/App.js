@@ -28,7 +28,7 @@ const App = () => {
         <Route path="/confirm-password" element={<ConfirmPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <ToastContainer autoClose={2000} theme="dark"  hideProgressBar={true} />
+      <ToastContainer autoClose={3000} theme="dark"  hideProgressBar={true} />
     </BrowserRouter>
   );
 };

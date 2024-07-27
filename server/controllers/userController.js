@@ -9,19 +9,19 @@ const signup = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   if (!isValidEmail(email)) {
-    return res.status(400).json({ error: 'Invalid email format' });
+    return res.status(400).json({ errors: 'Invalid email format' });
   }
 
   try {
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ error: 'User with this email already exists!' });
+      return res.status(400).json({ errors: 'User with this email already exists!' });
     }
   
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
   
-    user = await User.create({ email, password: hashedPassword });
+    user = await User.create({ email, password: hashedPassword , userType : "user" });
   
     const token = generateToken(user._id.toString());
   
@@ -32,6 +32,7 @@ const signup = asyncHandler(async (req, res) => {
         email,
         id: user._id.toString(),
         token,
+        userType : user.userType
       },
     });
     
@@ -48,12 +49,12 @@ const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   if (!isValidEmail(email)) {
-    return res.status(400).json({ error: 'Invalid email format' });
+    return res.status(400).json({ errors: 'Invalid email format' });
   }
 
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(400).json({ success: false, message: 'Incorrect credentials!' });
+    return res.status(400).json({ success: false, errors: 'Incorrect email address!' });
   }
 
   const matchedPassword = await bcrypt.compare(password, user.password);

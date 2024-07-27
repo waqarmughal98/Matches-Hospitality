@@ -1,12 +1,51 @@
-import React from 'react'
+import React , {useEffect}from 'react'
 import AuthLayout from '../../../ThemeLayout/AuthLayout'
 import loginBanner from '../../../../src/assets/svgs/auth/finishBanner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
 import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
 import { LabelInput } from '../../../Components/UiElements/TextInputs'
 import { useAppContext } from '../../../UseContext/ContextProvider'
+import axios from 'axios';
+import { toast } from 'react-toastify'
+import { URL } from '../../../utilities/ConstantData'
+import { useNavigate } from 'react-router-dom'
 const FinishSignup = () => {
     const {signUpDetails, signUpDetailsSetter} = useAppContext()
+    const navigate = useNavigate()
+
+    /* when user reload the screen on second step */
+    useEffect(()=>{
+         if(!signUpDetails.email){
+            navigate("/signup")
+         }
+    },[])
+
+    const handleCreateAccount = async () => {
+        axios.post(`${URL}/signup`, signUpDetails)
+        .then((res)=>{
+            const userData = res.data.data;
+            localStorage.setItem('userData', JSON.stringify(userData));
+            toast.success("Account created successfully!")
+            setTimeout(() => {
+                navigate("/dashboard/")
+            }, 1500);
+        })
+        .catch ((error)=> {
+            console.log(error)
+            const errors=error?.response?.data?.errors
+            if (typeof errors == 'string') {
+                toast.error(errors);
+            } else if (errors && Array.isArray(errors)) {
+                errors.forEach((err) => {
+                    toast.error(err.msg);
+                });
+            } else {
+                toast.error('An unknown error occurred.');
+            }
+        })
+    };
+
+
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
@@ -35,7 +74,7 @@ const FinishSignup = () => {
                             <LabelInput name="password" value={signUpDetails.password} onChange={(e)=>signUpDetailsSetter(e)} label='Create Password' />
                         </div>
                         <div className='col-span-12'>
-                            <PrimaryButton size='large' color='green'>
+                            <PrimaryButton onClick={handleCreateAccount} size='large' color='green'>
                                 Create Account
                             </PrimaryButton>
                         </div>
