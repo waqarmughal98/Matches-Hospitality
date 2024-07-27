@@ -4,7 +4,13 @@ import loginBanner from '../../../../src/assets/svgs/auth/forgetBanner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
 import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
 import { LabelInput } from '../../../Components/UiElements/TextInputs'
+import { useNavigate } from 'react-router-dom'
 const ForgotPassword = () => {
+    const navigate = useNavigate()
+    const handleClick=()=>{
+        navigate('/verify-code')
+    }
+
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
@@ -32,7 +38,7 @@ const ForgotPassword = () => {
                                     <LabelInput label='Enter your email address' />
                                 </div>
                                 <div className='col-span-12 pb-10'>
-                                    <PrimaryButton size='large' color='green'>
+                                    <PrimaryButton onClick={handleClick} size='large' color='green'>
                                         Confirm email Address
                                     </PrimaryButton>
                                 </div>

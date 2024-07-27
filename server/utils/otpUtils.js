@@ -1,8 +1,12 @@
 const nodemailer = require('nodemailer');
-const { v4: uuidv4 } = require('uuid');
 
 const generateOTP = () => {
-  return uuidv4().slice(0, 6); // Generates a 6-digit OTP
+  const digits = '0123456789';
+  let otp = '';
+  for (let i = 0; i < 4; i++) {
+    otp += digits[Math.floor(Math.random() * 10)];
+  }
+  return otp;
 };
 
 const sendOTPEmail = async (email, otp) => {
@@ -18,7 +22,7 @@ const sendOTPEmail = async (email, otp) => {
     const mailOptions = {
       from: process.env.EMAIL,
       to: email,
-      subject: 'Your OTP Code',
+      subject: 'OTP Code',
       text: `Your OTP code is ${otp}`,
     };
 
