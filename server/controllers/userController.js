@@ -12,28 +12,35 @@ const signup = asyncHandler(async (req, res) => {
     return res.status(400).json({ error: 'Invalid email format' });
   }
 
-
-  let user = await User.findOne({ email });
-  if (user) {
-    return res.status(400).json({ error: 'User with this email already exists!' });
+  try {
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ error: 'User with this email already exists!' });
+    }
+  
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+  
+    user = await User.create({ email, password: hashedPassword });
+  
+    const token = generateToken(user._id.toString());
+  
+    res.status(201).json({
+      success: true,
+      message: 'User created successfully!',
+      data: {
+        email,
+        id: user._id.toString(),
+        token,
+      },
+    });
+    
+  } catch (error) {
+    res.status(400).json({
+      success: true,
+      message: 'Something went wrong!',
+    });
   }
-
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  user = await User.create({ email, password: hashedPassword });
-
-  const token = generateToken(user._id.toString());
-
-  res.status(201).json({
-    success: true,
-    message: 'User created successfully!',
-    data: {
-      email,
-      id: user._id.toString(),
-      token,
-    },
-  });
 });
 
 /* Login */
@@ -110,13 +117,21 @@ const changePassword = asyncHandler(async (req, res) => {
 
 /* Delete User */
 const deleteUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user.id);
-  if (!user) {
-    return res.status(404).json({ success: false, message: 'User not found' });
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+  
+    await User.findByIdAndDelete(req.user.id);
+    res.status(200).json({ success: true, message: 'User deleted successfully' });
+    
+  } catch (error) {
+    res.status(405).json({
+      success: true,
+      message: 'Something went wrong!',
+    });
   }
-
-  await User.findByIdAndDelete(req.user.id);
-  res.status(200).json({ success: true, message: 'User deleted successfully' });
 });
 
 /* Send OTP */
