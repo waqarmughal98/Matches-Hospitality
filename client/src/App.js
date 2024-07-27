@@ -14,7 +14,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-      {/* <Route path="/" element={<Navigate to="/login" replace />} /> */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/" element={<Layout />}>
           <Route path="dashboard" element={<UserDashboard />} />
         </Route>
