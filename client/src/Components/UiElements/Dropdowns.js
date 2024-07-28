@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../UseContext/ContextProvider';
 const ProfileDropdown = () => {
-  const { openModal, closeModal, setIsOpen, isOpen } = useAppContext()
+  const { openModal, closeModal, setIsOpen, isOpen , showBackdropWithContent} = useAppContext()
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
       closeModal()
     } else {
       openModal()
+      showBackdropWithContent('')
     }
   };
 
