@@ -55,12 +55,12 @@ const login = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(400).json({ success: false, errors: 'Incorrect email address!' });
+    return res.status(400).json({ success: false, errors: 'Incorrect credentials!' });
   }
 
   const matchedPassword = await bcrypt.compare(password, user.password);
   if (!matchedPassword) {
-    return res.status(400).json({ success: false, errors: 'Incorrect password!' });
+    return res.status(400).json({ success: false, errors: 'Incorrect credentials!' });
   }
 
   const token = generateToken(user._id.toString());

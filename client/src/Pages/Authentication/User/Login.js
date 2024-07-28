@@ -90,7 +90,7 @@ const Login = () => {
                                 <div className='col-span-12'>
                                     <div className='grid grid-cols-12 gap-3'>
                                         <div className='col-span-12'>
-                                            <PrimaryButton onClick={handleLoginIn} size='large' color='green'>
+                                            <PrimaryButton onClick={handleLoginIn} disabled={!loginData.email || !loginData.password} size='large' color='green'>
                                                     Log in
                                             </PrimaryButton>
                                         </div>
