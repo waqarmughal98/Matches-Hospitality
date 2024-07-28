@@ -17,6 +17,7 @@ export const ContextProvider = ({ children }) => {
   })
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const [isOpen, setIsOpen,] = useState(false);
 
   const showBackdropWithContent = (content) => {
     console.log(content);
@@ -57,7 +58,9 @@ export const ContextProvider = ({ children }) => {
         setforgetPassworddata,
         forgetPasswordsSetter,
         showBackdropWithContent,
-        backdropContent
+        backdropContent,
+        isOpen,
+        setIsOpen
       }}>
       {children}
     </AppContext.Provider>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../UseContext/ContextProvider';
 const ProfileDropdown = () => {
-  const [isOpen, setIsOpen,] = useState(false);
-  const { openModal, closeModal } = useAppContext()
+  const { openModal, closeModal, setIsOpen, isOpen } = useAppContext()
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
     if (isOpen) {

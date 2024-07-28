@@ -5,10 +5,11 @@ import Navbar from '../Components/Menu/Navbar';
 import Backdrop from '../Components/Modal/Backdrop';
 import { useAppContext } from '../UseContext/ContextProvider';
 const Layout = () => {
-    const { openModal, closeModal } = useAppContext()
+    const { openModal, closeModal, isOpen, setIsOpen } = useAppContext()
     const handleToggle = () => {
-        if (openModal) {
+        if (openModal || isOpen) {
             closeModal()
+            setIsOpen(false)
         }
     }
     return (
