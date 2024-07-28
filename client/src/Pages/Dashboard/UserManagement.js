@@ -103,7 +103,7 @@ const UserManagement = () => {
             />
             {selectedFile ? (
                 <img
-                    src={selectedFile?.selectedFile}
+                    src={selectedFile}
                     alt='Profile Preview'
                     className='w-full h-full rounded-full object-cover absolute'
                 />
