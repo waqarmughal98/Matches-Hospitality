@@ -18,6 +18,7 @@ export const ContextProvider = ({ children }) => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const [isOpen, setIsOpen,] = useState(false);
+  const [selectedMatch, setSelectedMatch] = useState(null);
 
   const showBackdropWithContent = (content) => {
     console.log(content);
@@ -60,7 +61,9 @@ export const ContextProvider = ({ children }) => {
         showBackdropWithContent,
         backdropContent,
         isOpen,
-        setIsOpen
+        setIsOpen,
+        setSelectedMatch,
+        selectedMatch
       }}>
       {children}
     </AppContext.Provider>

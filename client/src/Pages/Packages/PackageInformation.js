@@ -6,57 +6,74 @@ import MatchCard from '../../Components/Cards/MatchCard';
 
 const PackageInformation = () => {
 
-    const { showBackdropWithContent, closeModal } = useAppContext();
+    const { showBackdropWithContent, closeModal, selectedMatch, setSelectedMatch } = useAppContext();
     const data = [
         {
             teamA: 'Leicester C',
-            teamB: 'Chelsea'
+            teamB: 'Chelsea',
+            id: '1'
         },
         {
             teamA: 'Leicester C',
-            teamB: 'Chelsea'
+            teamB: 'Chelsea',
+            id: '2'
         },
         {
             teamA: 'Leicester C',
-            teamB: 'Chelsea'
+            teamB: 'Chelsea',
+            id: '3'
         },
         {
             teamA: 'Leicester C',
-            teamB: 'Chelsea'
+            teamB: 'Chelsea',
+            id: '4'
         },
         {
             teamA: 'Leicester C',
-            teamB: 'Chelsea'
+            teamB: 'Chelsea',
+            id: '5'
         },
         {
             teamA: 'Leicester C',
-            teamB: 'Chelsea'
+            teamB: 'Chelsea',
+            id: '6'
         },
         {
             teamA: 'Leicester C',
-            teamB: 'Chelsea'
+            teamB: 'Chelsea',
+            id: '7'
         },
         {
             teamA: 'Leicester C',
-            teamB: 'Chelsea'
+            teamB: 'Chelsea',
+            id: '8'
         }
 
     ]
 
     const createPackage = [
         {
-            title: 'Match Ticket'
+            title: 'Match Ticket',
+            id: 1
         },
         {
-            title: 'External Flight'
+            title: 'External Flight',
+            id: 2
         },
         {
-            title: 'Lorem Ipsum'
+            title: 'Lorem Ipsum',
+            id: 3
         },
         {
-            title: 'Lorem Ipsum'
+            title: 'Lorem Ipsum',
+            id: 4
         }
     ]
+
+    const handleCardClick = (id) => {
+        console.log(id);
+        setSelectedMatch(id);
+    };
 
     const handleShowBackdrop = () => {
         const content = (
@@ -100,10 +117,14 @@ const PackageInformation = () => {
                 {/* innercards */}
                 <div className='col-span-12'>
                     <div className='grid grid-cols-12 gap-5 items-center'>
-                        {data.map((item) => {
+                        {data?.map((item) => {
                             return (
                                 <>
-                                    <MatchCard data={item} />
+                                    <MatchCard
+                                        key={item.id}
+                                        data={item}
+                                        onClick={() => handleCardClick(item.id)}
+                                    />
                                 </>
                             )
                         })}

@@ -1,9 +1,10 @@
 import React from 'react'
-
-const MatchCard = ({ data }) => {
+import { useAppContext } from '../../UseContext/ContextProvider';
+const MatchCard = ({ data , onClick}) => {
+    const {selectedMatch} = useAppContext()
 
     return (
-        <div className='xl:col-span-3 md:col-span-6 col-span-12 bg-[#141414] rounded-xl px-4 py-6 text-white'>
+        <div className={`xl:col-span-3 md:col-span-6 col-span-12 bg-[#141414] rounded-xl px-4 py-6 text-white ${data.id == selectedMatch  ? 'border-2 border-primaryGreen' : ''}`} onClick={onClick} >
             <div className='grid grid-cols-12 justify-center gap-y-2'>
                 <div className='col-span-3'>
                     <div className='flex flex-col gap-2 items-center'>
