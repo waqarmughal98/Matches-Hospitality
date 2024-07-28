@@ -20,7 +20,7 @@ export const PrimaryButton = ({ onClick, children, className = '', disabled = fa
   return (
     <button
       onClick={onClick}
-      className={`primaryBtn ${bgColor} rounded-full ${sizeClasses} ${className}`}
+      className={`primaryBtn ${bgColor} rounded-full font-semibold ${sizeClasses} ${className}`}
       disabled={disabled}
       type={type}
       style={buttonStyle}

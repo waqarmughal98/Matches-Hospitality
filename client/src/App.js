@@ -14,6 +14,7 @@ import AdminDashboard from './Pages/Dashboard/AdminDashboard';
 import UserManagement from './Pages/Dashboard/UserManagement';
 import PackageInformation from './Pages/Packages/PackageInformation';
 import CreatePackage from './Pages/Packages/CreatePackage';
+import Account from './Pages/Packages/Account';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="user-management" element={<UserManagement />} />
         <Route path="package" element={<PackageInformation />} />
         <Route path="create-package" element={<CreatePackage />} />
+        <Route path="admin-account" element={<Account />} />
         </Route>
         {/* auth */}
         <Route path="/login" element={<Login />} />
