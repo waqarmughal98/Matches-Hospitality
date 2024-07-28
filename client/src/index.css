@@ -17,10 +17,32 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: #1D1D1D; */
+  background-color: #1D1D1D;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@layer components {
+  .dropdown-content {
+    @apply  w-full bg-transparent rounded-md overflow-hidden transition-all duration-300 ease-out;
+  }
+  
+  .dropdown-content.active {
+    opacity: 1;
+  }
+}
+
+.dropdown-content {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.dropdown-content.active {
+  max-height: 200px; 
+  opacity: 1;
+}
+

@@ -55,8 +55,8 @@ const Login = () => {
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
-                <div className='col-span-5 bg-primaryBlack rounded-xl p-10 min-h-[100vh]'>
-                    <div className='grid grid-cols-12 gap-9'>
+                <div className='xl:col-span-5 md:col-span-6 col-span-12 xl:col-start-1 md:col-start-4 bg-primaryBlack rounded-xl sm:p-10 p-5 min-h-[100vh]'>
+                    <div className='grid grid-cols-12 gap-y-9'>
                         <div className='col-span-12'>
                             <SecondaryButton />
                         </div>
@@ -74,7 +74,7 @@ const Login = () => {
                             </div>
                         </div>
                         <div className='col-span-12'>
-                            <div className='grid grid-cols-12 gap-5'>
+                            <div className='grid grid-cols-12 gap-y-5'>
                                 <div className='col-span-12'>
                                     <LabelInput name="email" onChange={(e)=>handleChange(e)} label='Email Address' />
                                 </div>

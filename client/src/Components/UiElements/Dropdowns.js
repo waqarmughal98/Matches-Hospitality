@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../UseContext/ContextProvider';
-const ProfileDropdown = () => {
-  const { openModal, closeModal, setIsOpen, isOpen , showBackdropWithContent} = useAppContext()
+export const ProfileDropdown = () => {
+  const { openModal, closeModal, setIsOpen, isOpen, showBackdropWithContent } = useAppContext()
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -101,4 +101,37 @@ const ProfileDropdown = () => {
   );
 };
 
-export default ProfileDropdown;
+
+// filterdropdowns
+
+export const FilterDropdown = ({ isActive, onClick, children, text }) => {
+  return (
+    <div className="relative mb-2">
+      <button
+        className="px-4 py-2 bg-transparent text-white rounded-md flex justify-between w-full"
+        onClick={onClick}
+      >
+          <span>{text}</span>
+          <svg
+            className={`transition-all ms-2 mt-1 duration-150 ease-linear ${isActive ? 'rotate-180' : ''} }`}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+      </button>
+      <div className={`dropdown-content ${isActive ? 'active' : ''}`}>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+

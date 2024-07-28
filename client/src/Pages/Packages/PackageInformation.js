@@ -153,6 +153,26 @@ const PackageInformation = () => {
                                 </>
                             )
                         })}
+                        <div className='col-span-12 border p-5 border-[#5C5C5C] bg-[#0D0D0D] rounded-xl'>
+                            <div className='flex justify-between'>
+                                <div className='flex gap-2 items-center'>
+                                    <h1 className='text-4xl'>
+                                        $15000.00
+                                    </h1>
+                                    <div className='flex flex-col gap-y-2'>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="15.6" height="15.6" rx="5" fill="#88F67E" />
+                                            <path d="M10.1999 7.32443V8.11236H5.3999V7.32443H10.1999ZM8.2472 5.3999V10.1999H7.35742V5.3999H8.2472Z" fill="black" />
+                                        </svg>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect y="0.400391" width="15.6" height="15.6" rx="5" fill="#88F67E" />
+                                            <path d="M9.43126 7.60059V8.66934H6V7.60059H9.43126Z" fill="black" />
+                                        </svg>
+                                    </div>
+                                </div>
+                               <PrimaryButton size='medium' color='green'>Create Package</PrimaryButton>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
