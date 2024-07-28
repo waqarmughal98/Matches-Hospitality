@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { PrimaryButton } from '../../Components/UiElements/Buttons'
-import { useAppContext } from '../../UseContext/ContextProvider'
+import { useAppContext } from '../../UseContext/ContextProvider';
+import { LabelInput } from '../../Components/UiElements/TextInputs';
 const UserManagement = () => {
-  const { openModal } = useAppContext()
+  const { showBackdropWithContent , closeModal} = useAppContext();
   const userData = [
     {
       name: 'Lorem Ipsum',
@@ -56,6 +57,43 @@ const UserManagement = () => {
       numberOfUsers: '98,656'
     }
   ]
+  const handleShowBackdrop = () => {
+    const content = (
+      <div className='flex flex-col justify-center p-10 rounded-lg backdrop-blur-3xl w-1/2 m-auto bg-black/20'>
+          <button
+            type="button"
+            className="absolute top-4 right-4 rtl:right-auto rtl:left-4"
+            onClick={closeModal}
+          >
+            <svg
+              title="Close"
+              className="h-4 w-4 cursor-pointer text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+            <span className="sr-only">Close</span>
+          </button>
+        <div className='w-52 h-52 rounded-full bg-[#1E1E1E] flex justify-center items-center flex-col gap-y-5 m-auto'>
+          <p className='text-5xl font-bold text-white'>+</p>
+          <p className='text-primaryGreen text-xs'>Upload Profile Picture</p>
+        </div>
+        <div className='flex flex-col gap-5 justify-center w-9/12 m-auto'>
+          <LabelInput label='Enter User Name' />
+          <LabelInput label='Password' />
+          <PrimaryButton size='large' className='font-semibold'>Create</PrimaryButton>
+        </div>
+      </div>
+    );
+    showBackdropWithContent(content);
+  };
   return (
     <div className='grid grid-cols-12 text-white xl:gap-x-10 gap-y-8'>
       <div className='col-span-12'>
@@ -86,7 +124,7 @@ const UserManagement = () => {
                               </div>
                               <label class="inline-flex items-center cursor-pointer">
                                 <input type="checkbox" value="" class="sr-only peer" />
-                                <div class="relative rounded-full w-9 h-5 py-2 bg-gray-200 peer-focus:outline-none  rounded-ful after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen af rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+                                <div class="relative rounded-full w-10 h-5 py-2 bg-gray-200 peer-focus:outline-none  rounded-ful after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen af rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
                                 <span class="ms-2 text-xs text-[#4D4D4D] peer-checked:text-primaryGreen">Active</span>
                               </label>
                             </div>
@@ -105,7 +143,7 @@ const UserManagement = () => {
                       className={`rounded-lg border bg-transparent border-[#454545] font-semibold px-5 py-3 w-full focus:outline`}
                     />
                   </div>
-                  <PrimaryButton className='bg-white w-full h-12 font-semibold' onClick={openModal}>
+                  <PrimaryButton className='bg-white w-full h-12 font-semibold border-[#454545] border-1' onClick={handleShowBackdrop}>
                     Create New User
                   </PrimaryButton>
                 </div>
