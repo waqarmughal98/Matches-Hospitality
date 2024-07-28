@@ -22,7 +22,7 @@ const signup = asyncHandler(async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
   
-    user = await User.create({ email, password: hashedPassword , userType : "user" });
+    user = await User.create({ email, password: hashedPassword , userType : "a2d%lsakd4A" });
   
     const token = generateToken(user._id.toString());
   
@@ -73,6 +73,7 @@ const login = asyncHandler(async (req, res) => {
       email,
       id: user._id.toString(),
       token,
+      userType: user.userType
     },
   });
 });

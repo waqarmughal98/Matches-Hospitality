@@ -14,8 +14,9 @@ const protect = asyncHandler(async (req, res, next) => {
     req.user = await User.findById(decoded.id).select("-password");
     next();
   } catch (error) {
-    return res.status(401).json({ success: false, message: "Not Authorized" });
+    return res.status(401).json({ success: false, errors: "Not Authorized" });
   }
 });
 
-module.exports = protect;
+
+module.exports = protect
