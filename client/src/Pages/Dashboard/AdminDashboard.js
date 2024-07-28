@@ -2,7 +2,7 @@ import React from 'react'
 import Packages from '../../Components/Dashboard/Packages'
 import Revenue from '../../Components/Dashboard/Revenue'
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
   const userData = [
     {
       users: 'Total User',
@@ -32,7 +32,7 @@ const UserDashboard = () => {
                 {userData.map((item, index) => {
                   return (
                     <>
-                      <div className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-primaryBlack border-primaryBorder border-[1px] p-5'>
+                      <div key={index} className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-primaryBlack border-primaryBorder border-[1px] p-5'>
                         <div className='grid grid-cols-12'>
                           <div className='col-span-10'>
                             <div className='flex flex-col gap-3'>
@@ -67,10 +67,9 @@ const UserDashboard = () => {
         </div>
         <Packages />
         <Revenue />
-
       </div>
     </div>
   )
 }
 
-export default UserDashboard
+export default AdminDashboard

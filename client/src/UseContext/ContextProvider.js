@@ -5,6 +5,7 @@ const AppContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [backdropContent, setBackdropContent] = useState(null);
   const [ signUpDetails, setSignUpDetails] = useState({
     email : "",
     password : ""
@@ -16,6 +17,14 @@ export const ContextProvider = ({ children }) => {
   })
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const [isOpen, setIsOpen,] = useState(false);
+  const [selectedMatch, setSelectedMatch] = useState(null);
+
+  const showBackdropWithContent = (content) => {
+    console.log(content);
+    setBackdropContent(content);
+    openModal();
+  };
 
   const signUpDetailsSetter = (e) =>{
     const { name , value } = e.target
@@ -48,7 +57,13 @@ export const ContextProvider = ({ children }) => {
         isEmailValidate,
         forgetPassworddata,
         setforgetPassworddata,
-        forgetPasswordsSetter
+        forgetPasswordsSetter,
+        showBackdropWithContent,
+        backdropContent,
+        isOpen,
+        setIsOpen,
+        setSelectedMatch,
+        selectedMatch
       }}>
       {children}
     </AppContext.Provider>

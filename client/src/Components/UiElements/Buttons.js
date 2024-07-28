@@ -14,7 +14,7 @@ export const PrimaryButton = ({ onClick, children, className = '', disabled = fa
           '';
 
   const bgColor =
-    color === 'green' ? 'bg-primaryGreen text-black' : 'text-white' ? 'bg-[#020202]' : ''
+    color === 'green' ? 'bg-primaryGreen text-black' : 'bg-[#020202] text-white'
 
 
   return (
@@ -44,7 +44,7 @@ export const SecondaryButton = ({ onClick, children, className = '', disabled = 
       type={type}
       style={buttonStyle}
     >
-      <img src={backIcon} alt=''/>
+      <img src={backIcon} alt='' />
       <p className='text-sm font-semibold'>
         BACK
       </p>
@@ -64,7 +64,7 @@ export const SSOButton = ({ onClick, className = '', disabled = false, type = 'b
       type={type}
       style={buttonStyle}
     >
-      <img src={source} width={20} alt=''/>
+      <img src={source} width={20} alt='' />
       {btnText}
     </button>
   );
