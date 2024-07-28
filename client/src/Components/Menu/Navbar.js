@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileDropdown from '../UiElements/Dropdowns'
+import { ProfileDropdown } from '../UiElements/Dropdowns'
 
 const Navbar = () => {
     return (

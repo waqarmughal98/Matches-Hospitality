@@ -5,7 +5,7 @@ import Navbar from '../Components/Menu/Navbar';
 import Backdrop from '../Components/Modal/Backdrop';
 import { useAppContext } from '../UseContext/ContextProvider';
 const Layout = () => {
-    const { openModal, closeModal, isOpen, setIsOpen  } = useAppContext()
+    const { openModal, closeModal, isOpen, setIsOpen } = useAppContext()
     const handleToggle = () => {
         if (openModal == true || isOpen) {
             closeModal()
@@ -19,7 +19,7 @@ const Layout = () => {
             </div>
             <div className='w-full'>
                 <Navbar />
-                <div className={`p-10 relative bg-[#1D1D1D] ${openModal && 'cursor-pointer'}`} onClick={handleToggle}>
+                <div className={`p-10 relative  ${openModal && 'cursor-pointer'}`} onClick={handleToggle}>
                     {<Outlet />}
                     <Backdrop />
                 </div>
