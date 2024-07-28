@@ -3,16 +3,22 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from '../Components/Menu/Sidebar';
 import Navbar from '../Components/Menu/Navbar';
 import Backdrop from '../Components/Modal/Backdrop';
-
+import { useAppContext } from '../UseContext/ContextProvider';
 const Layout = () => {
+    const { openModal, closeModal } = useAppContext()
+    const handleToggle = () => {
+        if (openModal) {
+            closeModal()
+        }
+    }
     return (
         <div className='flex'>
-            <div className='min-w-24'>
+            <div className='min-w-24 z-40'>
                 <Sidebar />
             </div>
             <div className='w-full'>
                 <Navbar />
-                <div className='p-10 relative'>
+                <div className={`p-10 relative ${openModal && 'cursor-pointer'}`} onClick={handleToggle}>
                     {<Outlet />}
                     <Backdrop />
                 </div>
