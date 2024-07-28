@@ -14,12 +14,12 @@ const Layout = () => {
     }
     return (
         <div className='flex'>
-            <div className='min-w-24 z-40'>
+            <div className='min-w-20 z-40'>
                 <Sidebar />
             </div>
             <div className='w-full'>
                 <Navbar />
-                <div className={`p-10 relative ${openModal && 'cursor-pointer'}`} onClick={handleToggle}>
+                <div className={`p-10 relative bg-[#1D1D1D] ${openModal && 'cursor-pointer'}`} onClick={handleToggle}>
                     {<Outlet />}
                     <Backdrop />
                 </div>
