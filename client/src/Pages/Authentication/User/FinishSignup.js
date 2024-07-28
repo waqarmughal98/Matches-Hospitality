@@ -1,4 +1,4 @@
-import React , {useEffect}from 'react'
+import React , {useEffect, useState}from 'react'
 import AuthLayout from '../../../ThemeLayout/AuthLayout'
 import loginBanner from '../../../../src/assets/svgs/auth/finishBanner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 const FinishSignup = () => {
     const {signUpDetails, signUpDetailsSetter} = useAppContext()
     const navigate = useNavigate()
-
+    const [loading , setLoading] = useState(false)
     /* when user reload the screen on second step */
     useEffect(()=>{
          if(!signUpDetails.email){
@@ -21,8 +21,10 @@ const FinishSignup = () => {
     },[])
 
     const handleCreateAccount = async () => {
+        setLoading(true)
         axios.post(`${URL}/signup`, signUpDetails)
         .then((res)=>{
+            setLoading(false)
             const userData = res.data.data;
             localStorage.setItem('userData', JSON.stringify(userData));
             toast.success("Account created successfully!")
@@ -31,7 +33,7 @@ const FinishSignup = () => {
             }, 1500);
         })
         .catch ((error)=> {
-            console.log(error)
+            setLoading(false)
             const errors=error?.response?.data?.errors
             if (typeof errors == 'string') {
                 toast.error(errors);
@@ -74,8 +76,8 @@ const FinishSignup = () => {
                             <LabelInput name="password" value={signUpDetails.password} onChange={(e)=>signUpDetailsSetter(e)} label='Create Password' />
                         </div>
                         <div className='col-span-12'>
-                            <PrimaryButton onClick={handleCreateAccount} size='large' color='green'>
-                                Create Account
+                            <PrimaryButton onClick={handleCreateAccount} disabled={!signUpDetails.password || loading} size='large' color='green'>
+                            {loading ? 'Creating account...' :  'Create Account'}
                             </PrimaryButton>
                         </div>
                         <div className='col-span-12 text-base text-white'>

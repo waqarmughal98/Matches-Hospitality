@@ -12,7 +12,6 @@ import { useAppContext } from '../../../UseContext/ContextProvider'
 const Signup = () => {
   const { signUpDetails,signUpDetailsSetter,isEmailValidate}  = useAppContext()
   const navigate = useNavigate();
-
   const handleClick = () => {
     if(isEmailValidate(signUpDetails.email)){
         navigate('/finish-signup'); 

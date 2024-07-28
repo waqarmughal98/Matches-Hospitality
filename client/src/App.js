@@ -37,7 +37,7 @@ const App = () => {
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <ToastContainer autoClose={3000} theme="dark"  hideProgressBar={true} />
+      <ToastContainer autoClose={1500} theme="dark"  hideProgressBar={true} />
     </BrowserRouter>
   );
 };
