@@ -14,7 +14,7 @@ const ConfirmPassword = () => {
     const {  forgetPassworddata, forgetPasswordsSetter} = useAppContext()
     const [ confirmPassword, setConfirmPassword] = useState()
     const navigate = useNavigate()
- 
+    const [loading , setLoading] = useState(false)
     /* if user reload the page */
     useEffect(()=>{
         if(!forgetPassworddata.email || !forgetPassworddata.email ){
@@ -32,15 +32,17 @@ const ConfirmPassword = () => {
     }
     
     const resetPassword = async (otp) => {
+        setLoading(true)
         axios.post(`${URL}/reset-password`, forgetPassworddata)
         .then((res)=>{
+            setLoading(false)
             toast.success("Password reset successfully!")
             setTimeout(() => {
             navigate("/login")
             }, 1500);
         })
         .catch ((error)=> {
-            console.log(error)
+            setLoading(false)
             const errors=error?.response?.data?.errors
             if (typeof errors == 'string') {
                 toast.error(errors);
@@ -85,7 +87,7 @@ const ConfirmPassword = () => {
                                 </div>
                                 <div className='col-span-12'>
                                     <PrimaryButton onClick={changePassword} disabled={!forgetPassworddata.new_password || !confirmPassword} size='large' color='green'>
-                                        Change Password
+                                        {loading ?  "Changing password..." : "Change Password"}
                                     </PrimaryButton>
                                 </div>
                             </div>

@@ -9,12 +9,12 @@ import { URL } from '../../../utilities/ConstantData'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
-
 const Login = () => {
     const [loginData, setLoginData] = useState({
         email : "",
         password : ""
     })
+    const [loading , setLoading] = useState(false)
     const navigate = useNavigate()
     const handleChange = (e) =>{
         const { name , value } = e.target
@@ -24,8 +24,10 @@ const Login = () => {
     }
 
     const handleLoginIn = async () => {
+        setLoading(true)
         axios.post(`${URL}/login`, loginData)
         .then((res)=>{
+            setLoading(false)
             const userData = res.data.data;
             localStorage.setItem('userData', JSON.stringify(userData));
             toast.success("Login successfully!")
@@ -34,6 +36,7 @@ const Login = () => {
             }, 1500);
         })
         .catch ((error)=> {
+            setLoading(false)
             console.log(error)
             const errors=error?.response?.data?.errors
             if (typeof errors == 'string') {
@@ -90,8 +93,8 @@ const Login = () => {
                                 <div className='col-span-12'>
                                     <div className='grid grid-cols-12 gap-3'>
                                         <div className='col-span-12'>
-                                            <PrimaryButton onClick={handleLoginIn} disabled={!loginData.email || !loginData.password} size='large' color='green'>
-                                                    Log in
+                                            <PrimaryButton onClick={handleLoginIn} disabled={!loginData.email || !loginData.password || loading} size='large' color='green'>
+                                                {loading ? 'Logging in...' :  'Log in'}
                                             </PrimaryButton>
                                         </div>
                                         <div className='col-span-12 text-white text-center'>

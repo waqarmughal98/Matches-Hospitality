@@ -19,7 +19,7 @@ const VerifyCode = () => {
           navigate("/forgot-password")  
         }
     },[])
-
+    const [loading , setLoading] = useState(false)
     const handleChange = (e, index) => {
         const value = e.target.value;
         if (/^\d*$/.test(value)) {
@@ -66,15 +66,17 @@ const VerifyCode = () => {
     };
 
     const verifyOtp = async (otp) => {
+        setLoading(true)
         axios.post(`${URL}/verify-otp`, {email:forgetPassworddata.email , otp })
         .then((res)=>{
+            setLoading(false)
             toast.success("Otp verified successfully!")
             setTimeout(() => {
             navigate("/confirm-password")
             }, 1500);
         })
         .catch ((error)=> {
-            console.log(error)
+            setLoading(false)
             const errors=error?.response?.data?.errors
             if (typeof errors == 'string') {
                 toast.error(errors);
@@ -134,7 +136,7 @@ const VerifyCode = () => {
                                 color='green' 
                                 disabled={!allFieldsFilled}
                             >
-                                Confirm Code
+                                {loading ? "Verifying code..." : "Confirm Code"}
                             </PrimaryButton>
                         </div>
                     </div>

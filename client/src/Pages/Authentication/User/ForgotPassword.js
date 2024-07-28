@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthLayout from '../../../ThemeLayout/AuthLayout'
 import loginBanner from '../../../../src/assets/svgs/auth/forgetBanner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
@@ -17,17 +17,19 @@ const ForgotPassword = () => {
             sendOtp()
         }
     }
-
+    const [loading , setLoading] = useState(false)
     const sendOtp = async () => {
+        setLoading(true)
         axios.post(`${URL}/send-otp`, {email:forgetPassworddata.email})
         .then((res)=>{
+            setLoading(false)
             toast.success("Otp sent successfully to your email!")
             setTimeout(() => {
             navigate("/verify-code")
             }, 1500);
         })
         .catch ((error)=> {
-            console.log(error)
+            setLoading(false)
             const errors=error?.response?.data?.errors
             if (typeof errors == 'string') {
                 toast.error(errors);
@@ -69,8 +71,8 @@ const ForgotPassword = () => {
                                     <LabelInput name="email" value={forgetPassworddata.email}  onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter your email address' />
                                 </div>
                                 <div className='col-span-12 pb-10'>
-                                    <PrimaryButton disabled={!forgetPassworddata.email} onClick={handleClick} size='large' color='green'>
-                                        Confirm email Address
+                                    <PrimaryButton disabled={!forgetPassworddata.email || loading} onClick={handleClick} size='large' color='green'>
+                                        {loading ?  "Sending otp..." : "Confirm email Address"}
                                     </PrimaryButton>
                                 </div>
                             </div>
