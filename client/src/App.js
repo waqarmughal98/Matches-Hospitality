@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminDashboard from './Pages/Dashboard/AdminDashboard';
 import UserManagement from './Pages/Dashboard/UserManagement';
+import PackageInformation from './Pages/Packages/PackageInformation';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/" element={<Layout />}>
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="user-management" element={<UserManagement />} />
+        <Route path="package" element={<PackageInformation />} />
         </Route>
         {/* auth */}
         <Route path="/login" element={<Login />} />

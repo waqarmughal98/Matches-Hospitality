@@ -8,7 +8,7 @@ const Sidebar = () => {
     }
     return (
         <div class={`flex flex-col ${isCollapsed ? 'w-40' : 'w-24'} bg-primaryBlack min-h-screen transition-all duration-200 ease-linear sticky top-0`}>
-            <div class={`flex items-center h-[4.8rem] bg-primaryBlack ${isCollapsed ? 'justify-end pr-8' : 'justify-center'}`}>
+            <div class={`flex items-center h-[4.8rem] z-50 bg-primaryBlack ${isCollapsed ? 'justify-end pr-8' : 'justify-center'}`}>
                 <img src='assets/images/svgs/navbar/menu.svg' className='cursor-pointer' alt='menu' onClick={handleCollapse} width={30} />
             </div>
             <div class="flex flex-col">
