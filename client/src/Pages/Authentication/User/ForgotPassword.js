@@ -6,15 +6,41 @@ import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/B
 import { LabelInput } from '../../../Components/UiElements/TextInputs'
 import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../../UseContext/ContextProvider'
-const ForgotPassword = () => {
-    
+import { URL } from '../../../utilities/ConstantData'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+const ForgotPassword = () => { 
     const navigate = useNavigate()
     const {  forgetPassworddata, forgetPasswordsSetter, isEmailValidate} = useAppContext()
     const handleClick=()=>{
         if(isEmailValidate(forgetPassworddata.email)){
-            navigate('/verify-code'); 
+            sendOtp()
         }
     }
+
+    const sendOtp = async () => {
+        axios.post(`${URL}/send-otp`, {email:forgetPassworddata.email})
+        .then((res)=>{
+            toast.success("Otp sent successfully to your email!")
+            setTimeout(() => {
+            navigate("/verify-code")
+            }, 1500);
+        })
+        .catch ((error)=> {
+            console.log(error)
+            const errors=error?.response?.data?.errors
+            if (typeof errors == 'string') {
+                toast.error(errors);
+            } else if (errors && Array.isArray(errors)) {
+                errors.forEach((err) => {
+                    toast.error(err.msg);
+                });
+            } else {
+                toast.error('An unknown error occurred.');
+            }
+        })
+    };
+
 
     return (
         <AuthLayout backgroundImage={loginBanner}>

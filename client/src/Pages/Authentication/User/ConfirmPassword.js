@@ -1,10 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthLayout from '../../../ThemeLayout/AuthLayout'
 import loginBanner from '../../../../src/assets/svgs/auth/confirmBanner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
 import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
 import { LabelInput } from '../../../Components/UiElements/TextInputs'
+import { useAppContext } from '../../../UseContext/ContextProvider'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+import { URL } from '../../../utilities/ConstantData'
+
 const ConfirmPassword = () => {
+    const {  forgetPassworddata, forgetPasswordsSetter} = useAppContext()
+    const [ confirmPassword, setConfirmPassword] = useState()
+    const navigate = useNavigate()
+ 
+    /* if user reload the page */
+    useEffect(()=>{
+        if(!forgetPassworddata.email || !forgetPassworddata.email ){
+            navigate("/forgot-password")
+        }
+    },[])
+
+    const changePassword=()=>{
+        if(confirmPassword==forgetPassworddata.new_password){
+            resetPassword()
+        }
+        else{
+            toast.error("Password does not match")
+        }
+    }
+    
+    const resetPassword = async (otp) => {
+        axios.post(`${URL}/reset-password`, forgetPassworddata)
+        .then((res)=>{
+            toast.success("Password reset successfully!")
+            setTimeout(() => {
+            navigate("/login")
+            }, 1500);
+        })
+        .catch ((error)=> {
+            console.log(error)
+            const errors=error?.response?.data?.errors
+            if (typeof errors == 'string') {
+                toast.error(errors);
+            } else if (errors && Array.isArray(errors)) {
+                errors.forEach((err) => {
+                    toast.error(err.msg);
+                });
+            } else {
+                toast.error('An unknown error occurred.');
+            }
+        })
+    };
+
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
@@ -29,13 +78,13 @@ const ConfirmPassword = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-7'>
                                 <div className='col-span-12'>
-                                    <LabelInput label='Enter Your New Password' />
+                                    <LabelInput name="new_password" value={forgetPassworddata.new_password} onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter Your New Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <LabelInput label='Confirm Password' />
+                                    <LabelInput value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <PrimaryButton size='large' color='green'>
+                                    <PrimaryButton onClick={changePassword} disabled={!forgetPassworddata.new_password || !confirmPassword} size='large' color='green'>
                                         Change Password
                                     </PrimaryButton>
                                 </div>
