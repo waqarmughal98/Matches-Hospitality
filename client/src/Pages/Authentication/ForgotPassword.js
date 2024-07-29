@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import AuthLayout from '../../../ThemeLayout/AuthLayout'
-import loginBanner from '../../../../src/assets/svgs/auth/forgetBanner.webp'
-import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
-import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
-import { LabelInput } from '../../../Components/UiElements/TextInputs'
+import loginBanner from '../../../src/assets/webp/auth/forget-banner.webp'
+import logo from '../../../src/assets/svgs/navbar/match-logo.svg'
 import { useNavigate } from 'react-router-dom'
-import { useAppContext } from '../../../UseContext/ContextProvider'
-import { URL } from '../../../utilities/ConstantData'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { URL } from '../../utilities/ConstantData'
+import { useAppContext } from '../../UseContext/ContextProvider'
+import AuthLayout from '../../ThemeLayout/AuthLayout'
+import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
+import { LabelInput } from '../../Components/UiElements/TextInputs'
 const ForgotPassword = () => { 
     const navigate = useNavigate()
     const {  forgetPassworddata, forgetPasswordsSetter, isEmailValidate} = useAppContext()

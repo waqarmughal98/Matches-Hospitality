@@ -4,10 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 const Sidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const location = useLocation()
-    
-    // Get the current pathname
     const currentPath = location.pathname
-
     const handleCollapse = () => {
         setIsCollapsed(!isCollapsed)
     }
@@ -31,8 +28,8 @@ const Sidebar = () => {
             <div className="flex flex-col">
                 <nav className="flex-1 py-4 bg-primaryBlack flex flex-col gap-5">
                     <Link 
-                        to="/dashboard" 
-                        className={`flex items-center gap-3 py-2 text-gray-100 ${currentPath === '/dashboard' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                        to="dashboard" 
+                        className={`flex items-center gap-3 py-2 text-gray-100 ${currentPath === 'dashboard' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
                         <img src='assets/images/svgs/navbar/venu.svg' className='ps-5' alt='' />
                         {isCollapsed && (
@@ -42,8 +39,8 @@ const Sidebar = () => {
                         )}
                     </Link>
                     <Link 
-                        to="/package" 
-                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/package' ? 'border-l-2 border-primaryGreen' : ''}`}
+                        to="package" 
+                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === 'package' ? 'border-l-2 border-primaryGreen' : ''}`}
                     >
                         <img src='assets/images/svgs/navbar/home.svg' className='ps-5' alt='' />
                         {isCollapsed && (
@@ -53,8 +50,8 @@ const Sidebar = () => {
                         )}
                     </Link>
                     <Link 
-                        to="/user-management" 
-                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/user-management' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                        to="user-management" 
+                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === 'user-management' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
                         <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
                         {isCollapsed && (

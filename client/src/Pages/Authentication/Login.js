@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
-import AuthLayout from '../../../ThemeLayout/AuthLayout'
-import loginBanner from '../../../../src/assets/svgs/auth/loginBanner.webp'
-import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
-import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
-import { LabelInput } from '../../../Components/UiElements/TextInputs'
+import loginBanner from '../../../src/assets/webp/auth/login-banner.webp'
+import logo from '../../../src/assets/svgs/navbar/match-logo.svg'
 import { Link } from 'react-router-dom'
-import { URL } from '../../../utilities/ConstantData'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {toast} from 'react-toastify'
+import { URL } from '../../utilities/ConstantData'
+import AuthLayout from '../../ThemeLayout/AuthLayout'
+import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
+import { LabelInput } from '../../Components/UiElements/TextInputs'
 const Login = () => {
     const [loginData, setLoginData] = useState({
         email : "",
@@ -32,7 +32,7 @@ const Login = () => {
             localStorage.setItem('userData', JSON.stringify(userData));
             toast.success("Login successfully!")
             setTimeout(() => {
-                navigate("/dashboard/")
+                navigate("/dashboard")
             }, 1500);
         })
         .catch ((error)=> {

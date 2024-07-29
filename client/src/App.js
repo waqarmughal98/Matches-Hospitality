@@ -2,12 +2,6 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NotFound from './Pages/404/NotFound';
 import Layout from './ThemeLayout/Layout';
-import Login from './Pages/Authentication/User/Login';
-import Signup from './Pages/Authentication/User/Signup';
-import FinishSignup from './Pages/Authentication/User/FinishSignup';
-import ForgotPassword from './Pages/Authentication/User/ForgotPassword';
-import VerifyCode from './Pages/Authentication/User/VerifyCode';
-import ConfirmPassword from './Pages/Authentication/User/ConfirmPassword';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminDashboard from './Pages/Dashboard/AdminDashboard';
@@ -15,6 +9,12 @@ import UserManagement from './Pages/Dashboard/UserManagement';
 import PackageInformation from './Pages/Packages/PackageInformation';
 import CreatePackage from './Pages/Packages/CreatePackage';
 import Account from './Pages/Packages/Account';
+import Login from './Pages/Authentication/Login';
+import Signup from './Pages/Authentication/Signup';
+import FinishSignup from './Pages/Authentication/FinishSignup';
+import ForgotPassword from './Pages/Authentication/ForgotPassword';
+import VerifyCode from './Pages/Authentication/VerifyCode';
+import ConfirmPassword from './Pages/Authentication/ConfirmPassword';
 
 const App = () => {
   return (
@@ -36,8 +36,8 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verify-code" element={<VerifyCode />} />
         <Route path="/confirm-password" element={<ConfirmPassword />} />
-        {/* 404 */}
-        <Route path="*" element={<NotFound />} />
+        {/* 404 */} 
+        <Route path="/*" element={<NotFound />} />
       </Routes>
       <ToastContainer autoClose={1500} theme="dark"  hideProgressBar={true} />
     </BrowserRouter>
