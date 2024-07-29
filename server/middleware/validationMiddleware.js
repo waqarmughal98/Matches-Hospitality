@@ -70,10 +70,18 @@ const validatePackage = [
   validateRequest,
 ];
 
+
+const validateCategory = [
+  check('name').notEmpty().withMessage('Name is required'),
+  check('description').notEmpty().withMessage('Description is required'),
+  validateRequest,
+];
+
 module.exports = {
   validateSignup,
   validateLogin,
   validateChangePassword,
   validateResetPassword,
-  validatePackage
+  validatePackage,
+  validateCategory
 };
