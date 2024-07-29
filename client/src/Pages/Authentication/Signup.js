@@ -1,14 +1,13 @@
 import React from 'react'
-import AuthLayout from '../../../ThemeLayout/AuthLayout'
-import loginBanner from '../../../../src/assets/webp/auth/signup-banner.webp'
-import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
-import { PrimaryButton, SecondaryButton, SSOButton } from '../../../Components/UiElements/Buttons'
-import { LabelInput } from '../../../Components/UiElements/TextInputs'
-import google from '../../../../src/assets/svgs/auth/google.svg'
-import apple from '../../../../src/assets/svgs/auth/apple.svg'
+import loginBanner from '../../../src/assets/webp/auth/signup-banner.webp'
+import logo from '../../../src/assets/svgs/navbar/match-logo.svg'
+import google from '../../../src/assets/svgs/auth/google.svg'
+import apple from '../../../src/assets/svgs/auth/apple.svg'
 import { useNavigate } from 'react-router-dom';
-import { useAppContext } from '../../../UseContext/ContextProvider'
-
+import AuthLayout from '../../ThemeLayout/AuthLayout'
+import { PrimaryButton, SecondaryButton, SSOButton } from '../../Components/UiElements/Buttons'
+import { LabelInput } from '../../Components/UiElements/TextInputs'
+import { useAppContext } from '../../UseContext/ContextProvider'
 const Signup = () => {
   const { signUpDetails,signUpDetailsSetter,isEmailValidate}  = useAppContext()
   const navigate = useNavigate();

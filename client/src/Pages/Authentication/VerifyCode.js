@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import AuthLayout from '../../../ThemeLayout/AuthLayout';
-import loginBanner from '../../../../src/assets/webp/auth/code-banner.webp';
-import logo from '../../../../src/assets/svgs/navbar/match-logo.svg';
-import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons';
+import loginBanner from '../../../src/assets/webp/auth/code-banner.webp';
+import logo from '../../../src/assets/svgs/navbar/match-logo.svg';
 import { useNavigate } from 'react-router-dom';
-import { useAppContext } from '../../../UseContext/ContextProvider'
-import { URL } from '../../../utilities/ConstantData'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { URL } from '../../utilities/ConstantData';
+import AuthLayout from '../../ThemeLayout/AuthLayout';
+import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons';
+import { useAppContext } from '../../UseContext/ContextProvider';
 const VerifyCode = () => {
     const [otp, setOtp] = useState(['', '', '', '']);
     const inputRefs = useRef([]);

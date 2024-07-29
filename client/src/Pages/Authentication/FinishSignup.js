@@ -1,14 +1,14 @@
 import React , {useEffect, useState}from 'react'
-import AuthLayout from '../../../ThemeLayout/AuthLayout'
-import loginBanner from '../../../../src/assets/webp/auth/finish-banner.webp'
-import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
-import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
-import { LabelInput } from '../../../Components/UiElements/TextInputs'
-import { useAppContext } from '../../../UseContext/ContextProvider'
+import loginBanner from '../../../src/assets/webp/auth/finish-banner.webp'
+import logo from '../../../src/assets/svgs/navbar/match-logo.svg'
 import axios from 'axios';
 import { toast } from 'react-toastify'
-import { URL } from '../../../utilities/ConstantData'
 import { useNavigate } from 'react-router-dom'
+import { URL } from '../../utilities/ConstantData';
+import AuthLayout from '../../ThemeLayout/AuthLayout';
+import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons';
+import { LabelInput } from '../../Components/UiElements/TextInputs';
+import { useAppContext } from '../../UseContext/ContextProvider';
 const FinishSignup = () => {
     const {signUpDetails, signUpDetailsSetter} = useAppContext()
     const navigate = useNavigate()
@@ -29,7 +29,7 @@ const FinishSignup = () => {
             localStorage.setItem('userData', JSON.stringify(userData));
             toast.success("Account created successfully!")
             setTimeout(() => {
-                navigate("/dashboard/")
+                navigate("/dashboard")
             }, 1500);
         })
         .catch ((error)=> {
