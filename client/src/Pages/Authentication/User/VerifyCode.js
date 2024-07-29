@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import AuthLayout from '../../../ThemeLayout/AuthLayout';
-import loginBanner from '../../../../src/assets/svgs/auth/codeBanner.webp';
+import loginBanner from '../../../../src/assets/webp/auth/code-banner.webp';
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg';
 import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons';
 import { useNavigate } from 'react-router-dom';

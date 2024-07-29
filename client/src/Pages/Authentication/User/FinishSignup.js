@@ -1,6 +1,6 @@
 import React , {useEffect, useState}from 'react'
 import AuthLayout from '../../../ThemeLayout/AuthLayout'
-import loginBanner from '../../../../src/assets/svgs/auth/finishBanner.webp'
+import loginBanner from '../../../../src/assets/webp/auth/finish-banner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
 import { PrimaryButton, SecondaryButton } from '../../../Components/UiElements/Buttons'
 import { LabelInput } from '../../../Components/UiElements/TextInputs'

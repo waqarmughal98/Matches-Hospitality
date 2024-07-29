@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthLayout from '../../../ThemeLayout/AuthLayout'
-import loginBanner from '../../../../src/assets/svgs/auth/signupBanner.webp'
+import loginBanner from '../../../../src/assets/webp/auth/signup-banner.webp'
 import logo from '../../../../src/assets/svgs/navbar/match-logo.svg'
 import { PrimaryButton, SecondaryButton, SSOButton } from '../../../Components/UiElements/Buttons'
 import { LabelInput } from '../../../Components/UiElements/TextInputs'
