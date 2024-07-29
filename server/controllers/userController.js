@@ -4,10 +4,11 @@ const User = require('../models/userModel');
 const Otp = require('../models/otpModel');
 const { generateToken, isValidEmail } = require('../utils/tokenUtils');
 const { sendOTPEmail,generateOTP } = require('../utils/otpUtils');
+const handleError = require('../utils/errorHandler');
 
 /* Sign Up */
 const signup = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password , userName } = req.body;
 
   if (!isValidEmail(email)) {
     return res.status(400).json({ errors: 'Invalid email format' });
@@ -22,7 +23,7 @@ const signup = asyncHandler(async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
   
-    user = await User.create({ email, password: hashedPassword , userType : "a2d%lsakd4A" });
+    user = await User.create({ email,userName, password: hashedPassword , userType : "a2d%lsakd4A" });
   
     const token = generateToken(user._id.toString());
   
@@ -33,7 +34,9 @@ const signup = asyncHandler(async (req, res) => {
         email,
         id: user._id.toString(),
         token,
-        userType : user.userType
+        userName : userName || "",
+        userType : user.userType,
+        staus : user.status
       },
     });
     
@@ -73,7 +76,9 @@ const login = asyncHandler(async (req, res) => {
       email,
       id: user._id.toString(),
       token,
-      userType: user.userType
+      userType: user.userType,
+      userName : user.userName || "",
+      staus : user.status
     },
   });
 });
@@ -233,6 +238,42 @@ const resetPassword = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true, message: 'Password reset successfully' });
 });
 
+
+// Get All Users
+const getAllUsers = asyncHandler(async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({ success: true, data: users });
+  } catch (error) {
+    handleError(res, 400, 'Something went wrong');
+  }
+});
+
+// Change User Status
+const changeUserStatus = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!['active', 'deactive'].includes(status)) {
+      return handleError(res, 400, 'Invalid status value');
+    }
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return handleError(res, 404, 'User not found');
+    }
+
+    user.status = status;
+    await user.save();
+
+    res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    handleError(res, 400, 'Something went wrong');
+  }
+});
+
 module.exports = {
   signup,
   login,
@@ -241,5 +282,7 @@ module.exports = {
   deleteUser,
   sendOTP,
   verifyOTP,
-  resetPassword
+  resetPassword,
+  getAllUsers,
+  changeUserStatus
 };

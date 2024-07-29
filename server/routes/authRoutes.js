@@ -7,14 +7,20 @@ const {
   deleteUser,
   sendOTP,
   verifyOTP,
-  resetPassword
+  resetPassword,
+  getAllUsers,
+  changeUserStatus
 } = require('../controllers/userController');
 const protect = require('../middleware/authMiddleware');
+const isAdmin = require('../middleware/adminMiddleware');
+
 const {
   validateSignup,
   validateLogin,
   validateChangePassword,
   validateResetPassword,
+
+
 } = require('../middleware/validationMiddleware');
 
 const router = express.Router();
@@ -27,5 +33,7 @@ router.delete('/delete-user', protect, deleteUser);
 router.post('/send-otp', sendOTP);
 router.post('/verify-otp', verifyOTP);
 router.post('/reset-password', validateResetPassword, resetPassword);
+router.get('/all-users', protect, isAdmin, getAllUsers);
+router.patch('/change-user-status/:id', protect, isAdmin, changeUserStatus);
 
 module.exports = router;

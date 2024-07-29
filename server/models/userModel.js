@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
+  userName: {
+    type: String,
+    default:""
+  },
   email: {
     type: String,
     required : [true, "Email is required"],
@@ -12,6 +16,11 @@ const UserSchema = new mongoose.Schema({
   },
   userType:{
     type: String,
+  },
+  status:{
+    type: String,
+    enum: ["active", "deactive"],
+    default: "active",
   }
 }, {
   timestamps: true,
