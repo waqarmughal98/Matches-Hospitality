@@ -4,6 +4,9 @@ import { toast } from 'react-toastify';
 const AppContext = createContext();
 
 export const ContextProvider = ({ children }) => {
+
+  // states
+
   // modal, backdrop and dropdown
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [backdropContent, setBackdropContent] = useState(null);
@@ -29,6 +32,33 @@ export const ContextProvider = ({ children }) => {
   })
   // matchcard
   const [selectedMatch, setSelectedMatch] = useState(null);
+
+  // category
+  const [formData, setFormData] = useState({
+    eventName: '',
+    eventDescription: '',
+    eventLogo: null,
+    eventBanner: null,
+  });
+
+
+  // Functions
+  const handleFileChange = (event, fieldName) => {
+    console.log(event, fieldName);
+    const file = event.target.files[0];
+    if (file) {
+      setFormData(prevData => ({
+        ...prevData,
+        [fieldName]: file
+      }));
+    }
+  };
+
+
+
+
+
+  // ...........................abdullah
 
   const signUpDetailsSetter = (e) => {
     const { name, value } = e.target
@@ -67,7 +97,11 @@ export const ContextProvider = ({ children }) => {
         isOpen,
         setIsOpen,
         setSelectedMatch,
-        selectedMatch
+        selectedMatch,
+        // category
+        handleFileChange,
+        formData,
+        setFormData
       }}>
       {children}
     </AppContext.Provider>

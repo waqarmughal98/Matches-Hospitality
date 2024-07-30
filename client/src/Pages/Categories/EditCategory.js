@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons';
 import { LabelInput } from '../../Components/UiElements/TextInputs';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../UseContext/ContextProvider';
 
-const CreateCategory = () => {
+const EditCategory = () => {
     const { formData, setFormData, handleFileChange } = useAppContext();
+
+    useEffect(() => {
+        setData({
+            eventName: formData.eventName || '',
+            eventDescription: formData.eventDescription || '',
+            eventLogo: formData.eventLogo || null,
+            eventBanner: formData.eventBanner || null,
+        });
+    }, [formData]);
+    const [Data, setData] = useState({
+        eventName: '',
+        eventDescription: '',
+        eventLogo: null,
+        eventBanner: null,
+    });
     const navigate = useNavigate();
     const GoToEdit = () => {
         navigate('/edit-category');
@@ -21,10 +36,10 @@ const CreateCategory = () => {
                 <div className='grid grid-cols-12 gap-y-5'>
                     <div className='col-span-12'>
                         <LabelInput
-                            value={formData.eventName || ''}
+                            value={Data.eventName || ''}
                             label='Event Name'
                             placeholder='Event Name'
-                            onChange={(e) => setFormData({ ...formData, eventName: e.target.value })}
+                            onChange={(e) => setData({ ...Data, eventName: e.target.value })}
                         />
                     </div>
                     <div className='col-span-12'>
@@ -34,12 +49,12 @@ const CreateCategory = () => {
                             </div>
                             <div className='col-span-12'>
                                 <textarea
-                                    value={formData.eventDescription || ''}
+                                    value={Data.eventDescription || ''}
                                     id="description"
                                     rows="6"
                                     className="block p-2.5 w-full text-sm bg-transparent rounded-lg border border-[#454545] focus:ring-primaryGreen focus:border-primaryBlack"
                                     placeholder="Event Description"
-                                    onChange={(e) => setFormData({ ...formData, eventDescription: e.target.value })}
+                                    onChange={(e) => setData({ ...Data, eventDescription: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -60,10 +75,10 @@ const CreateCategory = () => {
                                             className='cursor-pointer'
                                             onClick={() => document.getElementById('eventLogo').click()}
                                         >
-                                            {formData.eventLogo ? (
+                                            {Data.eventLogo ? (
                                                 <img
-                                                    src={URL.createObjectURL(formData.eventLogo)}
-                                                    alt={formData.eventLogo.name}
+                                                    src={URL.createObjectURL(Data.eventLogo)}
+                                                    alt={Data.eventLogo.name}
                                                     width={30}
                                                     className='absolute w-full h-full object-cover rounded-lg'
                                                 />
@@ -77,9 +92,9 @@ const CreateCategory = () => {
                                             )}
                                         </div>
                                     </div>
-                                    {formData.eventLogo && (
+                                    {Data.eventLogo && (
                                         <p className='text-sm text-white'>
-                                            {formData.eventLogo.name}
+                                            {Data.eventLogo.name}
                                         </p>
                                     )}
                                 </div>
@@ -98,10 +113,10 @@ const CreateCategory = () => {
                                             className='cursor-pointer'
                                             onClick={() => document.getElementById('eventBanner').click()}
                                         >
-                                            {formData.eventBanner ? (
+                                            {Data.eventBanner ? (
                                                 <img
-                                                    src={URL.createObjectURL(formData.eventBanner)}
-                                                    alt={formData.eventBanner.name}
+                                                    src={URL.createObjectURL(Data.eventBanner)}
+                                                    alt={Data.eventBanner.name}
                                                     width={30}
                                                     className='absolute w-full h-full object-cover rounded-lg'
                                                 />
@@ -115,9 +130,9 @@ const CreateCategory = () => {
                                             )}
                                         </div>
                                     </div>
-                                    {formData.eventBanner && (
+                                    {Data.eventBanner && (
                                         <p className='text-sm text-white'>
-                                            {formData.eventBanner.name}
+                                            {Data.eventBanner.name}
                                         </p>
                                     )}
                                 </div>
@@ -125,7 +140,7 @@ const CreateCategory = () => {
                         </div>
                     </div>
                     <div className='col-span-12 mt-5'>
-                        <PrimaryButton onClick={GoToEdit} size='large'>Create Event</PrimaryButton>
+                        <PrimaryButton onClick={GoToEdit} size='large'>Update</PrimaryButton>
                     </div>
                 </div>
             </div>
@@ -133,4 +148,4 @@ const CreateCategory = () => {
     );
 };
 
-export default CreateCategory;
+export default EditCategory;

@@ -14,7 +14,7 @@ export const PrimaryInput = ({ placeholder, name, type, onChange, className }) =
     )
 }
 
-export const LabelInput = ({ placeholder, name, type, onChange, className, label }) => {
+export const LabelInput = ({ placeholder, name, type, onChange, className, label , value}) => {
     return (
         <div className='flex flex-col gap-3 w-full'>
             <label className='text-white text-base'>{label}</label>
@@ -23,6 +23,7 @@ export const LabelInput = ({ placeholder, name, type, onChange, className, label
                 name={name}
                 type={type}
                 placeholder={placeholder}
+                value={value}
                 className={`rounded-lg border bg-transparent border-[#454545] px-5 py-3 w-full text-white focus:outline outline-primaryGreen  ${className}`}
             />
         </div>

@@ -18,6 +18,7 @@ import UserDashboard from './Pages/Dashboard/User/UserDashboard';
 import UserManagement from './Pages/Dashboard/Admin/UserManagement';
 import AllCategories from './Pages/Categories/AllCategories';
 import CreateCategory from './Pages/Categories/CreateCategory';
+import EditCategory from './Pages/Categories/EditCategory';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
         {/* category */}
         <Route path="all-categories" element={<AllCategories />} />
         <Route path="create-category" element={<CreateCategory />} />
+        <Route path="edit-category" element={<EditCategory />} />
         {/* user dashboard */}
         <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>
