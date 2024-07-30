@@ -14,6 +14,9 @@ module.exports = {
       },
       borderRadius: {
         'cardRadius': '2xl'
+      },
+      borderColor:{
+        borderInput:'#454545'
       }
     },
   },

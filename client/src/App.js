@@ -4,7 +4,6 @@ import NotFound from './Pages/404/NotFound';
 import Layout from './ThemeLayout/Layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import UserManagement from './Pages/Dashboard/UserManagement';
 import PackageInformation from './Pages/Packages/PackageInformation';
 import CreatePackage from './Pages/Packages/CreatePackage';
 import Account from './Pages/Packages/Account';
@@ -16,6 +15,9 @@ import VerifyCode from './Pages/Authentication/VerifyCode';
 import ConfirmPassword from './Pages/Authentication/ConfirmPassword';
 import AdminDashboard from './Pages/Dashboard/Admin/AdminDashboard';
 import UserDashboard from './Pages/Dashboard/User/UserDashboard';
+import UserManagement from './Pages/Dashboard/Admin/UserManagement';
+import AllCategories from './Pages/Categories/AllCategories';
+import CreateCategory from './Pages/Categories/CreateCategory';
 
 const App = () => {
   return (
@@ -29,6 +31,9 @@ const App = () => {
         <Route path="package" element={<PackageInformation />} />
         <Route path="create-package" element={<CreatePackage />} />
         <Route path="admin-account" element={<Account />} />
+        {/* category */}
+        <Route path="all-categories" element={<AllCategories />} />
+        <Route path="create-category" element={<CreateCategory />} />
         {/* user dashboard */}
         <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>

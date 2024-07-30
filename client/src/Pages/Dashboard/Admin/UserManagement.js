@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { PrimaryButton } from '../../Components/UiElements/Buttons'
-import { useAppContext } from '../../UseContext/ContextProvider';
-import { LabelInput } from '../../Components/UiElements/TextInputs';
+import { PrimaryButton } from '../../../Components/UiElements/Buttons'
+import { useAppContext } from '../../../UseContext/ContextProvider';
+import { LabelInput } from '../../../Components/UiElements/TextInputs';
 const UserManagement = () => {
   const { showBackdropWithContent , closeModal} = useAppContext();
   const [selectedFile, setSelectedFile] = useState(null);

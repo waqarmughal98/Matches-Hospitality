@@ -14,7 +14,7 @@ const Layout = () => {
     }
     return (
         <div className='flex'>
-            <div className='min-w-20 z-40'>
+            <div className='min-w-20 z-40 md:block hidden'>
                 <Sidebar />
             </div>
             <div className='w-full'>
