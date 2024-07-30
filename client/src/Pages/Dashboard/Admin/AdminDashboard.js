@@ -1,6 +1,6 @@
 import React from 'react'
-import Packages from '../../Components/Dashboard/Packages'
-import Revenue from '../../Components/Dashboard/Revenue'
+import Packages from '../../../Components/Dashboard/Packages'
+import Revenue from '../../../Components/Dashboard/Revenue'
 
 const AdminDashboard = () => {
   const userData = [
@@ -65,7 +65,7 @@ const AdminDashboard = () => {
           </div>
           </div>
         </div>
-        <Packages />
+        <Packages/>
         <Revenue />
       </div>
     </div>

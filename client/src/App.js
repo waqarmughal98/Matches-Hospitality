@@ -4,7 +4,6 @@ import NotFound from './Pages/404/NotFound';
 import Layout from './ThemeLayout/Layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminDashboard from './Pages/Dashboard/AdminDashboard';
 import UserManagement from './Pages/Dashboard/UserManagement';
 import PackageInformation from './Pages/Packages/PackageInformation';
 import CreatePackage from './Pages/Packages/CreatePackage';
@@ -15,6 +14,8 @@ import FinishSignup from './Pages/Authentication/FinishSignup';
 import ForgotPassword from './Pages/Authentication/ForgotPassword';
 import VerifyCode from './Pages/Authentication/VerifyCode';
 import ConfirmPassword from './Pages/Authentication/ConfirmPassword';
+import AdminDashboard from './Pages/Dashboard/Admin/AdminDashboard';
+import UserDashboard from './Pages/Dashboard/User/UserDashboard';
 
 const App = () => {
   return (
@@ -28,6 +29,8 @@ const App = () => {
         <Route path="package" element={<PackageInformation />} />
         <Route path="create-package" element={<CreatePackage />} />
         <Route path="admin-account" element={<Account />} />
+        {/* user dashboard */}
+        <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>
         {/* auth */}
         <Route path="/login" element={<Login />} />
