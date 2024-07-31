@@ -9,12 +9,11 @@ export const PrimaryButton = ({ onClick, children, className = '', disabled = fa
 
   const sizeClasses =
     size === 'small' ? 'w-auto px-4 h-7 text-sm' :
-      size === 'medium' ? 'w-auto px-10 h-[3.5rem]' :
+      size === 'medium' ? 'w-auto px-10 h-[3.2rem]' :
         size === 'large' ? 'w-full h-12' :
           '';
 
-  const bgColor =
-    color === 'green' ? 'bg-primaryGreen text-black' : 'bg-[#020202] text-white'
+  const bgColor = color === 'green' ? 'bg-primaryGreen text-black' : 'bg-[#020202] text-white'
 
 
   return (

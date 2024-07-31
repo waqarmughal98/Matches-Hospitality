@@ -4,54 +4,86 @@ import { toast } from 'react-toastify';
 const AppContext = createContext();
 
 export const ContextProvider = ({ children }) => {
+
+  // states
+
+  // modal, backdrop and dropdown
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [backdropContent, setBackdropContent] = useState(null);
-  const [ signUpDetails, setSignUpDetails] = useState({
-    email : "",
-    password : ""
-  })
-  const [ forgetPassworddata, setforgetPassworddata] = useState({
-    email : "",
-    otp : "",
-    new_password : ""
-  })
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const [isOpen, setIsOpen,] = useState(false);
-  const [selectedMatch, setSelectedMatch] = useState(null);
-
+  // backdrop with content
   const showBackdropWithContent = (content) => {
-    console.log(content);
     setBackdropContent(content);
     openModal();
   };
+  // signup details
+  const [signUpDetails, setSignUpDetails] = useState({
+    email: "",
+    password: ""
+  })
+  // forgot password
+  const [forgetPassworddata, setforgetPassworddata] = useState({
+    email: "",
+    otp: "",
+    new_password: ""
+  })
+  // matchcard
+  const [selectedMatch, setSelectedMatch] = useState(null);
 
-  const signUpDetailsSetter = (e) =>{
-    const { name , value } = e.target
-    setSignUpDetails((pre)=>({...pre,[name]:value}))
- }
+  // category
+  const [formData, setFormData] = useState({
+    eventName: '',
+    eventDescription: '',
+    eventLogo: null,
+    eventBanner: null,
+  });
 
-  const forgetPasswordsSetter = (e) =>{
-    const { name , value } = e.target
-    setforgetPassworddata((pre)=>({...pre,[name]:value}))
- }
-  
- const isEmailValidate = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const result = emailRegex.test(email);
-  if(!result){
-    toast.error("Invalid email format.")
+
+  // Functions
+  const handleFileChange = (event, fieldName) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFormData(prevData => ({
+        ...prevData,
+        [fieldName]: file
+      }));
+    }
+  };
+
+
+
+
+
+  // ...........................abdullah
+
+  const signUpDetailsSetter = (e) => {
+    const { name, value } = e.target
+    setSignUpDetails((pre) => ({ ...pre, [name]: value }))
   }
-  return result
-};
+
+  const forgetPasswordsSetter = (e) => {
+    const { name, value } = e.target
+    setforgetPassworddata((pre) => ({ ...pre, [name]: value }))
+  }
+
+  const isEmailValidate = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const result = emailRegex.test(email);
+    if (!result) {
+      toast.error("Invalid email format.")
+    }
+    return result
+  };
 
   return (
-    <AppContext.Provider 
-      value={{ 
+    <AppContext.Provider
+      value={{
         isModalOpen,
         openModal,
         closeModal,
-        signUpDetails, 
+        signUpDetails,
         setSignUpDetails,
         signUpDetailsSetter,
         isEmailValidate,
@@ -63,7 +95,11 @@ export const ContextProvider = ({ children }) => {
         isOpen,
         setIsOpen,
         setSelectedMatch,
-        selectedMatch
+        selectedMatch,
+        // category
+        handleFileChange,
+        formData,
+        setFormData
       }}>
       {children}
     </AppContext.Provider>

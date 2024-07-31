@@ -4,8 +4,6 @@ import NotFound from './Pages/404/NotFound';
 import Layout from './ThemeLayout/Layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminDashboard from './Pages/Dashboard/AdminDashboard';
-import UserManagement from './Pages/Dashboard/UserManagement';
 import PackageInformation from './Pages/Packages/PackageInformation';
 import CreatePackage from './Pages/Packages/CreatePackage';
 import Account from './Pages/Packages/Account';
@@ -15,6 +13,14 @@ import FinishSignup from './Pages/Authentication/FinishSignup';
 import ForgotPassword from './Pages/Authentication/ForgotPassword';
 import VerifyCode from './Pages/Authentication/VerifyCode';
 import ConfirmPassword from './Pages/Authentication/ConfirmPassword';
+import AdminDashboard from './Pages/Dashboard/Admin/AdminDashboard';
+import UserDashboard from './Pages/Dashboard/User/UserDashboard';
+import UserManagement from './Pages/Dashboard/Admin/UserManagement';
+import AllCategories from './Pages/Categories/AllCategories';
+import CreateCategory from './Pages/Categories/CreateCategory';
+import EditCategory from './Pages/Categories/EditCategory';
+import AllMatches from './Pages/Matches/AllMatches';
+import CreateMatch from './Pages/Matches/CreateMatch';
 
 const App = () => {
   return (
@@ -28,6 +34,15 @@ const App = () => {
         <Route path="package" element={<PackageInformation />} />
         <Route path="create-package" element={<CreatePackage />} />
         <Route path="admin-account" element={<Account />} />
+        {/* category */}
+        <Route path="all-categories" element={<AllCategories />} />
+        <Route path="create-category" element={<CreateCategory />} />
+        <Route path="edit-category" element={<EditCategory />} />
+        {/* teams */}
+        <Route path="all-matches" element={<AllMatches />} />
+        <Route path="create-match" element={<CreateMatch />} />
+        {/* user dashboard */}
+        <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>
         {/* auth */}
         <Route path="/login" element={<Login />} />
