@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SecondaryButton } from '../../Components/UiElements/Buttons';
+import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons';
 import Dropdown from '../../Components/UiElements/Dropdowns';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -43,8 +43,8 @@ const CreateMatch = () => {
                         Create Match
                     </div>
                     <div className='col-span-6'>
-                        <div className='grid grid-cols-12 gap-4'>
-                            <div className='col-span-12'>
+                        <div className='grid grid-cols-12 gap-y-5'>
+                            <div className='col-span-11'>
                                 <Dropdown
                                     id="dropdown1"
                                     title="Choose an item"
@@ -69,7 +69,7 @@ const CreateMatch = () => {
                                     onSelect={(id) => handleSelect("dropdown2", id)}
                                 />
                             </div>
-                            <div className='col-span-2 text-white/80 items-center grid justify-center text-2xl'>
+                            <div className='col-span-1 text-white/80 items-center grid justify-center text-2xl'>
                                 vs
                             </div>
                             <div className='col-span-5'>
@@ -84,21 +84,21 @@ const CreateMatch = () => {
                                     onSelect={(id) => handleSelect("dropdown3", id)}
                                 />
                             </div>
-                            <div className='col-span-12'>
-                                <div className='grid grid-cols-12'>
-                                    <div className='col-span-4'>
+                            <div className='col-span-11'>
+                                <div className='grid grid-cols-12 gap-x-5'>
+                                    <div className='col-span-6'>
                                         <div className='flex flex-col gap-y-3'>
-                                            <label>Date</label>
-                                            <DatePicker selected={startDate} className='w-full bg-transparent border py-2 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0' onChange={(date) => setStartDate(date)} />
+                                            <label className='inputLabel'>Date and Time</label>
+                                            <DatePicker selected={startDate} className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0' onChange={(date) => setStartDate(date)} />
                                         </div>
                                     </div>
-                                    <div className='col-span-4'>
-                                        
-                                    </div>
-                                    <div className='col-span-4'>
-                                        <LabelInput label='Vanue'/>
+                                    <div className='col-span-6'>
+                                        <LabelInput label='Venu' />
                                     </div>
                                 </div>
+                            </div>
+                            <div className='col-span-11 mt-5'>
+                                <PrimaryButton size='large'>Create Match</PrimaryButton>
                             </div>
                         </div>
                     </div>

@@ -180,7 +180,7 @@ const Dropdown = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const dropdownClass = classNames('absolute bg-[#343434] w-full max-h-52 overflow-y-auto py-2 rounded shadow-md z-10 mt-2',);
+  const dropdownClass = classNames('absolute bg-[#343434] w-full max-h-60 overflow-y-auto rounded shadow-md z-10 mt-2',);
 
   return (
     <div className='relative' ref={dropdownRef}>
@@ -231,7 +231,7 @@ const Dropdown = ({
                   key={item.id}
                   onClick={() => handleChange(item)}
                   className={classNames(
-                    'flex items-center cursor-pointer px-3 gap-3 text-white py-2 border-b border-borderInput',
+                    'flex items-center cursor-pointer px-3 gap-3 text-white py-3 border-b border-borderInput hover:bg-black/30',
                     { 'bg-gray-300': selectedItem?.id === item.id }
                   )}
                 >
@@ -240,7 +240,7 @@ const Dropdown = ({
                       src={item.imageUrl}
                       alt={item.name}
                       loading='lazy'
-                      className='w-16 h-16 rounded-full bg-gray-400 object-cover me-2'
+                      className='w-10 h-10 rounded-full bg-gray-400 object-cover me-2'
                     />
                   )}
                   <span>{item.name}</span>
