@@ -3,12 +3,39 @@ import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Butt
 import { LabelInput } from '../../Components/UiElements/TextInputs';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../UseContext/ContextProvider';
-
+import { toast } from 'react-toastify';
 const CreateCategory = () => {
     const { formData, setFormData, handleFileChange } = useAppContext();
     const navigate = useNavigate();
-    const GoToEdit = () => {
-        navigate('/edit-category');
+
+    const validation = () => {
+        if (!formData.eventBanner || !(formData.eventBanner instanceof File)) {
+            toast.error("Event Banner is required and should be a file.");
+            return false;
+        }
+        if (!formData.eventLogo || !(formData.eventLogo instanceof File)) {
+            toast.error("Event Logo is required and should be a file.");
+            return false;
+        }
+        if (!formData.eventName || typeof formData.eventName !== "string" || formData.eventName.trim() === "") {
+            toast.error("Event Name is required and should be a non-empty string.");
+            return false;
+        }
+        if (!formData.eventDescription || typeof formData.eventDescription !== "string" || formData.eventDescription.trim() === "") {
+            toast.error("Event Description is required and should be a non-empty string.");
+            return false;
+        }
+        return true;
+    };
+
+
+    console.log(formData,"formData")
+    const handleSubmit = () => {
+         if(validation()){
+            console.log("do")
+         }
+
+
     };
 
     return (
@@ -125,7 +152,7 @@ const CreateCategory = () => {
                         </div>
                     </div>
                     <div className='col-span-12 mt-5'>
-                        <PrimaryButton onClick={GoToEdit} size='large'>Create Event</PrimaryButton>
+                        <PrimaryButton onClick={handleSubmit} size='large'>Create Event</PrimaryButton>
                     </div>
                 </div>
             </div>

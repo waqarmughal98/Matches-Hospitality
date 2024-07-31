@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
 import { toast } from 'react-toastify';
-
 const AppContext = createContext();
 
 export const ContextProvider = ({ children }) => {
@@ -53,11 +52,6 @@ export const ContextProvider = ({ children }) => {
   };
 
 
-
-
-
-  // ...........................abdullah
-
   const signUpDetailsSetter = (e) => {
     const { name, value } = e.target
     setSignUpDetails((pre) => ({ ...pre, [name]: value }))
@@ -76,6 +70,19 @@ export const ContextProvider = ({ children }) => {
     }
     return result
   };
+
+  const handeErrors=(error)=>{
+    const errors=error?.response?.data?.errors
+    if (typeof errors == 'string') {
+        toast.error(errors);
+    } else if (errors && Array.isArray(errors)) {
+        errors.forEach((err) => {
+            toast.error(err.msg);
+        });
+    } else {
+        toast.error('An unknown error occurred.');
+    }
+  }
 
   return (
     <AppContext.Provider
@@ -99,7 +106,8 @@ export const ContextProvider = ({ children }) => {
         // category
         handleFileChange,
         formData,
-        setFormData
+        setFormData,
+        handeErrors
       }}>
       {children}
     </AppContext.Provider>
