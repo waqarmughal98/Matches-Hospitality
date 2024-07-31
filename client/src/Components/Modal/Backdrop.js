@@ -6,13 +6,13 @@ const Backdrop = () => {
   if (!isModalOpen) return null;
 
   return (
-    <div className="absolute inset-0 z-20 flex justify-center h-full transition w-full">
+    <div className="fixed inset-0 z-20 flex justify-center transition w-full h-100vh items-center">
       <div
         aria-hidden="true"
         className="inset-0  w-full h-full bg-black/50 cursor-pointer absolute backdrop-blur-lg"
         onClick={closeModal}
       ></div>
-      <div className="relative w-full">
+      <div className="relative">
         {backdropContent}
       </div>
     </div>

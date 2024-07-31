@@ -15,7 +15,6 @@ export const ContextProvider = ({ children }) => {
   const [isOpen, setIsOpen,] = useState(false);
   // backdrop with content
   const showBackdropWithContent = (content) => {
-    console.log(content);
     setBackdropContent(content);
     openModal();
   };
@@ -44,7 +43,6 @@ export const ContextProvider = ({ children }) => {
 
   // Functions
   const handleFileChange = (event, fieldName) => {
-    console.log(event, fieldName);
     const file = event.target.files[0];
     if (file) {
       setFormData(prevData => ({

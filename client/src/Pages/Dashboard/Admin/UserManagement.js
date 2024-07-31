@@ -3,18 +3,18 @@ import { PrimaryButton } from '../../../Components/UiElements/Buttons'
 import { useAppContext } from '../../../UseContext/ContextProvider';
 import { LabelInput } from '../../../Components/UiElements/TextInputs';
 const UserManagement = () => {
-  const { showBackdropWithContent , closeModal} = useAppContext();
+  const { showBackdropWithContent, closeModal } = useAppContext();
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-              setSelectedFile(e.target.result);
-          };
-          reader.readAsDataURL(file);
-      }
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedFile(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
   console.log(selectedFile);
   const userData = [
@@ -72,52 +72,58 @@ const UserManagement = () => {
   ]
   const handleShowBackdrop = () => {
     const content = (
-      <div className='flex flex-col justify-center p-10 rounded-lg backdrop-blur-3xl w-1/2 m-auto mt-12 bg-black/40'>
-          <button
-            type="button"
-            className="absolute top-4 right-4    rtl:right-auto rtl:left-4"
-            onClick={closeModal}
+      <div className='grid grid-cols-12 justify-center p-10 rounded-lg backdrop-blur-3xl m-auto mt-12 bg-black/40'>
+        <button
+          type="button"
+          className="absolute top-4 right-4    rtl:right-auto rtl:left-4"
+          onClick={closeModal}
+        >
+          <svg
+            title="Close"
+            className="h-4 w-4 cursor-pointer text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
           >
-            <svg
-              title="Close"
-              className="h-4 w-4 cursor-pointer text-gray-400"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            <span className="sr-only">Close</span>
-          </button>
-          <div className='relative w-52 h-52 rounded-full bg-[#1E1E1E] flex justify-center items-center flex-col gap-y-5 m-auto'>
-            <input
+            <path
+              fillRule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+          <span className="sr-only">Close</span>
+        </button>
+        <div className='col-span-12'>
+          <div className='grid grid-cols-12 gap-y-5'>
+            <div className='relative w-52 h-52 rounded-full bg-[#1E1E1E] flex justify-center items-center flex-col gap-y-5 m-auto col-span-6 col-start-4'>
+              <input
                 type='file'
                 accept='image/*'
                 onChange={handleFileChange}
                 className='absolute inset-0 opacity-0 cursor-pointer'
-            />
-            {selectedFile ? (
+              />
+              {selectedFile ? (
                 <img
-                    src={selectedFile}
-                    alt='Profile Preview'
-                    className='w-full h-full rounded-full object-cover absolute'
+                  src={selectedFile}
+                  alt='Profile Preview'
+                  className='w-full h-full rounded-full object-cover absolute'
                 />
-            ) : (
+              ) : (
                 <>
-                    <p className='text-5xl font-bold text-white'>+</p>
-                    <p className='text-primaryGreen text-xs'>Upload Profile Picture</p>
+                  <p className='text-5xl font-bold text-white'>+</p>
+                  <p className='text-primaryGreen text-xs'>Upload Profile Picture</p>
                 </>
-            )}
-        </div>
-        <div className='flex flex-col gap-5 justify-center w-9/12 m-auto'>
-          <LabelInput label='Enter User Name' />
-          <LabelInput label='Password' />
-          <PrimaryButton size='large' className='font-semibold'>Create</PrimaryButton>
+              )}
+            </div>
+            <div className='col-span-12'>
+              <div className='flex flex-col gap-5 justify-center m-auto'>
+                <LabelInput label='Enter User Name'/>
+                <LabelInput label='Password' />
+                <PrimaryButton size='large' className='font-semibold'>Create</PrimaryButton>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
