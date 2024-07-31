@@ -3,54 +3,26 @@ import { toast } from 'react-toastify';
 const AppContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-
-  // states
-
-  // modal, backdrop and dropdown
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [backdropContent, setBackdropContent] = useState(null);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const [isOpen, setIsOpen,] = useState(false);
-  // backdrop with content
   const showBackdropWithContent = (content) => {
     setBackdropContent(content);
     openModal();
   };
-  // signup details
   const [signUpDetails, setSignUpDetails] = useState({
     email: "",
     password: ""
   })
-  // forgot password
+  const [selectedEditCategory, setSelectedEditCategory] = useState({})
   const [forgetPassworddata, setforgetPassworddata] = useState({
     email: "",
     otp: "",
     new_password: ""
   })
-  // matchcard
   const [selectedMatch, setSelectedMatch] = useState(null);
-
-  // category
-  const [formData, setFormData] = useState({
-    eventName: '',
-    eventDescription: '',
-    eventLogo: null,
-    eventBanner: null,
-  });
-
-
-  // Functions
-  const handleFileChange = (event, fieldName) => {
-    const file = event.target.files[0];
-    if (file) {
-      setFormData(prevData => ({
-        ...prevData,
-        [fieldName]: file
-      }));
-    }
-  };
-
 
   const signUpDetailsSetter = (e) => {
     const { name, value } = e.target
@@ -103,11 +75,9 @@ export const ContextProvider = ({ children }) => {
         setIsOpen,
         setSelectedMatch,
         selectedMatch,
-        // category
-        handleFileChange,
-        formData,
-        setFormData,
-        handeErrors
+        handeErrors,
+        setSelectedEditCategory,
+        selectedEditCategory
       }}>
       {children}
     </AppContext.Provider>

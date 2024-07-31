@@ -3,58 +3,130 @@ import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Butt
 import { LabelInput } from '../../Components/UiElements/TextInputs';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../UseContext/ContextProvider';
-
+import { axiosInstance2, URL as Api_URl } from '../../utilities/ConstantData';
+import { toast } from 'react-toastify';
 const EditCategory = () => {
-    const { formData, setFormData, handleFileChange } = useAppContext();
-
-    useEffect(() => {
-        setData({
-            eventName: formData.eventName || '',
-            eventDescription: formData.eventDescription || '',
-            eventLogo: formData.eventLogo || null,
-            eventBanner: formData.eventBanner || null,
-        });
-    }, [formData]);
+    const { selectedEditCategory , handeErrors} = useAppContext();
+    const [loading , setLoading] = useState(false)
     const [Data, setData] = useState({
-        eventName: '',
-        eventDescription: '',
-        eventLogo: null,
-        eventBanner: null,
+        name: '',
+        description: '',
+        categoryLogo: '',
+        categoryBanner: '',
     });
     const navigate = useNavigate();
-    const GoToEdit = () => {
-        navigate('/edit-category');
+    
+    useEffect(() => {
+        if(selectedEditCategory && Object.keys(selectedEditCategory).length > 0){
+            setData({
+                name: selectedEditCategory.name || '',
+                description: selectedEditCategory.description || '',
+                categoryLogo: selectedEditCategory.logo || null,
+                categoryBanner: selectedEditCategory.banner_image || null,
+            });
+        }
+        else{
+            navigate("/all-categories")
+        }   
+    }, []);
+
+    const handleFileChange = (event, fieldName) => {
+        const file = event.target.files[0];
+        if (file) {
+          setData(prevData => ({
+            ...prevData,
+            [fieldName]: file
+          }));
+        }
+      };
+
+
+      const validation = () => {
+        if (!Data.name) {
+            toast.error("Event Name is required and should be a non-empty string.");
+            return false;
+        }
+        else if (!Data.description) {
+            toast.error("Event Description is required and should be a non-empty string.");
+            return false;
+        }
+        else if (!Data.categoryBanner) {
+            toast.error("Event Banner is required and should be a file.");
+            return false;
+        }
+        return true;
     };
+
+
+    const HandleEdit=() => {
+         if(validation()){
+            EditCategory()
+         }
+    };
+
+
+    const EditCategory = async () => {
+        setLoading(true)
+        const data = new FormData();
+        data.append('name', Data.name);
+        data.append('description', Data.description);
+        if(Data.logo != "string"){
+            data.append('logo', Data.categoryLogo);
+        }
+        if(Data.banner_image != "string"){
+            data.append('banner_image', Data.categoryBanner);
+        }
+
+        axiosInstance2().put(`${Api_URl}/category/edit/${selectedEditCategory._id}`, data)
+        .then(()=>{
+            setLoading(false)
+            toast.success("Category updated successfully")
+            navigate("/all-categories")
+        })
+        .catch ((error)=> {
+            setLoading(false)
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                navigate("/Login")
+            }else{
+                handeErrors(error)
+            }
+        })
+    };
+
+    console.log(Data)
 
     return (
         <div className='grid grid-cols-12 text-white gap-y-10'>
             <div className='col-span-12'>
                 <SecondaryButton />
             </div>
-            <div className='col-span-12 font-semibold text-3xl'>Event Category</div>
+            <div className='col-span-12 font-semibold text-3xl'>Edit Category</div>
             <div className='lg:col-span-6 md:col-span-8 col-span-12'>
                 <div className='grid grid-cols-12 gap-y-5'>
                     <div className='col-span-12'>
                         <LabelInput
-                            value={Data.eventName || ''}
-                            label='Event Name'
-                            placeholder='Event Name'
-                            onChange={(e) => setData({ ...Data, eventName: e.target.value })}
+                            value={Data.name}
+                            label='Category Name'
+                            placeholder='Name...'
+                            onChange={(e) => setData({ ...Data, name: e.target.value })}
                         />
                     </div>
                     <div className='col-span-12'>
                         <div className='grid grid-cols-12 gap-3'>
                             <div className='col-span-12'>
-                                <label htmlFor="description" className="block text-base font-semibold">Your message</label>
+                                <label htmlFor="description" className="block text-base font-semibold">Category Description</label>
                             </div>
                             <div className='col-span-12'>
                                 <textarea
-                                    value={Data.eventDescription || ''}
+                                    value={Data.description}
                                     id="description"
                                     rows="6"
                                     className="block p-2.5 w-full text-sm bg-transparent rounded-lg border border-[#454545] focus:ring-primaryGreen focus:border-primaryBlack"
-                                    placeholder="Event Description"
-                                    onChange={(e) => setData({ ...Data, eventDescription: e.target.value })}
+                                    placeholder="Description..."
+                                    onChange={(e) => setData({ ...Data, description: e.target.value })}
                                 />
                             </div>
                         </div>
@@ -63,22 +135,29 @@ const EditCategory = () => {
                         <div className='grid grid-cols-12 lg:gap-x-10 gap-y-10'>
                             <div className='md:col-span-6 col-span-12'>
                                 <div className='flex flex-col gap-y-3'>
-                                    <label htmlFor='eventLogo'>Event Logo</label>
+                                    <label htmlFor='categoryLogo'>Category Logo</label>
                                     <div className='border relative border-borderInput min-h-36 rounded-lg'>
                                         <input
                                             type='file'
-                                            id='eventLogo'
+                                            id='categoryLogo'
                                             className='hidden'
-                                            onChange={(e) => handleFileChange(e, 'eventLogo')}
+                                            onChange={(e) => handleFileChange(e, 'categoryLogo')}
                                         />
                                         <div
                                             className='cursor-pointer'
-                                            onClick={() => document.getElementById('eventLogo').click()}
+                                            onClick={() => document.getElementById('categoryLogo').click()}
                                         >
-                                            {Data.eventLogo ? (
+                                            {typeof Data.categoryLogo=="string" ? (
                                                 <img
-                                                    src={URL.createObjectURL(Data.eventLogo)}
-                                                    alt={Data.eventLogo.name}
+                                                    src ={`../../uploads/${selectedEditCategory.logo}`}
+                                                    alt={"logo"}
+                                                    width={30}
+                                                    className='absolute w-full h-full object-cover rounded-lg'
+                                                />
+                                            ) : Data.categoryLogo ? (
+                                                <img
+                                                    src={URL.createObjectURL(Data.categoryLogo)}
+                                                    alt={Data.categoryLogo.name}
                                                     width={30}
                                                     className='absolute w-full h-full object-cover rounded-lg'
                                                 />
@@ -92,31 +171,38 @@ const EditCategory = () => {
                                             )}
                                         </div>
                                     </div>
-                                    {Data.eventLogo && (
+                                    {Data.categoryLogo && (
                                         <p className='text-sm text-white'>
-                                            {Data.eventLogo.name}
+                                            { typeof Data.categoryLogo=="string" ? Data.categoryLogo : Data.categoryLogo.name }
                                         </p>
                                     )}
                                 </div>
                             </div>
                             <div className='md:col-span-6 col-span-12'>
                                 <div className='flex flex-col gap-y-3'>
-                                    <label htmlFor='eventBanner'>Event Banner</label>
+                                    <label htmlFor='categoryBanner'>Category Banner</label>
                                     <div className='border relative border-borderInput min-h-36 rounded-lg'>
                                         <input
                                             type='file'
-                                            id='eventBanner'
+                                            id='categoryBanner'
                                             className='hidden'
-                                            onChange={(e) => handleFileChange(e, 'eventBanner')}
+                                            onChange={(e) => handleFileChange(e, 'categoryBanner')}
                                         />
                                         <div
                                             className='cursor-pointer'
-                                            onClick={() => document.getElementById('eventBanner').click()}
+                                            onClick={() => document.getElementById('categoryBanner').click()}
                                         >
-                                            {Data.eventBanner ? (
+                                            {typeof Data.categoryBanner=="string" ? (
                                                 <img
-                                                    src={URL.createObjectURL(Data.eventBanner)}
-                                                    alt={Data.eventBanner.name}
+                                                    src={`../../uploads/${selectedEditCategory.banner_image}`}
+                                                    alt={"Banner image"}
+                                                    width={30}
+                                                    className='absolute w-full h-full object-cover rounded-lg'
+                                                />
+                                            ): Data.categoryBanner ? (
+                                                <img
+                                                    src={URL.createObjectURL(Data.categoryBanner)}
+                                                    alt={Data.categoryBanner.name}
                                                     width={30}
                                                     className='absolute w-full h-full object-cover rounded-lg'
                                                 />
@@ -130,9 +216,9 @@ const EditCategory = () => {
                                             )}
                                         </div>
                                     </div>
-                                    {Data.eventBanner && (
+                                    {Data.categoryBanner && (
                                         <p className='text-sm text-white'>
-                                            {Data.eventBanner.name}
+                                            { typeof Data.categoryBanner == "string"  ? Data.categoryBanner  : Data.categoryBanner.name }
                                         </p>
                                     )}
                                 </div>
@@ -140,7 +226,7 @@ const EditCategory = () => {
                         </div>
                     </div>
                     <div className='col-span-12 mt-5'>
-                        <PrimaryButton onClick={GoToEdit} size='large'>Update</PrimaryButton>
+                        <PrimaryButton onClick={()=>HandleEdit()} size='large'>{loading ? "Updating category..." : "Update Category"}</PrimaryButton>
                     </div>
                 </div>
             </div>

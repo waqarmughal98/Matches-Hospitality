@@ -14,3 +14,14 @@ export const axiosInstance = () => {
   };
 
  
+
+  export const axiosInstance2 = () => {
+    const token = JSON.parse(localStorage.getItem('userData')).token;
+    return axios.create({
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    });
+  };
+ 
