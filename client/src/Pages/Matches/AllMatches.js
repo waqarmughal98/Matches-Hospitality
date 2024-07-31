@@ -1,8 +1,10 @@
 import React from 'react'
 import MatchCard from '../../Components/Cards/MatchCard'
 import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
+import { useNavigate } from 'react-router-dom'
 
 const AllMatches = () => {
+    const navigate = useNavigate()
     const createPackage = [
         {
             teamA: 'Leicester C',
@@ -62,6 +64,16 @@ const AllMatches = () => {
         {
             teamA: 'Leicester C',
             teamB: 'Chelsea',
+            id: '11'
+        },
+        {
+            teamA: 'Leicester C',
+            teamB: 'Chelsea',
+            id: '11'
+        },
+        {
+            teamA: 'Leicester C',
+            teamB: 'Chelsea',
             id: '12'
         }
 
@@ -71,7 +83,7 @@ const AllMatches = () => {
             <div className='col-span-12'>
                 <div className='flex justify-between items-center'>
                     <SecondaryButton />
-                    <PrimaryButton size='medium'>Create Match</PrimaryButton>
+                    <PrimaryButton size='medium' onClick={()=>navigate('/create-match')}>Create Match</PrimaryButton>
                 </div>
             </div>
             <div className='col-span-12'>
@@ -82,6 +94,8 @@ const AllMatches = () => {
                                 <MatchCard
                                     key={item.id}
                                     data={item}
+                                    fontSize='text-[12px]'
+                                    width='50'
                                 />
                             </>
                         )

@@ -37,6 +37,9 @@ code {
   .headerText {
     @apply  text-white font-semibold text-3xl;
   }
+  .inputLabel{
+    @apply text-white text-base
+  }
 }
 
 .dropdown-content {

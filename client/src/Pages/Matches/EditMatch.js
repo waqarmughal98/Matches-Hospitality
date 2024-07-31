@@ -17,12 +17,12 @@ const itemsImages = [
     { id: '3', name: 'Item 3', imageUrl: '/assets/images/Category/event-logo2.png' },
 ];
 
-const CreateMatch = () => {
+const EditMatch = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [selectedItems, setSelectedItems] = useState({
-        dropdown1: null,
-        dropdown2: null,
-        dropdown3: null,
+        dropdown1: undefined,
+        dropdown2: undefined,
+        dropdown3: undefined,
     });
 
     const handleSelect = (dropdownId, id) => {
@@ -40,7 +40,7 @@ const CreateMatch = () => {
             <div className='col-span-12'>
                 <div className='grid grid-cols-12 gap-y-10'>
                     <div className='col-span-12 headerText'>
-                        Create Match
+                        Edit Match
                     </div>
                     <div className='col-span-6'>
                         <div className='grid grid-cols-12 gap-y-5'>
@@ -108,4 +108,4 @@ const CreateMatch = () => {
     );
 };
 
-export default CreateMatch;
+export default EditMatch;

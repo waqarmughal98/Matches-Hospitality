@@ -107,7 +107,7 @@ const AllCategories = () => {
                     {categoryData.map((item, index) => (
                         <div key={index} className='group relative xl:col-span-4 md:col-span-12 col-span-12 min-h-56 rounded-xl bg-cover bg-center border-primaryBorder border-[1px]' style={{ backgroundImage: `url("../../uploads/${item.banner_image}")` }}>
                             <div className="absolute rounded-xl inset-0 bg-gradient-to-b from-transparent to-primaryGreen/40 opacity-0 group-hover:opacity-30 transition-opacity duration-100 ease-linear h-full w-full"></div>
-                            <div className='flex items-end absolute h-full w-full p-5 text-white group'>
+                            <div className='flex items-end absolute h-full w-full p-5 text-white group justify-between'>
                                 <div className='flex flex-col gap-y-5 group'>
                                     <img src={`../../uploads/${item.logo}`} alt='logo' width={40} />
                                     <div>
