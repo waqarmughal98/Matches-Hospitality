@@ -57,7 +57,7 @@ const CreateCategory = () => {
                     <div className='col-span-12'>
                         <div className='grid grid-cols-12 gap-3'>
                             <div className='col-span-12'>
-                                <label htmlFor="description" className="block text-base font-semibold">Your message</label>
+                                <label htmlFor="description" className="block text-base font-semibold">Event Description</label>
                             </div>
                             <div className='col-span-12'>
                                 <textarea

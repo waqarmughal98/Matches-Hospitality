@@ -21,6 +21,7 @@ import CreateCategory from './Pages/Categories/CreateCategory';
 import EditCategory from './Pages/Categories/EditCategory';
 import AllMatches from './Pages/Matches/AllMatches';
 import CreateMatch from './Pages/Matches/CreateMatch';
+import EditMatch from './Pages/Matches/EditMatch';
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
         {/* teams */}
         <Route path="all-matches" element={<AllMatches />} />
         <Route path="create-match" element={<CreateMatch />} />
+        <Route path="edit-match" element={<EditMatch />} />
         {/* user dashboard */}
         <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>
