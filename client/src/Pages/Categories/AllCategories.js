@@ -7,8 +7,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from 'react-toastify';
 import { axiosInstance, URL } from '../../utilities/ConstantData';
 const AllCategories = () => {
-    const { handeErrors } = useAppContext()
-    const { showBackdropWithContent } = useAppContext()
+    const { handeErrors , showBackdropWithContent, closeModal} = useAppContext()
     const [loading , setLoading] = useState(false)
     const navigate = useNavigate()
     const [categoryData, setCategoryData] = useState()
@@ -41,6 +40,77 @@ const AllCategories = () => {
         })
     };
 
+    const handleDelete = () => {
+        closeModal()
+    }
+    const data = [
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category1.webp',
+            title: 'Aafcon',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category3.webp',
+            title: 'Aafcon',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category2.webp',
+            title: 'Formula 1',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category3.webp',
+            title: 'Aafcon',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category1.webp',
+            title: 'Aafcon',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category2.webp',
+            title: 'Formula 1',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category1.webp',
+            title: 'Aafcon',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category2.webp',
+            title: 'Formula 1',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category3.webp',
+            title: 'Aafcon',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category2.webp',
+            title: 'Formula 1',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+        {
+            logo: 'assets/images/userdashboard/event-logo2.png',
+            banner: 'assets/images/Category/category1.webp',
+            title: 'Aafcon',
+            desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+        },
+    ];
 
     const handleShowBackdrop = () => {
         const content = (
@@ -56,7 +126,7 @@ const AllCategories = () => {
                         <button data-modal-toggle="deleteModal" type="button" class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                             No, cancel
                         </button>
-                        <button type="submit" class="py-2 px-3 text-sm font-medium text-center text-black bg-primaryGreen rounded-lg">
+                        <button onClick={handleDelete} type="submit" class="py-2 px-3 text-sm font-medium text-center text-black bg-primaryGreen rounded-lg">
                             Yes, I'm sure
                         </button>
                     </div>
