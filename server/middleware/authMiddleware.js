@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 
 const protect = asyncHandler(async (req, res, next) => {
   if (!req.headers.authorization || !req.headers.authorization.startsWith("Bearer")) {
-    return res.status(401).json({ success: false, message: "Not Authorized" });
+    return res.status(401).json({ success: false, errors: "Not Authorized" });
   }
 
   const token = req.headers.authorization.split(" ")[1];
