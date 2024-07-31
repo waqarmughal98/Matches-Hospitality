@@ -197,7 +197,7 @@ const Dropdown = ({
           type='button'
           onClick={() => setIsOpen(!isOpen)}
           className={classNames(
-            'flex justify-between items-center gap-5 rounded w-full py-2 px-4 bg-transparent border border-borderInput text-white',
+            'flex justify-between items-center gap-5 rounded w-full py-2 px-4 bg-transparent focus:border-primaryGreen border border-borderInput text-white',
             style
           )}
         >

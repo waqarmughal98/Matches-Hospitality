@@ -20,9 +20,9 @@ const itemsImages = [
 const CreateMatch = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [selectedItems, setSelectedItems] = useState({
-        dropdown1: undefined,
-        dropdown2: undefined,
-        dropdown3: undefined,
+        dropdown1: null,
+        dropdown2: null,
+        dropdown3: null,
     });
 
     const handleSelect = (dropdownId, id) => {
