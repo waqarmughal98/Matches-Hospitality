@@ -12,7 +12,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className={`flex flex-col ${isCollapsed ? 'w-40' : 'w-20'} bg-primaryBlack min-h-screen transition-all duration-200 ease-linear fixed`}>
+        <div className={`flex flex-col ${isCollapsed ? 'w-40' : 'w-20'} bg-primaryBlack min-h-screen transition-all duration-200 ease-linear sticky top-0`}>
             <div className={`flex items-center h-[4.8rem] z-50 bg-primaryBlack ${isCollapsed ? 'justify-end pr-8' : 'justify-center'}`}>
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={handleCollapse} className='cursor-pointer'>
                     <g clipPath="url(#clip0_191_3503)">
