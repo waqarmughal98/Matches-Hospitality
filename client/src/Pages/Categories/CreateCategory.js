@@ -17,7 +17,7 @@ const CreateCategory = () => {
                 <SecondaryButton />
             </div>
             <div className='col-span-12 font-semibold text-3xl'>Event Category</div>
-            <div className='col-span-6'>
+            <div className='lg:col-span-6 md:col-span-8 col-span-12'>
                 <div className='grid grid-cols-12 gap-y-5'>
                     <div className='col-span-12'>
                         <LabelInput
@@ -45,8 +45,8 @@ const CreateCategory = () => {
                         </div>
                     </div>
                     <div className='col-span-12'>
-                        <div className='grid grid-cols-12 gap-x-10'>
-                            <div className='col-span-6'>
+                        <div className='grid grid-cols-12 lg:gap-x-10 gap-y-10'>
+                            <div className='md:col-span-6 col-span-12'>
                                 <div className='flex flex-col gap-y-3'>
                                     <label htmlFor='eventLogo'>Event Logo</label>
                                     <div className='border relative border-borderInput min-h-36 rounded-lg'>
@@ -84,7 +84,7 @@ const CreateCategory = () => {
                                     )}
                                 </div>
                             </div>
-                            <div className='col-span-6'>
+                            <div className='md:col-span-6 col-span-12'>
                                 <div className='flex flex-col gap-y-3'>
                                     <label htmlFor='eventBanner'>Event Banner</label>
                                     <div className='border relative border-borderInput min-h-36 rounded-lg'>
