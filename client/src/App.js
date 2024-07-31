@@ -19,7 +19,7 @@ import UserManagement from './Pages/Dashboard/Admin/UserManagement';
 import AllCategories from './Pages/Categories/AllCategories';
 import CreateCategory from './Pages/Categories/CreateCategory';
 import EditCategory from './Pages/Categories/EditCategory';
-import AllTeams from './Pages/Teams/AllTeams';
+import AllMatches from './Pages/Matches/AllMatches';
 
 const App = () => {
   return (
@@ -38,7 +38,7 @@ const App = () => {
         <Route path="create-category" element={<CreateCategory />} />
         <Route path="edit-category" element={<EditCategory />} />
         {/* teams */}
-        <Route path="all-teams" element={<AllTeams />} />
+        <Route path="all-matches" element={<AllMatches />} />
         {/* user dashboard */}
         <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>

@@ -2,7 +2,7 @@ import React from 'react'
 import MatchCard from '../../Components/Cards/MatchCard'
 import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
 
-const AllTeams = () => {
+const AllMatches = () => {
     const createPackage = [
         {
             teamA: 'Leicester C',
@@ -92,4 +92,4 @@ const AllTeams = () => {
     )
 }
 
-export default AllTeams
+export default AllMatches
