@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 const Sidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const location = useLocation()
-    
+
     const currentPath = location.pathname
 
     const handleCollapse = () => {
@@ -12,7 +12,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className={`flex flex-col ${isCollapsed ? 'w-40' : 'w-20'} bg-primaryBlack min-h-screen transition-all duration-200 ease-linear sticky top-0`}>
+        <div className={`flex flex-col ${isCollapsed ? 'w-40' : 'w-20'} bg-primaryBlack min-h-screen transition-all duration-200 ease-linear fixed`}>
             <div className={`flex items-center h-[4.8rem] z-50 bg-primaryBlack ${isCollapsed ? 'justify-end pr-8' : 'justify-center'}`}>
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={handleCollapse} className='cursor-pointer'>
                     <g clipPath="url(#clip0_191_3503)">
@@ -29,8 +29,8 @@ const Sidebar = () => {
             </div>
             <div className="flex flex-col">
                 <nav className="flex-1 py-4 bg-primaryBlack flex flex-col gap-5">
-                    <Link 
-                        to="dashboard" 
+                    <Link
+                        to="dashboard"
                         className={`flex items-center gap-3 py-2 text-gray-100 ${currentPath === '/dashboard' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
                         <img src='assets/images/svgs/navbar/venu.svg' className='ps-5' alt='' />
@@ -40,8 +40,8 @@ const Sidebar = () => {
                             </p>
                         )}
                     </Link>
-                    <Link 
-                        to="package" 
+                    <Link
+                        to="package"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/package' ? 'border-l-2 border-primaryGreen' : ''}`}
                     >
                         <img src='assets/images/svgs/navbar/home.svg' className='ps-5' alt='' />
@@ -51,8 +51,8 @@ const Sidebar = () => {
                             </p>
                         )}
                     </Link>
-                    <Link 
-                        to="user-management" 
+                    <Link
+                        to="user-management"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/user-management' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
                         <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />

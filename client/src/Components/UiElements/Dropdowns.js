@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
+import { GoChevronDown } from 'react-icons/go';
 import { useAppContext } from '../../UseContext/ContextProvider';
 export const ProfileDropdown = () => {
   const { openModal, closeModal, setIsOpen, isOpen, showBackdropWithContent } = useAppContext()
@@ -17,7 +19,7 @@ export const ProfileDropdown = () => {
       <button
         id="hs-dropdown-custom-trigger"
         type="button"
-        className="hs-dropdown-toggle py-1 ps-1 pe-3 flex items-center gap-x-2 text-sm font-medium rounded-full borderbg-transparent text-gray-white shadow-sm  disabled:opacity-50 disabled:pointer-events-none"
+        className="hs-dropdown-toggle py-1 ps-1 pe-3 flex items-center gap-x-2 text-sm font-medium rounded-full borderbg-transparent shadow-sm  disabled:opacity-50 disabled:pointer-events-none"
         aria-haspopup="menu"
         aria-expanded={isOpen}
         aria-label="Dropdown"
@@ -111,21 +113,21 @@ export const FilterDropdown = ({ isActive, onClick, children, text }) => {
         className="px-4 py-2 bg-transparent text-white rounded-md flex justify-between w-full"
         onClick={onClick}
       >
-          <span>{text}</span>
-          <svg
-            className={`transition-all ms-2 mt-1 duration-150 ease-linear ${isActive ? 'rotate-180' : ''} }`}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+        <span>{text}</span>
+        <svg
+          className={`transition-all ms-2 mt-1 duration-150 ease-linear ${isActive ? 'rotate-180' : ''} }`}
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
       </button>
       <div className={`dropdown-content ${isActive ? 'active' : ''}`}>
         {children}
@@ -134,4 +136,123 @@ export const FilterDropdown = ({ isActive, onClick, children, text }) => {
   );
 };
 
+// select dropdown
+const Dropdown = ({
+  id,
+  title = 'Select',
+  data,
+  position = 'bottom-left',
+  hasImage,
+  style,
+  selectedId,
+  onSelect,
+  label,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(
+    selectedId ? data.find((item) => item.id === selectedId) : undefined
+  );
 
+  const dropdownRef = useRef(null);
+  const handleChange = (item) => {
+    setSelectedItem(item);
+    onSelect && onSelect(item.id);
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    if (selectedId && data) {
+      const newSelectedItem = data.find((item) => item.id === selectedId);
+      newSelectedItem && setSelectedItem(newSelectedItem);
+    } else {
+      setSelectedItem(undefined);
+    }
+  }, [selectedId, data]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const dropdownClass = classNames('absolute bg-[#343434] w-full max-h-52 overflow-y-auto py-2 rounded shadow-md z-10 mt-2',);
+
+  return (
+    <div className='relative' ref={dropdownRef}>
+      <div className='flex flex-col gap-y-3'>
+        {label&&(
+          <label className='text-white text-base'>{label}</label>
+        )}
+        <div>
+        <button
+          id={id}
+          aria-label='Toggle dropdown'
+          aria-haspopup='true'
+          aria-expanded={isOpen}
+          type='button'
+          onClick={() => setIsOpen(!isOpen)}
+          className={classNames(
+            'flex justify-between items-center gap-5 rounded w-full py-2 px-4 bg-transparent border border-borderInput text-white',
+            style
+          )}
+        >
+          <div className='flex items-center gap-5'>
+            {selectedItem?.imageUrl && (
+              <img
+                src={selectedItem.imageUrl}
+                alt='Selected'
+                className='w-7 h-7 rounded-full bg-gray-400 object-cover me-2'
+              />
+            )}
+            <span>{selectedItem?.name || title}</span>
+          </div>
+          <GoChevronDown
+            size={20}
+            className={classNames('transform duration-500 ease-in-out', {
+              'rotate-180': isOpen,
+            })}
+          />
+        </button>
+        {isOpen && (
+          <div aria-label='Dropdown menu' className={dropdownClass}>
+            <ul
+              role='menu'
+              aria-labelledby={id}
+              aria-orientation='vertical'
+              className='leading-10'
+            >
+              {data.map((item) => (
+                <li
+                  key={item.id}
+                  onClick={() => handleChange(item)}
+                  className={classNames(
+                    'flex items-center cursor-pointer  px-3 gap-3 text-white py-2 border-b border-borderInput',
+                    { 'bg-gray-300': selectedItem?.id === item.id }
+                  )}
+                >
+                  {hasImage && item.imageUrl && (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      loading='lazy'
+                      className='w-8 h-8 rounded-full bg-gray-400 object-cover me-2'
+                    />
+                  )}
+                  <span>{item.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dropdown;

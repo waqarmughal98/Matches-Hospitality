@@ -20,6 +20,7 @@ import AllCategories from './Pages/Categories/AllCategories';
 import CreateCategory from './Pages/Categories/CreateCategory';
 import EditCategory from './Pages/Categories/EditCategory';
 import AllMatches from './Pages/Matches/AllMatches';
+import CreateMatch from './Pages/Matches/CreateMatch';
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="edit-category" element={<EditCategory />} />
         {/* teams */}
         <Route path="all-matches" element={<AllMatches />} />
+        <Route path="create-match" element={<CreateMatch />} />
         {/* user dashboard */}
         <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>
