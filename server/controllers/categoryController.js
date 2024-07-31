@@ -1,10 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Category = require('../models/categoryModel');
-
-// Helper function for handling errors
-const handleError = (res, statusCode, message) => {
-  res.status(statusCode).json({ success: false, message });
-};
+const handleError = require('../utils/errorHandler');
 
 // Create Category
 const createCategory = asyncHandler(async (req, res) => {

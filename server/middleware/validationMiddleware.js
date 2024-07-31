@@ -77,11 +77,31 @@ const validateCategory = [
   validateRequest,
 ];
 
+
+const validateTeam = [
+  check('name').notEmpty().withMessage('Name is required'),
+  check('categoryId').notEmpty().withMessage('Category ID is required'),
+  validateRequest,
+];
+
+const validateEvent = [
+  check('categoryId').isMongoId().withMessage('Valid Category ID is required'),
+  check('team1Id').isMongoId().withMessage('Valid Team 1 ID is required'),
+  check('team2Id').isMongoId().withMessage('Valid Team 2 ID is required'),
+  check('date').notEmpty().withMessage('Date is required'),
+  check('time').notEmpty().withMessage('Time is required'),
+  check('packages').isArray({ min: 1 }).withMessage('Packages list is required'),
+  validateRequest,
+];
+
+
 module.exports = {
   validateSignup,
   validateLogin,
   validateChangePassword,
   validateResetPassword,
   validatePackage,
-  validateCategory
+  validateCategory,
+  validateTeam,
+  validateEvent
 };

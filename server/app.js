@@ -12,10 +12,14 @@ app.use(express.urlencoded({ extended: true }));
 const authRouter = require('./routes/authRoutes.js');
 const packageRouter = require('./routes/packageRoutes.js');
 const categoryRouter = require('./routes/categoryRoutes.js');
+const teamRouter = require('./routes/teamRoutes.js');
+const eventRouter = require('./routes/eventRoutes.js');
 
 app.use('/api/', authRouter);
 app.use('/api/package/', packageRouter);
 app.use('/api/category/', categoryRouter);
+app.use('/api/team/', teamRouter);
+app.use('/api/event/', eventRouter);
 
 
 const listenServer = async () => {
