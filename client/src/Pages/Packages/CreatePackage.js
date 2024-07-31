@@ -70,14 +70,14 @@ const CreatePackage = () => {
         }
     ]
 
-    const handleCardClick = (id) => {
-        console.log(id);
-        setSelectedMatch(id);
-    };
+    // const handleCardClick = (id) => {
+    //     console.log(id);
+    //     setSelectedMatch(id);
+    // };
 
     const handleShowBackdrop = () => {
         const content = (
-            <div className='grid grid-cols-12 bg-black/40 p-10 rounded-lg backdrop-blur-3xl justify-center m-10 gap-y-10 '>
+            <div className='grid grid-cols-12 bg-black/40 p-10 rounded-lg backdrop-blur-3xl justify-center mt-16 gap-y-10 min-h-[600px] overflow-y-auto'>
                 <div className='col-span-12'>
                     <div className='flex text-white gap-10'>
                         <div className='col-span-1 text-xl font-semibold'>
@@ -117,7 +117,7 @@ const CreatePackage = () => {
                 {/* innercards */}
                 <div className='col-span-12'>
                     <div className='grid grid-cols-12 gap-5 items-center'>
-                        {data?.map((item) => {
+                        {/* {data?.map((item) => {
                             return (
                                 <>
                                     <MatchCard
@@ -127,7 +127,7 @@ const CreatePackage = () => {
                                     />
                                 </>
                             )
-                        })}
+                        })} */}
 
                     </div>
                 </div>
@@ -170,7 +170,7 @@ const CreatePackage = () => {
                                         </svg>
                                     </div>
                                 </div>
-                               <PrimaryButton size='medium' color='green'>Create Package</PrimaryButton>
+                                <PrimaryButton size='medium' color='green'>Create Package</PrimaryButton>
                             </div>
                         </div>
                     </div>

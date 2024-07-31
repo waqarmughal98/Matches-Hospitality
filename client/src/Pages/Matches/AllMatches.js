@@ -62,6 +62,16 @@ const AllMatches = () => {
         {
             teamA: 'Leicester C',
             teamB: 'Chelsea',
+            id: '11'
+        },
+        {
+            teamA: 'Leicester C',
+            teamB: 'Chelsea',
+            id: '11'
+        },
+        {
+            teamA: 'Leicester C',
+            teamB: 'Chelsea',
             id: '12'
         }
 
@@ -82,6 +92,8 @@ const AllMatches = () => {
                                 <MatchCard
                                     key={item.id}
                                     data={item}
+                                    fontSize='text-[12px]'
+                                    width='50'
                                 />
                             </>
                         )

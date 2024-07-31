@@ -231,7 +231,7 @@ const Dropdown = ({
                   key={item.id}
                   onClick={() => handleChange(item)}
                   className={classNames(
-                    'flex items-center cursor-pointer  px-3 gap-3 text-white py-2 border-b border-borderInput',
+                    'flex items-center cursor-pointer px-3 gap-3 text-white py-2 border-b border-borderInput',
                     { 'bg-gray-300': selectedItem?.id === item.id }
                   )}
                 >
@@ -240,7 +240,7 @@ const Dropdown = ({
                       src={item.imageUrl}
                       alt={item.name}
                       loading='lazy'
-                      className='w-8 h-8 rounded-full bg-gray-400 object-cover me-2'
+                      className='w-16 h-16 rounded-full bg-gray-400 object-cover me-2'
                     />
                   )}
                   <span>{item.name}</span>

@@ -3,6 +3,7 @@ import { SecondaryButton } from '../../Components/UiElements/Buttons';
 import Dropdown from '../../Components/UiElements/Dropdowns';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { LabelInput } from '../../Components/UiElements/TextInputs';
 
 const items = [
     { id: '1', name: 'Item 1' },
@@ -83,15 +84,22 @@ const CreateMatch = () => {
                                     onSelect={(id) => handleSelect("dropdown3", id)}
                                 />
                             </div>
-                        </div>
-                    </div>
-                    <div className='col-span-12'>
-                        <div className='grid grid-cols-12'>
-                            <div className='col-span-6'>
-                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                            <div className='col-span-12'>
+                                <div className='grid grid-cols-12'>
+                                    <div className='col-span-4'>
+                                        <div className='flex flex-col gap-y-3'>
+                                            <label>Date</label>
+                                            <DatePicker selected={startDate} className='w-full bg-transparent border py-2 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0' onChange={(date) => setStartDate(date)} />
+                                        </div>
+                                    </div>
+                                    <div className='col-span-4'>
+                                        
+                                    </div>
+                                    <div className='col-span-4'>
+                                        <LabelInput label='Vanue'/>
+                                    </div>
+                                </div>
                             </div>
-                            <div className='col-span-6'></div>
-                            <div className='col-span-12'></div>
                         </div>
                     </div>
                 </div>
