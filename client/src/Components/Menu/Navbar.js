@@ -3,7 +3,7 @@ import { ProfileDropdown } from '../UiElements/Dropdowns'
 
 const Navbar = () => {
     return (
-        <nav className={`bg-primaryBlack border-gray-200 px-16 sticky top-0 !z-30`}>
+        <nav className={`bg-primaryBlack border-gray-200 md:px-16 px-8 sticky top-0 !z-30`}>
             <div className="flex flex-wrap items-center justify-between py-4">
                 <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="/assets/images/svgs/navbar/match-logo.svg" alt="match Logo" width='120' />
