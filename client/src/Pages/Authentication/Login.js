@@ -9,6 +9,7 @@ import { URL } from '../../utilities/ConstantData'
 import AuthLayout from '../../ThemeLayout/AuthLayout'
 import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
 import { LabelInput } from '../../Components/UiElements/TextInputs'
+import { useAppContext } from '../../UseContext/ContextProvider'
 const Login = () => {
     const [loginData, setLoginData] = useState({
         email : "",
@@ -16,6 +17,7 @@ const Login = () => {
     })
     const [loading , setLoading] = useState(false)
     const navigate = useNavigate()
+    const { handeErrors } = useAppContext()
     const handleChange = (e) =>{
         const { name , value } = e.target
         setLoginData((pre)=>({
@@ -37,17 +39,7 @@ const Login = () => {
         })
         .catch ((error)=> {
             setLoading(false)
-            console.log(error)
-            const errors=error?.response?.data?.errors
-            if (typeof errors == 'string') {
-                toast.error(errors);
-            } else if (errors && Array.isArray(errors)) {
-                errors.forEach((err) => {
-                    toast.error(err.msg);
-                });
-            } else {
-                toast.error('An unknown error occurred.');
-            }
+            handeErrors(error)
         })
     };
 

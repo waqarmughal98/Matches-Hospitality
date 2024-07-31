@@ -10,7 +10,7 @@ import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Butt
 import { LabelInput } from '../../Components/UiElements/TextInputs';
 import { useAppContext } from '../../UseContext/ContextProvider';
 const FinishSignup = () => {
-    const {signUpDetails, signUpDetailsSetter} = useAppContext()
+    const {signUpDetails, signUpDetailsSetter , handeErrors} = useAppContext()
     const navigate = useNavigate()
     const [loading , setLoading] = useState(false)
     /* when user reload the screen on second step */
@@ -34,16 +34,7 @@ const FinishSignup = () => {
         })
         .catch ((error)=> {
             setLoading(false)
-            const errors=error?.response?.data?.errors
-            if (typeof errors == 'string') {
-                toast.error(errors);
-            } else if (errors && Array.isArray(errors)) {
-                errors.forEach((err) => {
-                    toast.error(err.msg);
-                });
-            } else {
-                toast.error('An unknown error occurred.');
-            }
+            handeErrors(error)
         })
     };
 
