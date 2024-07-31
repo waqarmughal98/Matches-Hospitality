@@ -71,7 +71,7 @@ const AllMatches = () => {
             <div className='col-span-12'>
                 <div className='flex justify-between items-center'>
                     <SecondaryButton />
-                    <PrimaryButton size='medium'>Create Team</PrimaryButton>
+                    <PrimaryButton size='medium'>Create Match</PrimaryButton>
                 </div>
             </div>
             <div className='col-span-12'>
