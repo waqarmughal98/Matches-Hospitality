@@ -33,16 +33,16 @@ const EditMatch = () => {
     };
 
     return (
-        <div className='grid grid-cols-12 gap-y-10 backdrop-blur-xl p-10'>
-            <div className='col-span-12'>
+        <div className='grid grid-cols-12 gap-y-10 backdrop-blur-xl bg-black/30 p-10'>
+            {/* <div className='col-span-12'>
                 <SecondaryButton />
-            </div>
+            </div> */}
             <div className='col-span-12'>
-                <div className='grid grid-cols-12 gap-y-10'>
-                    <div className='col-span-12 headerText'>
+                <div className='grid grid-cols-12 gap-y-10 justify-center'>
+                    <div className='col-span-6 col-start-4 headerText'>
                         Edit Match
                     </div>
-                    <div className='col-span-6'>
+                    <div className='col-span-6 col-start-4'>
                         <div className='grid grid-cols-12 gap-y-5'>
                             <div className='col-span-11'>
                                 <Dropdown
@@ -98,7 +98,7 @@ const EditMatch = () => {
                                 </div>
                             </div>
                             <div className='col-span-11 mt-5'>
-                                <PrimaryButton size='large'>Create Match</PrimaryButton>
+                                <PrimaryButton size='large'>Update</PrimaryButton>
                             </div>
                         </div>
                     </div>
