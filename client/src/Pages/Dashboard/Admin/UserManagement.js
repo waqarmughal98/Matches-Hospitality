@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { PrimaryButton } from '../../../Components/UiElements/Buttons'
 import { useAppContext } from '../../../UseContext/ContextProvider';
 import { LabelInput } from '../../../Components/UiElements/TextInputs';
+import { Table } from '../../../Components/ReactTable/Table';
 const UserManagement = () => {
   const { showBackdropWithContent, closeModal } = useAppContext();
   const [selectedFile, setSelectedFile] = useState(null);
@@ -70,125 +71,99 @@ const UserManagement = () => {
       numberOfUsers: '98,656'
     }
   ]
-  const handleShowBackdrop = () => {
-    const content = (
-      <div className='grid grid-cols-12 justify-center p-10 rounded-lg backdrop-blur-3xl m-auto mt-12 bg-black/40'>
-        <button
-          type="button"
-          className="absolute top-4 right-4    rtl:right-auto rtl:left-4"
-          onClick={closeModal}
-        >
-          <svg
-            title="Close"
-            className="h-4 w-4 cursor-pointer text-gray-400"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-          <span className="sr-only">Close</span>
-        </button>
-        <div className='col-span-12'>
-          <div className='grid grid-cols-12 gap-y-5'>
-            <div className='relative w-52 h-52 rounded-full bg-[#1E1E1E] flex justify-center items-center flex-col gap-y-5 m-auto col-span-6 col-start-4'>
-              <input
-                type='file'
-                accept='image/*'
-                onChange={handleFileChange}
-                className='absolute inset-0 opacity-0 cursor-pointer'
-              />
-              {selectedFile ? (
-                <img
-                  src={selectedFile}
-                  alt='Profile Preview'
-                  className='w-full h-full rounded-full object-cover absolute'
-                />
-              ) : (
-                <>
-                  <p className='text-5xl font-bold text-white'>+</p>
-                  <p className='text-primaryGreen text-xs'>Upload Profile Picture</p>
-                </>
-              )}
-            </div>
-            <div className='col-span-12'>
-              <div className='flex flex-col gap-5 justify-center m-auto'>
-                <LabelInput label='Enter User Name'/>
-                <LabelInput label='Password' />
-                <PrimaryButton size='large' className='font-semibold'>Create</PrimaryButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-    showBackdropWithContent(content);
-  };
+  // const handleShowBackdrop = () => {
+  //   const content = (
+  //     <div className='grid grid-cols-12 justify-center p-10 rounded-lg backdrop-blur-3xl m-auto mt-12 bg-black/40'>
+  //       <button
+  //         type="button"
+  //         className="absolute top-4 right-4    rtl:right-auto rtl:left-4"
+  //         onClick={closeModal}
+  //       >
+  //         <svg
+  //           title="Close"
+  //           className="h-4 w-4 cursor-pointer text-gray-400"
+  //           xmlns="http://www.w3.org/2000/svg"
+  //           viewBox="0 0 20 20"
+  //           fill="currentColor"
+  //           aria-hidden="true"
+  //         >
+  //           <path
+  //             fillRule="evenodd"
+  //             d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+  //             clipRule="evenodd"
+  //           ></path>
+  //         </svg>
+  //         <span className="sr-only">Close</span>
+  //       </button>
+  //       <div className='col-span-12'>
+  //         <div className='grid grid-cols-12 gap-y-5'>
+  //           <div className='relative w-52 h-52 rounded-full bg-[#1E1E1E] flex justify-center items-center flex-col gap-y-5 m-auto col-span-6 col-start-4'>
+  //             <input
+  //               type='file'
+  //               accept='image/*'
+  //               onChange={handleFileChange}
+  //               className='absolute inset-0 opacity-0 cursor-pointer'
+  //             />
+  //             {selectedFile ? (
+  //               <img
+  //                 src={selectedFile}
+  //                 alt='Profile Preview'
+  //                 className='w-full h-full rounded-full object-cover absolute'
+  //               />
+  //             ) : (
+  //               <>
+  //                 <p className='text-5xl font-bold text-white'>+</p>
+  //                 <p className='text-primaryGreen text-xs'>Upload Profile Picture</p>
+  //               </>
+  //             )}
+  //           </div>
+  //           <div className='col-span-12'>
+  //             <div className='flex flex-col gap-5 justify-center m-auto'>
+  //               <LabelInput label='Enter User Name'/>
+  //               <LabelInput label='Password' />
+  //               <PrimaryButton size='large' className='font-semibold'>Create</PrimaryButton>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  //   showBackdropWithContent(content);
+  // };
+
+  const cols = useMemo(() => [
+    {
+        header: 'Name',
+        cell: (row) => row.renderValue(),
+        accessorKey: 'name',
+    },
+    {
+        header: 'Price',
+        cell: (row) => row.renderValue(),
+        accessorKey: 'price',
+    },
+    {
+        header: 'Quantity',
+        cell: (row) => row.renderValue(),
+        accessorKey: 'quantity',
+    },
+], []);
+
+  const dummyData = () => {
+    const items = [];
+    for (let i = 0; i < 15; i++) {
+        items.push({
+            id: i,
+            name: `Item ${i}`,
+            price: 100,
+            quantity: 1,
+        });
+    }
+    return items;
+};
   return (
     <div className='grid grid-cols-12 text-white xl:gap-x-10 gap-y-8'>
-      <div className='col-span-12'>
-        <div className='grid grid-cols-12 gap-5 xl:gap-x-8 gap-y-8'>
-          <div className='col-span-12 text-3xl font-semibold'>
-            User Management
-          </div>
-          <div className='col-span-12'>
-            <div className='grid grid-cols-12 gap-5'>
-              <div className='xl:col-span-9 col-span-12'>
-                <div className='grid grid-cols-12 gap-4'>
-                  {userData.map((item, index) => {
-                    return (
-                      <>
-                        <div key={index} className='xl:col-span-3 sm:col-span-6 col-span-12 w-full rounded-2xl bg-primaryBlack border-primaryBorder border-[1px]'>
-                          <div class="flex gap-3 p-5">
-                            <div class="flex-shrink-0">
-                              <img class="w-20 h-20 rounded-full" src="assets/images/user/Ellipse 760.png" alt="Neil image" />
-                            </div>
-                            <div className='flex flex-col gap-3'>
-                              <div class="flex-1 min-w-0">
-                                <p class="text-md font-medium text-white">
-                                  {item.name}
-                                </p>
-                                <div class="text-xs text-gray-500 truncate">
-                                  {item.email}
-                                </div>
-                              </div>
-                              <label class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox" value="" class="sr-only peer" />
-                                <div class="relative rounded-full w-10 h-5 py-2 bg-gray-200 peer-focus:outline-none  rounded-ful after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen af rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
-                                <span class="ms-2 text-xs text-[#4D4D4D] peer-checked:text-primaryGreen">Active</span>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    )
-                  })}
-                </div>
-              </div>
-              <div className='grid items-center xl:col-span-3 sm:col-span-6 col-span-12 bg-primaryGreen rounded-2xl text-black p-5'>
-                <div className='flex flex-col gap-3'>
-                  <div className='flex flex-col gap-3 w-full'>
-                    <label className='text-base font-semibold'>Email Address</label>
-                    <input
-                      className={`rounded-lg border bg-transparent border-[#454545] font-semibold px-5 py-3 w-full focus:outline`}
-                    />
-                  </div>
-                  <PrimaryButton className='bg-white w-full h-12 font-semibold border-[#454545] border-1' onClick={handleShowBackdrop}>
-                    Create New User
-                  </PrimaryButton>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className='col-span-12'>
+       <div className='col-span-12'>
         <div className='grid grid-cols-12 xl:gap-x-8 gap-y-8'>
           <div className='col-span-12 text-3xl font-semibold'>Users</div>
           <div className='col-span-12'>
@@ -226,6 +201,16 @@ const UserManagement = () => {
                 )
               })}
             </div>
+          </div>
+        </div>
+      </div>
+      <div className='col-span-12'>
+        <div className='grid grid-cols-12 gap-5 xl:gap-x-8 gap-y-8'>
+          <div className='col-span-12 text-3xl font-semibold'>
+            User Management
+          </div>
+          <div className='col-span-12'>
+          <Table data={dummyData()} columns={cols} showNavigation/>
           </div>
         </div>
       </div>

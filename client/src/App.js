@@ -23,6 +23,7 @@ import AllMatches from './Pages/Matches/AllMatches';
 import CreateMatch from './Pages/Matches/CreateMatch';
 import EditMatch from './Pages/Matches/EditMatch';
 import AllTeams from './Pages/Teams/AllTeams';
+import ReactTable from './Components/ReactTable/ReactTable';
 
 const App = () => {
   return (
@@ -56,6 +57,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verify-code" element={<VerifyCode />} />
         <Route path="/confirm-password" element={<ConfirmPassword />} />
+        <Route path="/table" element={<ReactTable />} />
         {/* 404 */} 
         <Route path="/*" element={<NotFound />} />
       </Routes>
