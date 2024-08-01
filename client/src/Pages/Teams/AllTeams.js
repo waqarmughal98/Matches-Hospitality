@@ -15,9 +15,10 @@ const AllTeams = () => {
   const navigate = useNavigate()
   const [loading , setLoading] = useState(true)
   const [TeamData, setTeamData] = useState([])
+  const [updation , setUpdation] = useState()
   useEffect(()=>{
     fetchData()
-  },[])
+  },[updation])
 
   const fetchData = async () => {
     axiosInstance().get(`${URL}/team/all`)
@@ -39,22 +40,23 @@ const AllTeams = () => {
     })
 };
 
-  const handleShowBackdrop = () => {
+  const handleEditShowBackdrop = (item) => {
     const content = (
-      <EditTeamModal />
+      <EditTeamModal selectedItem={item} setUpdation={setUpdation} />
     )
     showBackdropWithContent(content)
   }
-  const handleEditBackdrop = ()=>{
+
+  const handleCreateBackdrop = ()=>{
     const content = (
-      <CreateTeamModal />
+      <CreateTeamModal setTeamData={setTeamData} />
     )
     showBackdropWithContent(content)
   }
   
-  const handleBackdrop = () => {
+  const handleBackdrop= (id) => {
     const content = (
-      <DeleteModal />
+      <DeleteModal setTeamData={setTeamData} selectedItemID={id}/>
     )
     showBackdropWithContent(content)
   }
@@ -64,7 +66,7 @@ const AllTeams = () => {
       <div className='col-span-12 text-white'>
         <div className='flex justify-between items-center'>
           <h1 className='font-semibold text-3xl'>All Teams</h1>
-          <PrimaryButton size='medium' onClick={handleEditBackdrop}>
+          <PrimaryButton size='medium' onClick={handleCreateBackdrop}>
             Create Team
           </PrimaryButton>
         </div>
@@ -81,10 +83,10 @@ const AllTeams = () => {
                     <p>{item.categoryName || ""}</p>
                   </div>
                   <div className='flex items-center gap-x-3 py-1 rounded-md text-xs w-fit'>
-                    <div className='flex gap-x-3 items-center border-borderInput border px-2 py-1 rounded-md cursor-pointer' onClick={handleShowBackdrop}>
+                    <div className='flex gap-x-3 items-center border-borderInput border px-2 py-1 rounded-md cursor-pointer' onClick={()=>handleEditShowBackdrop(item)}>
                       Edit <MdOutlineEdit />
                     </div>
-                    <div onClick={handleBackdrop} className='flex gap-x-1  items-center text-white bg-red-700 px-2 py-1 rounded-md cursor-pointer font-semibold'>
+                    <div onClick={()=>handleBackdrop(item._id)} className='flex gap-x-1  items-center text-white bg-red-700 px-2 py-1 rounded-md cursor-pointer font-semibold'>
                       Delete <RiDeleteBinLine className='mt-[1px]' />
                     </div>
                   </div>

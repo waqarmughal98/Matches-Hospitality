@@ -33,12 +33,13 @@ const createTeam = asyncHandler(async (req, res) => {
 const editTeam = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, categoryId } = req.body;
+    const { name, categoryId , categoryName } = req.body;
     const logo = req.file ? req.file.filename : undefined;
 
     const updateFields = {
       ...(name && { name }),
       ...(categoryId && { categoryId }),
+      ...(categoryName && { categoryName }),
       ...(logo && { logo }),
     };
 

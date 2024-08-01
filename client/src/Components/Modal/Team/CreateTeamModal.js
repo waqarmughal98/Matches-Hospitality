@@ -1,34 +1,116 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import { LabelInput } from '../../UiElements/TextInputs';
 import Dropdown from '../../UiElements/Dropdowns';
 import { PrimaryButton } from '../../UiElements/Buttons';
 import { useAppContext } from '../../../UseContext/ContextProvider';
-const CreateTeamModal = () => {
+import { axiosInstance, URL as API_URL, axiosInstance2 } from '../../../utilities/ConstantData';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../../UiElements/Loader';
+const CreateTeamModal = ({setTeamData}) => {
     const [selectedFile, setSelectedFile] = useState(null);
+    const [name, setName] = useState(null);
     const [selectedItems, setSelectedItems] = useState(null,)
-    const { closeModal } = useAppContext()
+    const { closeModal , handeErrors } = useAppContext()
+    const [loading , setLoading] = useState(true)
+    const [loading2 , setLoading2] = useState(false)
+    const [categoryData, setCategoryData] = useState([])
+    const navigate = useNavigate()
 
-    const items = [
-        { id: '1', name: 'Item 1' },
-        { id: '2', name: 'Item 2' },
-        { id: '3', name: 'Item 3' },
-    ];
+    useEffect(()=>{
+        fetchData()
+    },[])
+
+    const fetchData = async () => {
+        axiosInstance().get(`${API_URL}/category/all`)
+        .then((res)=>{
+            setLoading(false)
+            const data = res.data.data;
+            setCategoryData(data)
+        })
+        .catch ((error)=> {
+            setLoading(false)
+            closeModal()
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                navigate("/Login")
+            }else{
+                handeErrors(error)
+            }
+        })
+    };
+
     const handleSelect = (id) => {
         setSelectedItems(id)
     };
 
-
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setSelectedFile(e.target.result);
-            };
-            reader.readAsDataURL(file);
+            setSelectedFile(file);
         }
     };
-    return (
+
+    const validation = () => {
+        if (!selectedFile || !(selectedFile instanceof File)) {
+            toast.error("Logo is required and should be a file.");
+            setLoading2(false)
+            return false;
+        }
+         if (!name) {
+            toast.error("Name is required and should be a non-empty string.");
+            setLoading2(false)
+            return false;
+        }
+        if (!selectedItems) {
+            toast.error("Kindly select category");
+            setLoading2(false)
+            return false;
+        }
+        return true;
+    };
+
+    const handleCreateTeam = () => {
+        if(validation()){
+            CreateTeam()
+        }
+   };
+   
+   const CreateTeam = async () => {
+    setLoading2(true)
+    const data = new FormData();
+    data.append('name', name);
+    data.append('categoryId', selectedItems._id);
+    data.append('categoryName', selectedItems.name);
+    data.append('logo', selectedFile);
+
+    axiosInstance2().post(`${API_URL}/team/create`, data)
+    .then((res)=>{
+        const data=res.data.data
+        setTeamData((pre)=>([...pre,data]))
+        setLoading2(false)
+        toast.success("Team created successfully")
+        closeModal()
+        navigate("/all-teams")
+    })
+    .catch ((error)=> {
+        setLoading2(false)
+        const errors=error?.response?.data?.errors
+        const statusCode=error?.response?.status
+        if(statusCode==401){
+            toast.error(errors);
+            navigate("/Login")
+        }else{
+            handeErrors(error)
+        }
+    })
+};
+
+
+
+    return loading ? <Loader/> : (
         <div className='grid grid-cols-12 justify-center p-10 rounded-lg backdrop-blur-3xl m-auto mt-12 bg-black/40 max-h-full overflow-auto custom-scroll'>
             <button
                 type="button"
@@ -60,26 +142,38 @@ const CreateTeamModal = () => {
                             onChange={handleFileChange}
                             className='absolute inset-0 opacity-0 cursor-pointer'
                         />
-                        {selectedFile ? (
-                            <img
-                                src={selectedFile}
-                                alt='Profile Preview'
-                                className='w-full h-full rounded-full object-cover absolute'
-                            />
-                        ) : (
-                            <>
-                                <p className='text-5xl font-bold text-white'>+</p>
-                                <p className='text-primaryGreen text-xs'>Upload Team Logo</p>
-                            </>
-                        )}
+                        <div 
+                            className='cursor-pointer flex justify-center items-center flex-col gap-4'
+                        >
+                            {selectedFile ? (
+                                <img
+                                    src={URL.createObjectURL(selectedFile)}
+                                    alt='Profile Preview'
+                                    className='absolute w-full h-full object-cover rounded-full'
+                                />
+                            ) : (
+                                <>
+                                    <p className='text-5xl font-bold text-white'>+</p>
+                                    <p className='text-primaryGreen text-xs'>Upload Team Logo</p>
+                                </>
+                            )}
+                        </div>
+                    <div >
+                        <input
+                            type='file'
+                            accept='image/*'
+                            onChange={handleFileChange}
+                            className='absolute inset-0 opacity-0 cursor-pointer'
+                        />
+                    </div>
                     </div>
                     <div className='col-span-12'>
                         <div className='flex flex-col gap-5 justify-center m-auto'>
-                            <LabelInput label='Team Name' />
+                            <LabelInput name="name" onChange={(e)=>setName(e.target.value)} label='Team Name' />
                             <Dropdown
                                 id="Categoty"
                                 title="Category"
-                                data={items}
+                                data={categoryData}
                                 position="bottom-left"
                                 hasImage={false}
                                 style="custom-dropdown-style"
@@ -87,7 +181,7 @@ const CreateTeamModal = () => {
                                 onSelect={(id) => handleSelect(id)}
                                 label='Team Category'
                             />
-                            <PrimaryButton size='large' className='font-semibold mt-5'>Create Team</PrimaryButton>
+                            <PrimaryButton onClick={()=>handleCreateTeam()} size='large' className='font-semibold mt-5'>{loading2 ?  "Creating team..." : "Create Team" }</PrimaryButton>
                         </div>
                     </div>
                 </div>
