@@ -87,7 +87,7 @@ const CreateTeamModal = () => {
                                 onSelect={(id) => handleSelect(id)}
                                 label='Team Category'
                             />
-                            <PrimaryButton size='large' className='font-semibold mt-5'>Update</PrimaryButton>
+                            <PrimaryButton size='large' className='font-semibold mt-5'>Create Team</PrimaryButton>
                         </div>
                     </div>
                 </div>

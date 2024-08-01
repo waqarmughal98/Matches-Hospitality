@@ -77,6 +77,12 @@ const AllTeams = () => {
     )
     showBackdropWithContent(content)
   }
+  const handleEditBackdrop = ()=>{
+    const content = (
+      <CreateTeamModal />
+    )
+    showBackdropWithContent(content)
+  }
   const handleBackdrop = () => {
     const content = (
       <DeleteModal />
@@ -89,7 +95,7 @@ const AllTeams = () => {
       <div className='col-span-12 text-white'>
         <div className='flex justify-between items-center'>
           <h1 className='font-semibold text-3xl'>All Teams</h1>
-          <PrimaryButton size='medium' onClick={handleShowBackdrop}>
+          <PrimaryButton size='medium' onClick={handleEditBackdrop}>
             Create Team
           </PrimaryButton>
         </div>
