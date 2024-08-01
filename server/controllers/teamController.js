@@ -7,7 +7,7 @@ const handleError = require('../utils/errorHandler');
 // Create Team
 const createTeam = asyncHandler(async (req, res) => {
   try {
-    const { name, categoryId } = req.body;
+    const { name, categoryId , categoryName} = req.body;
     const logo = req.file ? req.file.filename : '';
 
     if (!logo) {
@@ -17,7 +17,8 @@ const createTeam = asyncHandler(async (req, res) => {
     const newTeam = new Team({
       name,
       logo,
-      categoryId
+      categoryId,
+      categoryName: categoryName || "" 
     });
 
     await newTeam.save();
