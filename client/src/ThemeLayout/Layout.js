@@ -19,7 +19,7 @@ const Layout = () => {
             </div>
             <div className='w-full'>
                 <Navbar />
-                <div className={`p-10 relative  ${openModal && 'cursor-pointer'}`} onClick={handleToggle}>
+                <div className={`p-10 relative`} onClick={handleToggle}>
                     {<Outlet />}
                     <Backdrop />
                 </div>
