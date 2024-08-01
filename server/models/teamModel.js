@@ -14,6 +14,10 @@ const TeamSchema = new mongoose.Schema({
     ref: 'Category',
     required: [true, 'Category ID is required'],
   },
+  categoryName: {
+    type: String,
+    required: [true, 'Category Name is required'],
+  },
 }, {
   timestamps: true,
 });

@@ -81,6 +81,7 @@ const validateCategory = [
 const validateTeam = [
   check('name').notEmpty().withMessage('Name is required'),
   check('categoryId').notEmpty().withMessage('Category ID is required'),
+  check('categoryName').notEmpty().withMessage('Category Name is required'),
   validateRequest,
 ];
 
