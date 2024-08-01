@@ -3,7 +3,6 @@ import { useAppContext } from '../../UseContext/ContextProvider';
 import { MdOutlineEdit } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import DeleteModal from '../Modal/DeleteModal';
-import { useContext } from 'react';
 import EditMatch from '../../Pages/Matches/EditMatch';
 const MatchCard = ({ data, onClick, width, overlay }) => {
     const {showBackdropWithContent} = useAppContext()
@@ -38,13 +37,13 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
             <div className='grid grid-cols-12 justify-center gap-y-2'>
                 <div className='col-span-3'>
                     <div className='flex flex-col gap-2 items-center'>
-                        <img src='/assets/images/package/LC.png' width={imageWidth} />
-                        <p className='text-white font-semibold text-xs'>{data.teamA}</p>
+                        <img src={`/uploads/${data.team1.logo}`} width={imageWidth} />
+                        <p className='text-white font-semibold text-xs'>{data.team1.name}</p>
                     </div>
                 </div>
                 <div className='col-span-6 grid items-center'>
                     <div className='flex flex-col items-center gap-1'>
-                        <p className={`${width === 'small' ? 'text-[13px]' : 'text-[12px]'} whitespace-nowrap font-semibold`}>UEFA Champions League </p>
+                        <p className={`${width === 'small' ? 'text-[13px]' : 'text-[12px]'} whitespace-nowrap font-semibold`}>{data.category.name} </p>
                         <span>VS</span>
                         <div className='flex items-center gap-1'>
                             <div className='h-3 w-3 rounded-full bg-[#FF824D]'></div>
@@ -54,8 +53,8 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
                 </div>
                 <div className='col-span-3'>
                     <div className='flex flex-col gap-2 items-center'>
-                        <img src='/assets/images/package/chelsea.png' width={imageWidth} />
-                        <p className='text-white font-semibold text-xs'>{data.teamB}</p>
+                        <img src={`/uploads/${data.team2.logo}`} width={imageWidth} />
+                        <p className='text-white font-semibold text-xs'>{data.team2.name}</p>
                     </div>
                 </div>
             </div>

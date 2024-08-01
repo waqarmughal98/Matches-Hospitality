@@ -12,6 +12,8 @@ export const ContextProvider = ({ children }) => {
     setBackdropContent(content);
     openModal();
   };
+  const [categoryData, setCategoryData] = useState([])
+  const [PackageData, setPackageData] = useState([])
   const [signUpDetails, setSignUpDetails] = useState({
     email: "",
     password: ""
@@ -77,7 +79,11 @@ export const ContextProvider = ({ children }) => {
         selectedMatch,
         handeErrors,
         setSelectedEditCategory,
-        selectedEditCategory
+        selectedEditCategory,
+        categoryData,
+        setCategoryData,
+        PackageData,
+        setPackageData
       }}>
       {children}
     </AppContext.Provider>

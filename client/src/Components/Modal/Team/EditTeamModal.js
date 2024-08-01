@@ -3,45 +3,17 @@ import { LabelInput } from '../../UiElements/TextInputs';
 import Dropdown from '../../UiElements/Dropdowns';
 import { PrimaryButton } from '../../UiElements/Buttons';
 import { useAppContext } from '../../../UseContext/ContextProvider';
-import { axiosInstance, URL as API_URL, axiosInstance2 } from '../../../utilities/ConstantData';
+import { URL as API_URL, axiosInstance2 } from '../../../utilities/ConstantData';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import Loader from '../../UiElements/Loader';
 const EditTeamModal = ({selectedItem,setUpdation}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedItems, setSelectedItems] = useState(null,)
-    const { closeModal , handeErrors } = useAppContext()
+    const { closeModal , handeErrors , categoryData } = useAppContext()
     const [name, setName] = useState(null);
-    const [loading , setLoading] = useState(true)
     const [loading2 , setLoading2] = useState(false)
-    const [categoryData, setCategoryData] = useState([])
     const navigate = useNavigate()
 
-    useEffect(()=>{
-        fetchData()
-    },[])
-
-    const fetchData = async () => {
-        axiosInstance().get(`${API_URL}/category/all`)
-        .then((res)=>{
-            setLoading(false)
-            const data = res.data.data;
-            setCategoryData(data)
-        })
-        .catch ((error)=> {
-            setLoading(false)
-            closeModal()
-            const errors=error?.response?.data?.errors
-            const statusCode=error?.response?.status
-            if(statusCode==401){
-                toast.error(errors);
-                navigate("/Login")
-            }else{
-                handeErrors(error)
-            }
-        })
-    };
-    
     const handleSelect = (id) => {
         setSelectedItems(id)
     };
@@ -52,7 +24,6 @@ const EditTeamModal = ({selectedItem,setUpdation}) => {
         setSelectedFile(selectedItem.logo)
       }
     },[selectedItem])
-
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -70,14 +41,12 @@ const EditTeamModal = ({selectedItem,setUpdation}) => {
         return true;
     };
 
-
     const handleEditTeam = () => {
         if(validation()){
             EditTeam()
         }
    };
 
-   console.log(selectedItems,"selectedIte")
    
    const EditTeam = async () => {
     setLoading2(true)
@@ -111,7 +80,7 @@ const EditTeamModal = ({selectedItem,setUpdation}) => {
     })
 };
 
-    return loading ? <Loader/> : (
+    return (
         <div className='grid grid-cols-12 justify-center p-10 rounded-lg backdrop-blur-3xl m-auto mt-12 bg-black/40 max-h-full overflow-auto custom-scroll'>
             <button
                 type="button"

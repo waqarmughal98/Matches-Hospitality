@@ -1,84 +1,87 @@
-import React from 'react'
+import React ,{useEffect, useState}from 'react'
 import MatchCard from '../../Components/Cards/MatchCard'
-import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
+import { PrimaryButton } from '../../Components/UiElements/Buttons'
 import { useNavigate } from 'react-router-dom'
-
+import { axiosInstance, URL } from '../../utilities/ConstantData';
+import Loader from '../../Components/UiElements/Loader';
+import { useAppContext } from '../../UseContext/ContextProvider';
+import { toast } from 'react-toastify';
 const AllMatches = () => {
     const navigate = useNavigate()
-    const createPackage = [
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '1'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '2'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '3'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '4'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '5'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '6'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '7'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '8'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '9'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '10'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '11'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '11'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '11'
-        },
-        {
-            teamA: 'Leicester C',
-            teamB: 'Chelsea',
-            id: '12'
-        }
+    const [loading , setLoading] = useState(true)
+    const [MatchesData, setMatchesData] = useState([])
+    const [updation , setUpdation] = useState()
+    const { handeErrors ,categoryData, setCategoryData, PackageData, setPackageData  } = useAppContext()
+  
 
-    ]
-    return (
+    useEffect(()=>{
+        fetchData()
+        if(categoryData.length==0){
+            fetchCategories()
+        }
+        if(PackageData.length==0){
+            fetchPackages()
+        }
+      },[])
+
+      const fetchData = async () => {
+        axiosInstance().get(`${URL}/event/all`)
+        .then((res)=>{
+            setLoading(false)
+            const data = res.data.data;
+            setMatchesData(data)
+        })
+        .catch ((error)=> {
+            setLoading(false)
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                navigate("/Login")
+            }else{
+                handeErrors(error)
+            }
+        })
+    };
+
+
+      const fetchCategories = async () => {
+        axiosInstance().get(`${URL}/category/all`)
+        .then((res)=>{
+            const data = res.data.data;
+            setCategoryData(data)
+        })
+        .catch ((error)=> {
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                navigate("/Login")
+            }else{
+                handeErrors(error)
+            }
+        })
+    };
+
+      const fetchPackages = async () => {
+        axiosInstance().get(`${URL}/package/all`)
+        .then((res)=>{
+            const data = res.data.data;
+            setPackageData(data)
+        })
+        .catch ((error)=> {
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                navigate("/Login")
+            }else{
+                handeErrors(error)
+            }
+        })
+    };
+
+    return loading ? <Loader/> : (
         <div className='grid grid-cols-12 gap-y-10'>
             <div className='col-span-12'>
                 <div className='flex justify-between items-center'>
@@ -88,7 +91,7 @@ const AllMatches = () => {
             </div>
             <div className='col-span-12'>
                 <div className='grid grid-cols-12 gap-5'>
-                    {createPackage?.map((item) => {
+                    {MatchesData?.map((item) => {
                         return (
                             <>
                                 <MatchCard

@@ -11,13 +11,16 @@ import Loader from '../../Components/UiElements/Loader';
 import { toast } from 'react-toastify';
 import CreateTeamModal from '../../Components/Modal/Team/CreateTeamModal';
 const AllTeams = () => {
-  const { showBackdropWithContent, closeModal , handeErrors } = useAppContext()
+  const { showBackdropWithContent, categoryData, setCategoryData , handeErrors } = useAppContext()
   const navigate = useNavigate()
   const [loading , setLoading] = useState(true)
   const [TeamData, setTeamData] = useState([])
   const [updation , setUpdation] = useState()
   useEffect(()=>{
     fetchData()
+    if(categoryData.length==0){
+      fetchCategories()
+    }
   },[updation])
 
   const fetchData = async () => {
@@ -38,6 +41,24 @@ const AllTeams = () => {
             handeErrors(error)
         }
     })
+};
+
+const fetchCategories = async () => {
+  axiosInstance().get(`${URL}/category/all`)
+  .then((res)=>{
+      const data = res.data.data;
+      setCategoryData(data)
+  })
+  .catch ((error)=> {
+      const errors=error?.response?.data?.errors
+      const statusCode=error?.response?.status
+      if(statusCode==401){
+          toast.error(errors);
+          navigate("/Login")
+      }else{
+          handeErrors(error)
+      }
+  })
 };
 
   const handleEditShowBackdrop = (item) => {

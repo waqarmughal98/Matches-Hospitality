@@ -137,7 +137,6 @@ export const FilterDropdown = ({ isActive, onClick, children, text }) => {
 };
 
 
-
 // select dropdown
 const Dropdown = ({
   id,
@@ -149,10 +148,11 @@ const Dropdown = ({
   selectedId,
   onSelect,
   label,
+  disabled = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(
-    selectedId ? data.find((item) => item._id === selectedId) : undefined
+    selectedId ? data.find((item) => item.id === selectedId) : undefined
   );
 
   const dropdownRef = useRef(null);
@@ -182,13 +182,20 @@ const Dropdown = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const dropdownClass = classNames('absolute bg-[#343434] w-full max-h-60 overflow-y-auto rounded shadow-md z-10 mt-2',);
+  const dropdownClass = classNames(
+    'absolute bg-[#343434] w-full max-h-60 overflow-y-auto rounded shadow-md z-10 mt-2',
+    {
+      'cursor-not-allowed opacity-50': disabled,
+    }
+  );
 
   return (
     <div className='relative' ref={dropdownRef}>
       <div className='flex flex-col gap-y-3'>
         {label && (
-          <label className='text-white text-base'>{label}</label>
+          <label className={classNames('text-white text-base', { 'opacity-50': disabled })}>
+            {label}
+          </label>
         )}
         <div>
           <button
@@ -197,11 +204,13 @@ const Dropdown = ({
             aria-haspopup='true'
             aria-expanded={isOpen}
             type='button'
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => !disabled && setIsOpen(!isOpen)}
             className={classNames(
               'flex justify-between items-center gap-5 rounded w-full py-2 px-4 bg-transparent focus:border-primaryGreen border border-borderInput text-white',
-              style
+              style,
+              { 'cursor-not-allowed opacity-50': disabled }
             )}
+            disabled={disabled}
           >
             <div className='flex items-center gap-5'>
               {selectedItem?.imageUrl && (
@@ -231,7 +240,7 @@ const Dropdown = ({
                 {data.map((item) => (
                   <li
                     key={item.id}
-                    onClick={() => handleChange(item)}
+                    onClick={() => !disabled && handleChange(item)}
                     className={classNames(
                       'flex items-center cursor-pointer px-3 gap-3 text-white py-3 border-b border-borderInput hover:bg-black/30',
                       { 'bg-black/30': selectedItem?.id === item.id }
