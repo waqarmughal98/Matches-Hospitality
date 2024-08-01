@@ -42,9 +42,9 @@ const CreateMatch = () => {
                     <div className='col-span-12 headerText'>
                         Create Match
                     </div>
-                    <div className='col-span-6'>
+                    <div className='lg:col-span-6 col-span-12'>
                         <div className='grid grid-cols-12 gap-y-5'>
-                            <div className='col-span-11'>
+                            <div className='sm:col-span-11 col-span-12'>
                                 <Dropdown
                                     id="dropdown1"
                                     title="Choose an item"
@@ -57,7 +57,7 @@ const CreateMatch = () => {
                                     label='Team Category'
                                 />
                             </div>
-                            <div className='col-span-5'>
+                            <div className='md:col-span-5 col-span-12'>
                                 <Dropdown
                                     id="dropdown2"
                                     title="Choose an item"
@@ -69,10 +69,10 @@ const CreateMatch = () => {
                                     onSelect={(id) => handleSelect("dropdown2", id)}
                                 />
                             </div>
-                            <div className='col-span-1 text-white/80 items-center grid justify-center text-2xl'>
+                            <div className='md:col-span-1 col-span-12 text-white/80 items-center grid justify-center text-2xl'>
                                 vs
                             </div>
-                            <div className='col-span-5'>
+                            <div className='md:col-span-5 col-span-12'>
                                 <Dropdown
                                     id="dropdown3"
                                     title="Choose an item"
@@ -84,15 +84,15 @@ const CreateMatch = () => {
                                     onSelect={(id) => handleSelect("dropdown3", id)}
                                 />
                             </div>
-                            <div className='col-span-11'>
-                                <div className='grid grid-cols-12 gap-x-5'>
-                                    <div className='col-span-6'>
+                            <div className='sm:col-span-11 col-span-12'>
+                                <div className='grid grid-cols-12 sm:gap-x-5 gap-y-5'>
+                                    <div className='lg:col-span-6 col-span-12'>
                                         <div className='flex flex-col gap-y-3'>
                                             <label className='inputLabel'>Date and Time</label>
                                             <DatePicker showTimeSelect selected={startDate} className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0' onChange={(date) => setStartDate(date)} />
                                         </div>
                                     </div>
-                                    <div className='col-span-6'>
+                                    <div className='sm:col-span-6 col-span-12'>
                                         <LabelInput label='Venu' />
                                     </div>
                                 </div>
