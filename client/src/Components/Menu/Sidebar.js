@@ -33,18 +33,25 @@ const Sidebar = () => {
                         to="dashboard"
                         className={`flex items-center gap-3 py-2 text-gray-100 ${currentPath === '/dashboard' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='ms-5' stroke='white' width="30px" height="30px"><path d="M 12 2.0996094 L 1 12 L 4 12 L 4 21 L 11 21 L 11 15 L 13 15 L 13 21 L 20 21 L 20 12 L 23 12 L 12 2.0996094 z M 12 4.7910156 L 18 10.191406 L 18 11 L 18 19 L 15 19 L 15 13 L 9 13 L 9 19 L 6 19 L 6 10.191406 L 12 4.7910156 z" /></svg>
+                        <svg class="  text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" className='ms-5' stroke='white' fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+                        </svg>
+
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                 Dashboard
                             </p>
                         )}
                     </Link>
+                    
                     <Link
                         to="package"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/package' ? 'border-l-2 border-primaryGreen' : ''}`}
                     >
-                        <img src='assets/images/svgs/navbar/home.svg' className='ps-5' alt='' />
+                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
+                        </svg>
+
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear  overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                 Packages
@@ -66,7 +73,9 @@ const Sidebar = () => {
                         to="all-categories"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-categories' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
-                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
+                        </svg>
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                 Categories
