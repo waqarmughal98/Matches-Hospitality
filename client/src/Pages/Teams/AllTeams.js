@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../UseContext/ContextProvider';
 import { PrimaryButton } from '../../Components/UiElements/Buttons';
 import CreateTeamModal from '../../Components/Modal/Team/CreateTeamModal';
-import { FaEdit } from "react-icons/fa";
-import { AiFillDelete } from "react-icons/ai";
+import { MdOutlineEdit } from "react-icons/md";
+import { RiDeleteBinLine } from "react-icons/ri";
 import EditTeamModal from '../../Components/Modal/Team/EditTeamModal';
 import DeleteModal from '../../Components/Modal/DeleteModal';
 const AllTeams = () => {
@@ -107,10 +107,10 @@ const AllTeams = () => {
                   </div>
                   <div className='flex items-center gap-x-3 py-1 rounded-md text-xs w-fit'>
                     <div className='flex gap-x-3 items-center border-borderInput border px-2 py-1 rounded-md cursor-pointer' onClick={handleShowBackdrop}>
-                      Edit <FaEdit />
+                      Edit <MdOutlineEdit />
                     </div>
-                    <div onClick={handleBackdrop} className='flex gap-x-1  items-center text-black bg-primaryGreen px-2 py-1 rounded-md cursor-pointer font-semibold'>
-                      Delete <AiFillDelete className='mt-[1px]' />
+                    <div onClick={handleBackdrop} className='flex gap-x-1  items-center text-white bg-red-700 px-2 py-1 rounded-md cursor-pointer font-semibold'>
+                      Delete <RiDeleteBinLine className='mt-[1px]' />
                     </div>
                   </div>
                 </div>

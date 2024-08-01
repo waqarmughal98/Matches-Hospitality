@@ -8,7 +8,7 @@ const MatchCard = ({ data , onClick , fontSize , width}) => {
             <div className='grid grid-cols-12 justify-center gap-y-2'>
                 <div className='col-span-3'>
                     <div className='flex flex-col gap-2 items-center'>
-                        <img src='/assets/images/package/LC.png' width={`${width}`} />
+                        <img src='/assets/images/package/LC.png' width={50} />
                         <p className='text-white font-semibold text-xs'>{data.teamA}</p>
                     </div>
                 </div>
@@ -24,7 +24,7 @@ const MatchCard = ({ data , onClick , fontSize , width}) => {
                 </div>
                 <div className='col-span-3'>
                     <div className='flex flex-col gap-2 items-center'>
-                        <img src='/assets/images/package/chelsea.png' width={`${width}`} />
+                        <img src='/assets/images/package/chelsea.png' width={50} />
                         <p className='text-white font-semibold text-xs'>{data.teamB}</p>
                     </div>
                 </div>

@@ -33,7 +33,7 @@ const Sidebar = () => {
                         to="dashboard"
                         className={`flex items-center gap-3 py-2 text-gray-100 ${currentPath === '/dashboard' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
-                        <img src='assets/images/svgs/navbar/venu.svg' className='ps-5' alt='' />
+                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                 Dashboard
@@ -54,6 +54,39 @@ const Sidebar = () => {
                     <Link
                         to="user-management"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/user-management' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                    >
+                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                        {isCollapsed && (
+                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
+                                Matches
+                            </p>
+                        )}
+                    </Link>
+                    <Link
+                        to="all-categories"
+                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-categories' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                    >
+                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                        {isCollapsed && (
+                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
+                                Categories
+                            </p>
+                        )}
+                    </Link>
+                    <Link
+                        to="all-teams"
+                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-teams' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                    >
+                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                        {isCollapsed && (
+                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
+                                Teams
+                            </p>
+                        )}
+                    </Link>
+                    <Link
+                        to="all-matches"
+                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-matches' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
                         <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
                         {isCollapsed && (
