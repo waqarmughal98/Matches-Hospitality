@@ -76,7 +76,9 @@ const AllTeams = () => {
           {TeamData.map((item, index) => (
             <div key={index} className='group relative grid xl:col-span-3 md:col-span-12 col-span-12 items-center min-h-44 rounded-xl bg-cover bg-center border-primaryBorder border-[1px]'>
               <div className='flex text-white gap-5 items-center justify-center'>
-                <img className='flex-shrink-0' src={`/uploads/${item.logo}`} alt='logo' width={70} />
+                <div className='h-16 w-16 relative'>
+                <img className='flex-shrink-0 absolute h-full w-full' src={`/uploads/${item.logo}`} alt='logo' width={70} />
+                </div>
                 <div className='flex flex-col gap-y-3'>
                   <div className='flex flex-col'>
                     <p className='text-lg font-semibold'>{item.name || ""}</p>

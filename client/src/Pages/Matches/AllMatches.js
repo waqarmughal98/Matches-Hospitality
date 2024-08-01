@@ -82,7 +82,7 @@ const AllMatches = () => {
         <div className='grid grid-cols-12 gap-y-10'>
             <div className='col-span-12'>
                 <div className='flex justify-between items-center'>
-                    <p className='text-headerText'>All Matches</p>
+                    <p className='text-headerText text-white font-semibold'>All Matches</p>
                     <PrimaryButton size='medium' onClick={()=>navigate('/create-match')}>Create Match</PrimaryButton>
                 </div>
             </div>
@@ -96,6 +96,7 @@ const AllMatches = () => {
                                     data={item}
                                     fontSize='text-[12px]'
                                     width='large'
+                                    overlay={true}
                                 />
                             </>
                         )
