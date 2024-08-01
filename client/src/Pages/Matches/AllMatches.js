@@ -95,7 +95,7 @@ const AllMatches = () => {
                                     key={item.id}
                                     data={item}
                                     fontSize='text-[12px]'
-                                    width='50'
+                                    width='large'
                                 />
                             </>
                         )

@@ -5,6 +5,7 @@ const DeleteModal = () => {
     const handleDelete = () => {
         closeModal()
     }
+    
     return (
         <div className='flex-1'>
             <div class="relative p-10 text-center rounded-lg bg-black/30 backdrop-blur-xl sm:p-5 shadow-lg">

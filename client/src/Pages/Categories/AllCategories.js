@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { PrimaryButton } from '../../Components/UiElements/Buttons'
 import { useAppContext } from '../../UseContext/ContextProvider';
 import { useNavigate } from 'react-router-dom';
-import { FaEdit } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
+import { MdOutlineEdit } from "react-icons/md";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from 'react-toastify';
 import { axiosInstance, URL } from '../../utilities/ConstantData';
 import Loader from '../../Components/UiElements/Loader';
@@ -115,12 +115,12 @@ const AllCategories = () => {
                                         <p className='w-3/4 text-sm'>{item.description}</p>
                                     </div>
                                 </div>
-                                <div className='flex gap-5 items-center group'>
-                                    <div className='h-8 w-8 flex-shrink-0 rounded-full bg-primaryGreen flex justify-center items-center opacity-0 group-hover:opacity-100 group transition-opacity duration-100 ease-linear' onClick={()=>handleShowBackdrop(item._id)}>
-                                      <MdDeleteForever />
+                                <div className='flex gap-x-3 items-center group'>
+                                    <div onClick={()=>handleEdit(item._id)} className='h-8 w-8 cursor-pointer flex-shrink-0 rounded-lg text-black/90 bg-primaryGreen flex justify-center items-center opacity-0 group-hover:opacity-100 group transition-opacity duration-100 ease-linear'>
+                                      <MdOutlineEdit />
                                     </div>
-                                    <div onClick={()=>handleEdit(item._id)} className='h-8 w-8 flex-shrink-0 rounded-full bg-primaryGreen flex justify-center items-center opacity-0 group-hover:opacity-100 group transition-opacity duration-100 ease-linear'>
-                                      <FaEdit />
+                                    <div className='h-8 w-8 flex-shrink-0 rounded-lg cursor-pointer bg-primaryGreen flex justify-center items-center opacity-0 group-hover:opacity-100 group transition-opacity duration-100 ease-linear' onClick={()=>handleShowBackdrop(item._id)}>
+                                      <RiDeleteBinLine className='text-black/90'/>
                                     </div>
                                 </div>
                             </div>

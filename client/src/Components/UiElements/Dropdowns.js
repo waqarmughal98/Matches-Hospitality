@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { GoChevronDown } from 'react-icons/go';
 import { useAppContext } from '../../UseContext/ContextProvider';
+import { Link } from 'react-router-dom';
 export const ProfileDropdown = () => {
   const { openModal, closeModal, setIsOpen, isOpen, showBackdropWithContent } = useAppContext()
   const toggleDropdown = () => {
@@ -136,6 +137,8 @@ export const FilterDropdown = ({ isActive, onClick, children, text }) => {
   );
 };
 
+
+
 // select dropdown
 const Dropdown = ({
   id,
@@ -185,71 +188,71 @@ const Dropdown = ({
   return (
     <div className='relative' ref={dropdownRef}>
       <div className='flex flex-col gap-y-3'>
-        {label&&(
+        {label && (
           <label className='text-white text-base'>{label}</label>
         )}
         <div>
-        <button
-          id={id}
-          aria-label='Toggle dropdown'
-          aria-haspopup='true'
-          aria-expanded={isOpen}
-          type='button'
-          onClick={() => setIsOpen(!isOpen)}
-          className={classNames(
-            'flex justify-between items-center gap-5 rounded w-full py-2 px-4 bg-transparent focus:border-primaryGreen border border-borderInput text-white',
-            style
-          )}
-        >
-          <div className='flex items-center gap-5'>
-            {selectedItem?.imageUrl && (
-              <img
-                src={selectedItem.imageUrl}
-                alt='Selected'
-                className='w-7 h-7 rounded-full bg-gray-400 object-cover me-2'
-              />
+          <button
+            id={id}
+            aria-label='Toggle dropdown'
+            aria-haspopup='true'
+            aria-expanded={isOpen}
+            type='button'
+            onClick={() => setIsOpen(!isOpen)}
+            className={classNames(
+              'flex justify-between items-center gap-5 rounded w-full py-2 px-4 bg-transparent focus:border-primaryGreen border border-borderInput text-white',
+              style
             )}
-            <span>{selectedItem?.name || title}</span>
-          </div>
-          <GoChevronDown
-            size={20}
-            className={classNames('transform duration-500 ease-in-out', {
-              'rotate-180': isOpen,
-            })}
-          />
-        </button>
-        {isOpen && (
-          <div aria-label='Dropdown menu' className={dropdownClass}>
-            <ul
-              role='menu'
-              aria-labelledby={id}
-              aria-orientation='vertical'
-              className='leading-10'
-            >
-              {data.map((item) => (
-                <li
-                  key={item.id}
-                  onClick={() => handleChange(item)}
-                  className={classNames(
-                    'flex items-center cursor-pointer px-3 gap-3 text-white py-3 border-b border-borderInput hover:bg-black/30',
-                    { 'bg-gray-300': selectedItem?.id === item.id }
-                  )}
-                >
-                  {hasImage && item.imageUrl && (
-                    <img
-                      src={item.imageUrl}
-                      alt={item.name}
-                      loading='lazy'
-                      className='w-10 h-10 rounded-full bg-gray-400 object-cover me-2'
-                    />
-                  )}
-                  <span>{item.name}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+          >
+            <div className='flex items-center gap-5'>
+              {selectedItem?.imageUrl && (
+                <img
+                  src={selectedItem.imageUrl}
+                  alt='Selected'
+                  className='w-7 h-7 rounded-full bg-gray-400 object-cover me-2'
+                />
+              )}
+              <span>{selectedItem?.name || title}</span>
+            </div>
+            <GoChevronDown
+              size={20}
+              className={classNames('transform duration-500 ease-in-out', {
+                'rotate-180': isOpen,
+              })}
+            />
+          </button>
+          {isOpen && (
+            <div aria-label='Dropdown menu' className={dropdownClass}>
+              <ul
+                role='menu'
+                aria-labelledby={id}
+                aria-orientation='vertical'
+                className='leading-10'
+              >
+                {data.map((item) => (
+                  <li
+                    key={item.id}
+                    onClick={() => handleChange(item)}
+                    className={classNames(
+                      'flex items-center cursor-pointer px-3 gap-3 text-white py-3 border-b border-borderInput hover:bg-black/30',
+                      { 'bg-black/30': selectedItem?.id === item.id }
+                    )}
+                  >
+                    {hasImage && item.imageUrl && (
+                      <img
+                        src={item.imageUrl}
+                        alt={item.name}
+                        loading='lazy'
+                        className='w-10 h-10 rounded-full bg-gray-400 object-cover me-2'
+                      />
+                    )}
+                    <span>{item.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

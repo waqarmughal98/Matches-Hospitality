@@ -33,18 +33,25 @@ const Sidebar = () => {
                         to="dashboard"
                         className={`flex items-center gap-3 py-2 text-gray-100 ${currentPath === '/dashboard' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
-                        <img src='assets/images/svgs/navbar/venu.svg' className='ps-5' alt='' />
+                        <svg class="  text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" className='ms-5' stroke='white' fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+                        </svg>
+
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                 Dashboard
                             </p>
                         )}
                     </Link>
+                    
                     <Link
                         to="package"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/package' ? 'border-l-2 border-primaryGreen' : ''}`}
                     >
-                        <img src='assets/images/svgs/navbar/home.svg' className='ps-5' alt='' />
+                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
+                        </svg>
+
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear  overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                 Packages
@@ -54,6 +61,41 @@ const Sidebar = () => {
                     <Link
                         to="user-management"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/user-management' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                    >
+                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                        {isCollapsed && (
+                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
+                                Matches
+                            </p>
+                        )}
+                    </Link>
+                    <Link
+                        to="all-categories"
+                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-categories' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                    >
+                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
+                        </svg>
+                        {isCollapsed && (
+                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
+                                Categories
+                            </p>
+                        )}
+                    </Link>
+                    <Link
+                        to="all-teams"
+                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-teams' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                    >
+                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                        {isCollapsed && (
+                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
+                                Teams
+                            </p>
+                        )}
+                    </Link>
+                    <Link
+                        to="all-matches"
+                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-matches' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
                         <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
                         {isCollapsed && (
