@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { GoChevronDown } from 'react-icons/go';
 import { useAppContext } from '../../UseContext/ContextProvider';
-import { Link } from 'react-router-dom';
 export const ProfileDropdown = () => {
   const { openModal, closeModal, setIsOpen, isOpen, showBackdropWithContent } = useAppContext()
   const toggleDropdown = () => {
@@ -153,13 +152,13 @@ const Dropdown = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(
-    selectedId ? data.find((item) => item.id === selectedId) : undefined
+    selectedId ? data.find((item) => item._id === selectedId) : undefined
   );
 
   const dropdownRef = useRef(null);
   const handleChange = (item) => {
     setSelectedItem(item);
-    onSelect && onSelect(item.id);
+    onSelect && onSelect(item);
     setIsOpen(false);
   };
 

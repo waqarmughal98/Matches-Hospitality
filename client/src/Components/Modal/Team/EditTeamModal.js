@@ -1,34 +1,117 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { LabelInput } from '../../UiElements/TextInputs';
 import Dropdown from '../../UiElements/Dropdowns';
 import { PrimaryButton } from '../../UiElements/Buttons';
 import { useAppContext } from '../../../UseContext/ContextProvider';
-const EditTeamModal = () => {
+import { axiosInstance, URL as API_URL, axiosInstance2 } from '../../../utilities/ConstantData';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../../UiElements/Loader';
+const EditTeamModal = ({selectedItem,setUpdation}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedItems, setSelectedItems] = useState(null,)
-    const { closeModal } = useAppContext()
+    const { closeModal , handeErrors } = useAppContext()
+    const [name, setName] = useState(null);
+    const [loading , setLoading] = useState(true)
+    const [loading2 , setLoading2] = useState(false)
+    const [categoryData, setCategoryData] = useState([])
+    const navigate = useNavigate()
 
-    const items = [
-        { id: '1', name: 'Item 1' },
-        { id: '2', name: 'Item 2' },
-        { id: '3', name: 'Item 3' },
-    ];
+    useEffect(()=>{
+        fetchData()
+    },[])
+
+    const fetchData = async () => {
+        axiosInstance().get(`${API_URL}/category/all`)
+        .then((res)=>{
+            setLoading(false)
+            const data = res.data.data;
+            setCategoryData(data)
+        })
+        .catch ((error)=> {
+            setLoading(false)
+            closeModal()
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                navigate("/Login")
+            }else{
+                handeErrors(error)
+            }
+        })
+    };
+    
     const handleSelect = (id) => {
         setSelectedItems(id)
     };
+
+    useEffect(()=>{
+      if(selectedItem){
+        setName(selectedItem.name)
+        setSelectedFile(selectedItem.logo)
+      }
+    },[selectedItem])
 
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setSelectedFile(e.target.result);
-            };
-            reader.readAsDataURL(file);
+            setSelectedFile(file)
         }
     };
-    return (
+
+    const validation = () => {
+         if (!name) {
+            toast.error("Name is required and should be a non-empty string.");
+            setLoading2(false)
+            return false;
+        }
+        return true;
+    };
+
+
+    const handleEditTeam = () => {
+        if(validation()){
+            EditTeam()
+        }
+   };
+
+   console.log(selectedItems,"selectedIte")
+   
+   const EditTeam = async () => {
+    setLoading2(true)
+    const data = new FormData();
+    data.append('name', name);
+    data.append('categoryId', selectedItems?._id || selectedItem.categoryId);
+    data.append('categoryName', selectedItems?.name || selectedItem.categoryName);
+    if(selectedFile!="string"){
+        data.append('logo', selectedFile);
+    }
+
+    axiosInstance2().put(`${API_URL}/team/edit/${selectedItem._id}`, data)
+    .then((res)=>{
+        const data=res.data.data
+        setUpdation(data)
+        setLoading2(false)
+        toast.success("Team updated successfully")
+        closeModal()
+        navigate("/all-teams")
+    })
+    .catch ((error)=> {
+        setLoading2(false)
+        const errors=error?.response?.data?.errors
+        const statusCode=error?.response?.status
+        if(statusCode==401){
+            toast.error(errors);
+            navigate("/Login")
+        }else{
+            handeErrors(error)
+        }
+    })
+};
+
+    return loading ? <Loader/> : (
         <div className='grid grid-cols-12 justify-center p-10 rounded-lg backdrop-blur-3xl m-auto mt-12 bg-black/40 max-h-full overflow-auto custom-scroll'>
             <button
                 type="button"
@@ -60,34 +143,52 @@ const EditTeamModal = () => {
                             onChange={handleFileChange}
                             className='absolute inset-0 opacity-0 cursor-pointer'
                         />
-                        {selectedFile ? (
-                            <img
-                                src={selectedFile}
-                                alt='Profile Preview'
-                                className='w-full h-full rounded-full object-cover absolute'
-                            />
-                        ) : (
-                            <>
-                                <p className='text-5xl font-bold text-white'>+</p>
-                                <p className='text-primaryGreen text-xs'>Upload Team Logo</p>
-                            </>
-                        )}
+                        <div  className='cursor-pointer flex justify-center items-center flex-col gap-4'>
+                            {typeof selectedFile=="string" ? (
+                                <img
+                                    src={`/uploads/${selectedFile}`}
+                                    alt='Profile Preview'
+                                    className='w-full h-full rounded-full object-cover absolute'
+                                />
+                            ) : selectedFile ? (
+                                <img
+                                    src={URL.createObjectURL(selectedFile)}
+                                    alt='Profile Preview'
+                                    className='w-full h-full rounded-full object-cover absolute'
+                                />
+                            ) : (
+                                <>
+                                    <p className='text-5xl font-bold text-white'>+</p>
+                                    <p className='text-primaryGreen text-xs'>Upload Team Logo</p>
+                                </>
+                            )}
+                        <div >
+                        <div >
+                            <input
+                                type='file'
+                                accept='image/*'
+                                onChange={handleFileChange}
+                                className='absolute inset-0 opacity-0 cursor-pointer'
+                                />
+                        </div>
+                    </div>
+                     </div>
                     </div>
                     <div className='col-span-12'>
                         <div className='flex flex-col gap-5 justify-center m-auto'>
-                            <LabelInput label='Team Name' />
+                            <LabelInput name="Name" value={name || selectedItem.name} onChange={(e)=>setName(e.target.value)} label='Team Name' />
                             <Dropdown
                                 id="Categoty"
                                 title="Category"
-                                data={items}
+                                data={categoryData}
                                 position="bottom-left"
                                 hasImage={false}
                                 style="custom-dropdown-style"
-                                selectedId={selectedItems}
+                                selectedId={selectedItem.categoryId}
                                 onSelect={(id) => handleSelect(id)}
                                 label='Team Category'
                             />
-                            <PrimaryButton size='large' className='font-semibold mt-5'>Update</PrimaryButton>
+                            <PrimaryButton size='large' onClick={()=>handleEditTeam()} className='font-semibold mt-5'>{loading2 ? "Updating team..." : "Update Team"}</PrimaryButton>
                         </div>
                     </div>
                 </div>

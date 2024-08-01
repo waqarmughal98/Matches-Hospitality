@@ -1,10 +1,35 @@
 import React from 'react'
 import { useAppContext } from '../../UseContext/ContextProvider'
-const DeleteModal = () => {
-    const { closeModal } = useAppContext()
-    const handleDelete = () => {
-        closeModal()
-    }
+import { axiosInstance, URL } from '../../utilities/ConstantData';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+const DeleteModal = ({selectedItemID, setTeamData }) => {
+    const { closeModal , handeErrors } = useAppContext()
+    const navigate = useNavigate()
+    
+    const filterCategory = () => {
+        setTeamData(prevData => prevData.filter(team => team._id !== selectedItemID));
+    };
+
+    const handleDelete = async () => {
+        axiosInstance().delete(`${URL}/team/delete/${selectedItemID}`)
+        .then((res)=>{
+            filterCategory()
+            closeModal()
+            toast.success("Team deleted successfully")
+        })
+        .catch ((error)=> {
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                navigate("/Login")
+            }else{
+                handeErrors(error)
+            }
+        })
+    };
+
     
     return (
         <div className='flex-1'>
