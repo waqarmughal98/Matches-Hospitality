@@ -122,6 +122,7 @@ const PackageInformation = () => {
                                                     key={item.id}
                                                     data={item}
                                                     onClick={() => handleCardClick(item.id)}
+                                                    width='small'
                                                 />
                                             </>
                                         )
