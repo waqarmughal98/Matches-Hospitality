@@ -89,11 +89,52 @@ const CreateMatch = () => {
                                     <div className='col-span-6'>
                                         <div className='flex flex-col gap-y-3'>
                                             <label className='inputLabel'>Date and Time</label>
-                                            <DatePicker selected={startDate} className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0' onChange={(date) => setStartDate(date)} />
+                                            <DatePicker showTimeSelect selected={startDate} className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0' onChange={(date) => setStartDate(date)} />
                                         </div>
                                     </div>
                                     <div className='col-span-6'>
                                         <LabelInput label='Venu' />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-span-11 mt-5'>
+                                <div className='grid grid-cols-12 gap-y-5'>
+                                    <div className='col-span-12 headerText'>
+                                        Available Packages
+                                    </div>
+                                    <div className='col-span-12'>
+                                        <div className='grid grid-cols-12 gap-y-5'>
+                                            <div className='col-span-12 border-borderInput border-b py-3'>
+                                                <div className='flex justify-between'>
+                                                    <h1 className='text-lg text-white'>Platinum</h1>
+                                                    <label class="inline-flex items-center cursor-pointer">
+                                                        <input type="checkbox" value="" class="sr-only peer" checked />
+                                                        <div class="relative w-9 h-5 py-2 bg-gray-200 peer-focus:outline-none  rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen af rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+                                                        <span class="ms-2 text-xs text-[#4D4D4D] font-semibold">Subscribed</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div className='col-span-12 border-borderInput border-b py-3'>
+                                                <div className='flex justify-between'>
+                                                    <h1 className='text-lg text-white'>Gold</h1>
+                                                    <label class="inline-flex items-center cursor-pointer">
+                                                        <input type="checkbox" value="" class="sr-only peer" checked />
+                                                        <div class="relative w-9 h-5 py-2 bg-gray-200 peer-focus:outline-none  rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen af rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+                                                        <span class="ms-2 text-xs text-[#4D4D4D] font-semibold">Subscribed</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div className='col-span-12 border-borderInput border-b py-3'>
+                                                <div className='flex justify-between'>
+                                                    <h1 className='text-lg text-white'>Silver</h1>
+                                                    <label class="inline-flex items-center cursor-pointer">
+                                                        <input type="checkbox" value="" class="sr-only peer" checked />
+                                                        <div class="relative w-9 h-5 py-2 bg-gray-200 peer-focus:outline-none  rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen af rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+                                                        <span class="ms-2 text-xs text-[#4D4D4D] font-semibold">Subscribed</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

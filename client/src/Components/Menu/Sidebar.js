@@ -62,10 +62,12 @@ const Sidebar = () => {
                         to="user-management"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/user-management' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
-                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                         <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
+                        </svg>
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
-                                Matches
+                                Users
                             </p>
                         )}
                     </Link>
@@ -86,7 +88,9 @@ const Sidebar = () => {
                         to="all-teams"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-teams' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
-                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                         <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
+                        </svg>
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                 Teams
@@ -97,7 +101,9 @@ const Sidebar = () => {
                         to="all-matches"
                         className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-matches' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                     >
-                        <img src='assets/images/svgs/navbar/stadium.svg' className='ps-5' alt='' />
+                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
+                        </svg>
                         {isCollapsed && (
                             <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                 Matches
