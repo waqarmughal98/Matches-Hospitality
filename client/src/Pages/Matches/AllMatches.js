@@ -96,6 +96,7 @@ const AllMatches = () => {
                                     data={item}
                                     fontSize='text-[12px]'
                                     width='large'
+                                    overlay={true}
                                 />
                             </>
                         )

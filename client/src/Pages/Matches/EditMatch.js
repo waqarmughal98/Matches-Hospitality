@@ -33,7 +33,7 @@ const EditMatch = () => {
     };
 
     return (
-        <div className='grid grid-cols-12 gap-y-10'>
+        <div className='grid grid-cols-12 gap-y-10 backdrop-blur-xl p-10'>
             <div className='col-span-12'>
                 <SecondaryButton />
             </div>
