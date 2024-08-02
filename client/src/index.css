@@ -3,18 +3,21 @@
 @tailwind utilities;
 
 
-/* @font-face {
+@font-face {
   font-family: "JumperPERSONALUSEONLY-Regular";
   src: local("JumperPERSONALUSEONLY-Regular"),
-       url("./assets/fonts/JumperPERSONALUSEONLY-Regular.ttf") format("truetype");
-} */
+       url("./assets/fonts/jumper-font/JumperPersonalUseOnlyThin-ZVLDB.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto"),
+       url("./assets/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+}
 
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:"JumperPERSONALUSEONLY-Regular";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #1D1D1D;
@@ -37,8 +40,8 @@ code {
   .headerText {
     @apply  text-white font-semibold text-3xl;
   }
-  .inputLabel{
-    @apply text-white text-base
+  .primaryText{
+    @apply text-white text-base font-roboto;
   }
   .card{
     @apply  bg-[#0d0d0d]

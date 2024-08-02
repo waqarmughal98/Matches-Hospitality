@@ -17,7 +17,7 @@ export const Table = ({ data, columns, showNavigation }) => {
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full  sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-cardBG rounded-lg">
-                        <table className="min-w-full text-center rounded-lg">
+                        <table className="min-w-full text-center rounded-lg font-roboto">
                             <thead className="bg-cardBG rounded-tr-lg border-b-2 border-borderInput">
                                 {table.getHeaderGroups().map((headerGroup) => (
                                     <tr key={headerGroup.id}>
@@ -46,7 +46,7 @@ export const Table = ({ data, columns, showNavigation }) => {
                         </table>
                         {showNavigation ? (
                             <>
-                                <div className="flex items-center gap-2 justify-between py-8 px-7">
+                                <div className="flex items-center gap-2 justify-between py-8 px-7 font-roboto">
                                     <div className='flex gap-5'>
                                         <button
                                             className="cursor-pointer rounded p-2 bg-primaryGreen text-black"

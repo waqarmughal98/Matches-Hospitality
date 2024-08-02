@@ -154,26 +154,30 @@ const UserManagement = () => {
     },
     {
       header: 'Last Payment Date',
-      cell: (row) => row.renderValue(),
+      cell: (row) => (
+        <span>
+          {row.renderValue()}
+        </span>
+      ),
       accessorKey: 'date',
     },
     {
       header: 'Deactivate',
       cell: (row) => (
-          <div className="flex items-center gap-x-5 justify-center">
-              <label className="inline-flex items-center cursor-pointer">
-                  <input type="checkbox" value="" className="sr-only peer" />
-                  {/* checked={row.getValue('deactivate')} */}
-                  <div className="relative w-9 h-5 py-2 bg-gray-400 peer-focus:outline-none rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
-                  <span className="ms-2 text-xs text-white/80 font-semibold">Subscribed</span>
-              </label>
-              {/* <button className="text-red-500 hover:text-red-700">
+        <div className="flex items-center gap-x-5 justify-center">
+          <label className="inline-flex items-center cursor-pointer">
+            <input type="checkbox" value="" className="sr-only peer" />
+            {/* checked={row.getValue('deactivate')} */}
+            <div className="relative w-9 h-5 py-2 bg-gray-400 peer-focus:outline-none rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+            <span className="ms-2 text-xs text-white/80 font-semibold">Subscribed</span>
+          </label>
+          {/* <button className="text-red-500 hover:text-red-700">
                   <FaTrash />
               </button> */}
-          </div>
+        </div>
       ),
       accessorKey: 'deactivate',
-  },
+    },
   ], []);
 
   const dummyData = () => {
@@ -205,7 +209,7 @@ const UserManagement = () => {
                         <div className='col-span-10'>
                           <div className='flex flex-col gap-3'>
                             <span className='text-base font-semibold'>{item.users}</span>
-                            <span className='text-4xl font-semibold'>{item.numberOfUsers}</span>
+                            <span className='text-4xl font-semibold font-roboto'>{item.numberOfUsers}</span>
                             {/* <div className='flex gap-2'>
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z" fill="#00B69B" />

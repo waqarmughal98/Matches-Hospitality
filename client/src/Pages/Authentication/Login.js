@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import loginBanner from '../../../src/assets/webp/auth/login-banner.webp'
 import logo from '../../../src/assets/svgs/navbar/match-logo.svg'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import { URL } from '../../utilities/ConstantData'
 import AuthLayout from '../../ThemeLayout/AuthLayout'
 import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
@@ -12,35 +12,35 @@ import { LabelInput } from '../../Components/UiElements/TextInputs'
 import { useAppContext } from '../../UseContext/ContextProvider'
 const Login = () => {
     const [loginData, setLoginData] = useState({
-        email : "",
-        password : ""
+        email: "",
+        password: ""
     })
-    const [loading , setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const { handleErrors } = useAppContext()
-    const handleChange = (e) =>{
-        const { name , value } = e.target
-        setLoginData((pre)=>({
-            ...pre, [name]:value
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setLoginData((pre) => ({
+            ...pre, [name]: value
         }))
     }
 
     const handleLoginIn = async () => {
         setLoading(true)
         axios.post(`${URL}/login`, loginData)
-        .then((res)=>{
-            setLoading(false)
-            const userData = res.data.data;
-            localStorage.setItem('userData', JSON.stringify(userData));
-            toast.success("Login successfully!")
-            setTimeout(() => {
-                navigate("/dashboard")
-            }, 1500);
-        })
-        .catch ((error)=> {
-            setLoading(false)
-            handleErrors(error)
-        })
+            .then((res) => {
+                setLoading(false)
+                const userData = res.data.data;
+                localStorage.setItem('userData', JSON.stringify(userData));
+                toast.success("Login successfully!")
+                setTimeout(() => {
+                    navigate("/dashboard")
+                }, 1500);
+            })
+            .catch((error) => {
+                setLoading(false)
+                handleErrors(error)
+            })
     };
 
 
@@ -53,7 +53,7 @@ const Login = () => {
                             <img src={logo} alt='logo' />
                         </div>
                         <div className='col-span-12'>
-                            <div className='grid grid-cols-12 gap-2'>
+                            <div className='grid grid-cols-12 gap-3'>
                                 <div className='col-span-12 text-white text-headerText leading-tight font-semibold'>
                                     UEFA Champions League Hospitality Packages
                                 </div>
@@ -65,12 +65,12 @@ const Login = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-y-5'>
                                 <div className='col-span-12'>
-                                    <LabelInput name="email" onChange={(e)=>handleChange(e)} label='Email Address' />
+                                    <LabelInput name="email" onChange={(e) => handleChange(e)} label='Email Address' />
                                 </div>
                                 <div className='col-span-12'>
                                     <div className='grid grid-cols-12 gap-2'>
                                         <div className='col-span-12'>
-                                            <LabelInput name="password" onChange={(e)=>handleChange(e)} label='Password' />
+                                            <LabelInput name="password" onChange={(e) => handleChange(e)} label='Password' />
                                         </div>
                                         <div className='col-span-12 text-white text-xs text-right'>
                                             <Link to={'/forgot-password'}>
@@ -83,7 +83,7 @@ const Login = () => {
                                     <div className='grid grid-cols-12 gap-3'>
                                         <div className='col-span-12'>
                                             <PrimaryButton onClick={handleLoginIn} disabled={!loginData.email || !loginData.password || loading} size='large' color='green'>
-                                                {loading ? 'Logging in...' :  'Log in'}
+                                                {loading ? 'Logging in...' : 'Log in'}
                                             </PrimaryButton>
                                         </div>
                                         <div className='col-span-12 text-white text-center'>

@@ -17,7 +17,7 @@ export const PrimaryInput = ({ placeholder, name, type, onChange, className }) =
 export const LabelInput = ({ placeholder, name, type, onChange, className, label , value}) => {
     return (
         <div className='flex flex-col gap-3 w-full'>
-            <label className='text-white text-base'>{label}</label>
+            <label className='primaryText'>{label}</label>
             <input
                 onChange={onChange}
                 name={name}

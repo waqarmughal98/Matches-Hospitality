@@ -58,7 +58,7 @@ export const SSOButton = ({ onClick, className = '', disabled = false, type = 'b
   return (
     <button
       onClick={onClick}
-      className={`primaryBtn bg-white w-full rounded-full text-black h-12 font-semibold flex justify-center items-center gap-2 ${className}`}
+      className={`primaryBtn bg-white w-full rounded-full text-black h-12 primaryText font-semibold flex justify-center items-center gap-2 ${className}`}
       disabled={disabled}
       type={type}
       style={buttonStyle}
