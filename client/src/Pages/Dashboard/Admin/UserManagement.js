@@ -141,7 +141,7 @@ const UserManagement = () => {
     {
       header: 'Email',
       cell: (row) => (
-        <span className='text-primaryGreen/60'>
+        <span>
           {row.renderValue()}
         </span>
       ),

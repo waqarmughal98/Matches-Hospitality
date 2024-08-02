@@ -24,7 +24,7 @@ export const Table = ({ data, columns, showNavigation }) => {
                                         {headerGroup.headers.map((header, index) => (
                                             <th
                                                 key={header.id}
-                                                className={`px-6 py-4 text-lg font-medium text-white ${index === 0 ? 'text-left' : 'text-center'}`}
+                                                className={`px-6 py-6 text-md font-medium text-white ${index === 0 ? 'text-left' : 'text-center'}`}
                                             >
                                                 {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                             </th>
@@ -49,7 +49,7 @@ export const Table = ({ data, columns, showNavigation }) => {
                                 <div className="flex items-center gap-2 justify-between py-8 px-7">
                                     <div className='flex gap-5'>
                                         <button
-                                            className="cursor-pointer rounded border p-2 bg-primaryGreen text-black"
+                                            className="cursor-pointer rounded p-2 bg-primaryGreen text-black"
                                             onClick={() => table.setPageIndex(0)}
                                             disabled={!table.getCanPreviousPage()}
                                         >
@@ -57,21 +57,21 @@ export const Table = ({ data, columns, showNavigation }) => {
 
                                         </button>
                                         <button
-                                            className="cursor-pointer rounded border p-2"
+                                            className="cursor-pointer rounded border border-borderInput p-2"
                                             onClick={() => table.previousPage()}
                                             disabled={!table.getCanPreviousPage()}
                                         >
                                             <FaAngleLeft size={15} />
                                         </button>
                                         <button
-                                            className="cursor-pointer rounded border p-2"
+                                            className="cursor-pointer rounded border border-borderInput p-2"
                                             onClick={() => table.nextPage()}
                                             disabled={!table.getCanNextPage()}
                                         >
                                             <FaAngleRight size={15}/>
                                         </button>
                                         <button
-                                            className="cursor-pointer rounded border p-2"
+                                            className="cursor-pointer rounded p-2 bg-primaryGreen text-black"
                                             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                                             disabled={!table.getCanNextPage()}
                                         >
@@ -94,7 +94,7 @@ export const Table = ({ data, columns, showNavigation }) => {
                                                     const page = e.target.value ? Number(e.target.value) - 1 : 0;
                                                     table.setPageIndex(page);
                                                 }}
-                                                className="w-16 rounded border p-1 bg-transparent"
+                                                className="w-16 rounded border border-borderInput p-1 bg-transparent"
                                             />
                                         </span>
                                     </div>
