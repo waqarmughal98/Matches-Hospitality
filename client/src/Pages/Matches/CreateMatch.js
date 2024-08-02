@@ -159,7 +159,7 @@ const CreateMatch = () => {
         if(action=="create"){
             axiosInstance().post(`${API_URL}/event/create`, data)
             .then((res) => {
-                handleResponse()
+                handleResponse("crated")
             })
             .catch((error) => {
                 handleCatch(error)
@@ -168,7 +168,7 @@ const CreateMatch = () => {
         else{
             axiosInstance().put(`${API_URL}/event/edit/${selectedEditMatch._id}`, data)
             .then((res) => {
-                handleResponse()
+                handleResponse("updated")
             })
             .catch((error) => {
                 handleCatch(error)
@@ -176,9 +176,9 @@ const CreateMatch = () => {
         }
     };
 
-    const handleResponse = () =>{
+    const handleResponse = (word) =>{
         setLoading2(false);
-        toast.success("Match created successfully");
+        toast.success(`Match ${word} successfully`);
         navigate("/all-matches");
     }
 
