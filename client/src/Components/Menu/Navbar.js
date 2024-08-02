@@ -22,7 +22,7 @@ const Navbar = () => {
                             </svg>
                             <span className="sr-only">Search icon</span>
                         </div>
-                        <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm border border-[#2E3539] rounded-full bg-transparent text-white focus:outline outline-primaryGreen" placeholder="Search Matches, Players, Stats ..." />
+                        <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm border border-[#2E3539] rounded-full bg-transparent text-white focus:outline outline-primaryGreen font-roboto" placeholder="Search Matches, Players, Stats ..." />
                     </div>
                     <button data-collapse-toggle="navbar-search" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-search" aria-expanded="false">
                         <span className="sr-only">Open main menu</span>
@@ -38,7 +38,7 @@ const Navbar = () => {
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
-                        <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm border border-gray-300 rounded-lg text-white focus:outline outline-primaryGreen" placeholder="Search Matches, Players, Stats ..." />
+                        <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm border border-gray-300 rounded-lg text-white focus:outline outline-primaryGreen font-roboto" placeholder="Search Matches, Players, Stats ..." />
                     </div>
                     <div className='flex gap-5'>
                         <div className='text-white self-center grid grid-cols-3 gap-7 mr-3'>
