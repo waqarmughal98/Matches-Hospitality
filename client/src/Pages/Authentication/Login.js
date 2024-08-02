@@ -17,7 +17,7 @@ const Login = () => {
     })
     const [loading , setLoading] = useState(false)
     const navigate = useNavigate()
-    const { handeErrors } = useAppContext()
+    const { handleErrors } = useAppContext()
     const handleChange = (e) =>{
         const { name , value } = e.target
         setLoginData((pre)=>({
@@ -39,7 +39,7 @@ const Login = () => {
         })
         .catch ((error)=> {
             setLoading(false)
-            handeErrors(error)
+            handleErrors(error)
         })
     };
 

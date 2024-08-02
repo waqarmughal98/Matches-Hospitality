@@ -10,7 +10,7 @@ const CreateTeamModal = ({setTeamData}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [name, setName] = useState(null);
     const [selectedItems, setSelectedItems] = useState(null,)
-    const { closeModal , handeErrors , categoryData} = useAppContext()
+    const { closeModal , handleErrors , categoryData} = useAppContext()
     const [loading2 , setLoading2] = useState(false)
     const navigate = useNavigate()
 
@@ -75,12 +75,10 @@ const CreateTeamModal = ({setTeamData}) => {
             toast.error(errors);
             navigate("/Login")
         }else{
-            handeErrors(error)
+            handleErrors(error)
         }
     })
 };
-
-
 
     return (
         <div className='grid grid-cols-12 justify-center p-10 rounded-lg backdrop-blur-3xl m-auto mt-12 bg-black/40 max-h-full overflow-auto custom-scroll'>
@@ -147,7 +145,7 @@ const CreateTeamModal = ({setTeamData}) => {
                                 title="Category"
                                 data={categoryData}
                                 position="bottom-left"
-                                hasImage={false}
+                                hasImage={true}
                                 style="custom-dropdown-style"
                                 selectedId={selectedItems}
                                 onSelect={(id) => handleSelect(id)}

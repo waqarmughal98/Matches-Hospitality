@@ -5,7 +5,7 @@ const handleError = require('../utils/errorHandler');
 // Create Event
 const createEvent = asyncHandler(async (req, res) => {
   try {
-    const { category, team1, team2, date, time, packages } = req.body;
+    const { category, team1, team2, date, time,venue, packages } = req.body;
 
     const newEvent = new Event({
       category,
@@ -13,6 +13,7 @@ const createEvent = asyncHandler(async (req, res) => {
       team2,
       date,
       time,
+      venue,
       packages,
     });
 
@@ -28,7 +29,7 @@ const createEvent = asyncHandler(async (req, res) => {
 const editEvent = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const { category, team1, team2, date, time, packages } = req.body;
+    const { category, team1, team2, date, time, packages, venue } = req.body;
 
     const updateFields = {
       ...(category && { category }),
@@ -36,6 +37,7 @@ const editEvent = asyncHandler(async (req, res) => {
       ...(team2 && { team2 }),
       ...(date && { date }),
       ...(time && { time }),
+      ...(venue && { venue }),
       ...(packages && { packages }),
     };
 

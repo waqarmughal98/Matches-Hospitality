@@ -6,7 +6,7 @@ import { useAppContext } from '../../UseContext/ContextProvider';
 import { axiosInstance2, URL as Api_URl } from '../../utilities/ConstantData';
 import { toast } from 'react-toastify';
 const EditCategory = () => {
-    const { selectedEditCategory , handeErrors} = useAppContext();
+    const { selectedEditCategory , handleErrors} = useAppContext();
     const [loading , setLoading] = useState(false)
     const [Data, setData] = useState({
         name: '',
@@ -46,11 +46,11 @@ const EditCategory = () => {
             toast.error("Event Name is required and should be a non-empty string.");
             return false;
         }
-        else if (!Data.description) {
+        if (!Data.description) {
             toast.error("Event Description is required and should be a non-empty string.");
             return false;
         }
-        else if (!Data.categoryBanner) {
+         if (!Data.categoryBanner) {
             toast.error("Event Banner is required and should be a file.");
             return false;
         }
@@ -91,7 +91,7 @@ const EditCategory = () => {
                 toast.error(errors);
                 navigate("/Login")
             }else{
-                handeErrors(error)
+                handleErrors(error)
             }
         })
     };

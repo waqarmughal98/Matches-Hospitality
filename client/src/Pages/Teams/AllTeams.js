@@ -11,7 +11,7 @@ import Loader from '../../Components/UiElements/Loader';
 import { toast } from 'react-toastify';
 import CreateTeamModal from '../../Components/Modal/Team/CreateTeamModal';
 const AllTeams = () => {
-  const { showBackdropWithContent, categoryData, setCategoryData , handeErrors } = useAppContext()
+  const { showBackdropWithContent, categoryData, setCategoryData , handleErrors , closeModal} = useAppContext()
   const navigate = useNavigate()
   const [loading , setLoading] = useState(true)
   const [TeamData, setTeamData] = useState([])
@@ -38,7 +38,7 @@ const AllTeams = () => {
             toast.error(errors);
             navigate("/Login")
         }else{
-            handeErrors(error)
+            handleErrors(error)
         }
     })
 };
@@ -56,7 +56,7 @@ const fetchCategories = async () => {
           toast.error(errors);
           navigate("/Login")
       }else{
-          handeErrors(error)
+          handleErrors(error)
       }
   })
 };
@@ -74,10 +74,33 @@ const fetchCategories = async () => {
     )
     showBackdropWithContent(content)
   }
+  const filterCategory = (id) => {
+    setTeamData(prevData => prevData.filter(team => team._id !== id));
+};
+
+const handleDelete = async (id) => {
+    axiosInstance().delete(`${URL}/team/delete/${id}`)
+    .then((res)=>{
+        filterCategory(id)
+        closeModal()
+        toast.success("Team deleted successfully")
+    })
+    .catch ((error)=> {
+        const errors=error?.response?.data?.errors
+        const statusCode=error?.response?.status
+        if(statusCode==401){
+            toast.error(errors);
+            navigate("/Login")
+        }else{
+            handleErrors(error)
+        }
+    })
+};
+
   
   const handleBackdrop= (id) => {
     const content = (
-      <DeleteModal setTeamData={setTeamData} selectedItemID={id}/>
+      <DeleteModal handleDelete={handleDelete} item="team" id={id}/>
     )
     showBackdropWithContent(content)
   }

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const EditTeamModal = ({selectedItem,setUpdation}) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedItems, setSelectedItems] = useState(null,)
-    const { closeModal , handeErrors , categoryData } = useAppContext()
+    const { closeModal , handleErrors , categoryData } = useAppContext()
     const [name, setName] = useState(null);
     const [loading2 , setLoading2] = useState(false)
     const navigate = useNavigate()
@@ -75,7 +75,7 @@ const EditTeamModal = ({selectedItem,setUpdation}) => {
             toast.error(errors);
             navigate("/Login")
         }else{
-            handeErrors(error)
+            handleErrors(error)
         }
     })
 };
@@ -151,7 +151,7 @@ const EditTeamModal = ({selectedItem,setUpdation}) => {
                                 title="Category"
                                 data={categoryData}
                                 position="bottom-left"
-                                hasImage={false}
+                                hasImage={true}
                                 style="custom-dropdown-style"
                                 selectedId={selectedItem.categoryId}
                                 onSelect={(id) => handleSelect(id)}
