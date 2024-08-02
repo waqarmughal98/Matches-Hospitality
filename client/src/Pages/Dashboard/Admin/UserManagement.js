@@ -9,6 +9,7 @@ import Loader from '../../../Components/UiElements/Loader';
 const UserManagement = () => {
   const { handleErrors } = useAppContext();
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
   const [statistics, setStatistics] = useState([]);
   const navigate = useNavigate();
@@ -53,17 +54,19 @@ const UserManagement = () => {
   console.log(statistics,"statistics")
 
   const handleToggleStatus = async (userId, currentStatus) => {
+    setLoading2(true)
     const newStatus = currentStatus === 'active' ? 'deactive' : 'active';
     updateStatics(currentStatus)
     axiosInstance().patch(`${URL}/change-user-status/${userId}`, { status: newStatus })
       .then(() => {
         toast.success(`User ${newStatus}d successfully`);
-        // Update the user's status in the state
+        setLoading2(false)
         setAllUsers(prevUsers => prevUsers.map(user =>
           user._id === userId ? { ...user, status: newStatus } : user
         ));
       })
       .catch((error) => {
+        setLoading2(false)
         const errors = error?.response?.data?.errors;
         const statusCode = error?.response?.status;
         if (statusCode === 401) {
@@ -112,6 +115,7 @@ const UserManagement = () => {
             <input 
               checked={row.getValue('status') === 'active'} 
               type="checkbox" 
+              disabled={loading2}
               className="sr-only peer" 
               onChange={() => handleToggleStatus(row.row.original._id, row.getValue('status'))}
             />

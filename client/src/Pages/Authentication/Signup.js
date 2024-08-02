@@ -20,7 +20,7 @@ const Signup = () => {
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
-                <div className='col-span-5 bg-primaryBlack rounded-xl p-10 min-h-[100vh]'>
+                <div className='col-span-5 bg-primaryBlack rounded-xl p-10 pb-14'>
                     <div className='grid grid-cols-12 gap-9'>
                         <div className='col-span-12'>
                             <SecondaryButton />
@@ -32,16 +32,19 @@ const Signup = () => {
                             Sign Up/Sign In
                         </div>
                         <div className='col-span-12'>
+                            <LabelInput name="userName" value={signUpDetails.userName}  onChange={(e)=>signUpDetailsSetter(e)} label='Full Name' />
+                        </div>
+                        <div className='col-span-12'>
                             <LabelInput name="email" value={signUpDetails.email}  onChange={(e)=>signUpDetailsSetter(e)} label='Email Address' />
                         </div>
-                        <div className='col-span-12 pb-10'>
-                            <div className='grid grid-cols-12 gap-5'>
+                        <div className='col-span-12'>
+                            <div className='grid grid-cols-12'>
                                 <div className='col-span-12'>
-                                    <PrimaryButton  onClick={handleClick}  disabled={!signUpDetails.email} size='large' color='green'>
+                                    <PrimaryButton  onClick={handleClick}  disabled={!signUpDetails.email || !signUpDetails.userName } size='large' color='green'>
                                             Get Started
                                     </PrimaryButton>
                                 </div>
-                                <div className='col-span-12'>
+                                {/* <div className='col-span-12'>
                                     <div className='grid grid-cols-12 items-center'>
                                         <div className='col-span-5 bg-white h-[1px]'></div>
                                         <div className='col-span-2 text-white text-center'>Or</div>
@@ -53,7 +56,7 @@ const Signup = () => {
                                 </div>
                                 <div className='col-span-12'>
                                     <SSOButton btnText='Continue with Google' source={apple} />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
