@@ -21,7 +21,7 @@ const Revenue = () => {
                             <div className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-primaryBlack border-primaryBorder border-[1px] p-5'>
                                 <div className='grid grid-cols-12'>
                                     <div className='col-span-12'>
-                                        <div className='flex flex-col gap-2'>
+                                        <div className='flex flex-col gap-3'>
                                             <span className='text-base font-semibold'>{item.title}</span>
                                             <span className='text-4xl font-bold pb-2'>{item.revenue}</span>
                                             <div className='flex gap-2'>

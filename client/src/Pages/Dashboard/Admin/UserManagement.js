@@ -204,7 +204,7 @@ const UserManagement = () => {
               {users.map((item, index) => {
                 return (
                   <>
-                    <div key={index} className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-cardBG border-primaryBorder border-[1px] p-7 '>
+                    <div key={index} className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-cardBG border-primaryBorder border-[1px] p-7 font-roboto'>
                       <div className='grid grid-cols-12'>
                         <div className='col-span-10'>
                           <div className='flex flex-col gap-3'>
