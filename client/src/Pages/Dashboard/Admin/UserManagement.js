@@ -3,6 +3,7 @@ import { PrimaryButton } from '../../../Components/UiElements/Buttons'
 import { useAppContext } from '../../../UseContext/ContextProvider';
 import { LabelInput } from '../../../Components/UiElements/TextInputs';
 import { Table } from '../../../Components/ReactTable/Table';
+import { FaTrash } from 'react-icons/fa';
 const UserManagement = () => {
   const { showBackdropWithContent, closeModal } = useAppContext();
   const [selectedFile, setSelectedFile] = useState(null);
@@ -55,11 +56,11 @@ const UserManagement = () => {
 
   const users = [
     {
-      users: 'Total User',
+      users: 'This Week',
       numberOfUsers: '54,272'
     },
     {
-      users: 'Total User',
+      users: 'This Month',
       numberOfUsers: '12,098'
     },
     {
@@ -67,7 +68,7 @@ const UserManagement = () => {
       numberOfUsers: '23,765'
     },
     {
-      users: 'Total User',
+      users: 'Deactivated User',
       numberOfUsers: '98,656'
     }
   ]
@@ -133,37 +134,65 @@ const UserManagement = () => {
 
   const cols = useMemo(() => [
     {
-        header: 'Name',
-        cell: (row) => row.renderValue(),
-        accessorKey: 'name',
+      header: 'Name',
+      cell: (row) => row.renderValue(),
+      accessorKey: 'name',
     },
     {
-        header: 'Price',
-        cell: (row) => row.renderValue(),
-        accessorKey: 'price',
+      header: 'Email',
+      cell: (row) => (
+        <span className='text-primaryGreen/60'>
+          {row.renderValue()}
+        </span>
+      ),
+      accessorKey: 'email',
     },
     {
-        header: 'Quantity',
-        cell: (row) => row.renderValue(),
-        accessorKey: 'quantity',
+      header: 'Last Bought Package',
+      cell: (row) => row.renderValue(),
+      accessorKey: 'package',
     },
-], []);
+    {
+      header: 'Last Payment Date',
+      cell: (row) => row.renderValue(),
+      accessorKey: 'date',
+    },
+    {
+      header: 'Deactivate',
+      cell: (row) => (
+          <div className="flex items-center gap-x-5 justify-center">
+              <label className="inline-flex items-center cursor-pointer">
+                  <input type="checkbox" value="" className="sr-only peer" />
+                  {/* checked={row.getValue('deactivate')} */}
+                  <div className="relative w-9 h-5 py-2 bg-gray-400 peer-focus:outline-none rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+                  <span className="ms-2 text-xs text-white/80 font-semibold">Subscribed</span>
+              </label>
+              {/* <button className="text-red-500 hover:text-red-700">
+                  <FaTrash />
+              </button> */}
+          </div>
+      ),
+      accessorKey: 'deactivate',
+  },
+  ], []);
 
   const dummyData = () => {
     const items = [];
     for (let i = 0; i < 15; i++) {
-        items.push({
-            id: i,
-            name: `Item ${i}`,
-            price: 100,
-            quantity: 1,
-        });
+      items.push({
+        id: i,
+        name: `Item ${i}`,
+        email: 'email@gmail.com',
+        package: 'Silver',
+        date: '12/02/2023',
+        deactivate: 1,
+      });
     }
     return items;
-};
+  };
   return (
     <div className='grid grid-cols-12 text-white xl:gap-x-10 gap-y-8'>
-       <div className='col-span-12'>
+      <div className='col-span-12'>
         <div className='grid grid-cols-12 xl:gap-x-8 gap-y-8'>
           <div className='col-span-12 text-3xl font-semibold'>Users</div>
           <div className='col-span-12'>
@@ -171,13 +200,13 @@ const UserManagement = () => {
               {users.map((item, index) => {
                 return (
                   <>
-                    <div key={index} className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-primaryBlack border-primaryBorder border-[1px] p-5'>
+                    <div key={index} className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-cardBG border-primaryBorder border-[1px] p-7 '>
                       <div className='grid grid-cols-12'>
                         <div className='col-span-10'>
                           <div className='flex flex-col gap-3'>
                             <span className='text-base font-semibold'>{item.users}</span>
                             <span className='text-4xl font-semibold'>{item.numberOfUsers}</span>
-                            <div className='flex gap-2'>
+                            {/* <div className='flex gap-2'>
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z" fill="#00B69B" />
                               </svg>
@@ -185,7 +214,7 @@ const UserManagement = () => {
                               <span>
                                 Up from yesterday
                               </span>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                         <div className='grid col-span-2 items-end justify-end'>
@@ -210,7 +239,7 @@ const UserManagement = () => {
             User Management
           </div>
           <div className='col-span-12'>
-          <Table data={dummyData()} columns={cols} showNavigation/>
+            <Table data={dummyData()} columns={cols} showNavigation />
           </div>
         </div>
       </div>
