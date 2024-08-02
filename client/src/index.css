@@ -40,6 +40,9 @@ code {
   .inputLabel{
     @apply text-white text-base
   }
+  .card{
+    @apply  bg-[#0d0d0d]
+  }
 }
 
 .custom-scroll::-webkit-scrollbar {
