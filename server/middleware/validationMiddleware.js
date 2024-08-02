@@ -86,9 +86,9 @@ const validateTeam = [
 ];
 
 const validateEvent = [
-  check('categoryId').isMongoId().withMessage('Valid Category ID is required'),
-  check('team1Id').isMongoId().withMessage('Valid Team 1 ID is required'),
-  check('team2Id').isMongoId().withMessage('Valid Team 2 ID is required'),
+  check('category').isMongoId().withMessage('Valid Category ID is required'),
+  check('team1').isMongoId().withMessage('Valid Team 1 ID is required'),
+  check('team2').isMongoId().withMessage('Valid Team 2 ID is required'),
   check('date').notEmpty().withMessage('Date is required'),
   check('time').notEmpty().withMessage('Time is required'),
   check('packages').isArray({ min: 1 }).withMessage('Packages list is required'),
