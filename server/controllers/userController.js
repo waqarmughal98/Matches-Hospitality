@@ -5,7 +5,7 @@ const Otp = require('../models/otpModel');
 const { generateToken, isValidEmail } = require('../utils/tokenUtils');
 const { sendOTPEmail,generateOTP } = require('../utils/otpUtils');
 const handleError = require('../utils/errorHandler');
-
+const moment = require('moment');
 /* Sign Up */
 const signup = asyncHandler(async (req, res) => {
   const { email, password , userName } = req.body;
@@ -243,12 +243,42 @@ const resetPassword = asyncHandler(async (req, res) => {
 const getAllUsers = asyncHandler(async (req, res) => {
   try {
     const users = await User.find();
-    res.status(200).json({ success: true, data: users });
+
+    const totalUsers = users.length;
+
+    const thisMonth = moment().startOf('month');
+    const thisWeek = moment().startOf('week');
+
+    const thisMonthUsers = users.filter(user => moment(user.createdAt).isSameOrAfter(thisMonth)).length;
+    const thisWeekUsers = users.filter(user => moment(user.createdAt).isSameOrAfter(thisWeek)).length;
+    const deactivatedUsers = users.filter(user => user.status === 'deactive').length;
+
+    const statistics = 
+    [
+      {
+        title: 'This Week',
+        numberOfUsers: thisWeekUsers
+      },
+      {
+        title: 'This Month',
+        numberOfUsers: thisMonthUsers
+      },
+      {
+        title: 'Total Users',
+        numberOfUsers: totalUsers
+      },
+      {
+        title: 'Deactivated Users',
+        numberOfUsers: deactivatedUsers
+      }
+    ]
+  
+
+    res.status(200).json({ success: true, data: users, statistics });
   } catch (error) {
     handleError(res, 400, 'Something went wrong');
   }
 });
-
 // Change User Status
 const changeUserStatus = asyncHandler(async (req, res) => {
   try {

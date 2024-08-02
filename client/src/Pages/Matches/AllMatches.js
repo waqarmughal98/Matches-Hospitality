@@ -11,7 +11,6 @@ const AllMatches = () => {
     const [loading , setLoading] = useState(true)
     const { handleErrors ,categoryData, setCategoryData, PackageData, setPackageData,MatchesData, setMatchesData  } = useAppContext()
   
-
     useEffect(()=>{
         fetchData()
         if(categoryData.length==0){
