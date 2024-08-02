@@ -140,7 +140,11 @@ const UserManagement = () => {
     },
     {
       header: 'Email',
-      cell: (row) => row.renderValue(),
+      cell: (row) => (
+        <span className='text-primaryGreen/60'>
+          {row.renderValue()}
+        </span>
+      ),
       accessorKey: 'email',
     },
     {
