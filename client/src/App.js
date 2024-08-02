@@ -23,6 +23,8 @@ import AllMatches from './Pages/Matches/AllMatches';
 import CreateMatch from './Pages/Matches/CreateMatch';
 import AllTeams from './Pages/Teams/AllTeams';
 import ReactTable from './Components/ReactTable/ReactTable';
+import AllPackages from './Pages/Packages/AllPackages';
+import NewPackage from './Pages/Packages/NewPackage';
 
 const App = () => {
   return (
@@ -45,6 +47,9 @@ const App = () => {
         <Route path="match/:action" element={<CreateMatch />} />
         {/* temas */}
         <Route path="all-teams" element={<AllTeams />} />
+        {/* packages */}
+        <Route path="all-packages" element={<AllPackages />} />
+        <Route path="new-package" element={<NewPackage />} />
         {/* user dashboard */}
         <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>

@@ -87,9 +87,9 @@ const PackageInformation = () => {
                         <SecondaryButton />
                     </div>
                     <div className='col-span-10 text-white'>
-                        <div className='flex justify-between items-center'>
-                            <h1 className='text-2xl font-semibold'>Select Package</h1>
-                            <PrimaryButton size='medium' color='green' className='font-semibold'>Create New Package</PrimaryButton>
+                        <div className='flex justify-end items-center'>
+                            {/* <h1 className='text-2xl font-semibold'>Select Package</h1> */}
+                            <PrimaryButton size='medium' color='green' className='primaryText'>Create New Package</PrimaryButton>
                         </div>
                     </div>
                 </div>
@@ -118,12 +118,12 @@ const PackageInformation = () => {
                                     {createPackage?.map((item) => {
                                         return (
                                             <>
-                                                <MatchCard
+                                                {/* <MatchCard
                                                     key={item.id}
                                                     data={item}
                                                     onClick={() => handleCardClick(item.id)}
                                                     width='small'
-                                                />
+                                                /> */}
                                             </>
                                         )
                                     })}
