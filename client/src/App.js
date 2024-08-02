@@ -21,7 +21,6 @@ import CreateCategory from './Pages/Categories/CreateCategory';
 import EditCategory from './Pages/Categories/EditCategory';
 import AllMatches from './Pages/Matches/AllMatches';
 import CreateMatch from './Pages/Matches/CreateMatch';
-import EditMatch from './Pages/Matches/EditMatch';
 import AllTeams from './Pages/Teams/AllTeams';
 import ReactTable from './Components/ReactTable/ReactTable';
 
@@ -43,8 +42,7 @@ const App = () => {
         <Route path="edit-category" element={<EditCategory />} />
         {/* matches */}
         <Route path="all-matches" element={<AllMatches />} />
-        <Route path="create-match" element={<CreateMatch />} />
-        <Route path="edit-match" element={<EditMatch />} />
+        <Route path="match/:action" element={<CreateMatch />} />
         {/* temas */}
         <Route path="all-teams" element={<AllTeams />} />
         {/* user dashboard */}

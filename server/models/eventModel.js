@@ -25,6 +25,10 @@ const EventSchema = new Schema({
     type: String,
     required: true,
   },
+  venue: {
+    type: String,
+    required: true,
+  },
   packages: [
     {
       type: String,

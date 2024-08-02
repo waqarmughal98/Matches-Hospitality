@@ -90,6 +90,7 @@ const validateEvent = [
   check('team1').isMongoId().withMessage('Valid Team 1 ID is required'),
   check('team2').isMongoId().withMessage('Valid Team 2 ID is required'),
   check('date').notEmpty().withMessage('Date is required'),
+  check('venue').notEmpty().withMessage('Venue is required'),
   check('time').notEmpty().withMessage('Time is required'),
   check('packages').isArray({ min: 1 }).withMessage('Packages list is required'),
   validateRequest,

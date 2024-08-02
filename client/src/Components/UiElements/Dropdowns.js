@@ -152,8 +152,11 @@ const Dropdown = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(
-    selectedId ? data.find((item) => item.id === selectedId) : undefined
+    selectedId ? data.find((item) => item._id == selectedId) : undefined
   );
+  console.log(data)
+  console.log("selectedId..",selectedId)
+  console.log("selectedItem..",selectedItem)
 
   const dropdownRef = useRef(null);
   const handleChange = (item) => {
@@ -164,7 +167,7 @@ const Dropdown = ({
 
   useEffect(() => {
     if (selectedId && data) {
-      const newSelectedItem = data.find((item) => item.id === selectedId);
+      const newSelectedItem = data.find((item) => item._id == selectedId);
       newSelectedItem && setSelectedItem(newSelectedItem);
     } else {
       setSelectedItem(undefined);
@@ -213,9 +216,9 @@ const Dropdown = ({
             disabled={disabled}
           >
             <div className='flex items-center gap-5'>
-              {selectedItem?.imageUrl && (
+              {selectedItem?.logo && (
                 <img
-                  src={selectedItem.imageUrl}
+                  src={`/uploads/${selectedItem.logo}`}
                   alt='Selected'
                   className='w-7 h-7 rounded-full bg-gray-400 object-cover me-2'
                 />
@@ -246,12 +249,12 @@ const Dropdown = ({
                       { 'bg-black/30': selectedItem?.id === item.id }
                     )}
                   >
-                    {hasImage && item.imageUrl && (
+                    {hasImage && item.logo && (
                       <img
-                        src={item.imageUrl}
+                        src={`/uploads/${item.logo}`}
                         alt={item.name}
                         loading='lazy'
-                        className='w-10 h-10 rounded-full bg-gray-400 object-cover me-2'
+                        className='w-7 h-7 rounded-full bg-gray-400 object-cover me-2'
                       />
                     )}
                     <span>{item.name}</span>

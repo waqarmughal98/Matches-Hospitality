@@ -14,11 +14,13 @@ export const ContextProvider = ({ children }) => {
   };
   const [categoryData, setCategoryData] = useState([])
   const [PackageData, setPackageData] = useState([])
+  const [MatchesData, setMatchesData] = useState([])
   const [signUpDetails, setSignUpDetails] = useState({
     email: "",
     password: ""
   })
   const [selectedEditCategory, setSelectedEditCategory] = useState({})
+  const [selectedEditMatch, setSelectedEditMatch] = useState({})
   const [forgetPassworddata, setforgetPassworddata] = useState({
     email: "",
     otp: "",
@@ -45,7 +47,7 @@ export const ContextProvider = ({ children }) => {
     return result
   };
 
-  const handeErrors=(error)=>{
+  const handleErrors=(error)=>{
     const errors=error?.response?.data?.errors
     if (typeof errors == 'string') {
         toast.error(errors);
@@ -57,6 +59,27 @@ export const ContextProvider = ({ children }) => {
         toast.error('An unknown error occurred.');
     }
   }
+
+  function convertToAmPm(timestamp) {
+    const date = new Date(timestamp);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    const amPm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+    return `${hours}:${formattedMinutes} ${amPm}`;
+}
+
+function convertToDateFormat(isoString) {
+  const date = new Date(isoString);
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const year = date.getFullYear();
+  return `${month}-${day}-${year}`;
+}
+
+
+
 
   return (
     <AppContext.Provider
@@ -77,13 +100,19 @@ export const ContextProvider = ({ children }) => {
         setIsOpen,
         setSelectedMatch,
         selectedMatch,
-        handeErrors,
+        handleErrors,
         setSelectedEditCategory,
         selectedEditCategory,
         categoryData,
         setCategoryData,
         PackageData,
-        setPackageData
+        setPackageData,
+        convertToAmPm,
+        convertToDateFormat,
+        selectedEditMatch,
+        setSelectedEditMatch,
+        MatchesData,
+        setMatchesData
       }}>
       {children}
     </AppContext.Provider>

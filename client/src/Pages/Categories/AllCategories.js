@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { axiosInstance, URL } from '../../utilities/ConstantData';
 import Loader from '../../Components/UiElements/Loader';
 const AllCategories = () => {
-    const { handeErrors , showBackdropWithContent, closeModal , setSelectedEditCategory} = useAppContext()
+    const { handleErrors , showBackdropWithContent, closeModal , setSelectedEditCategory} = useAppContext()
     const [loading , setLoading] = useState(true)
     const navigate = useNavigate()
     const [categoryData, setCategoryData] = useState([])
@@ -35,7 +35,7 @@ const AllCategories = () => {
                 toast.error(errors);
                 navigate("/Login")
             }else{
-                handeErrors(error)
+                handleErrors(error)
             }
         })
     };
@@ -58,7 +58,7 @@ const AllCategories = () => {
                 toast.error(errors);
                 navigate("/Login")
             }else{
-                handeErrors(error)
+                handleErrors(error)
             }
         })
     };

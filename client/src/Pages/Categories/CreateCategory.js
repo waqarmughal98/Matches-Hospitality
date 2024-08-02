@@ -6,7 +6,7 @@ import { useAppContext } from '../../UseContext/ContextProvider';
 import { toast } from 'react-toastify';
 import { axiosInstance2, URL as Api_URl } from '../../utilities/ConstantData';
 const CreateCategory = () => {
-    const { handeErrors} = useAppContext();
+    const { handleErrors} = useAppContext();
     const [loading , setLoading] = useState(false)
     const navigate = useNavigate();
 
@@ -33,11 +33,11 @@ const CreateCategory = () => {
             toast.error("Event Name is required and should be a non-empty string.");
             return false;
         }
-        else if (!formData.categoryDescription) {
+         if (!formData.categoryDescription) {
             toast.error("Event Description is required and should be a non-empty string.");
             return false;
         }
-        else if (!formData.categoryBanner || !(formData.categoryBanner instanceof File)) {
+         if (!formData.categoryBanner || !(formData.categoryBanner instanceof File)) {
             toast.error("Event Banner is required and should be a file.");
             return false;
         }
@@ -72,7 +72,7 @@ const CreateCategory = () => {
                 toast.error(errors);
                 navigate("/Login")
             }else{
-                handeErrors(error)
+                handleErrors(error)
             }
         })
     };

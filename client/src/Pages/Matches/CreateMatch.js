@@ -4,17 +4,10 @@ import Dropdown from '../../Components/UiElements/Dropdowns';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'
-import { axiosInstance, URL } from '../../utilities/ConstantData';
+import { useNavigate, useParams } from 'react-router-dom';
+import { axiosInstance, URL as API_URL } from '../../utilities/ConstantData';
 import { LabelInput } from '../../Components/UiElements/TextInputs';
 import { useAppContext } from '../../UseContext/ContextProvider';
-
-
-const itemsImages = [
-    { id: '1', name: 'Item 1', imageUrl: '/assets/images/Category/event-logo2.png' },
-    { id: '2', name: 'Item 2', imageUrl: '/assets/images/Category/event-logo2.png' },
-    { id: '3', name: 'Item 3', imageUrl: '/assets/images/Category/event-logo2.png' },
-];
 
 const CreateMatch = () => {
     const [selectedItems, setSelectedItems] = useState({
@@ -22,12 +15,15 @@ const CreateMatch = () => {
         dropdown2: null,
         dropdown3: null,
     });
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [selectedPackages, setSelectedPackages] = useState([]);
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [venue, setVenue] = useState('');
-    const { handeErrors ,categoryData, PackageData } = useAppContext()
+    const [TeamData, setTeamData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [loading2, setLoading2] = useState(false);
+    const { handleErrors, categoryData, PackageData, selectedEditMatch } = useAppContext();
 
     const handleSelect = (dropdownId, id) => {
         setSelectedItems((prevSelectedItems) => ({
@@ -36,25 +32,73 @@ const CreateMatch = () => {
         }));
     };
 
+    const { action } = useParams();
+
     useEffect(() => {
-        //for reload
-        if(PackageData.length==0){
-            navigate("/all-matches") 
+        // for reload
+        if (PackageData.length === 0) {
+            navigate("/all-matches");
         }
-        const packageIds = PackageData.map(pkg => pkg._id);
-        setSelectedPackages(packageIds);
+        if (action === "create") {
+            const packageIds = PackageData.map(pkg => pkg._id);
+            setSelectedPackages(packageIds);
+        }
     }, []);
 
+    useEffect(() => {
+        if (selectedEditMatch && action === "edit") {
+            setDate(new Date(selectedEditMatch.date));
+            setTime(new Date(selectedEditMatch.time));
+            setVenue(selectedEditMatch.venue);
+            setSelectedPackages(selectedEditMatch.packages);
+            setSelectedItems({
+                dropdown1: selectedEditMatch.category,
+                dropdown2: selectedEditMatch.team1,
+                dropdown3: selectedEditMatch.team2,
+            });
+        }
+    }, [selectedEditMatch, action]);
+
+    useEffect(() => {
+        if (selectedItems.dropdown1) {
+            if (action === "create") {
+                setSelectedItems((prev) => ({
+                    ...prev,
+                    dropdown2: null,
+                    dropdown3: null,
+                }));
+            }
+            fetchTeams(selectedItems.dropdown1._id);
+        }
+    }, [selectedItems.dropdown1]);
+
+    const fetchTeams = async (id) => {
+        axiosInstance().get(`${API_URL}/team/filter-by-category/${id}`)
+            .then((res) => {
+                const data = res.data.data;
+                setTeamData(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                const errors = error?.response?.data?.errors;
+                const statusCode = error?.response?.status;
+                if (statusCode === 401) {
+                    toast.error(errors);
+                    navigate("/Login");
+                } else {
+                    handleErrors(error);
+                }
+            });
+    };
 
     const handlePackageToggle = (packageId) => {
-        setSelectedPackages((prevSelectedPackages) => 
+        setSelectedPackages((prevSelectedPackages) =>
             prevSelectedPackages.includes(packageId)
                 ? prevSelectedPackages.filter(id => id !== packageId)
                 : [...prevSelectedPackages, packageId]
         );
     };
 
-    console.log(selectedItems,"selected items")
     const handleDateChange = (date) => {
         setDate(date);
     };
@@ -67,6 +111,91 @@ const CreateMatch = () => {
         setVenue(e.target.value);
     };
 
+    const validation = () => {
+        if (!selectedItems.dropdown1) {
+            toast.error("Please select a team category.");
+            return false;
+        }
+        if (!selectedItems.dropdown2) {
+            toast.error("Please select the first team.");
+            return false;
+        }
+        if (!selectedItems.dropdown3) {
+            toast.error("Please select the second team.");
+            return false;
+        }
+        if (!date) {
+            toast.error("Please select a date.");
+            return false;
+        }
+        if (!time) {
+            toast.error("Please select a time.");
+            return false;
+        }
+        if (!venue) {
+            toast.error("Please enter the venue.");
+            return false;
+        }
+        return true;
+    };
+
+    const handleSubmit = () => {
+        if (validation()) {
+            apiCall();
+        }
+    };
+
+    const apiCall = async () => {
+        setLoading2(true);
+        const data = {
+            category: selectedItems?.dropdown1?._id,
+            team1: selectedItems?.dropdown2?._id,
+            team2: selectedItems?.dropdown3?._id,
+            date,
+            time,
+            venue,
+            packages: selectedPackages,
+        };
+        if(action=="create"){
+            axiosInstance().post(`${API_URL}/event/create`, data)
+            .then((res) => {
+                handleResponse("crated")
+            })
+            .catch((error) => {
+                handleCatch(error)
+            });
+        }
+        else{
+            axiosInstance().put(`${API_URL}/event/edit/${selectedEditMatch._id}`, data)
+            .then((res) => {
+                handleResponse("updated")
+            })
+            .catch((error) => {
+                handleCatch(error)
+            });
+        }
+    };
+
+    const handleResponse = (word) =>{
+        setLoading2(false);
+        toast.success(`Match ${word} successfully`);
+        navigate("/all-matches");
+    }
+
+    const handleCatch=(error)=>{
+        console.log(error,"error")
+        setLoading2(false);
+        const errors = error?.response?.data?.errors;
+        const statusCode = error?.response?.status;
+        if (statusCode === 401) {
+            toast.error(errors);
+            navigate("/Login");
+        } else {
+            handleErrors(error);
+        }
+    }
+
+
     return (
         <div className='grid grid-cols-12 gap-y-10'>
             <div className='col-span-12'>
@@ -75,7 +204,7 @@ const CreateMatch = () => {
             <div className='col-span-12'>
                 <div className='grid grid-cols-12 gap-y-10'>
                     <div className='col-span-12 headerText'>
-                        Create Match
+                        {action === "create" ? "Create Match" : "Edit Match"}
                     </div>
                     <div className='lg:col-span-6 col-span-12'>
                         <div className='grid grid-cols-12 gap-y-5'>
@@ -85,10 +214,10 @@ const CreateMatch = () => {
                                     title="Choose an item"
                                     data={categoryData}
                                     position="bottom-left"
-                                    hasImage={false}
+                                    hasImage={true}
                                     style="custom-dropdown-style"
-                                    selectedId={selectedItems}
-                                    onSelect={(id) => handleSelect("dropdown1",id)}
+                                    selectedId={selectedItems?.dropdown1?._id?.toString()}
+                                    onSelect={(id) => handleSelect("dropdown1", id)}
                                     label='Team Category'
                                 />
                             </div>
@@ -96,12 +225,12 @@ const CreateMatch = () => {
                                 <Dropdown
                                     id="dropdown2"
                                     title="Choose an item"
-                                    data={itemsImages}
+                                    data={TeamData}
                                     position="bottom-left"
                                     hasImage={true}
                                     style="custom-dropdown-style"
-                                    disabled={true}
-                                    selectedId={selectedItems.dropdown2}
+                                    disabled={loading}
+                                    selectedId={selectedItems?.dropdown2?._id?.toString()}
                                     onSelect={(id) => handleSelect("dropdown2", id)}
                                 />
                             </div>
@@ -112,12 +241,12 @@ const CreateMatch = () => {
                                 <Dropdown
                                     id="dropdown3"
                                     title="Choose an item"
-                                    data={itemsImages}
+                                    data={TeamData}
                                     position="bottom-left"
                                     hasImage={true}
-                                    disabled={true}
+                                    disabled={loading}
                                     style="custom-dropdown-style"
-                                    selectedId={selectedItems.dropdown3}
+                                    selectedId={selectedItems?.dropdown3?._id?.toString()}
                                     onSelect={(id) => handleSelect("dropdown3", id)}
                                 />
                             </div>
@@ -126,10 +255,10 @@ const CreateMatch = () => {
                                     <div className='lg:col-span-6 col-span-12'>
                                         <div className='flex flex-col gap-y-3'>
                                             <label className='inputLabel'>Date</label>
-                                            <DatePicker 
-                                                selected={date} 
-                                                className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0' 
-                                                onChange={handleDateChange} 
+                                            <DatePicker
+                                                selected={date}
+                                                className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0'
+                                                onChange={handleDateChange}
                                                 dateFormat="MM/dd/yyyy"
                                             />
                                         </div>
@@ -166,14 +295,14 @@ const CreateMatch = () => {
                                                     <div className='flex justify-between'>
                                                         <h1 className='text-lg text-white'>{item.name}</h1>
                                                         <label className="inline-flex items-center cursor-pointer">
-                                                            <input 
-                                                                type="checkbox" 
-                                                                value={item.name} 
+                                                            <input
+                                                                type="checkbox"
+                                                                value={item.name}
                                                                 className="sr-only peer"
-                                                                checked={selectedPackages.includes(item._id)} 
+                                                                checked={selectedPackages.includes(item._id)}
                                                                 onChange={() => handlePackageToggle(item._id)}
                                                             />
-                                                            <div className="relative w-9 h-5 py-2 bg-gray-200 peer-focus:outline-none  rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen af rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+                                                            <div className="relative w-9 h-5 py-2 bg-gray-200 peer-focus:outline-none rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -183,7 +312,15 @@ const CreateMatch = () => {
                                 </div>
                             </div>
                             <div className='col-span-11 mt-5'>
-                                <PrimaryButton size='large'>Create Match</PrimaryButton>
+                                {action === 'create' ? (
+                                    <PrimaryButton onClick={handleSubmit} size='large'>
+                                        {loading2 ? "Creating match..." : "Create Match"}
+                                    </PrimaryButton>
+                                ) : (
+                                    <PrimaryButton onClick={handleSubmit} size='large'>
+                                        {loading2 ? "Updating match..." : "Update Match"}
+                                    </PrimaryButton>
+                                )}
                             </div>
                         </div>
                     </div>

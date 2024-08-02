@@ -9,9 +9,7 @@ import { toast } from 'react-toastify';
 const AllMatches = () => {
     const navigate = useNavigate()
     const [loading , setLoading] = useState(true)
-    const [MatchesData, setMatchesData] = useState([])
-    const [updation , setUpdation] = useState()
-    const { handeErrors ,categoryData, setCategoryData, PackageData, setPackageData  } = useAppContext()
+    const { handleErrors ,categoryData, setCategoryData, PackageData, setPackageData,MatchesData, setMatchesData  } = useAppContext()
   
 
     useEffect(()=>{
@@ -39,7 +37,7 @@ const AllMatches = () => {
                 toast.error(errors);
                 navigate("/Login")
             }else{
-                handeErrors(error)
+                handleErrors(error)
             }
         })
     };
@@ -58,7 +56,7 @@ const AllMatches = () => {
                 toast.error(errors);
                 navigate("/Login")
             }else{
-                handeErrors(error)
+                handleErrors(error)
             }
         })
     };
@@ -76,7 +74,7 @@ const AllMatches = () => {
                 toast.error(errors);
                 navigate("/Login")
             }else{
-                handeErrors(error)
+                handleErrors(error)
             }
         })
     };
@@ -86,7 +84,7 @@ const AllMatches = () => {
             <div className='col-span-12'>
                 <div className='flex justify-between items-center'>
                     <p className='text-headerText text-white font-semibold'>All Matches</p>
-                    <PrimaryButton size='medium' onClick={()=>navigate('/create-match')}>Create Match</PrimaryButton>
+                    <PrimaryButton size='medium' onClick={()=>navigate('/match/create')}>Create Match</PrimaryButton>
                 </div>
             </div>
             <div className='col-span-12'>
