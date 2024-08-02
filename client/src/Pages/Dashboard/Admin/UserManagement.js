@@ -160,7 +160,7 @@ const UserManagement = () => {
               <label className="inline-flex items-center cursor-pointer">
                   <input type="checkbox" value="" className="sr-only peer" />
                   {/* checked={row.getValue('deactivate')} */}
-                  <div className="relative w-9 h-5 py-2 bg-gray-200 peer-focus:outline-none rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+                  <div className="relative w-9 h-5 py-2 bg-gray-400 peer-focus:outline-none rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
                   <span className="ms-2 text-xs text-[#4D4D4D] font-semibold">Subscribed</span>
               </label>
               {/* <button className="text-red-500 hover:text-red-700">

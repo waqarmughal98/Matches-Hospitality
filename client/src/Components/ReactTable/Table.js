@@ -4,10 +4,6 @@ import { FaAnglesRight } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAnglesLeft } from "react-icons/fa6";
 
-
-
-
-
 export const Table = ({ data, columns, showNavigation }) => {
     const table = useReactTable({
         data,
