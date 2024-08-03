@@ -59,14 +59,6 @@ const validatePackage = [
   check('price')
     .notEmpty().withMessage('Price is required')
     .isFloat({ gt: 0 }).withMessage('Price must be a positive number'),
-  check('matchTicket')
-    .isBoolean().withMessage('Match Ticket must be true or false'),
-  check('externalFlight')
-    .isBoolean().withMessage('External Flight must be true or false'),
-  check('hotelAccommodation')
-    .isBoolean().withMessage('Hotel Accommodation must be true or false'),
-  check('groundTransportation')
-    .isBoolean().withMessage('Ground Transportation must be true or false'),
   validateRequest,
 ];
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppContext } from '../../UseContext/ContextProvider'
-const DeleteModal = ({handleDelete,id,item}) => {
+const DeleteModal = ({handleDelete,id,item='item'}) => {
     const { closeModal} = useAppContext()
 
     return (

@@ -21,6 +21,7 @@ export const ContextProvider = ({ children }) => {
   })
   const [selectedEditCategory, setSelectedEditCategory] = useState({})
   const [selectedEditMatch, setSelectedEditMatch] = useState({})
+  const [selectedEditPackage, setSelectedEditPackage] = useState({})
   const [forgetPassworddata, setforgetPassworddata] = useState({
     email: "",
     otp: "",
@@ -112,7 +113,9 @@ function convertToDateFormat(isoString) {
         selectedEditMatch,
         setSelectedEditMatch,
         MatchesData,
-        setMatchesData
+        setMatchesData,
+        selectedEditPackage,
+        setSelectedEditPackage
       }}>
       {children}
     </AppContext.Provider>

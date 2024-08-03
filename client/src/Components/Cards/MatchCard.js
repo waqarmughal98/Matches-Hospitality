@@ -72,9 +72,9 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
                         <span>VS</span>
                         <div className='flex items-center gap-1'>
                             <div className='h-3 w-3 rounded-full bg-[#FF824D]'></div>
-                            <span className='text-xs pr-2'>{convertToAmPm(data.time)}</span>
+                            <span className='text-xs pr-2 font-jumper'>{convertToAmPm(data.time)}</span>
                         </div>
-                        <span className='text-xs pr-2'>{convertToDateFormat(data.date)}</span>
+                        <span className='text-xs pr-2 font-jumper'>{convertToDateFormat(data.date)}</span>
                     </div>
                 </div>
                 <div className='col-span-3'>

@@ -36,7 +36,7 @@ const CreateMatch = () => {
 
     useEffect(() => {
         // for reload
-        if (PackageData.length === 0) {
+        if (selectedEditMatch.length === 0 || PackageData.length==0) {
             navigate("/all-matches");
         }
         if (action === "create") {
@@ -257,7 +257,7 @@ const CreateMatch = () => {
                                             <label className='inputLabel text-white'>Date</label>
                                             <DatePicker
                                                 selected={date}
-                                                className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0'
+                                                className='w-full bg-transparent border font-jumper py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0'
                                                 onChange={handleDateChange}
                                                 dateFormat="MM/dd/yyyy"
                                             />
@@ -268,7 +268,7 @@ const CreateMatch = () => {
                                             <label className='inputLabel text-white'>Time</label>
                                             <DatePicker
                                                 selected={time}
-                                                className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0'
+                                                className='w-full bg-transparent border font-jumper py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0'
                                                 onChange={handleTimeChange}
                                                 showTimeSelect
                                                 showTimeSelectOnly

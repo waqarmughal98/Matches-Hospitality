@@ -49,7 +49,7 @@ const App = () => {
         <Route path="all-teams" element={<AllTeams />} />
         {/* packages */}
         <Route path="all-packages" element={<AllPackages />} />
-        <Route path="new-package" element={<NewPackage />} />
+        <Route path="package/:action" element={<NewPackage />} />
         {/* user dashboard */}
         <Route path="user-dashboard" element={<UserDashboard />} />
         </Route>

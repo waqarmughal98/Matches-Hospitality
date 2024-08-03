@@ -14,19 +14,16 @@ const PackageSchema = new mongoose.Schema({
     required: [true, "Price is required"],
   },
   matchTicket: {
-    type: Boolean,
-    default: false,
+    type: String,
   },
   externalFlight: {
-    type: Boolean,
-    default: false,
+    type: String,
   },
   hotelAccommodation: {
-    type: Boolean,
-    default: false,
+    type: String,
   },
   groundTransportation: {
-    type: Boolean,
+    type: String,
     default: false,
   },
   status: {
