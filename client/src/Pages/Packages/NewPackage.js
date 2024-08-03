@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PrimaryButton } from '../../Components/UiElements/Buttons';
-import { LabelInput } from '../../Components/UiElements/TextInputs';
+import { LabelInput, PrimaryInput } from '../../Components/UiElements/TextInputs';
 
 const Switch = ({ checked, onChange }) => (
     <label className="relative inline-flex items-center cursor-pointer">
@@ -76,9 +76,10 @@ const NewPackage = () => {
                             <div className='col-span-12 border p-5 border-[#5C5C5C] rounded-xl font-roboto'>
                                 <div className='flex justify-between'>
                                     <div className='flex gap-2 items-center'>
-                                        <h1 className='text-4xl'>
+                                        {/* <h1 className='text-4xl'>
                                             $15000.00
-                                        </h1>
+                                        </h1> */}
+                                        <PrimaryInput className='text-lg' value='$15,0000'/>
                                         <div className='flex flex-col gap-y-2'>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="15.6" height="15.6" rx="5" fill="#88F67E" />
