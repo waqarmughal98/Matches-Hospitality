@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { PrimaryButton } from '../../Components/UiElements/Buttons';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { MdOutlineEdit } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 const AllPackages = () => {
+
+    const navigate = useNavigate()
 
     const packagesData = [
         {
@@ -14,6 +17,10 @@ const AllPackages = () => {
             desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.",
         },
     ];
+
+    const CreatePackage = ()=>{
+        navigate('/new-package')
+    }
     return (
         <div className='grid grid-cols-12 text-white gap-10 font-roboto'>
             <div className='col-span-12'>
@@ -24,7 +31,7 @@ const AllPackages = () => {
                                 All Packages
                             </div>
                             <div className='grid col-span-4 justify-end'>
-                                <PrimaryButton size='medium' className='font-semibold'>
+                                <PrimaryButton size='medium' className='font-semibold' onClick={CreatePackage}>
                                     Create New Package
                                 </PrimaryButton>
                             </div>
