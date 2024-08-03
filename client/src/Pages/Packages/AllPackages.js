@@ -3,9 +3,12 @@ import { PrimaryButton } from '../../Components/UiElements/Buttons';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { MdOutlineEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import DeleteModal from '../../Components/Modal/DeleteModal';
+import { useAppContext } from '../../UseContext/ContextProvider';
 const AllPackages = () => {
 
     const navigate = useNavigate()
+    const {showBackdropWithContent} = useAppContext()
 
     const packagesData = [
         {
@@ -20,6 +23,15 @@ const AllPackages = () => {
 
     const CreatePackage = ()=>{
         navigate('/new-package')
+    }
+    const handleDelete = ()=>{
+
+    }
+    const handleShowBackdrop = ()=>{
+        const content =(
+            <DeleteModal handleDelete={handleDelete} id={'id'}/>
+        )
+        showBackdropWithContent(content)
     }
     return (
         <div className='grid grid-cols-12 text-white gap-10 font-roboto'>
@@ -60,7 +72,7 @@ const AllPackages = () => {
                                                         <div className='bg-primaryGreen h-8 w-8 rounded-md flex justify-center items-center cursor-pointer'>
                                                             <MdOutlineEdit />
                                                         </div>
-                                                        <div className='bg-primaryGreen h-8 w-8 rounded-md flex justify-center items-center cursor-pointer'>
+                                                        <div className='bg-primaryGreen h-8 w-8 rounded-md flex justify-center items-center cursor-pointer' onClick={handleShowBackdrop}>
                                                             <RiDeleteBinLine />
                                                         </div>
                                                     </div>
