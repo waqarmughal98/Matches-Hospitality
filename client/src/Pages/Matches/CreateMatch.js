@@ -254,7 +254,7 @@ const CreateMatch = () => {
                                 <div className='grid grid-cols-12 sm:gap-x-5 gap-y-5'>
                                     <div className='lg:col-span-6 col-span-12'>
                                         <div className='flex flex-col gap-y-3'>
-                                            <label className='inputLabel'>Date</label>
+                                            <label className='inputLabel text-white'>Date</label>
                                             <DatePicker
                                                 selected={date}
                                                 className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0'
@@ -265,7 +265,7 @@ const CreateMatch = () => {
                                     </div>
                                     <div className='lg:col-span-6 col-span-12'>
                                         <div className='flex flex-col gap-y-3'>
-                                            <label className='inputLabel'>Time</label>
+                                            <label className='inputLabel text-white'>Time</label>
                                             <DatePicker
                                                 selected={time}
                                                 className='w-full bg-transparent border py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0'
