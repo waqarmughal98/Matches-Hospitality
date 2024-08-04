@@ -36,7 +36,8 @@ const signup = asyncHandler(async (req, res) => {
         token,
         userName : userName || "",
         userType : user.userType,
-        staus : user.status
+        staus : user.status,
+        profileImage: user.profileImage || "",
       },
     });
     
@@ -78,7 +79,8 @@ const login = asyncHandler(async (req, res) => {
       token,
       userType: user.userType,
       userName : user.userName || "",
-      staus : user.status
+      staus : user.status,
+      profileImage: user.profileImage || "",
     },
   });
 });
@@ -304,6 +306,44 @@ const changeUserStatus = asyncHandler(async (req, res) => {
   }
 });
 
+const updateUserInfo = asyncHandler(async (req, res) => {
+  const userId = req.user.id; 
+  const { userName } = req.body;
+  const profileImage = req.file ? req.file.filename : undefined;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return handleError(res, 404, 'User not found');
+    }
+
+    if (userName) user.userName = userName;
+    if (profileImage) user.profileImage = profileImage;
+
+    await user.save();
+
+    const token = generateToken(user._id.toString());
+
+    res.status(200).json({
+      success: true,
+      message: 'User info updated successfully',
+      data: {
+        name: user.name,
+        email: user.email,
+        id: user._id.toString(),
+        token,
+        userType: user.userType,
+        userName: user.userName,
+        status: user.status,
+        profileImage: user.profileImage,
+      },
+    });
+  } catch (error) {
+    handleError(res, 400, 'Something went wrong');
+  }
+});
+
 module.exports = {
   signup,
   login,
@@ -314,5 +354,6 @@ module.exports = {
   verifyOTP,
   resetPassword,
   getAllUsers,
-  changeUserStatus
+  changeUserStatus,
+  updateUserInfo
 };

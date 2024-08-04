@@ -9,11 +9,12 @@ const {
   verifyOTP,
   resetPassword,
   getAllUsers,
-  changeUserStatus
+  changeUserStatus,
+  updateUserInfo
 } = require('../controllers/userController');
 const protect = require('../middleware/authMiddleware');
 const isAdmin = require('../middleware/adminMiddleware');
-
+const upload = require('../middleware/uploadMiddleware');
 const {
   validateSignup,
   validateLogin,
@@ -35,5 +36,6 @@ router.post('/verify-otp', verifyOTP);
 router.post('/reset-password', validateResetPassword, resetPassword);
 router.get('/all-users', protect, isAdmin, getAllUsers);
 router.patch('/change-user-status/:id', protect, isAdmin, changeUserStatus);
+router.patch('/update-info', protect, upload.single('profileImage'), updateUserInfo);
 
 module.exports = router;
