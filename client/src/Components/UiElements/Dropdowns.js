@@ -3,9 +3,11 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { GoChevronDown } from 'react-icons/go';
 import { useAppContext } from '../../UseContext/ContextProvider';
+import { toast } from 'react-toastify';
 export const ProfileDropdown = () => {
   const { openModal, closeModal, setIsOpen, isOpen, showBackdropWithContent } = useAppContext()
   const navigate=useNavigate()
+  const [ userData, setUserData] = useState()
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -18,8 +20,11 @@ export const ProfileDropdown = () => {
 
 
   const handleLogout=()=>{
+    setIsOpen(false);
+    closeModal()
     try {
       localStorage.removeItem('userData')  
+      toast.error("Logout successfully!")
     } catch (error) {
       console.log(error)
     }finally{
@@ -27,6 +32,12 @@ export const ProfileDropdown = () => {
     }
     
   }
+
+  const getUserData = () => JSON.parse(localStorage.getItem('userData'));
+
+  useEffect(()=>{
+    setUserData(getUserData())
+  },[])
   return (
     <div className="hs-dropdown relative flex flex-col">
       <button
@@ -40,10 +51,10 @@ export const ProfileDropdown = () => {
       >
         <img
           className="w-10 h-10 rounded-full flex items-center object-cover"
-          src="assets/images/svgs/navbar/profile.png "
+          src={  userData?.profileImage!="" ? `/uploads/${userData?.profileImage}` : `assets/images/svgs/navbar/profile.png`}
           alt="Avatar"
         />
-        <span className="font-medium truncate max-w-[7.5rem] text-white">Ali Hamza</span>
+        <span className="font-medium truncate max-w-[7.5rem] text-white">{userData?.userName || ''}</span>
         <svg
           className={`transition-all ms-2 mt-1 duration-150 ease-linear ${isOpen ? 'rotate-180' : ''}`}
           xmlns="http://www.w3.org/2000/svg"
