@@ -38,7 +38,7 @@ code {
   }
 
   .headerText {
-    @apply  text-white font-semibold text-3xl font-roboto;
+    @apply  text-white font-semibold text-3xl font-jumper;
   }
   .primaryText{
     @apply text-white text-base font-roboto;

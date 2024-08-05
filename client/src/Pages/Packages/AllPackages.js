@@ -83,7 +83,7 @@ const AllPackages = () => {
                 <div className='grid grid-cols-12 gap-8'>
                     <div className='col-span-12'>
                         <div className='grid grid-cols-12'>
-                            <div className='col-span-8 text-4xl font-semibold'>
+                            <div className='col-span-8 headerText'>
                                 All Packagess
                             </div>
                             <div className='grid col-span-4 justify-end'>
