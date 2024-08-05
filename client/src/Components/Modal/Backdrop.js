@@ -23,15 +23,15 @@ const Backdrop = () => {
   if (!isModalOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-20 flex justify-center w-full h-[100vh] items-center transition-opacity duration-200 ease-linear `}>
+    <div className={`fixed inset-0 z-20 flex justify-center w-full h-[100vh] items-center`}>
       <div
         aria-hidden="true"
-        className={`inset-0 w-full h-full bg-black/50 cursor-pointer absolute backdrop-blur-lg transition-opacity duration-200 ease-linear `}
+        className={`inset-0 w-full h-full bg-black/50 cursor-pointer absolute backdrop-blur-lg  `}
         onClick={closeModal}
       ></div>
       <div
         ref={modalRef}
-        className={`  relative max-h-[700px] transition-opacity duration-200 ease-linear overflow-y-auto overflow-x-hidden custom-scroll rounded-md`}
+        className={`  relative max-h-[700px] overflow-y-auto overflow-x-hidden custom-scroll rounded-md`}
       >
         {backdropContent}
       </div>

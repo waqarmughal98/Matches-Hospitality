@@ -21,7 +21,7 @@ const Layout = () => {
                 <Navbar />
                 <div className={`p-10 relative`} onClick={handleToggle}>
                     {<Outlet />}
-                    <div className={` ${isModalOpen ? 'opacity-100' : 'opacity-0 '} transition-opacity duration-200 ease-linear`}>
+                    <div className={` ${isModalOpen ? 'block opacity-100' : 'opacity-0 none '} transition-all duration-200 ease-linear`}>
                     <Backdrop />
                     </div>
                 </div>

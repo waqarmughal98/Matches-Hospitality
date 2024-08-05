@@ -1,15 +1,27 @@
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { adminSidebarItems, userSidebarItems } from '../../utilities/MenuData';
+
 
 const Sidebar = () => {
-    const [isCollapsed, setIsCollapsed] = useState(false)
-    const location = useLocation()
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [sidebarItems, setSidebarItems] = useState([]);
+    const location = useLocation();
+    const currentPath = location.pathname;
 
-    const currentPath = location.pathname
+    useEffect(() => {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        const userType = userData?.userType;
+        if (userType === 'ap%4k45a5sd') {
+            setSidebarItems(adminSidebarItems);
+        } else {
+            setSidebarItems(userSidebarItems);
+        }
+    }, []);
 
     const handleCollapse = () => {
-        setIsCollapsed(!isCollapsed)
-    }
+        setIsCollapsed(!isCollapsed);
+    };
 
     return (
         <div className={`flex flex-col ${isCollapsed ? 'w-40' : 'w-20'} bg-primaryBlack min-h-screen transition-all font-roboto duration-200 ease-linear sticky top-0`}>
@@ -44,91 +56,30 @@ const Sidebar = () => {
 
             <div className="flex flex-col">
                 <nav className="flex-1 py-4 bg-primaryBlack flex flex-col gap-5">
-                    <Link
-                        to="dashboard"
-                        className={`flex items-center gap-3 py-2 text-gray-100 ${currentPath === '/dashboard' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
-                    >
-                        <svg class="  text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" className='ms-5' stroke='white' fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
-                        </svg>
+                    {sidebarItems.map(item => (
+                        <Link
+                            key={item.path}
+                            to={item.path}
+                            className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === `/${item.path}` ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                        >
+                            {/* <svg className="text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.iconPath} />
+                            </svg> */}
+                            <div className='ms-5 text-2xl'>
+                                {item.iconPath}
+                            </div>
 
-                        {isCollapsed && (
-                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
-                                Dashboard
-                            </p>
-                        )}
-                    </Link>
-
-                    <Link
-                        to="package"
-                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/package' ? 'border-l-2 border-primaryGreen' : ''}`}
-                    >
-                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
-                        </svg>
-
-                        {isCollapsed && (
-                            <p className={`transition-opacity duration-300 ease-linear  overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
-                                Packages
-                            </p>
-                        )}
-                    </Link>
-                    <Link
-                        to="user-management"
-                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/user-management' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
-                    >
-                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
-                        </svg>
-                        {isCollapsed && (
-                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
-                                Users
-                            </p>
-                        )}
-                    </Link>
-                    <Link
-                        to="all-categories"
-                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-categories' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
-                    >
-                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
-                        </svg>
-                        {isCollapsed && (
-                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
-                                Categories
-                            </p>
-                        )}
-                    </Link>
-                    <Link
-                        to="all-teams"
-                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-teams' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
-                    >
-                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
-                        </svg>
-                        {isCollapsed && (
-                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
-                                Teams
-                            </p>
-                        )}
-                    </Link>
-                    <Link
-                        to="all-matches"
-                        className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === '/all-matches' ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
-                    >
-                        <svg class=" text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5" />
-                        </svg>
-                        {isCollapsed && (
-                            <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
-                                Matches
-                            </p>
-                        )}
-                    </Link>
+                            {isCollapsed && (
+                                <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
+                                    {item.label}
+                                </p>
+                            )}
+                        </Link>
+                    ))}
                 </nav>
             </div>
         </div>
-    )
+    );
 }
 
-export default Sidebar
+export default Sidebar;
