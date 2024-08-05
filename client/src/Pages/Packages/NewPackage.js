@@ -55,6 +55,9 @@ const NewPackage = () => {
     }
 
     useEffect(()=>{
+        if( action=="edit" && Object.keys(selectedEditPackage).length == 0){
+            navigate('/all-packages')
+        }
         if(action=="edit"){
             updateSelectedIds()
         }
@@ -128,7 +131,7 @@ const NewPackage = () => {
         setLoading2(true)
         if(action=="create"){
             axiosInstance().post(`${API_URL}/package/create`, info)
-            .then((res) => {
+            .then(() => {
                 handleResponse("crated")
             })
             .catch((error) => {
@@ -137,7 +140,7 @@ const NewPackage = () => {
         }
         else{
             axiosInstance().put(`${API_URL}/package/edit/${selectedEditPackage._id}`, info)
-            .then((res) => {
+            .then(() => {
                 handleResponse("updated")
             })
             .catch((error) => {
@@ -159,7 +162,13 @@ const NewPackage = () => {
         const statusCode = error?.response?.status;
         if (statusCode === 401) {
             toast.error(errors);
-            navigate("/Login");
+            try {
+                localStorage.removeItem('userData')
+              } catch (error) {
+                console.log(error)
+              } finally {
+                navigate("/Login")
+              }
         } else {
             handleErrors(error);
         }
