@@ -25,6 +25,7 @@ import AllTeams from './Pages/Teams/AllTeams';
 import AllPackages from './Pages/Packages/AllPackages';
 import NewPackage from './Pages/Packages/NewPackage';
 import ProtectedRoute from './ProtectedRoutes';
+import { AdminProfile } from './Pages/Profile/AdminProfile';
 
 const routes = [
   { path: "/", element: <Navigate to="/login" replace />, type: "public" },
@@ -53,6 +54,7 @@ const routes = [
       { path: "all-packages", element: <AllPackages />, type: "admin" },
       { path: "package/:action", element: <NewPackage />, type: "admin" },
       { path: "user-dashboard", element: <UserDashboard />, type: "user" },
+      { path: "admin-profile", element: <AdminProfile />, type: "admin" },
     ],
   },
   { path: "/*", element: <NotFound />, type: "public" },
