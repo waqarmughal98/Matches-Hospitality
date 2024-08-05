@@ -29,17 +29,14 @@ const CreateTeamModal = ({ setTeamData }) => {
     const validation = () => {
         if (!selectedFile || !(selectedFile instanceof File)) {
             toast.error("Logo is required and should be a file.");
-            setLoading2(false)
             return false;
         }
         if (!name) {
             toast.error("Name is required and should be a non-empty string.");
-            setLoading2(false)
             return false;
         }
         if (!selectedItems) {
             toast.error("Kindly select category");
-            setLoading2(false)
             return false;
         }
         return true;
@@ -74,7 +71,13 @@ const CreateTeamModal = ({ setTeamData }) => {
                 const statusCode = error?.response?.status
                 if (statusCode == 401) {
                     toast.error(errors);
-                    navigate("/Login")
+                    try {
+                        localStorage.removeItem('userData')
+                      } catch (error) {
+                        console.log(error)
+                      } finally {
+                        navigate("/Login")
+                      }
                 } else {
                     handleErrors(error)
                 }

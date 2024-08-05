@@ -28,7 +28,7 @@ export const PrimaryInput = ({ placeholder, field, name, type, onChange, classNa
     );
 };
 
-export const LabelInput = ({ placeholder, name, type, onChange, className, label , value , readOnly}) => {
+export const LabelInput = ({ placeholder, name, type, onChange, className, label , value , readOnly, onkeydown}) => {
     return (
         <div className='flex flex-col gap-3 w-full'>
             <label className='primaryText'>{label}</label>
@@ -39,6 +39,7 @@ export const LabelInput = ({ placeholder, name, type, onChange, className, label
                 placeholder={placeholder}
                 readOnly={readOnly}
                 value={value}
+                onKeyDown={onkeydown}
                 className={`rounded-lg border font-jumper bg-transparent border-[#454545] px-5 py-3 w-full text-white focus:outline ${readOnly ? '' : 'outline-primaryGreen' }  ${className}`}
             />
         </div>

@@ -36,7 +36,7 @@ const CreateMatch = () => {
 
     useEffect(() => {
         // for reload
-        if (selectedEditMatch.length === 0 || PackageData.length==0) {
+        if (action=="edit" && (selectedEditMatch.length === 0 || PackageData.length==0)) {
             navigate("/all-matches");
         }
         if (action === "create") {
@@ -84,7 +84,13 @@ const CreateMatch = () => {
                 const statusCode = error?.response?.status;
                 if (statusCode === 401) {
                     toast.error(errors);
-                    navigate("/Login");
+                    try {
+                        localStorage.removeItem('userData')
+                      } catch (error) {
+                        console.log(error)
+                      } finally {
+                        navigate("/Login")
+                      }
                 } else {
                     handleErrors(error);
                 }
@@ -189,7 +195,13 @@ const CreateMatch = () => {
         const statusCode = error?.response?.status;
         if (statusCode === 401) {
             toast.error(errors);
-            navigate("/Login");
+              try {
+                localStorage.removeItem('userData')
+              } catch (error) {
+                console.log(error)
+              } finally {
+                navigate("/Login")
+              }
         } else {
             handleErrors(error);
         }
@@ -313,11 +325,11 @@ const CreateMatch = () => {
                             </div>
                             <div className='col-span-11 mt-5'>
                                 {action === 'create' ? (
-                                    <PrimaryButton onClick={handleSubmit} size='large'>
+                                    <PrimaryButton onClick={()=>handleSubmit()} size='large'>
                                         {loading2 ? "Creating match..." : "Create Match"}
                                     </PrimaryButton>
                                 ) : (
-                                    <PrimaryButton onClick={handleSubmit} size='large'>
+                                    <PrimaryButton onClick={()=>handleSubmit()} size='large'>
                                         {loading2 ? "Updating match..." : "Update Match"}
                                     </PrimaryButton>
                                 )}

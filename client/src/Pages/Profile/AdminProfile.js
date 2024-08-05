@@ -1,14 +1,130 @@
-import React from 'react'
+import React, { useState , useEffect } from 'react'
 import { BiEdit } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'
 import { CiStar } from 'react-icons/ci'
+import { toast } from 'react-toastify'
 import { MdOutlineMailOutline } from 'react-icons/md'
-import { RiProfileLine } from 'react-icons/ri'
 import { LabelInput } from '../../Components/UiElements/TextInputs'
 import { PrimaryButton } from '../../Components/UiElements/Buttons'
 import profile from '../../../src/assets/images/userdashboard/event1.jpg'
-
+import { useAppContext } from '../../UseContext/ContextProvider'
+import { axiosInstance, URL as API_URL } from '../../utilities/ConstantData'
+import { useNavigate } from 'react-router-dom';
 export const AdminProfile = () => {
+    const { handleErrors} = useAppContext()
+    const [userData, setUserData] = useState()
+     const [passwordData, setPasswordData] = useState({
+        old_password : "",
+        current_password : "",
+        password_confirmation : ""
+    
+     })
+    const [userName, setUserName] = useState("")
+    const [profileImage, setProfileImage] = useState("")
+    const [loading2 , setLoading2] = useState(false)
+    const navigate = useNavigate()
+    const handleChange=(e)=>{
+        const {name, value} = e.target
+       setPasswordData((pre)=>({
+        ...pre, [name] :value
+       }))
+    }
+
+    const validatePasswordChange = () => {
+        const { old_password, current_password, password_confirmation } = passwordData;
+        if (!current_password) {
+            toast.error("New password is required.");
+            return false;
+        }
+        if (!password_confirmation) {
+            toast.error("Password confirmation is required.");
+            return false;
+        }
+        if (current_password !== password_confirmation) {
+            toast.error("New password and confirmation do not match.");
+            return false;
+        }
+        if (!old_password) {
+            toast.error("Old password is required.");
+            return false;
+        }
+        return true;
+    };
+
+    const handleChangePassword = () => {
+        if (validatePasswordChange()) {
+            changePassword()
+        }
+    }
+
+    useEffect(() => {
+        (async()=>{
+            const userdata=await JSON.parse(localStorage.getItem('userData'))
+            setUserData(userdata)
+            setUserName(userdata.userName)
+            setProfileImage(userdata.profileImage)
+        })()
+    }, [])
+
+    const changePassword = async () => {
+        setLoading2(true)    
+        axiosInstance().post(`${API_URL}/change-password`, passwordData)
+        .then((res)=>{
+            setLoading2(false)
+            toast.success("Password changed successfully")
+            navigate("/dashboard")
+        })
+        .catch ((error)=> {
+            setLoading2(false)
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                try {
+                    localStorage.removeItem('userData')
+                  } catch (error) {
+                    console.log(error)
+                  } finally {
+                    navigate("/Login")
+                  }
+            }else{
+                handleErrors(error)
+            }
+        })
+    };
+
+    const handleKeyDown=(e)=>{
+          if(e.key=="Enter" || e.key=="Tab" ){
+            updateProfile()
+          }
+    }
+
+    const updateProfile = async () => {
+        axiosInstance().patch(`${API_URL}/update-info`, {
+            userName, profileImage
+        })
+        .then((res)=>{
+            toast.success("Profile updated successfully")
+        })
+        .catch ((error)=> {
+            const errors=error?.response?.data?.errors
+            const statusCode=error?.response?.status
+            if(statusCode==401){
+                toast.error(errors);
+                try {
+                    localStorage.removeItem('userData')
+                  } catch (error) {
+                    console.log(error)
+                  } finally {
+                    navigate("/Login")
+                  }
+            }else{
+                handleErrors(error)
+            }
+        })
+    };
+
+
     return (
         <div className='grid grid-cols-12 gap-y-5 font-roboto'>
             <div className='col-span-12 min-h-72  rounded-lg grid'>
@@ -21,7 +137,7 @@ export const AdminProfile = () => {
                             <BiEdit className='absolute bottom-8 right-0 text-xl' />
                         </div>
                         <div className='flex flex-col gap-2 pt-24'>
-                            <div className='headerText'>Codiepi Limited</div>
+                            <div className='headerText'>{userData?.userName}</div>
                             <div className=''>Admin</div>
                         </div>
                     </div>
@@ -38,7 +154,7 @@ export const AdminProfile = () => {
                                         <CgProfile className='text-2xl mt-1' />
                                         <div className='flex flex-col'>
                                             <label className='primaryText'>Name</label>
-                                            <p className='text-sm'>Ali Hamza</p>
+                                            <p className='text-sm'>{userName}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +163,7 @@ export const AdminProfile = () => {
                                         <MdOutlineMailOutline className='text-2xl mt-1' />
                                         <div className='flex flex-col'>
                                             <label className='primaryText'>Email</label>
-                                            <p className='text-sm'>codiepi@gmail.com</p>
+                                            <p className='text-sm'>{userData?.email}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +172,7 @@ export const AdminProfile = () => {
                                         <CiStar className='text-2xl mt-1' />
                                         <div className='flex flex-col'>
                                             <label className='primaryText'>Role</label>
-                                            <p className='text-sm'>Admin</p>
+                                            <p className='text-sm'>{userData?.userType == "ap%4k45a5sd" ? 'Admin' : 'User'}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -67,20 +183,21 @@ export const AdminProfile = () => {
                         <div className='grid grid-cols-12 gap-y-5'>
                             <div className='col-span-12'>
                                 <div className='flex'>
-                                    <LabelInput label='Full Name' value='Admin' readOnly/>
+                                <LabelInput name='name' onkeydown={(e)=>handleKeyDown(e)} value={userName} onChange={(e)=>setUserName(e.target.value)}  label='Full Name' />
                                 </div>
+                                <p className='text-sm mt-2 text-gray-300'>Note: To update the Full Name, simply type it in the input field and press Enter.</p>
                             </div>
                             <div className='col-span-12'>
                                 <div className='flex gap-x-5'>
-                                    <LabelInput label='New Password' />
-                                    <LabelInput label='Confirm Password' />
+                                    <LabelInput name='current_password' value={passwordData.current_password} onChange={(e)=>handleChange(e)}  label='New Password' />
+                                    <LabelInput name='password_confirmation' value={passwordData.password_confirmation} onChange={(e)=>handleChange(e)} label='Confirm Password' />
                                 </div>
                             </div>
                             <div className='col-span-6'>
-                                <LabelInput label='Old Password' />
+                                <LabelInput name='old_password' value={passwordData.old_password} onChange={(e)=>handleChange(e)} label='Old Password' />
                             </div>
                             <div className='grid col-span-12 justify-end'>
-                                <PrimaryButton size='medium'>Set Password</PrimaryButton>
+                                <PrimaryButton onClick={()=>handleChangePassword()} size='medium'>{loading2 ? "Changing Password" : "Change Password" }</PrimaryButton>
                             </div>
                         </div>
                     </div>
