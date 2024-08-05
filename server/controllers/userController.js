@@ -99,8 +99,12 @@ const changePassword = asyncHandler(async (req, res) => {
     return res.status(400).json({ success: false, errors: 'All fields are required' });
   }
 
-  if (current_password.length < 8 || current_password !== password_confirmation || current_password === old_password) {
+  if (current_password.length < 8 || current_password !== password_confirmation ) {
     return res.status(400).json({ success: false, errors: 'Invalid password criteria' });
+  }
+
+  if (current_password === old_password) {
+    return res.status(400).json({ success: false, errors: 'The new password must not match the old password' });
   }
 
   const user = await User.findById(req.user.id);
@@ -328,16 +332,6 @@ const updateUserInfo = asyncHandler(async (req, res) => {
     res.status(200).json({
       success: true,
       message: 'User info updated successfully',
-      data: {
-        name: user.name,
-        email: user.email,
-        id: user._id.toString(),
-        token,
-        userType: user.userType,
-        userName: user.userName,
-        status: user.status,
-        profileImage: user.profileImage,
-      },
     });
   } catch (error) {
     handleError(res, 400, 'Something went wrong');

@@ -33,7 +33,13 @@ const UserManagement = () => {
       const statusCode = error?.response?.status;
       if (statusCode == 401) {
         toast.error(errors);
-        navigate('/Login');
+        try {
+          localStorage.removeItem('userData')
+        } catch (error) {
+          console.log(error)
+        } finally {
+          navigate("/Login")
+        }
       } else {
         handleErrors(error);
       }
@@ -71,7 +77,13 @@ const UserManagement = () => {
         const statusCode = error?.response?.status;
         if (statusCode === 401) {
           toast.error(errors);
-          navigate('/Login');
+          try {
+            localStorage.removeItem('userData')
+          } catch (error) {
+            console.log(error)
+          } finally {
+            navigate("/Login")
+          }
         } else {
           handleErrors(error);
         }
