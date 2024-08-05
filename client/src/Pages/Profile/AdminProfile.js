@@ -1,4 +1,4 @@
-import React, { useState , useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { BiEdit } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'
 import { CiStar } from 'react-icons/ci'
@@ -11,26 +11,26 @@ import { useAppContext } from '../../UseContext/ContextProvider'
 import { axiosInstance, URL as API_URL } from '../../utilities/ConstantData'
 import { useNavigate } from 'react-router-dom';
 export const AdminProfile = () => {
-    const { handleErrors , setProfileUpdation} = useAppContext()
+    const { handleErrors, setProfileUpdation } = useAppContext()
     const [userData, setUserData] = useState()
-     const [passwordData, setPasswordData] = useState({
-        old_password : "",
-        current_password : "",
-        password_confirmation : ""
-    
-     })
+    const [passwordData, setPasswordData] = useState({
+        old_password: "",
+        current_password: "",
+        password_confirmation: ""
+
+    })
     const [userName, setUserName] = useState("")
     const [profileImage, setProfileImage] = useState("")
-    const [loading2 , setLoading2] = useState(false)
-    const [profileFile , setProfileFile] = useState()
+    const [loading2, setLoading2] = useState(false)
+    const [profileFile, setProfileFile] = useState()
     const navigate = useNavigate()
     const fileInputRef = useRef(null);
 
-    const handleChange=(e)=>{
-        const {name, value} = e.target
-         setPasswordData((pre)=>({
-        ...pre, [name] :value
-       }))
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setPasswordData((pre) => ({
+            ...pre, [name]: value
+        }))
     }
 
     const handleFileChange = (e) => {
@@ -40,7 +40,7 @@ export const AdminProfile = () => {
 
     const handleIconClick = () => {
         fileInputRef.current.click();
-      };
+    };
 
     const validatePasswordChange = () => {
         const { old_password, current_password, password_confirmation } = passwordData;
@@ -70,8 +70,8 @@ export const AdminProfile = () => {
     }
 
     useEffect(() => {
-        (async()=>{
-            const userdata=await JSON.parse(localStorage.getItem('userData'))
+        (async () => {
+            const userdata = await JSON.parse(localStorage.getItem('userData'))
             setUserData(userdata)
             setUserName(userdata.userName)
             setProfileImage(userdata.profileImage)
@@ -79,39 +79,39 @@ export const AdminProfile = () => {
     }, [])
 
     const changePassword = async () => {
-        setLoading2(true)    
+        setLoading2(true)
         axiosInstance().post(`${API_URL}/change-password`, passwordData)
-        .then((res)=>{
-            setLoading2(false)
-            toast.success("Password changed successfully")
-            navigate("/dashboard")
-        })
-        .catch ((error)=> {
-            setLoading2(false)
-            const errors=error?.response?.data?.errors
-            const statusCode=error?.response?.status
-            if(statusCode==401){
-                toast.error(errors);
-                try {
-                    localStorage.removeItem('userData')
-                  } catch (error) {
-                    console.log(error)
-                  } finally {
-                    navigate("/Login")
-                  }
-            }else{
-                handleErrors(error)
-            }
-        })
+            .then((res) => {
+                setLoading2(false)
+                toast.success("Password changed successfully")
+                navigate("/dashboard")
+            })
+            .catch((error) => {
+                setLoading2(false)
+                const errors = error?.response?.data?.errors
+                const statusCode = error?.response?.status
+                if (statusCode == 401) {
+                    toast.error(errors);
+                    try {
+                        localStorage.removeItem('userData')
+                    } catch (error) {
+                        console.log(error)
+                    } finally {
+                        navigate("/Login")
+                    }
+                } else {
+                    handleErrors(error)
+                }
+            })
     };
 
-    const handleKeyDown=(e)=>{
-          if(e.key=="Enter" || e.key=="Tab" ){
+    const handleKeyDown = (e) => {
+        if (e.key == "Enter" || e.key == "Tab") {
             updateProfile()
-          }
+        }
     }
 
-    const updateUserData=()=>{
+    const updateUserData = () => {
         try {
             let user = JSON.parse(localStorage.getItem('userData'));
             user.userName = userName;
@@ -119,34 +119,34 @@ export const AdminProfile = () => {
             localStorage.setItem('userData', JSON.stringify(user));
         } catch (error) {
             console.log(error)
-        }finally{
-            setProfileUpdation({userName, profileImage})
+        } finally {
+            setProfileUpdation({ userName, profileImage })
         }
     }
     const updateProfile = async () => {
         axiosInstance().patch(`${API_URL}/update-info`, {
             userName, profileImage
         })
-        .then((res)=>{
-            toast.success("Profile updated successfully")
-            updateUserData()
-        })
-        .catch ((error)=> {
-            const errors=error?.response?.data?.errors
-            const statusCode=error?.response?.status
-            if(statusCode==401){
-                toast.error(errors);
-                try {
-                    localStorage.removeItem('userData')
-                  } catch (error) {
-                    console.log(error)
-                  } finally {
-                    navigate("/Login")
-                  }
-            }else{
-                handleErrors(error)
-            }
-        })
+            .then((res) => {
+                toast.success("Profile updated successfully")
+                updateUserData()
+            })
+            .catch((error) => {
+                const errors = error?.response?.data?.errors
+                const statusCode = error?.response?.status
+                if (statusCode == 401) {
+                    toast.error(errors);
+                    try {
+                        localStorage.removeItem('userData')
+                    } catch (error) {
+                        console.log(error)
+                    } finally {
+                        navigate("/Login")
+                    }
+                } else {
+                    handleErrors(error)
+                }
+            })
     };
 
 
@@ -160,17 +160,16 @@ export const AdminProfile = () => {
                         <div className='h-40 w-40 rounded-full relative'>
                             <img src={profile} className='absolute h-full w-full rounded-full' />
                             <div
-                                className="absolute cursor-pointer right-2 h-8 w-8  text-slate-600 rounded-full shadow-sm flex flex-col items-center justify-center md:top-[140px] top-[100px]"
-                                onClick={()=>handleIconClick()}
+                                className="absolute cursor-pointer bg-primaryGreen right-2 bottom-4 h-7 w-7 rounded-lg flex items-center justify-center"
+                                onClick={() => handleIconClick()}
                             >
-                                <BiEdit className='absolute bg-gray-500 rounded-full p-5 bottom-8 right-0 text-xl' />
-                                {/* Hidden file input */}
+                                <BiEdit className='text-black'/>
                                 <input
-                                type="file"
-                                name="image"
-                                ref={fileInputRef}
-                                style={{ display: "none" }}
-                                onChange={handleFileChange}
+                                    type="file"
+                                    name="image"
+                                    ref={fileInputRef}
+                                    style={{ display: "none" }}
+                                    onChange={handleFileChange}
                                 />
                             </div>
                         </div>
@@ -221,21 +220,21 @@ export const AdminProfile = () => {
                         <div className='grid grid-cols-12 gap-y-5'>
                             <div className='col-span-12'>
                                 <div className='flex'>
-                                <LabelInput name='name' onkeydown={(e)=>handleKeyDown(e)} value={userName} onChange={(e)=>setUserName(e.target.value)}  label='Full Name' />
+                                    <LabelInput name='name' onkeydown={(e) => handleKeyDown(e)} value={userName} onChange={(e) => setUserName(e.target.value)} label='Full Name' />
                                 </div>
                                 <p className='text-sm mt-2 text-gray-300'>Note: To update the Full Name, simply type it in the input field and press Enter.</p>
                             </div>
                             <div className='col-span-12'>
                                 <div className='flex gap-x-5'>
-                                    <LabelInput name='current_password' value={passwordData.current_password} onChange={(e)=>handleChange(e)}  label='New Password' />
-                                    <LabelInput name='password_confirmation' value={passwordData.password_confirmation} onChange={(e)=>handleChange(e)} label='Confirm Password' />
+                                    <LabelInput name='current_password' value={passwordData.current_password} onChange={(e) => handleChange(e)} label='New Password' />
+                                    <LabelInput name='password_confirmation' value={passwordData.password_confirmation} onChange={(e) => handleChange(e)} label='Confirm Password' />
                                 </div>
                             </div>
                             <div className='col-span-6'>
-                                <LabelInput name='old_password' value={passwordData.old_password} onChange={(e)=>handleChange(e)} label='Old Password' />
+                                <LabelInput name='old_password' value={passwordData.old_password} onChange={(e) => handleChange(e)} label='Old Password' />
                             </div>
                             <div className='grid col-span-12 justify-end'>
-                                <PrimaryButton onClick={()=>handleChangePassword()} size='medium'>{loading2 ? "Changing Password" : "Change Password" }</PrimaryButton>
+                                <PrimaryButton onClick={() => handleChangePassword()} size='medium'>{loading2 ? "Changing Password" : "Change Password"}</PrimaryButton>
                             </div>
                         </div>
                     </div>
