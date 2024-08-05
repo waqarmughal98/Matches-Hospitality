@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        jumper: ['Jumper', 'sans-serif'],
-        roboto: ['Roboto', 'sans-serif'],
+        jumper: ['JumperPERSONALUSEONLY-Regular', ],
+        roboto: ['Roboto'],
       },
       colors: {
         'primaryBlack': '#0D0D0D',

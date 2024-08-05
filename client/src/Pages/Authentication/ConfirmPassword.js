@@ -68,7 +68,7 @@ const ConfirmPassword = () => {
                         </div>
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-2'>
-                                <div className='col-span-12 text-white text-headerText leading-tight font-semibold'>
+                                <div className='col-span-12 text-white headerText leading-tight font-semibold'>
                                     Confirm Your Password
                                 </div>
                                 <div className='col-span-12 text-sm text-white '>

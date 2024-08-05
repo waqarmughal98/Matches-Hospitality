@@ -28,7 +28,7 @@ const Signup = () => {
                         <div className='col-span-12'>
                             <img src={logo} alt=''/>
                         </div>
-                        <div className='col-span-12 text-white text-headerText leading-tight font-semibold'>
+                        <div className='col-span-12 text-white headerText leading-tight font-semibold'>
                             Sign Up/Sign In
                         </div>
                         <div className='col-span-12'>

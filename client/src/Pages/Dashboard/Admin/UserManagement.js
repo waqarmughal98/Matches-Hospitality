@@ -144,7 +144,7 @@ const UserManagement = () => {
     <div className='grid grid-cols-12 text-white xl:gap-x-10 gap-y-8'>
       <div className='col-span-12'>
         <div className='grid grid-cols-12 xl:gap-x-8 gap-y-8'>
-          <div className='col-span-12 text-3xl font-semibold'>Users Management</div>
+          <div className='col-span-12 headerText'>Users Management</div>
           <div className='col-span-12'>
             <div className='grid grid-cols-12 xl:gap-x-5 gap-y-5'>
               {statistics.map((item, index) => (
@@ -172,7 +172,7 @@ const UserManagement = () => {
       </div>
       <div className='col-span-12'>
         <div className='grid grid-cols-12 gap-5 xl:gap-x-8 gap-y-8'>
-          <div className='col-span-12 text-3xl font-semibold'>
+          <div className='col-span-12 headerText'>
             All Users
           </div>
           <div className='col-span-12'>
