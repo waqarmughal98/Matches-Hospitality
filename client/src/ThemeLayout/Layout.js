@@ -19,7 +19,7 @@ const Layout = () => {
             </div>
             <div className='w-full'>
                 <Navbar />
-                <div className={`p-10 relative`} onClick={handleToggle}>
+                <div className={`p-12 relative`} onClick={handleToggle}>
                     {<Outlet />}
                     {/* <div className={` ${isModalOpen ? 'block opacity-100' : 'opacity-0 none '} transition-all duration-200 ease-linear`}> */}
                     <Backdrop />
