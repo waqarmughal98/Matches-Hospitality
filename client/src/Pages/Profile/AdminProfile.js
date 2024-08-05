@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState , useEffect, useRef } from 'react'
 import { BiEdit } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'
 import { CiStar } from 'react-icons/ci'
@@ -11,7 +11,7 @@ import { useAppContext } from '../../UseContext/ContextProvider'
 import { axiosInstance, URL as API_URL } from '../../utilities/ConstantData'
 import { useNavigate } from 'react-router-dom';
 export const AdminProfile = () => {
-    const { handleErrors} = useAppContext()
+    const { handleErrors , setProfileUpdation} = useAppContext()
     const [userData, setUserData] = useState()
      const [passwordData, setPasswordData] = useState({
         old_password : "",
@@ -22,13 +22,25 @@ export const AdminProfile = () => {
     const [userName, setUserName] = useState("")
     const [profileImage, setProfileImage] = useState("")
     const [loading2 , setLoading2] = useState(false)
+    const [profileFile , setProfileFile] = useState()
     const navigate = useNavigate()
+    const fileInputRef = useRef(null);
+
     const handleChange=(e)=>{
         const {name, value} = e.target
-       setPasswordData((pre)=>({
+         setPasswordData((pre)=>({
         ...pre, [name] :value
        }))
     }
+
+    const handleFileChange = (e) => {
+        const image = e.target.files[0];
+        setProfileFile(image)
+    }
+
+    const handleIconClick = () => {
+        fileInputRef.current.click();
+      };
 
     const validatePasswordChange = () => {
         const { old_password, current_password, password_confirmation } = passwordData;
@@ -99,12 +111,25 @@ export const AdminProfile = () => {
           }
     }
 
+    const updateUserData=()=>{
+        try {
+            let user = JSON.parse(localStorage.getItem('userData'));
+            user.userName = userName;
+            user.profileImage = profileImage;
+            localStorage.setItem('userData', JSON.stringify(user));
+        } catch (error) {
+            console.log(error)
+        }finally{
+            setProfileUpdation({userName, profileImage})
+        }
+    }
     const updateProfile = async () => {
         axiosInstance().patch(`${API_URL}/update-info`, {
             userName, profileImage
         })
         .then((res)=>{
             toast.success("Profile updated successfully")
+            updateUserData()
         })
         .catch ((error)=> {
             const errors=error?.response?.data?.errors
@@ -134,7 +159,20 @@ export const AdminProfile = () => {
                     <div className='absolute h-full w-full flex items-center px-5 text-white gap-5'>
                         <div className='h-40 w-40 rounded-full relative'>
                             <img src={profile} className='absolute h-full w-full rounded-full' />
-                            <BiEdit className='absolute bottom-8 right-0 text-xl' />
+                            <div
+                                className="absolute cursor-pointer right-2 h-8 w-8  text-slate-600 rounded-full shadow-sm flex flex-col items-center justify-center md:top-[140px] top-[100px]"
+                                onClick={()=>handleIconClick()}
+                            >
+                                <BiEdit className='absolute bg-gray-500 rounded-full p-5 bottom-8 right-0 text-xl' />
+                                {/* Hidden file input */}
+                                <input
+                                type="file"
+                                name="image"
+                                ref={fileInputRef}
+                                style={{ display: "none" }}
+                                onChange={handleFileChange}
+                                />
+                            </div>
                         </div>
                         <div className='flex flex-col gap-2 pt-24'>
                             <div className='headerText'>{userData?.userName}</div>

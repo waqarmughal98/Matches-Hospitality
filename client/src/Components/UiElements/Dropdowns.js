@@ -5,7 +5,7 @@ import { GoChevronDown } from 'react-icons/go';
 import { useAppContext } from '../../UseContext/ContextProvider';
 import { toast } from 'react-toastify';
 export const ProfileDropdown = () => {
-  const { openModal, closeModal, setIsOpen, isOpen, showBackdropWithContent } = useAppContext()
+  const { openModal, closeModal, setIsOpen, isOpen, showBackdropWithContent, profileUpdation } = useAppContext()
   const dropdownRef = useRef(null);
   const navigate = useNavigate()
   const [userData, setUserData] = useState()
@@ -54,7 +54,7 @@ export const ProfileDropdown = () => {
 
   useEffect(() => {
     setUserData(getUserData())
-  }, [])
+  }, [profileUpdation])
   return (
     <div className="hs-dropdown relative flex flex-col" ref={dropdownRef}>
       <button
