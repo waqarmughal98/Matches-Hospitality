@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GoChevronDown } from 'react-icons/go';
 import { useAppContext } from '../../UseContext/ContextProvider';
 import { toast } from 'react-toastify';
 export const ProfileDropdown = () => {
   const { openModal, closeModal, setIsOpen, isOpen, showBackdropWithContent } = useAppContext()
-  const navigate=useNavigate()
-  const [ userData, setUserData] = useState()
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate()
+  const [userData, setUserData] = useState()
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
     if (isOpen) {
@@ -19,27 +20,43 @@ export const ProfileDropdown = () => {
   };
 
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     setIsOpen(false);
     closeModal()
     try {
-      localStorage.removeItem('userData')  
+      localStorage.removeItem('userData')
       toast.error("Logout successfully!")
     } catch (error) {
       console.log(error)
-    }finally{
+    } finally {
       navigate("/login")
     }
-    
+
   }
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+        closeModal();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+  
+  const handleItemClick = () => {
+    setIsOpen(false);
+    closeModal();
+  };
 
   const getUserData = () => JSON.parse(localStorage.getItem('userData'));
 
-  useEffect(()=>{
+  useEffect(() => {
     setUserData(getUserData())
-  },[])
+  }, [])
   return (
-    <div className="hs-dropdown relative flex flex-col">
+    <div className="hs-dropdown relative flex flex-col" ref={dropdownRef}>
       <button
         id="hs-dropdown-custom-trigger"
         type="button"
@@ -51,7 +68,7 @@ export const ProfileDropdown = () => {
       >
         <img
           className="w-10 h-10 rounded-full flex items-center object-cover"
-          src={  userData?.profileImage!="" ? `/uploads/${userData?.profileImage}` : `assets/images/svgs/navbar/profile.png`}
+          src={userData?.profileImage != "" ? `/uploads/${userData?.profileImage}` : `assets/images/svgs/navbar/profile.png`}
           alt="Avatar"
         />
         <span className="font-medium truncate max-w-[7.5rem] text-white">{userData?.userName || ''}</span>
@@ -78,13 +95,13 @@ export const ProfileDropdown = () => {
       >
         <ul class="py-2 text-sm text-white dark:text-gray-200" aria-labelledby="dropdownDividerButton">
           <li>
-            <a href="#" class="flex items-center gap-3 px-4 py-3">
+            <Link to='/admin-profile' class="flex items-center gap-3 px-4 py-3" onClick={handleItemClick}>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M6.75 2.75C6.75 2.33579 6.41421 2 6 2C5.58579 2 5.25 2.33579 5.25 2.75V4.00879C3.43368 4.13698 2 5.65106 2 7.5V8.5C2 10.3489 3.43368 11.863 5.25 11.9912L5.25 17.25C5.25 17.6642 5.58579 18 6 18C6.41421 18 6.75 17.6642 6.75 17.25L6.75 11.9912C8.56632 11.863 10 10.3489 10 8.5V7.5C10 5.65106 8.56632 4.13698 6.75 4.00879V2.75ZM8.5 7.5C8.5 6.39543 7.60457 5.5 6.5 5.5H5.5C4.39543 5.5 3.5 6.39543 3.5 7.5V8.5C3.5 9.60457 4.39543 10.5 5.5 10.5H6.5C7.60457 10.5 8.5 9.60457 8.5 8.5V7.5Z" fill="#9B9B9B" />
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 2.75L13.25 8.00879C11.4337 8.13698 10 9.65106 10 11.5V12.5C10 14.3489 11.4337 15.863 13.25 15.9912L13.25 17.25C13.25 17.6642 13.5858 18 14 18C14.4142 18 14.75 17.6642 14.75 17.25L14.75 15.9912C16.5663 15.863 18 14.3489 18 12.5V11.5C18 9.65106 16.5663 8.13698 14.75 8.00879L14.75 2.75C14.75 2.33579 14.4142 2 14 2C13.5858 2 13.25 2.33579 13.25 2.75ZM13.5 9.5C12.3954 9.5 11.5 10.3954 11.5 11.5V12.5C11.5 13.6046 12.3954 14.5 13.5 14.5H14.5C15.6046 14.5 16.5 13.6046 16.5 12.5V11.5C16.5 10.3954 15.6046 9.5 14.5 9.5H13.5Z" fill="#9B9B9B" />
               </svg>
               Profile Settings
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#" class="flex items-center gap-3 px-4 py-3">
@@ -113,7 +130,7 @@ export const ProfileDropdown = () => {
             </a>
           </li>
         </ul>
-        <div class="py-2" onClick={()=>handleLogout()}>
+        <div class="py-2" onClick={() => handleLogout()}>
           <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-white">
             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M13 11.2C13.3866 11.2 13.7 10.8866 13.7 10.5C13.7 10.1134 13.3866 9.8 13 9.8L13 11.2ZM2.50503 10.005C2.23166 10.2784 2.23166 10.7216 2.50503 10.995L6.9598 15.4497C7.23316 15.7231 7.67638 15.7231 7.94975 15.4497C8.22311 15.1764 8.22311 14.7332 7.94975 14.4598L3.98995 10.5L7.94975 6.5402C8.22312 6.26683 8.22312 5.82362 7.94975 5.55025C7.67638 5.27688 7.23317 5.27688 6.9598 5.55025L2.50503 10.005ZM13 9.8L3 9.8L3 11.2L13 11.2L13 9.8Z" fill="#9B9B9B" />
@@ -179,8 +196,8 @@ const Dropdown = ({
     selectedId ? data.find((item) => item._id == selectedId) : undefined
   );
   console.log(data)
-  console.log("selectedId..",selectedId)
-  console.log("selectedItem..",selectedItem)
+  console.log("selectedId..", selectedId)
+  console.log("selectedItem..", selectedItem)
 
   const dropdownRef = useRef(null);
   const handleChange = (item) => {
