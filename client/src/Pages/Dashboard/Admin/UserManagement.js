@@ -131,8 +131,8 @@ const UserManagement = () => {
               className="sr-only peer" 
               onChange={() => handleToggleStatus(row.row.original._id, row.getValue('status'))}
             />
-            <div className="relative w-9 h-5 py-2 bg-gray-400 peer-focus:outline-none rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
-            <span className="ms-2 text-xs text-white/80 font-semibold">{row.getValue('status') === 'active' ? 'Active' : 'Deactivated'}</span>
+            <div className="relative w-9 h-5 py-2 bg-white/90 peer-focus:outline-none rounded-full after:bg-[#E10000] peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
+            <span className="ms-4 text-base text-white/80">{row.getValue('status') === 'active' ? 'Active' : 'Deactivated'}</span>
           </label>
         </div>
       ),
@@ -172,11 +172,11 @@ const UserManagement = () => {
       </div>
       <div className='col-span-12'>
         <div className='grid grid-cols-12 gap-5 xl:gap-x-8 gap-y-8'>
-          <div className='col-span-12 headerText'>
+          {/* <div className='col-span-12 headerText'>
             All Users
-          </div>
+          </div> */}
           <div className='col-span-12'>
-            <Table data={allUsers} columns={cols} showNavigation />
+            <Table data={allUsers} columns={cols} showNavigation search={true} header='All Users'/>
           </div>
         </div>
       </div>
