@@ -19,7 +19,7 @@ export const PrimaryButton = ({ onClick, children, className = '', disabled = fa
   return (
     <button
       onClick={onClick}
-      className={`primaryBtn ${bgColor} rounded-full font-semibold ${sizeClasses} ${className}`}
+      className={`primaryBtn ${bgColor} font-roboto rounded-full font-semibold ${sizeClasses} ${className}`}
       disabled={disabled}
       type={type}
       style={buttonStyle}
@@ -38,7 +38,7 @@ export const SecondaryButton = ({ onClick, children, className = '', disabled = 
   return (
     <button
       onClick={() => navigate(-1)}
-      className={`primaryBtn bg-gradient-to-r from-[#88F67E]/20 to-[#181818]/0 px-7 rounded-full text-white h-10 flex items-center justify-center gap-1 ${className}`}
+      className={`primaryBtn font-roboto bg-gradient-to-r from-[#88F67E]/20 to-[#181818]/0 px-7 rounded-full text-white h-10 flex items-center justify-center gap-1 ${className}`}
       disabled={disabled}
       type={type}
       style={buttonStyle}

@@ -122,7 +122,7 @@ const UserManagement = () => {
     {
       header: 'Status',
       cell: (row) => (
-        <div className="flex items-center gap-x-5 justify-center">
+        <div className="flex items-center gap-x-5 ps-24">
           <label className="inline-flex items-center cursor-pointer">
             <input 
               checked={row.getValue('status') === 'active'} 
