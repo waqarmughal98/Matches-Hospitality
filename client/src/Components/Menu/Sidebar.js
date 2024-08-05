@@ -62,9 +62,12 @@ const Sidebar = () => {
                             to={item.path}
                             className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === `/${item.path}` ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
                         >
-                            <svg className="text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                            {/* <svg className="text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.iconPath} />
-                            </svg>
+                            </svg> */}
+                            <div className='ms-5 text-2xl'>
+                                {item.iconPath}
+                            </div>
 
                             {isCollapsed && (
                                 <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
