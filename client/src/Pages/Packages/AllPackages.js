@@ -84,7 +84,7 @@ const AllPackages = () => {
                     <div className='col-span-12'>
                         <div className='grid grid-cols-12'>
                             <div className='col-span-8 headerText'>
-                                All Packagess
+                                All Packages
                             </div>
                             <div className='grid col-span-4 justify-end'>
                                 <PrimaryButton size='medium' className='font-semibold' onClick={()=>CreatePackage()}>

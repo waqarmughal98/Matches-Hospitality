@@ -15,7 +15,7 @@ const Packages = () => {
     return (
         <div className='col-span-12 font-jumper'>
             <div className='grid grid-cols-12 lg:gap-x-8 gap-y-8'>
-                <div className='col-span-12 text-3xl font-semibold'>Packages</div>
+                <div className='col-span-12 headerText'>Packages</div>
                 <div className='col-span-12'>
                     <div className='grid grid-cols-12 lg:gap-x-5 gap-y-5'>
                         <div className='grid lg:col-span-5 col-span-12 bg-white text-primaryBlack rounded-2xl p-6 min-h-[19rem]'>

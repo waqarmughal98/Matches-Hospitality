@@ -26,7 +26,7 @@ const AdminDashboard = () => {
       <div className='grid grid-cols-12 lg:gap-x-10 gap-y-8'>
         <div className='col-span-12'>
           <div className='grid grid-cols-12 lg:gap-x-8 gap-y-8'>
-            <div className='col-span-12 text-3xl font-semibold'>Users</div>
+            <div className='col-span-12 headerText'>Users</div>
             <div className='col-span-12'>
               <div className='grid grid-cols-12 lg:gap-x-5 gap-y-5'>
                 {userData.map((item, index) => {
