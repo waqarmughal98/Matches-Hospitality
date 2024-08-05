@@ -24,44 +24,71 @@ import CreateMatch from './Pages/Matches/CreateMatch';
 import AllTeams from './Pages/Teams/AllTeams';
 import AllPackages from './Pages/Packages/AllPackages';
 import NewPackage from './Pages/Packages/NewPackage';
-import { ProtectedRoute, AdminRoute, UserRoute, PublicRoute } from './ProtectedRoutes';
+import ProtectedRoute from './ProtectedRoutes';
+
+const routes = [
+  { path: "/", element: <Navigate to="/login" replace />, type: "public" },
+  { path: "/login", element: <Login />, type: "public" },
+  { path: "/signup", element: <Signup />, type: "public" },
+  { path: "/finish-signup", element: <FinishSignup />, type: "public" },
+  { path: "/forgot-password", element: <ForgotPassword />, type: "public" },
+  { path: "/verify-code", element: <VerifyCode />, type: "public" },
+  { path: "/confirm-password", element: <ConfirmPassword />, type: "public" },
+  {
+    path: "/",
+    element: <Layout />,
+    type: "protected",
+    children: [
+      { path: "dashboard", element: <AdminDashboard />, type: "admin" },
+      { path: "user-management", element: <UserManagement />, type: "admin" },
+      { path: "package", element: <PackageInformation />, type: "admin" },
+      { path: "create-package", element: <CreatePackage />, type: "admin" },
+      { path: "admin-account", element: <Account />, type: "admin" },
+      { path: "all-categories", element: <AllCategories />, type: "admin" },
+      { path: "create-category", element: <CreateCategory />, type: "admin" },
+      { path: "edit-category", element: <EditCategory />, type: "admin" },
+      { path: "all-matches", element: <AllMatches />, type: "admin" },
+      { path: "match/:action", element: <CreateMatch />, type: "admin" },
+      { path: "all-teams", element: <AllTeams />, type: "admin" },
+      { path: "all-packages", element: <AllPackages />, type: "admin" },
+      { path: "package/:action", element: <NewPackage />, type: "admin" },
+      { path: "user-dashboard", element: <UserDashboard />, type: "user" },
+    ],
+  },
+  { path: "/*", element: <NotFound />, type: "public" },
+];
+
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        
-        {/* Auth Routes */}
-        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-        <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
-        <Route path="/finish-signup" element={<PublicRoute><FinishSignup /></PublicRoute>} />
-        <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
-        <Route path="/verify-code" element={<PublicRoute><VerifyCode /></PublicRoute>} />
-        <Route path="/confirm-password" element={<PublicRoute><ConfirmPassword /></PublicRoute>} />
-        
-        {/* Inner Layout */}
-        <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
-          {/* Admin Routes */}
-          <Route path="dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-          <Route path="user-management" element={<AdminRoute><UserManagement /></AdminRoute>} />
-          <Route path="package" element={<AdminRoute><PackageInformation /></AdminRoute>} />
-          <Route path="create-package" element={<AdminRoute><CreatePackage /></AdminRoute>} />
-          <Route path="admin-account" element={<AdminRoute><Account /></AdminRoute>} />
-          <Route path="all-categories" element={<AdminRoute><AllCategories /></AdminRoute>} />
-          <Route path="create-category" element={<AdminRoute><CreateCategory /></AdminRoute>} />
-          <Route path="edit-category" element={<AdminRoute><EditCategory /></AdminRoute>} />
-          <Route path="all-matches" element={<AdminRoute><AllMatches /></AdminRoute>} />
-          <Route path="match/:action" element={<AdminRoute><CreateMatch /></AdminRoute>} />
-          <Route path="all-teams" element={<AdminRoute><AllTeams /></AdminRoute>} />
-          <Route path="all-packages" element={<AdminRoute><AllPackages /></AdminRoute>} />
-          <Route path="package/:action" element={<AdminRoute><NewPackage /></AdminRoute>} />
-          
-          {/* User Routes */}
-          <Route path="user-dashboard" element={<UserRoute><UserDashboard /></UserRoute>} />
-        </Route>
-        
-        {/* 404 */}
-        <Route path="/*" element={<NotFound />} />
+        {routes.map(({ path, element, type, children }) => {
+          if (children) {
+            return (
+              <Route
+                key={path}
+                path={path}
+                element={<ProtectedRoute type={type}>{element}</ProtectedRoute>}
+              >
+                {children.map(({ path, element, type }) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={<ProtectedRoute type={type}>{element}</ProtectedRoute>}
+                  />
+                ))}
+              </Route>
+            );
+          }
+
+          return (
+            <Route
+              key={path}
+              path={path}
+              element={<ProtectedRoute type={type}>{element}</ProtectedRoute>}
+            />
+          );
+        })}
       </Routes>
       <ToastContainer autoClose={1500} theme="dark" hideProgressBar={true} />
     </BrowserRouter>
