@@ -115,7 +115,7 @@ const handleDelete = async (id) => {
           </PrimaryButton>
         </div>
       </div>
-      <div className='col-span-12'>
+      <div className='col-span-12 font-roboto'>
         <div className='grid grid-cols-12 gap-5'>
           {TeamData.map((item, index) => (
             <div key={index} className='group relative grid xl:col-span-3 md:col-span-12 col-span-12 items-center min-h-44 rounded-xl bg-cover bg-center border-primaryBorder border-[1px]'>

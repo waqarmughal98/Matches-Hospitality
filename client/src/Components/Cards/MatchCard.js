@@ -46,7 +46,7 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
     const { selectedMatch } = useAppContext()
     const imageWidth = width === 'large' ? '60' : width === 'small' ? '50' : ''
     return (
-        <div className={` ${width === 'small' ? 'xl:col-span-4' : 'xl:col-span-3'} group md:col-span-6 col-span-12 bg-[#141414] cursor-pointer rounded-xl px-4 py-6 text-white relative ${data.id == selectedMatch ? 'border-1 border-primaryGreen' : ''}`} onClick={onClick} >
+        <div className={` ${width === 'small' ? 'xl:col-span-4' : 'xl:col-span-3'} group md:col-span-6 col-span-12 bg-[#141414] cursor-pointer rounded-xl px-4 py-6 text-white relative font-roboto ${data.id == selectedMatch ? 'border-1 border-primaryGreen' : ''}`} onClick={onClick} >
             {overlay && (
                 <div className='absolute opacity-0 h-0 group-hover:h-full group-hover:opacity-100 w-full backdrop-blur-xl top-0 left-0 transition-all duration-200 ease-linear rounded-xl flex items-center justify-center'>
                     <div className='flex items-center gap-x-3 rounded-md text-xs w-fit'>

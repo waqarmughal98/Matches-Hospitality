@@ -73,7 +73,7 @@ export const ProfileDropdown = () => {
         />
         <span className="font-medium truncate max-w-[7.5rem] text-white">{userData?.userName || ''}</span>
         <svg
-          className={`transition-all ms-2 mt-1 duration-150 ease-linear ${isOpen ? 'rotate-180' : ''}`}
+          className={`transition-all ms-2 duration-150 ease-linear ${isOpen ? 'rotate-180' : ''}`}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -88,7 +88,7 @@ export const ProfileDropdown = () => {
         </svg>
       </button>
       <div
-        className={`hs-dropdown-menu transition-opacity duration-200 ease-linear ${isOpen ? 'opacity-100' : 'opacity-0 hidden'} min-w-60 bg-[#121212] shadow-md rounded-lg p-1 space-y-0.5 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 absolute right-0 top-10`}
+        className={`hs-dropdown-menu transition-opacity duration-200 ease-linear ${isOpen ? 'opacity-100' : 'opacity-0'} min-w-60 bg-[#121212] shadow-md rounded-lg p-1 space-y-0.5 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 absolute right-0 top-10`}
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="hs-dropdown-custom-trigger"

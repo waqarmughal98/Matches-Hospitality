@@ -5,7 +5,7 @@ import Navbar from '../Components/Menu/Navbar';
 import Backdrop from '../Components/Modal/Backdrop';
 import { useAppContext } from '../UseContext/ContextProvider';
 const Layout = () => {
-    const { openModal, closeModal, isOpen, setIsOpen } = useAppContext()
+    const { openModal, closeModal, isOpen, setIsOpen , isModalOpen } = useAppContext()
     const handleToggle = () => {
         if (openModal == true || isOpen) {
             closeModal()
@@ -21,7 +21,9 @@ const Layout = () => {
                 <Navbar />
                 <div className={`p-10 relative`} onClick={handleToggle}>
                     {<Outlet />}
+                    <div className={` ${isModalOpen ? 'opacity-100' : 'opacity-0 '} transition-opacity duration-200 ease-linear`}>
                     <Backdrop />
+                    </div>
                 </div>
             </div>
         </div>
