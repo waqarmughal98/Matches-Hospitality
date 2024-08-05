@@ -15,6 +15,7 @@ export const ContextProvider = ({ children }) => {
   const [categoryData, setCategoryData] = useState([])
   const [PackageData, setPackageData] = useState([])
   const [MatchesData, setMatchesData] = useState([])
+  const [profileUpdation, setProfileUpdation] = useState()
   const [signUpDetails, setSignUpDetails] = useState({
     email: "",
     password: ""
@@ -115,7 +116,9 @@ function convertToDateFormat(isoString) {
         MatchesData,
         setMatchesData,
         selectedEditPackage,
-        setSelectedEditPackage
+        setSelectedEditPackage,
+        profileUpdation,
+        setProfileUpdation
       }}>
       {children}
     </AppContext.Provider>
