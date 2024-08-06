@@ -74,7 +74,7 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
                 </div>
                 <div className='col-span-6 grid items-center'>
                     <div className='flex flex-col items-center gap-1'>
-                        <p className={`${width === 'small' ? 'text-[13px]' : 'text-[12px]'} whitespace-nowrap font-semibold`}>{data.category.name} </p>
+                        <p className={`${width === 'small' ? 'text-[13px]' : 'text-[12px]'} whitespace-nowrap font-semibold`}>{data.team1.categoryName} </p>
                         <span>VS</span>
                         <div className='flex items-center gap-1'>
                             <div className='h-3 w-3 rounded-full bg-[#FF824D]'></div>
