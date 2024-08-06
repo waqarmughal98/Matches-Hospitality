@@ -29,7 +29,7 @@ const CustomSlider = ({ slides, slidesToShow = 3, slidesToScroll = 1, infinite =
 
     return (
         <div className='relative'>
-            <div className='flex justify-end items-center'>
+            <div className='flex justify-end items-center pb-2'>
                 <div
                     className={`p-2 cursor-pointer ${isPrevDisabled ? 'opacity-50 cursor-not-allowed text-gray-400' : 'text-primaryGreen'}`}
                     onClick={() => !isPrevDisabled && sliderRef.current.slickPrev()}
