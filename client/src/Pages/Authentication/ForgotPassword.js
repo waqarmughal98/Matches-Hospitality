@@ -13,6 +13,7 @@ const ForgotPassword = () => {
     const navigate = useNavigate()
     const {  forgetPassworddata, forgetPasswordsSetter, isEmailValidate} = useAppContext()
     const handleClick=()=>{
+        
         if(isEmailValidate(forgetPassworddata.email)){
             sendOtp()
         }
@@ -71,7 +72,7 @@ const ForgotPassword = () => {
                                     <LabelInput name="email" value={forgetPassworddata.email}  onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter your email address' />
                                 </div>
                                 <div className='col-span-12 pb-10'>
-                                    <PrimaryButton disabled={!forgetPassworddata.email || loading} onClick={handleClick} size='large' color='green'>
+                                    <PrimaryButton disabled={loading} onClick={handleClick} size='large' color='green'>
                                         {loading ?  "Sending otp..." : "Confirm email Address"}
                                     </PrimaryButton>
                                 </div>

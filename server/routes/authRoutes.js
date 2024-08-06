@@ -10,7 +10,8 @@ const {
   resetPassword,
   getAllUsers,
   changeUserStatus,
-  updateUserInfo
+  updateUserInfo,
+  checkUserExists
 } = require('../controllers/userController');
 const protect = require('../middleware/authMiddleware');
 const isAdmin = require('../middleware/adminMiddleware');
@@ -28,6 +29,7 @@ const router = express.Router();
 
 router.post('/signup', validateSignup, signup);
 router.post('/login', validateLogin, login);
+router.post('/check-user-exists', checkUserExists);
 router.post('/logout', protect, logout);
 router.post('/change-password', protect, validateChangePassword, changePassword);
 router.delete('/delete-user', protect, deleteUser);

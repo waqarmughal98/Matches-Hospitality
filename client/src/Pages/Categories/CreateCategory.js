@@ -60,9 +60,9 @@ const CreateCategory = () => {
 
         axiosInstance2().post(`${Api_URl}/category/create`, data)
         .then(()=>{
-            setLoading(false)
-            toast.success("Event created successfully")
+            toast.success("Category created successfully")
             navigate("/all-categories")
+            setLoading(false)
         })
         .catch ((error)=> {
             setLoading(false)

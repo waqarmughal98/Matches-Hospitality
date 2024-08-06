@@ -13,6 +13,8 @@ const FinishSignup = () => {
     const {signUpDetails, signUpDetailsSetter , handleErrors} = useAppContext()
     const navigate = useNavigate()
     const [loading , setLoading] = useState(false)
+    const [confirmPassword, setConfirmPassword] = useState("")
+
     /* when user reload the screen on second step */
     useEffect(()=>{
          if(!signUpDetails.email){
@@ -20,7 +22,25 @@ const FinishSignup = () => {
          }
     },[])
 
+    const validation = () => {
+        if (!signUpDetails.password) {
+            toast.error("Password is required");
+            return false;
+        }
+        if (confirmPassword==signUpDetails.password) {
+            toast.error("Password must not be match");
+            return false;
+        }
+    
+        return true;
+    };
+
+
+
     const handleCreateAccount = async () => {
+        if(!validation()){
+            return null
+        }
         setLoading(true)
         axios.post(`${URL}/signup`, signUpDetails)
         .then((res)=>{
@@ -67,7 +87,10 @@ const FinishSignup = () => {
                             <LabelInput name="password" value={signUpDetails.password} onChange={(e)=>signUpDetailsSetter(e)} label='Create Password' />
                         </div>
                         <div className='col-span-12'>
-                            <PrimaryButton onClick={handleCreateAccount} disabled={!signUpDetails.password || loading} size='large' color='green'>
+                            <LabelInput name="confirm-password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
+                        </div>
+                        <div className='col-span-12'>
+                            <PrimaryButton onClick={handleCreateAccount} disabled={loading} size='large' color='green'>
                             {loading ? 'Creating account...' :  'Create Account'}
                             </PrimaryButton>
                         </div>
