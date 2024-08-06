@@ -3,23 +3,6 @@ import { useAppContext } from '../../UseContext/ContextProvider';
 
 const Backdrop = () => {
   const { isModalOpen, closeModal, backdropContent } = useAppContext();
-  const modalRef = useRef(null);
-
-  const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      closeModal();
-    }
-  };
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }
-  }, [isModalOpen]);
-
   if (!isModalOpen) return null;
 
   return (
@@ -30,7 +13,6 @@ const Backdrop = () => {
         onClick={closeModal}
       ></div>
       <div
-        ref={modalRef}
         className={`  relative max-h-[700px] overflow-y-auto overflow-x-hidden custom-scroll rounded-md`}
       >
         {backdropContent}
