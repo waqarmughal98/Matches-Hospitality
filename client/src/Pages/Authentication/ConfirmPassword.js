@@ -21,12 +21,28 @@ const ConfirmPassword = () => {
         }
     },[])
 
-    const changePassword=()=>{
-        if(confirmPassword==forgetPassworddata.new_password){
-            resetPassword()
+
+    const validation = () => {
+        if (!forgetPassworddata.new_password) {
+            toast.error("Password is required");
+            return false;
         }
-        else{
-            toast.error("Password does not match")
+        if (!confirmPassword) {
+            toast.error("Confirm Password is required");
+            return false;
+        }
+        if (confirmPassword==forgetPassworddata.new_password) {
+            toast.error("Password does not match");
+            return false;
+        }
+    
+        return true;
+    };
+ 
+
+    const changePassword=()=>{
+        if(validation()==true){
+            resetPassword()
         }
     }
     
@@ -85,7 +101,7 @@ const ConfirmPassword = () => {
                                     <LabelInput value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <PrimaryButton onClick={changePassword} disabled={!forgetPassworddata.new_password || !confirmPassword} size='large' color='green'>
+                                    <PrimaryButton onClick={changePassword}  size='large' color='green'>
                                         {loading ?  "Changing password..." : "Change Password"}
                                     </PrimaryButton>
                                 </div>

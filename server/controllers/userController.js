@@ -85,6 +85,7 @@ const login = asyncHandler(async (req, res) => {
   });
 });
 
+
 /* Logout */
 const logout = (req, res) => {
   const token = req.headers.authorization;
@@ -336,7 +337,26 @@ const updateUserInfo = asyncHandler(async (req, res) => {
   } catch (error) {
     handleError(res, 400, 'Something went wrong');
   }
+  
 });
+
+const checkUserExists = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+  
+    if (!email || !isValidEmail(email)) {
+      return res.status(400).json({ success: false, errors: 'Invalid or missing email format' });
+    }
+  
+    try {
+      const user = await User.findOne({ email });
+  
+      if (!user) {
+        return res.status(404).json({ success: false, message: 'User does not exist' });
+      }
+    } catch (error) {
+      handleError(res, 500, 'Something went wrong');
+    }
+  });
 
 module.exports = {
   signup,
@@ -349,5 +369,6 @@ module.exports = {
   resetPassword,
   getAllUsers,
   changeUserStatus,
-  updateUserInfo
+  updateUserInfo,
+  checkUserExists
 };

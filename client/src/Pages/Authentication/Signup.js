@@ -1,17 +1,35 @@
 import React from 'react'
 import loginBanner from '../../../src/assets/webp/auth/signup-banner.webp'
 import logo from '../../../src/assets/svgs/navbar/match-logo.svg'
-import google from '../../../src/assets/svgs/auth/google.svg'
-import apple from '../../../src/assets/svgs/auth/apple.svg'
-import { useNavigate } from 'react-router-dom';
+// import google from '../../../src/assets/svgs/auth/google.svg'
+// import apple from '../../../src/assets/svgs/auth/apple.svg'
 import AuthLayout from '../../ThemeLayout/AuthLayout'
-import { PrimaryButton, SecondaryButton, SSOButton } from '../../Components/UiElements/Buttons'
+import { PrimaryButton, SecondaryButton} from '../../Components/UiElements/Buttons'
 import { LabelInput } from '../../Components/UiElements/TextInputs'
 import { useAppContext } from '../../UseContext/ContextProvider'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 const Signup = () => {
   const { signUpDetails,signUpDetailsSetter,isEmailValidate}  = useAppContext()
   const navigate = useNavigate();
+
+  const validation = () => {
+        if (!signUpDetails.userName) {
+            toast.error("Full name is required");
+            return false;
+        }
+        if (!signUpDetails.email) {
+            toast.error("Email is required");
+            return false;
+        }
+
+        return true;
+    };
+
   const handleClick = () => {
+    if(!validation()){
+        return null
+    }
     if(isEmailValidate(signUpDetails.email)){
         navigate('/finish-signup'); 
     }
@@ -40,7 +58,7 @@ const Signup = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12'>
                                 <div className='col-span-12'>
-                                    <PrimaryButton  onClick={handleClick}  disabled={!signUpDetails.email || !signUpDetails.userName } size='large' color='green'>
+                                    <PrimaryButton  onClick={handleClick}  size='large' color='green'>
                                             Get Started
                                     </PrimaryButton>
                                 </div>

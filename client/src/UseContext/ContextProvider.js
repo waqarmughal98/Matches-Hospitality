@@ -43,7 +43,10 @@ export const ContextProvider = ({ children }) => {
   const isEmailValidate = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const result = emailRegex.test(email);
-    if (!result) {
+    if (!email) {
+      toast.error("Email is required")
+    }
+    else if (!result) {
       toast.error("Invalid email format.")
     }
     return result

@@ -25,7 +25,7 @@ export const ProfileDropdown = () => {
     closeModal()
     try {
       localStorage.removeItem('userData')
-      toast.error("Logout successfully!")
+      toast.success("Logout successfully!")
     } catch (error) {
       console.log(error)
     } finally {
