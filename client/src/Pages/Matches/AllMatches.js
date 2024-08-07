@@ -99,21 +99,27 @@ const AllMatches = () => {
                 </div>
             </div>
             <div className='col-span-12'>
-                <div className='grid grid-cols-12 gap-5'>
-                    {MatchesData?.map((item) => {
-                        return (
-                            <>
-                                <MatchCard
-                                    key={item.id}
-                                    data={item}
-                                    fontSize='text-[12px]'
-                                    width='large'
-                                    overlay={true}
-                                />
-                            </>
-                        )
-                    })}
-                </div>
+                {
+                    MatchesData.length>0 ?
+                    <div className='grid grid-cols-12 gap-5'>
+                        {MatchesData?.map((item) => {
+                            return (
+                                <>
+                                    <MatchCard
+                                        key={item.id}
+                                        data={item}
+                                        fontSize='text-[12px]'
+                                        width='large'
+                                        overlay={true}
+                                    />
+                                </>
+                            )
+                        })}
+                    </div>:
+                    <div>
+                         <h2 className='text-white text-center'>There are currently no matches available!</h2>
+                    </div>
+                }
             </div>
         </div>
     )

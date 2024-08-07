@@ -54,7 +54,7 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
     return (
         <div className={` ${width === 'small' ? 'xl:col-span-4' : 'xl:col-span-3'} group md:col-span-6 col-span-12 bg-[#141414] cursor-pointer rounded-xl px-5 py-6 text-white relative  ${data.id == selectedMatch ? 'border-1 border-primaryGreen' : ''}`} onClick={onClick} >
             {overlay && (
-                <div className='absolute opacity-0 h-0 z-30 group-hover:h-full group-hover:opacity-100 w-full backdrop-blur-xl top-0 left-0 transition-all duration-200 ease-linear rounded-xl flex items-center justify-center'>
+                <div className='absolute opacity-0 h-0 z-27 group-hover:h-full group-hover:opacity-100 w-full backdrop-blur-xl top-0 left-0 transition-all duration-200 ease-linear rounded-xl flex items-center justify-center'>
                     <div className='flex items-center gap-x-3 rounded-md text-xs w-fit mt-2'>
                         <div className='flex gap-x-3 items-center border-borderInput border px-2 py-1 rounded-md cursor-pointer' onClick={()=>handleShowBackdrop()}>
                             Edit <MdOutlineEdit />
@@ -67,16 +67,17 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
             )}
             <div className='grid grid-cols-12 justify-center gap-y-2'>
                 <div className='col-span-3'>
-                    <div className='flex flex-col gap-2 items-center'>
+                    { data?.team1 && <div className='flex flex-col gap-2 items-center'>
                         <div className='h-16 w-16 relative'>
                         <img src={`/uploads/${data?.team1?.logo}`} className='absolute h-full w-full object-scale-down' alt='logo' width={imageWidth} />
                         </div>
                         <p className='text-white font-semibold text-xs'>{data?.team1?.name}</p>
                     </div>
+                    }
                 </div>
                 <div className='col-span-6 grid items-center'>
                     <div className='flex flex-col items-center gap-1'>
-                        <p className={`${width === 'small' ? 'text-[13px]' : 'text-[12px]'} whitespace-nowrap font-semibold`}>{data.team1.categoryName} </p>
+                        <p className={`${width === 'small' ? 'text-[13px]' : 'text-[12px]'} whitespace-nowrap font-semibold`}>{data?.category?.name || ""} </p>
                         <span>VS</span>
                         <div className='flex items-center gap-1'>
                             <div className='h-3 w-3 rounded-full bg-[#FF824D]'></div>
@@ -86,12 +87,12 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
                     </div>
                 </div>
                 <div className='col-span-3'>
-                    <div className='flex flex-col gap-2 items-center'>
-                    <div className='h-16 w-16 relative'>
-                        <img src={`/uploads/${data?.team2?.logo}`} className='absolute h-full w-full object-scale-down' alt='logo' width={imageWidth} />
+                    {data?.team2 && <div className='flex flex-col gap-2 items-center'>
+                      <div className='h-16 w-16 relative'>
+                         <img src={`/uploads/${data?.team2?.logo}`} className='absolute h-full w-full object-scale-down' alt='logo' width={imageWidth} />
                         </div>
                         <p className='text-white font-semibold text-xs'>{data?.team2?.name}</p>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>

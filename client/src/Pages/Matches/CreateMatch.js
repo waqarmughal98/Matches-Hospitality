@@ -36,7 +36,7 @@ const CreateMatch = () => {
 
     useEffect(() => {
         // for reload
-        if (action=="edit" && (selectedEditMatch.length === 0 || PackageData.length==0)) {
+        if (selectedEditMatch.length === 0 || PackageData.length==0) {
             navigate("/all-matches");
         }
         if (action === "create") {
@@ -271,7 +271,7 @@ const CreateMatch = () => {
                                                 selected={date}
                                                 className='w-full bg-transparent border font-jumper py-3 rounded-lg text-white px-2 border-borderInput focus:outline-primaryGreen focus:outline-none focus:border-0'
                                                 onChange={handleDateChange}
-                                                dateFormat="MM/dd/yyyy"
+                                                dateFormat="MM-dd-yyyy"
                                             />
                                         </div>
                                     </div>
