@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 import { axiosInstance, URL } from '../../../utilities/ConstantData';
 import Loader from '../../../Components/UiElements/Loader';
 import { PrimaryButton } from '../../../Components/UiElements/Buttons';
+import { LabelInput } from '../../../Components/UiElements/TextInputs';
 
 const UserManagement = () => {
-  const { handleErrors } = useAppContext();
+  const { handleErrors, showBackdropWithContent, closeModal } = useAppContext();
   const [loading, setLoading] = useState(true);
   const [loading2, setLoading2] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
@@ -57,8 +58,6 @@ const UserManagement = () => {
     )
   }
 
-
-  console.log(statistics, "statistics")
 
   const handleToggleStatus = async (userId, currentStatus) => {
     setLoading2(true)
@@ -141,6 +140,59 @@ const UserManagement = () => {
     },
   ], []);
 
+  const handleBackdrop = () => {
+    const content = (
+      <div className='grid grid-cols-12 justify-center p-20 lg:w-[800px] rounded-lg backdrop-blur-3xl m-auto mt-28 bg-black/40 overflow-auto custom-scroll max-h-[600px] overflow-y-auto'>
+        <button
+          type="button"
+          className="absolute top-4 right-4    rtl:right-auto rtl:left-4"
+          onClick={closeModal}
+        >
+          <svg
+            title="Close"
+            className="h-4 w-4 cursor-pointer text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+          <span className="sr-only">Close</span>
+        </button>
+        <div className='lg:col-span-10 lg:col-start-2'>
+          <div className='grid grid-cols-12 gap-y-8'>
+            <div className='col-span-12 headerText'>Create User</div>
+            <div className='col-span-12'>
+              <div className='grid grid-cols-12 gap-y-5'>
+                <div className='col-span-12'>
+                  <LabelInput label='Full Name' />
+                </div>
+                <div className='col-span-12'>
+                  <LabelInput label='Email' />
+                </div>
+                <div className='col-span-12'>
+                  <LabelInput label='Password' type='password' showEyeIcon={true} />
+                </div>
+                <div className='col-span-12'>
+                  <LabelInput label='Confirm Password' type='password' showEyeIcon={true} />
+                </div>
+                <div className='col-span-12'>
+                  <PrimaryButton size='large'>Create User</PrimaryButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+    showBackdropWithContent(content)
+  }
+
   return loading ? <Loader /> : (
     <div className='grid grid-cols-12 text-white xl:gap-x-10 gap-y-8'>
       <div className='col-span-12'>
@@ -150,7 +202,7 @@ const UserManagement = () => {
               <div className='headerText'>
                 Users Management
               </div>
-              <PrimaryButton size='medium'>Create User</PrimaryButton>
+              <PrimaryButton size='medium' onClick={handleBackdrop}>Create User</PrimaryButton>
             </div>
           </div>
           <div className='col-span-12'>
