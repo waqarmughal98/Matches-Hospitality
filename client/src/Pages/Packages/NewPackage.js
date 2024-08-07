@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PrimaryButton } from '../../Components/UiElements/Buttons';
+import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons';
 import { LabelInput, PrimaryInput } from '../../Components/UiElements/TextInputs';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -17,7 +17,7 @@ const Switch = ({ checked, onChange }) => (
 
 const NewPackage = () => {
     const [selectedIds, setSelectedIds] = useState([]);
-    const [loading2 , setLoading2] = useState(false)
+    const [loading2, setLoading2] = useState(false)
     const navigate = useNavigate();
     const { action } = useParams();
     const { handleErrors, selectedEditPackage } = useAppContext();
@@ -25,7 +25,7 @@ const NewPackage = () => {
         name: selectedEditPackage.name || '',
         description: selectedEditPackage.description || '',
         price: selectedEditPackage.price || '',
-        matchTicket: selectedEditPackage.matchTicket || '' ,
+        matchTicket: selectedEditPackage.matchTicket || '',
         externalFlight: selectedEditPackage.externalFlight || '',
         hotelAccommodation: selectedEditPackage.hotelAccommodation || '',
         groundTransportation: selectedEditPackage.groundTransportation || '',
@@ -46,34 +46,34 @@ const NewPackage = () => {
         { title: 'Ground Transportation', name: 'groundTransportation', id: 4 },
     ];
 
-    const updateSelectedIds=()=>{
-        createPackage.map((item)=>{
-               if(selectedEditPackage[item.name]!=''){
-                 setSelectedIds((pre)=>([...pre,item.id]))
-               }
+    const updateSelectedIds = () => {
+        createPackage.map((item) => {
+            if (selectedEditPackage[item.name] != '') {
+                setSelectedIds((pre) => ([...pre, item.id]))
+            }
         })
     }
 
-    useEffect(()=>{
-        if( action=="edit" && Object.keys(selectedEditPackage).length == 0){
+    useEffect(() => {
+        if (action == "edit" && Object.keys(selectedEditPackage).length == 0) {
             navigate('/all-packages')
         }
-        if(action=="edit"){
+        if (action == "edit") {
             updateSelectedIds()
         }
-        else{
+        else {
             setSelectedIds([])
             clearInfo()
         }
-    },[])
+    }, [])
 
     const clearInfo = () => {
         const clearedInfo = Object.keys(info).reduce((acc, key) => {
-          acc[key] = '';
-          return acc;
+            acc[key] = '';
+            return acc;
         }, {});
         setInfo(clearedInfo);
-      };
+    };
 
     const handleToggle = (id, name) => {
         setSelectedIds(prev =>
@@ -88,8 +88,8 @@ const NewPackage = () => {
     };
 
     const validation = () => {
-    
-         if (!info.name) {
+
+        if (!info.name) {
             toast.error("Name of package is required.");
             setLoading2(false)
             return false;
@@ -109,10 +109,10 @@ const NewPackage = () => {
 
     const handleCreatePackage = () => {
         let isValid = true;
-        if(!validation()){
+        if (!validation()) {
             return null
         }
-        
+
 
         createPackage.forEach(item => {
             if (selectedIds.includes(item.id) && !info[item.name]) {
@@ -129,34 +129,34 @@ const NewPackage = () => {
 
     const apiCall = async () => {
         setLoading2(true)
-        if(action=="create"){
+        if (action == "create") {
             axiosInstance().post(`${API_URL}/package/create`, info)
-            .then(() => {
-                handleResponse("crated")
-            })
-            .catch((error) => {
-                handleCatch(error)
-            });
+                .then(() => {
+                    handleResponse("crated")
+                })
+                .catch((error) => {
+                    handleCatch(error)
+                });
         }
-        else{
+        else {
             axiosInstance().put(`${API_URL}/package/edit/${selectedEditPackage._id}`, info)
-            .then(() => {
-                handleResponse("updated")
-            })
-            .catch((error) => {
-                handleCatch(error)
-            });
+                .then(() => {
+                    handleResponse("updated")
+                })
+                .catch((error) => {
+                    handleCatch(error)
+                });
         }
     };
-    
-    const handleResponse = (word) =>{
+
+    const handleResponse = (word) => {
         setLoading2(false);
         toast.success(`Package ${word} successfully`);
         navigate("/all-packages");
     }
 
-    const handleCatch=(error)=>{
-        console.log(error,"error")
+    const handleCatch = (error) => {
+        console.log(error, "error")
         setLoading2(false);
         const errors = error?.response?.data?.errors;
         const statusCode = error?.response?.status;
@@ -164,11 +164,11 @@ const NewPackage = () => {
             toast.error(errors);
             try {
                 localStorage.removeItem('userData')
-              } catch (error) {
+            } catch (error) {
                 console.log(error)
-              } finally {
+            } finally {
                 navigate("/Login")
-              }
+            }
         } else {
             handleErrors(error);
         }
@@ -176,8 +176,13 @@ const NewPackage = () => {
 
     return (
         <div className='grid grid-cols-12 rounded-lg justify-center gap-y-10 min-h-[600px] overflow-y-auto min-w-[800px]'>
+            {action && (
+                <div className='col-span-12 headerText'>
+                    {action == "create" ? "" : <SecondaryButton />}
+                </div>
+            )}
             <div className='col-span-12 headerText'>
-                {action=="create" ?  "Create Package" : "Edit Package" }
+                {action == "create" ? "Create Package" : "Edit Package"}
             </div>
             <div className='col-span-6'>
                 <div className='grid grid-cols-12 gap-y-5'>
@@ -185,17 +190,31 @@ const NewPackage = () => {
                         <LabelInput name="name" value={info.name} onChange={handleChange} label='Package Name' />
                     </div>
                     <div className='col-span-12'>
-                        <LabelInput name="description" value={info.description} onChange={handleChange} label='Package Description' />
+                        <div className='grid grdi-cols-12 gap-y-3'>
+                            <div className='col-span-12'>
+                                <label htmlFor="description" className="primaryText">Package Description</label>
+                            </div>
+                            <div className='col-span-12'>
+                                <textarea
+                                    value={info.description}
+                                    rows="6"
+                                    className="block p-2.5 text-white w-full text-sm bg-transparent rounded-lg border border-borderInput focus:outline-none focus:border-primaryGreen"
+                                    placeholder="Description..."
+                                    onChange={handleChange}
+                                    name='description'
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div className='col-span-12 text-white'>
                         <div className='grid grid-cols-12'>
                             {createPackage.map((item) => {
                                 const isChecked = selectedIds.includes(item.id);
                                 return (
-                                    <div key={item.id} className={`grid col-span-12 border-t font-roboto border-[#5C5C5C] transition-all duration-150 ease-linear ${isChecked ? 'h-52' : 'h-16'}`}>
+                                    <div key={item.id} className={`grid col-span-12 border-t  border-[#5C5C5C] transition-all duration-150 ease-linear ${isChecked ? 'h-52' : 'h-16'}`}>
                                         <div className='flex flex-col pt-5 gap-y-5'>
                                             <div className='flex justify-between'>
-                                                <h1 className='text-xl'>
+                                                <h1 className='primaryText'>
                                                     {item.title}
                                                 </h1>
                                                 <div className='flex items-center'>
@@ -220,7 +239,7 @@ const NewPackage = () => {
                                     </div>
                                 );
                             })}
-                            <div className='col-span-12 border p-5 border-[#5C5C5C] rounded-xl font-roboto'>
+                            <div className='col-span-12 border p-5 border-[#5C5C5C] rounded-xl'>
                                 <div className='flex justify-between'>
                                     <div className='flex gap-2 items-center'>
                                         <h1 className='text-xl'>
@@ -239,11 +258,11 @@ const NewPackage = () => {
                                         </div>
                                     </div>
                                     {
-                                        action == "create" 
-                                        ?
-                                        <PrimaryButton size='medium' color='green' onClick={handleCreatePackage}>{loading2 ?  "Creating package..." : "Create Package" }</PrimaryButton>
-                                        :
-                                        <PrimaryButton size='medium' color='green' onClick={handleCreatePackage}>{loading2 ?  "Updating package..." : "Update Package"}</PrimaryButton>
+                                        action == "create"
+                                            ?
+                                            <PrimaryButton size='medium' color='green' onClick={handleCreatePackage}>{loading2 ? "Creating package..." : "Create Package"}</PrimaryButton>
+                                            :
+                                            <PrimaryButton size='medium' color='green' onClick={handleCreatePackage}>{loading2 ? "Updating package..." : "Update Package"}</PrimaryButton>
                                     }
                                 </div>
                             </div>

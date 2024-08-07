@@ -24,7 +24,7 @@ const Sidebar = () => {
     };
 
     return (
-        <div className={`flex flex-col ${isCollapsed ? 'w-40' : 'w-20'} bg-primaryBlack min-h-screen transition-all font-roboto duration-200 ease-linear sticky top-0`}>
+        <div className={`flex flex-col ${isCollapsed ? 'w-40' : 'w-20'} bg-primaryBlack min-h-screen transition-all  duration-300 ease-linear sticky top-0`}>
             <div className={`flex items-center h-[4.8rem] z-50 bg-primaryBlack ${isCollapsed ? 'justify-end pr-8' : 'justify-center'}`}>
                 <svg
                     width="28"
@@ -70,7 +70,7 @@ const Sidebar = () => {
                             </div>
 
                             {isCollapsed && (
-                                <p className={`transition-opacity duration-300 ease-linear overflow-hidden ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
+                                <p className={`transition-opacity duration-1000 ease-in-out overflow-hidden opacity-0 ${isCollapsed ? 'opacity-100' : 'opacity-0'}`}>
                                     {item.label}
                                 </p>
                             )}

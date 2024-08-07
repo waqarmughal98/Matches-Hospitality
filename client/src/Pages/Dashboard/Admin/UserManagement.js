@@ -148,12 +148,12 @@ const UserManagement = () => {
           <div className='col-span-12'>
             <div className='grid grid-cols-12 xl:gap-x-5 gap-y-5'>
               {statistics.map((item, index) => (
-                <div key={index} className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-cardBG border-primaryBorder border-[1px] p-7 font-roboto'>
+                <div key={index} className='xl:col-span-3 md:col-span-6 col-span-12 rounded-2xl bg-cardBG border-primaryBorder border-[1px] p-7'>
                   <div className='grid grid-cols-12'>
                     <div className='col-span-10'>
                       <div className='flex flex-col gap-3'>
                         <span className='text-base font-semibold'>{item.title}</span>
-                        <span className='text-4xl font-semibold font-roboto'>{item.numberOfUsers}</span>
+                        <span className='text-4xl font-semibold '>{item.numberOfUsers}</span>
                       </div>
                     </div>
                     <div className='grid col-span-2 items-end justify-end'>

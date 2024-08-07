@@ -42,7 +42,7 @@ export const Table = ({ data, columns, showNavigation, search, searchLabel ,head
                         )}
                     </div>
                     <div className="overflow-hidden bg-cardBG rounded-lg">
-                        <table className="min-w-full text-center rounded-lg font-roboto">
+                        <table className="min-w-full text-center rounded-lg ">
                             <thead className="bg-cardBG rounded-tr-lg border-b-2 border-borderInput">
                                 {table.getHeaderGroups().map(headerGroup => (
                                     <tr key={headerGroup.id}>
@@ -73,7 +73,7 @@ export const Table = ({ data, columns, showNavigation, search, searchLabel ,head
                             </tbody>
                         </table>
                         {showNavigation && (
-                            <div className="flex items-center gap-2 justify-between py-8 px-7 font-roboto">
+                            <div className="flex items-center gap-2 justify-between py-8 px-7 ">
                                 <div className='flex gap-5'>
                                     <button
                                         className="cursor-pointer rounded p-2 bg-primaryGreen text-black"

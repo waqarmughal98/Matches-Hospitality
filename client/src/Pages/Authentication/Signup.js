@@ -38,15 +38,15 @@ const Signup = () => {
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
-                <div className='col-span-5 bg-primaryBlack rounded-xl p-10 pb-14'>
-                    <div className='grid grid-cols-12 gap-9'>
+                <div className='col-span-5 bg-primaryBlack rounded-xl p-10'>
+                    <div className='grid grid-cols-12 gap-5'>
                         <div className='col-span-12'>
                             <SecondaryButton />
                         </div>
                         <div className='col-span-12'>
                             <img src={logo} alt=''/>
                         </div>
-                        <div className='col-span-12 text-white headerText leading-tight font-semibold'>
+                        <div className='col-span-12 jumperHeading'>
                             Sign Up/Sign In
                         </div>
                         <div className='col-span-12'>
@@ -57,7 +57,7 @@ const Signup = () => {
                         </div>
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12'>
-                                <div className='col-span-12'>
+                                <div className='col-span-12 mt-3'>
                                     <PrimaryButton  onClick={handleClick}  size='large' color='green'>
                                             Get Started
                                     </PrimaryButton>

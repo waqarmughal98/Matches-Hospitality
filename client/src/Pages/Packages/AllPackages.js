@@ -78,7 +78,7 @@ const AllPackages = () => {
     }
 
     return loading ? <Loader/> : (
-        <div className='grid grid-cols-12 text-white gap-10 font-roboto'>
+        <div className='grid grid-cols-12 text-white gap-10'>
             <div className='col-span-12'>
                 <div className='grid grid-cols-12 gap-8'>
                     <div className='col-span-12'>
@@ -137,9 +137,6 @@ const AllPackages = () => {
                                                                 {item.description}
                                                             </p>
                                                             <div className='flex justify-between items-center'>
-                                                                {/* <PrimaryButton size='medium' color='black'>
-                                                                    View Details
-                                                                </PrimaryButton> */}
                                                                  <h2 className='text-white font-bold text-3xl'>
                                                                     ${item.price}
                                                                 </h2>
@@ -147,8 +144,8 @@ const AllPackages = () => {
                                                                     <div onClick={()=>handleEdit(item)} className='bg-primaryGreen h-8 w-8 rounded-md flex justify-center items-center cursor-pointer'>
                                                                         <MdOutlineEdit className='text-black'/>
                                                                     </div>
-                                                                    <div onClick={()=>handleShowBackdrop(item._id)} className='bg-primaryGreen h-8 w-8 rounded-md flex justify-center items-center cursor-pointer'>
-                                                                        <RiDeleteBinLine className='text-black'/>
+                                                                    <div onClick={()=>handleShowBackdrop(item._id)} className='bg-red-800 h-8 w-8 rounded-md flex justify-center items-center cursor-pointer'>
+                                                                        <RiDeleteBinLine className='text-white'/>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -41,7 +41,7 @@ const routes = [
     type: "protected",
     children: [
       { path: "dashboard", element: <AdminDashboard />, type: "admin" },
-      { path: "user-management", element: <UserManagement />, type: "admin" },
+      { path: "all-users", element: <UserManagement />, type: "admin" },
       { path: "package", element: <PackageInformation />, type: "admin" },
       { path: "create-package", element: <CreatePackage />, type: "admin" },
       { path: "admin-account", element: <Account />, type: "admin" },

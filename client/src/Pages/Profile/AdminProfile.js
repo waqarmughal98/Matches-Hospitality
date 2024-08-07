@@ -151,7 +151,7 @@ export const AdminProfile = () => {
 
 
     return (
-        <div className='grid grid-cols-12 gap-y-5 font-roboto'>
+        <div className='grid grid-cols-12 gap-y-5 '>
             <div className='col-span-12 min-h-72  rounded-lg grid'>
                 <div className='flex flex-col relative'>
                     <div className='flex-1 bg-primaryGreen/80 rounded-t-md'></div>

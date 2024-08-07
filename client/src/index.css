@@ -4,75 +4,80 @@
 
 
 @font-face {
-  font-family: "JumperPERSONALUSEONLY-Regular";
-  src: local("JumperPERSONALUSEONLY-Regular"),
+  font-family: "JumperPersonalUseOnly";
+  src: local("JumperPersonalUseOnly"),
        url("./assets/fonts/jumper-font/JumperPersonalUseOnlyThin-ZVLDB.ttf") format("truetype");
 }
+
 @font-face {
-  font-family: "Roboto";
-  src: local("Roboto"),
-       url("./assets/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  font-family: "Manrope";
+  src: local("Manrope Regular"),
+       url("./assets/fonts/Manrope/static/Manrope-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Mohol";
+  src: local("Mohol Regular"),
+       url("./assets/fonts/Mohol-Regular/Mohol-Regular.otf") format("opentype");
+}
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #1D1D1D;
-  font-family: 'Roboto';
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Manrope';
 }
 
 @layer components {
   .dropdown-content {
-    @apply  w-full bg-transparent rounded-md overflow-hidden transition-all duration-300 ease-out;
+    @apply w-full bg-transparent rounded-md overflow-hidden transition-all duration-300 ease-out;
   }
-  
+
   .dropdown-content.active {
     opacity: 1;
   }
 
+  .jumperHeading {
+    @apply text-white font-semibold text-4xl;
+    font-family: "JumperPersonalUseOnly";
+  }
+
   .headerText {
-    @apply  text-white font-semibold text-3xl font-jumper;
+    @apply text-white font-semibold text-3xl;
+    font-family: "JumperPersonalUseOnly";
   }
-  .primaryText{
-    @apply text-white text-base font-roboto;
+
+  .primaryText {
+    @apply text-white text-base;
+    font-family: "Manrope";
   }
-  .card{
-    @apply  bg-[#0d0d0d]
+
+  .card {
+    @apply bg-[#0d0d0d];
   }
 }
 
 .custom-scroll::-webkit-scrollbar {
-  width: 5px; 
+  width: 5px;
   opacity: 0;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: rgba(32, 33, 37, 0); 
-  border-radius: 50px; 
+  background: rgba(32, 33, 37, 0);
+  border-radius: 50px;
   opacity: 0;
-
 }
 
 .custom-scroll::-webkit-scrollbar-track {
-  background: transparent; 
+  background: transparent;
   opacity: 0;
-
 }
 
 .custom-scroll {
-  scrollbar-width: thin; 
-  scrollbar-color: rgba(32, 33, 37, 0.2) transparent; 
+  scrollbar-width: thin;
+  scrollbar-color: rgba(32, 33, 37, 0.2) transparent;
 }
-
-
-
 
 .dropdown-content {
   max-height: 0;
@@ -81,11 +86,6 @@ code {
 }
 
 .dropdown-content.active {
-  max-height: 200px; 
+  max-height: 200px;
   opacity: 1;
 }
-
-
-
-
-

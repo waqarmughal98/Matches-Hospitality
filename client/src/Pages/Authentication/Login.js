@@ -27,25 +27,8 @@ const Login = () => {
         }))
     }
 
-    const validation = () => {
-        if (!loginData.email) {
-            toast.error("Email is required");
-            return false;
-        }
-        if (!loginData.password) {
-            toast.error("Password is required");
-            return false;
-        }
-    
-        return true;
-    };
-
     const handleLoginIn = async (e) => {
         e.preventDefault();
-
-        if(!validation()){
-            return null
-        }
         setLoading(true)
         axios.post(`${URL}/login`, loginData)
             .then((res) => {
@@ -73,7 +56,7 @@ const Login = () => {
                         </div>
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-3'>
-                                <div className='col-span-12 text-white headerText leading-tight font-semibold'>
+                                <div className='col-span-12 jumperHeading'>
                                     UEFA Champions League Hospitality Packages
                                 </div>
                                 <div className='col-span-12 text-sm text-white '>
@@ -90,7 +73,7 @@ const Login = () => {
                                     <div className='col-span-12'>
                                         <div className='grid grid-cols-12 gap-2'>
                                             <div className='col-span-12'>
-                                                <LabelInput name="password" onChange={(e) => handleChange(e)} label='Password' />
+                                                <LabelInput type="password" name="password" onChange={(e) => handleChange(e)} label='Password' showEyeIcon={true} />
                                             </div>
                                             <div className='col-span-12 text-white text-xs text-right'>
                                                 <Link to={'/forgot-password'}>
@@ -102,7 +85,7 @@ const Login = () => {
                                     <div className='col-span-12'>
                                         <div className='grid grid-cols-12 gap-3'>
                                             <div className='col-span-12'>
-                                                <PrimaryButton className='cursor-pointer' type="submit" disabled={loading} size='large' color='green'>
+                                                <PrimaryButton type="submit" disabled={!loginData.email || !loginData.password || loading} size='large' color='green'>
                                                     {loading ? 'Logging in...' : 'Log in'}
                                                 </PrimaryButton>
                                             </div>

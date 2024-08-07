@@ -109,7 +109,7 @@ const CreateCategory = () => {
                                     value={formData.categoryDescription || ''}
                                     id="description"
                                     rows="6"
-                                    className="block p-2.5 w-full text-sm bg-transparent rounded-lg border border-[#454545] focus:ring-primaryGreen focus:border-primaryBlack"
+                                    className="block p-2.5 w-full text-sm bg-transparent rounded-lg border border-borderInput focus:outline-none focus:border-primaryGreen"
                                     placeholder="Description..."
                                     onChange={(e) => setFormData({ ...formData, categoryDescription: e.target.value })}
                                 />
