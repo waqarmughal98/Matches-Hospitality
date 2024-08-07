@@ -20,7 +20,7 @@ const Layout = () => {
             <div className='w-full'>
                 <Navbar />
                 <div className={`p-12 relative`}>
-                    {<Outlet />}
+                    <Outlet />
                     <Backdrop />
                 </div>
             </div>
