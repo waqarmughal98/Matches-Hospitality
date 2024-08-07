@@ -176,11 +176,14 @@ const NewPackage = () => {
 
     return (
         <div className='grid grid-cols-12 rounded-lg justify-center gap-y-10 min-h-[600px] overflow-y-auto min-w-[800px] px-1'>
-            {action && (
+            {/* {action && (
                 <div className='col-span-12 headerText'>
                     {action == "create" ? "" : <SecondaryButton />}
                 </div>
-            )}
+            )} */}
+            <div className='col-span-12'>
+                <SecondaryButton/>
+            </div>
             <div className='col-span-12 headerText'>
                 {action == "create" ? "Create Package" : "Edit Package"}
             </div>

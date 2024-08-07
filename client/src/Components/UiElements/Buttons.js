@@ -2,7 +2,7 @@ import React from 'react'
 import { Colors } from '../../utilities/Color';
 import backIcon from '../../../src/assets/svgs/auth/back-arrow.svg'
 import { useNavigate } from 'react-router-dom';
-export const PrimaryButton = ({ onClick, children, className = '', disabled = false, type = 'button', size = 'full', color = "green" }) => {
+export const PrimaryButton = ({ onClick, children, className = '', disabled = false, type = 'button', size = 'large', color = "green" }) => {
   const buttonStyle = {
     backgroundColor: Colors.primaryBlack,
   };
@@ -19,7 +19,7 @@ export const PrimaryButton = ({ onClick, children, className = '', disabled = fa
   return (
     <button
       onClick={onClick}
-      className={`primaryBtn ${bgColor} font-Manrope rounded-full font-semibold ${sizeClasses} ${className}`}
+      className={`primaryBtn ${bgColor} rounded-full font-semibold ${sizeClasses} ${className}`}
       disabled={disabled}
       type={type}
       style={buttonStyle}

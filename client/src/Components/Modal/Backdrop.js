@@ -13,7 +13,7 @@ const Backdrop = () => {
         onClick={closeModal}
       ></div>
       <div
-        className={`relative max-h-[700px] overflow-y-auto overflow-x-hidden custom-scroll rounded-md`}
+        className={`relative overflow-x-hidden custom-scroll rounded-md`}
       >
         {backdropContent}
       </div>

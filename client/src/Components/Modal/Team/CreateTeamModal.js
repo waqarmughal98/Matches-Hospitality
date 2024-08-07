@@ -85,7 +85,7 @@ const CreateTeamModal = ({ setTeamData }) => {
     };
 
     return (
-        <div className='grid grid-cols-12 justify-center p-10 rounded-lg backdrop-blur-3xl m-auto mt-12 bg-black/40 max-h-full overflow-auto custom-scroll'>
+        <div className='grid grid-cols-12 justify-center p-20 lg:w-[800px] rounded-lg backdrop-blur-3xl m-auto mt-28 bg-black/40 overflow-auto custom-scroll max-h-[600px] overflow-y-auto'>
             <button
                 type="button"
                 className="absolute top-4 right-4    rtl:right-auto rtl:left-4"
@@ -107,7 +107,7 @@ const CreateTeamModal = ({ setTeamData }) => {
                 </svg>
                 <span className="sr-only">Close</span>
             </button>
-            <div className='col-span-12'>
+            <div className='lg:col-span-10 lg:col-start-2'>
                 <div className='grid grid-cols-12 gap-y-5'>
                     <div className='relative w-48 h-48 rounded-full bg-[#1E1E1E] flex justify-center items-center flex-col gap-y-5 m-auto col-span-6 col-start-4'>
                         <input

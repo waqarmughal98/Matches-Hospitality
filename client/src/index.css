@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* Font Faces */
 @font-face {
   font-family: "JumperPersonalUseOnly";
   src: local("JumperPersonalUseOnly"),
@@ -10,47 +10,52 @@
 }
 
 @font-face {
-  font-family: "Manrope";
-  src: local("Manrope Regular"),
+  font-family: "Manrope-Regular";
+  src: local("Manrope-Regular"),
        url("./assets/fonts/Manrope/static/Manrope-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Mohol";
-  src: local("Mohol Regular"),
+  font-family: "Mohol-Regular";
+  src: local("Mohol-Regular"),
        url("./assets/fonts/Mohol-Regular/Mohol-Regular.otf") format("opentype");
 }
 
+/* Global Styles */
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #1D1D1D;
-  font-family: 'Manrope';
+  font-family: 'Manrope-Regular', sans-serif;
 }
 
+/* Components */
 @layer components {
   .dropdown-content {
     @apply w-full bg-transparent rounded-md overflow-hidden transition-all duration-300 ease-out;
+    max-height: 0;
+    opacity: 0;
   }
 
   .dropdown-content.active {
+    max-height: 200px;
     opacity: 1;
   }
 
   .jumperHeading {
     @apply text-white font-semibold text-4xl;
-    font-family: "JumperPersonalUseOnly";
+    font-family: "JumperPersonalUseOnly", serif;
   }
 
   .headerText {
     @apply text-white font-semibold text-3xl;
-    font-family: "JumperPersonalUseOnly";
+    font-family: "JumperPersonalUseOnly", serif;
   }
 
   .primaryText {
     @apply text-white text-base;
-    font-family: "Manrope";
+    font-family: "Manrope-Regular", sans-serif;
   }
 
   .card {
@@ -58,6 +63,7 @@ body {
   }
 }
 
+/* Custom Scrollbar Styles */
 .custom-scroll::-webkit-scrollbar {
   width: 5px;
   opacity: 0;
@@ -79,13 +85,11 @@ body {
   scrollbar-color: rgba(32, 33, 37, 0.2) transparent;
 }
 
-.dropdown-content {
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+/* Font Utility Classes */
+/* .jumper {
+  font-family: "JumperPersonalUseOnly", serif;
 }
 
-.dropdown-content.active {
-  max-height: 200px;
-  opacity: 1;
-}
+.manrope {
+  font-family: "Manrope-Regular", sans-serif;
+} */
