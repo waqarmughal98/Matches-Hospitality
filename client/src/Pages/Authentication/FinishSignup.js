@@ -10,7 +10,7 @@ import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Butt
 import { LabelInput } from '../../Components/UiElements/TextInputs';
 import { useAppContext } from '../../UseContext/ContextProvider';
 const FinishSignup = () => {
-    const { signUpDetails, signUpDetailsSetter, handleErrors } = useAppContext()
+    const { signUpDetails, signUpDetailsSetter, setSignUpDetails, handleErrors } = useAppContext()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -27,8 +27,8 @@ const FinishSignup = () => {
             toast.error("Password is required");
             return false;
         }
-        if (confirmPassword == signUpDetails.password) {
-            toast.error("Password must not be match");
+        if (confirmPassword != signUpDetails.password) {
+            toast.error("Password must be match");
             return false;
         }
 
@@ -48,6 +48,12 @@ const FinishSignup = () => {
                 const userData = res.data.data;
                 localStorage.setItem('userData', JSON.stringify(userData));
                 toast.success("Account created successfully!")
+                setConfirmPassword("")
+                setSignUpDetails({
+                    userName:"",
+                    email: "",
+                    password: ""
+                  })
                 setTimeout(() => {
                     navigate("/dashboard")
                 }, 1500);
@@ -80,16 +86,16 @@ const FinishSignup = () => {
                                     <span className='text-primaryGreen'>
                                         {signUpDetails.email}
                                     </span>
-                                </div>
+                                </div>``
                             </div>
                         </div>
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-y-5'>
                                 <div className='col-span-12'>
-                                    <LabelInput name="password" value={signUpDetails.password} onChange={(e) => signUpDetailsSetter(e)} label='Create Password' />
+                                    <LabelInput type='password' name="password" showEyeIcon={true} value={signUpDetails.password} onChange={(e) => signUpDetailsSetter(e)} label='Create Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <LabelInput name="confirm-password" showEyeIcon={true} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} label='Confirm Password' />
+                                    <LabelInput type='password' name="confirm-password" showEyeIcon={true} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} label='Confirm Password' />
                                 </div>
                             </div>
                         </div>

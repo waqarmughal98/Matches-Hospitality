@@ -9,8 +9,10 @@ import { LabelInput } from '../../Components/UiElements/TextInputs'
 import { useAppContext } from '../../UseContext/ContextProvider'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { URL } from '../../utilities/ConstantData'
+import axios from 'axios'
 const Signup = () => {
-  const { signUpDetails,signUpDetailsSetter,isEmailValidate}  = useAppContext()
+  const { signUpDetails,signUpDetailsSetter,isEmailValidate,handleErrors}  = useAppContext()
   const navigate = useNavigate();
 
   const validation = () => {
@@ -31,9 +33,19 @@ const Signup = () => {
         return null
     }
     if(isEmailValidate(signUpDetails.email)){
-        navigate('/finish-signup'); 
+        checkUserExists()
     }
   };
+
+  const checkUserExists=()=>{
+    axios.post(`${URL}/check-user-exists`, {email : signUpDetails.email})
+    .then((res) => {
+        navigate('/finish-signup'); 
+    })
+    .catch((error) => {
+        handleErrors(error)
+    })
+  }
 
     return (
         <AuthLayout backgroundImage={loginBanner}>

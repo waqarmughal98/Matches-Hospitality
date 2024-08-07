@@ -8,7 +8,7 @@ import axios from 'axios'
 import AuthLayout from '../../ThemeLayout/AuthLayout'
 import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
 import { LabelInput } from '../../Components/UiElements/TextInputs'
-
+import {URL} from '../../../src/utilities/ConstantData'
 const ConfirmPassword = () => {
     const {  forgetPassworddata, forgetPasswordsSetter} = useAppContext()
     const [ confirmPassword, setConfirmPassword] = useState()
@@ -31,8 +31,8 @@ const ConfirmPassword = () => {
             toast.error("Confirm Password is required");
             return false;
         }
-        if (confirmPassword==forgetPassworddata.new_password) {
-            toast.error("Password does not match");
+        if (confirmPassword!=forgetPassworddata.new_password) {
+            toast.error("Password must be match");
             return false;
         }
     
@@ -95,10 +95,10 @@ const ConfirmPassword = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-7'>
                                 <div className='col-span-12'>
-                                    <LabelInput name="new_password" value={forgetPassworddata.new_password} showEyeIcon={true} onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter Your New Password' />
+                                    <LabelInput type='password' showEyeIcon={true} name="new_password" value={forgetPassworddata.new_password} showEyeIcon={true} onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter Your New Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <LabelInput value={confirmPassword} showEyeIcon={true} onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
+                                    <LabelInput type='password' showEyeIcon={true} value={confirmPassword} showEyeIcon={true} onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
                                 </div>
                                 <div className='col-span-12'>
                                     <PrimaryButton onClick={changePassword}  size='large' color='green'>
