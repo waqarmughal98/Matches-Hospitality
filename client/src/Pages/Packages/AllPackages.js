@@ -140,7 +140,7 @@ const AllPackages = () => {
                                                                  <h2 className='text-white font-bold text-3xl'>
                                                                     ${item.price}
                                                                 </h2>
-                                                                <div className='flex justify-end gap-x-4'>
+                                                                <div className='flex justify-end gap-x-3'>
                                                                     <div onClick={()=>handleEdit(item)} className='bg-primaryGreen h-8 w-8 rounded-md flex justify-center items-center cursor-pointer'>
                                                                         <MdOutlineEdit className='text-black'/>
                                                                     </div>

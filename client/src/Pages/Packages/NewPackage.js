@@ -175,7 +175,7 @@ const NewPackage = () => {
     }
 
     return (
-        <div className='grid grid-cols-12 rounded-lg justify-center gap-y-10 min-h-[600px] overflow-y-auto min-w-[800px]'>
+        <div className='grid grid-cols-12 rounded-lg justify-center gap-y-10 min-h-[600px] overflow-y-auto min-w-[800px] px-1'>
             {action && (
                 <div className='col-span-12 headerText'>
                     {action == "create" ? "" : <SecondaryButton />}
@@ -227,7 +227,7 @@ const NewPackage = () => {
                                             </div>
                                             {isChecked && (
                                                 <textarea
-                                                    className='w-full p-2 border rounded bg-transparent'
+                                                    className='w-full p-2 border rounded bg-transparent border-borderInput focus:outline-none focus:border-primaryGreen'
                                                     placeholder='Enter details here...'
                                                     rows={4}
                                                     name={item.name}

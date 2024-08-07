@@ -120,7 +120,7 @@ const CreatePackage = () => {
                         {/* {data?.map((item) => {
                             return (
                                 <>
-                                    <MatchCard
+                                    <MatchCardall
                                         key={item.id}
                                         data={item}
                                         onClick={() => handleCardClick(item.id)}
