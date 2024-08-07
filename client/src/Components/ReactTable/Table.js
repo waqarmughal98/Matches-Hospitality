@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { getCoreRowModel, useReactTable, flexRender, getPaginationRowModel } from '@tanstack/react-table';
 import { FaAngleRight, FaAnglesRight, FaAngleLeft, FaAnglesLeft } from 'react-icons/fa6';
 
-export const Table = ({ data, columns, showNavigation, search, searchLabel ,header}) => {
+export const Table = ({ data, columns, showNavigation, search, searchLabel, header }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const filteredData = useMemo(() => {
@@ -29,17 +29,19 @@ export const Table = ({ data, columns, showNavigation, search, searchLabel ,head
         <div className="flex flex-col">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full sm:px-6 lg:px-8">
-                    <div className='flex justify-between items-center'>
+                    <div className='flex justify-between items-center pb-5'>
                         <div className='headerText'>{header}</div>
-                        {search && (
-                            <input
-                                onChange={handleSearchChange}
-                                value={searchQuery}
-                                size="small"
-                                placeholder={searchLabel || 'Search...'}
-                                className="p-2 rounded-md mb-4 bg-transparent border border-borderInput outline-none"
-                            />
-                        )}
+                        <div>
+                            {search && (
+                                <input
+                                    onChange={handleSearchChange}
+                                    value={searchQuery}
+                                    size="small"
+                                    placeholder={searchLabel || 'Search...'}
+                                    className="p-2 rounded-md mb-4 bg-transparent border border-borderInput outline-none focus:border-primaryGreen"
+                                />
+                            )}
+                        </div>
                     </div>
                     <div className="overflow-hidden bg-cardBG rounded-lg">
                         <table className="min-w-full text-center rounded-lg ">
@@ -120,13 +122,13 @@ export const Table = ({ data, columns, showNavigation, search, searchLabel ,head
                                                 const page = e.target.value ? Number(e.target.value) - 1 : 0;
                                                 table.setPageIndex(page);
                                             }}
-                                            className="w-16 rounded border border-borderInput p-1 bg-transparent"
+                                            className="w-16 rounded border border-borderInput p-1 bg-transparent focus:!border-primaryGreen"
                                         />
                                     </span>
                                 </div>
                                 <select
                                     value={table.getState().pagination.pageSize}
-                                    className='bg-transparent px-2 py-1 rounded-md border border-borderInput'
+                                    className='bg-transparent px-2 py-1 rounded-md border border-borderInput focus:border-primaryGreen'
                                     onChange={(e) => {
                                         table.setPageSize(Number(e.target.value));
                                     }}

@@ -13,7 +13,7 @@ const adminSidebarItems = [
     { path: 'dashboard', label: 'Dashboard', iconPath: <IoHomeOutline /> },
     { path: 'all-categories', label: 'Categories', iconPath: <TbCategory /> },
     { path: 'all-packages', label: 'Packages', iconPath: <LuPackage2 /> },
-    { path: 'user-management', label: 'Users', iconPath: <FiUsers /> },
+    { path: 'all-users', label: 'Users', iconPath: <FiUsers /> },
     { path: 'all-teams', label: 'Teams', iconPath: <PiMicrosoftTeamsLogo /> },
     { path: 'all-matches', label: 'Matches', iconPath: <MdOutlineStadium /> },
 ];
