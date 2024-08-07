@@ -95,10 +95,10 @@ const ConfirmPassword = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-7'>
                                 <div className='col-span-12'>
-                                    <LabelInput name="new_password" value={forgetPassworddata.new_password} onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter Your New Password' />
+                                    <LabelInput name="new_password" value={forgetPassworddata.new_password} showEyeIcon={true} onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter Your New Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <LabelInput value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
+                                    <LabelInput value={confirmPassword} showEyeIcon={true} onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
                                 </div>
                                 <div className='col-span-12'>
                                     <PrimaryButton onClick={changePassword}  size='large' color='green'>

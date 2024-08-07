@@ -33,7 +33,7 @@ const slidesData = [
 ];
 
 const slides = slidesData.map((item, index) => (
-  <div key={index} className='min-h-56 rounded-lg bg-cover bg-center border border-borderInput' style={{ backgroundImage: `url(${item.banner})` }}>
+  <div key={index} className='min-h-56 rounded-xl bg-cover bg-center border border-borderInput' style={{ backgroundImage: `url(${item.banner})` }}>
     <div className='flex items-end h-full p-5 text-white'>
       <div className='flex flex-col gap-y-5'>
         <img src={item.logo} alt='logo' width={40} />

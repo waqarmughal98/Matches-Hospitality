@@ -69,7 +69,7 @@ const ForgotPassword = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-5'>
                                 <div className='col-span-12'>
-                                    <LabelInput name="email" value={forgetPassworddata.email}  onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter your email address' />
+                                    <LabelInput name="email" value={forgetPassworddata.email} showEyeIcon={true}  onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter your email address' />
                                 </div>
                                 <div className='col-span-12 pb-10'>
                                     <PrimaryButton disabled={loading} onClick={handleClick} size='large' color='green'>

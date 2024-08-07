@@ -89,7 +89,7 @@ const FinishSignup = () => {
                                     <LabelInput name="password" value={signUpDetails.password} onChange={(e) => signUpDetailsSetter(e)} label='Create Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <LabelInput name="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} label='Confirm Password' />
+                                    <LabelInput name="confirm-password" showEyeIcon={true} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} label='Confirm Password' />
                                 </div>
                             </div>
                         </div>
