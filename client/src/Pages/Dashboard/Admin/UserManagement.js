@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { axiosInstance, URL } from '../../../utilities/ConstantData';
 import Loader from '../../../Components/UiElements/Loader';
+import { PrimaryButton } from '../../../Components/UiElements/Buttons';
 
 const UserManagement = () => {
   const { handleErrors } = useAppContext();
@@ -23,8 +24,8 @@ const UserManagement = () => {
       const res = await axiosInstance().get(`${URL}/all-users`);
       setLoading(false);
       const data = res.data.data;
-      console.log(process.env.REACT_APP_ADMIN_SECRET,"secret")
-      const filteredData=data.filter(item=>item.userType !=  'ap%4k45a5sd' )
+      console.log(process.env.REACT_APP_ADMIN_SECRET, "secret")
+      const filteredData = data.filter(item => item.userType != 'ap%4k45a5sd')
       setAllUsers(filteredData);
       setStatistics(res.data.statistics)
     } catch (error) {
@@ -46,18 +47,18 @@ const UserManagement = () => {
     }
   };
 
-  const updateStatics=(status)=>{
+  const updateStatics = (status) => {
     setStatistics(prevStats =>
       prevStats.map(stat =>
         stat.title === 'Deactivated Users'
-          ? { ...stat, numberOfUsers: status=="active" ?  stat.numberOfUsers + 1 : stat.numberOfUsers - 1  }
+          ? { ...stat, numberOfUsers: status == "active" ? stat.numberOfUsers + 1 : stat.numberOfUsers - 1 }
           : stat
       )
     )
   }
 
 
-  console.log(statistics,"statistics")
+  console.log(statistics, "statistics")
 
   const handleToggleStatus = async (userId, currentStatus) => {
     setLoading2(true)
@@ -124,11 +125,11 @@ const UserManagement = () => {
       cell: (row) => (
         <div className="flex items-center gap-x-5 ps-24">
           <label className="inline-flex items-center cursor-pointer">
-            <input 
-              checked={row.getValue('status') === 'active'} 
-              type="checkbox" 
+            <input
+              checked={row.getValue('status') === 'active'}
+              type="checkbox"
               disabled={loading2}
-              className="sr-only peer" 
+              className="sr-only peer"
               onChange={() => handleToggleStatus(row.row.original._id, row.getValue('status'))}
             />
             <div className="relative w-9 h-5 py-2 bg-white/90 peer-focus:outline-none rounded-full after:bg-red-800 peer-checked:after:translate-x-full peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
@@ -144,7 +145,14 @@ const UserManagement = () => {
     <div className='grid grid-cols-12 text-white xl:gap-x-10 gap-y-8'>
       <div className='col-span-12'>
         <div className='grid grid-cols-12 xl:gap-x-8 gap-y-8'>
-          <div className='col-span-12 headerText'>Users Management</div>
+          <div className='col-span-12'>
+            <div className='flex justify-between items-center'>
+              <div className='headerText'>
+                Users Management
+              </div>
+              <PrimaryButton size='medium'>Create User</PrimaryButton>
+            </div>
+          </div>
           <div className='col-span-12'>
             <div className='grid grid-cols-12 xl:gap-x-5 gap-y-5'>
               {statistics.map((item, index) => (
@@ -176,7 +184,7 @@ const UserManagement = () => {
             All Users
           </div> */}
           <div className='col-span-12'>
-            <Table data={allUsers} columns={cols} showNavigation search={true} header='All Users'/>
+            <Table data={allUsers} columns={cols} showNavigation search={true} header='All Users' />
           </div>
         </div>
       </div>
