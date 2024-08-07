@@ -5,7 +5,7 @@ import Navbar from '../Components/Menu/Navbar';
 import Backdrop from '../Components/Modal/Backdrop';
 import { useAppContext } from '../UseContext/ContextProvider';
 const Layout = () => {
-    // const { openModal, closeModal, isOpen, setIsOpen, isModalOpen } = useAppContext()
+    const {  isModalOpen } = useAppContext()
     // const handleToggle = () => {
     //     if (openModal == true || isOpen) {
     //         closeModal()
@@ -17,11 +17,13 @@ const Layout = () => {
             <div className='min-w-20 z-40 lg:block hidden'>
                 <Sidebar />
             </div>
-            <div className='w-full'>
+            <div className='w-full flex flex-col'>
                 <Navbar />
                 <div className={`p-12 relative`}>
                     <Outlet />
+                    <div className={`${isModalOpen ? 'opacity-100 ' : 'opacity-0' } transition-opacity duration-150 ease-linear`}>
                     <Backdrop />
+                    </div>
                 </div>
             </div>
         </div>

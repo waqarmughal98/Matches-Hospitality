@@ -86,7 +86,7 @@ export const ProfileDropdown = () => {
         </svg>
       </button>
       <div
-        className={`hs-dropdown-menu transition-all duration-200 ease-linear ${isOpen ? 'visible' : 'hidden'} min-w-60 bg-[#121212] shadow-md rounded-lg p-1 space-y-0.5 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 absolute right-0 top-10`}
+        className={`hs-dropdown-menu transition-all duration-200 ease-linear ${isOpen ? 'h-60 opacity-100' : 'h-0 opacity-0 overflow-hidden'} min-w-60 bg-[#121212] shadow-md rounded-lg p-1 space-y-0.5 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 absolute right-0 top-10`}
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="hs-dropdown-custom-trigger"
