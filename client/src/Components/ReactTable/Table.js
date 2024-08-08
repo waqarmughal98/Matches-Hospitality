@@ -6,6 +6,7 @@ export const Table = ({ data, columns, showNavigation, search, searchLabel, head
     const [searchQuery, setSearchQuery] = useState('');
 
     const filteredData = useMemo(() => {
+
         if (!searchQuery) return data;
         return data.filter(row => {
             return Object.values(row).some(value =>
