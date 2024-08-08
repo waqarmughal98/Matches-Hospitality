@@ -48,16 +48,13 @@ const UserModal = ({setNewUser}) => {
               setLoading(false)
               toast.success("User created successfully!")
               setConfirmPassword("")
-              closeModal()
               setNewUser(signUpDetails)
               setSignUpDetails({
                   userName:"",
                   email: "",
                   password: ""
                 })
-              setTimeout(() => {
-                  navigate("/dashboard")
-              }, 1500);
+              closeModal()
           })
           .catch((error) => {
               setLoading(false)
