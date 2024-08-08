@@ -231,13 +231,13 @@ export const AdminProfile = () => {
                                 <p className='text-sm mt-2 text-gray-300'>Note: To update the Full Name, simply type it in the input field and press Enter.</p>
                             </div>
                             <div className='col-span-12'>
+                                <LabelInput name='old_password' value={passwordData.old_password} onChange={(e) => handleChange(e)} label='Old Password' />
+                            </div>
+                            <div className='col-span-12'>
                                 <div className='flex gap-x-5'>
                                     <LabelInput name='current_password' value={passwordData.current_password} onChange={(e) => handleChange(e)} label='New Password' />
                                     <LabelInput name='password_confirmation' value={passwordData.password_confirmation} onChange={(e) => handleChange(e)} label='Confirm Password' />
                                 </div>
-                            </div>
-                            <div className='col-span-6'>
-                                <LabelInput name='old_password' value={passwordData.old_password} onChange={(e) => handleChange(e)} label='Old Password' />
                             </div>
                             <div className='grid col-span-12 justify-end'>
                                 <PrimaryButton onClick={() => handleChangePassword()} size='medium'>{loading2 ? "Changing Password" : "Change Password"}</PrimaryButton>
