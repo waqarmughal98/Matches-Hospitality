@@ -88,7 +88,7 @@ const CreateCategory = () => {
             <div className='col-span-12'>
                 <SecondaryButton />
             </div>
-            <div className='col-span-12 headerText'>Category Creation</div>
+            <div className='col-span-12 headerText'>Event Creation</div>
             <div className='lg:col-span-6 md:col-span-8 col-span-12'>
                 <div className='grid grid-cols-12 gap-y-5'>
                     <div className='col-span-12'>

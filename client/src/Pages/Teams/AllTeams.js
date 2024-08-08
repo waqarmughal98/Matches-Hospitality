@@ -130,7 +130,7 @@ const AllTeams = () => {
       <div className='col-span-12'>
         {
           TeamData.length>0 ?
-          <div className='grid grid-cols-12 gap-5'>
+          <div className='grid grid-cols-12 gap-7'>
             {TeamData.map((item, index) => (
               <div key={index} className='group relative text-white grid xl:col-span-2 md:col-span-12 col-span-12 items-center min-h-44 rounded-xl bg-cover bg-center border-primaryBorder border-[1px] bg-gradient-to-t from-primaryGreen/10 py-5 to-transparent'>
                 <div className='flex flex-col items-center gap-y-3'>
