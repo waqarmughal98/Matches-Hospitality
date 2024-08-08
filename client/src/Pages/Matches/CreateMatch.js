@@ -223,7 +223,7 @@ const CreateMatch = () => {
                             <div className='sm:col-span-11 col-span-12'>
                                 <Dropdown
                                     id="dropdown1"
-                                    title="Choose an item"
+                                    title="Select category"
                                     data={categoryData}
                                     position="bottom-left"
                                     hasImage={true}
@@ -236,7 +236,7 @@ const CreateMatch = () => {
                             <div className='md:col-span-5 col-span-12'>
                                 <Dropdown
                                     id="dropdown2"
-                                    title="Choose an item"
+                                    title="Select team 1"
                                     data={TeamData}
                                     position="bottom-left"
                                     hasImage={true}
@@ -252,7 +252,7 @@ const CreateMatch = () => {
                             <div className='md:col-span-5 col-span-12'>
                                 <Dropdown
                                     id="dropdown3"
-                                    title="Choose an item"
+                                    title="Select team 2"
                                     data={TeamData}
                                     position="bottom-left"
                                     hasImage={true}
