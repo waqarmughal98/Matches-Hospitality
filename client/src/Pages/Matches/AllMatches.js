@@ -95,7 +95,7 @@ const AllMatches = () => {
             <div className='col-span-12'>
                 <div className='flex justify-between items-center'>
                     <p className='headerText'>All Matches</p>
-                    <PrimaryButton size='medium' onClick={()=>navigate('/match/create')}>Create Match</PrimaryButton>
+                    <PrimaryButton size='medium' onClick={()=>navigate('/match/create')}>Create New Match</PrimaryButton>
                 </div>
             </div>
             <div className='col-span-12'>

@@ -128,12 +128,12 @@ const AllPackages = () => {
                                         <div className='grid grid-cols-12 gap-5'>
                                             {PackagesData.map((item, index) => {
                                                 return (
-                                                    <div key={index} className='grid lg:col-span-4 col-span-12 bg-gradient-to-t from-primaryGreen/5 to-transparent bg-[#161616] rounded-2xl p-6 min-h-[19rem] items-center'>
+                                                    <div key={index} className='grid lg:col-span-4 col-span-12 bg-gradient-to-t from-primaryGreen/5 to-transparent bg-[#161616] rounded-2xl p-8'>
                                                         <div className='flex flex-col gap-5'>
                                                             <h1 className='text-3xl font-bold'>
                                                                 {item.name}
                                                             </h1>
-                                                            <p className='text-white/50 text-sm'>
+                                                            <p className='text-white/50 text-sm truncate-multiline'  style={{ '--line-clamp': 4 }}>
                                                                 {item.description}
                                                             </p>
                                                             <div className='flex justify-between items-center'>
