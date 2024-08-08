@@ -26,7 +26,7 @@ const EditCategory = () => {
             });
         }
         else{
-            navigate("/all-categories")
+            navigate("/all-events")
         }   
     }, []);
 
@@ -81,7 +81,7 @@ const EditCategory = () => {
         .then(()=>{
             setLoading(false)
             toast.success("Category updated successfully")
-            navigate("/all-categories")
+            navigate("/all-events")
         })
         .catch ((error)=> {
             setLoading(false)

@@ -11,7 +11,7 @@ import { MdOutlineStadium } from "react-icons/md";
 
 const adminSidebarItems = [
     { path: 'dashboard', label: 'Dashboard', iconPath: <IoHomeOutline /> },
-    { path: 'all-categories', label: 'Categories', iconPath: <TbCategory /> },
+    { path: 'all-events', label: 'Categories', iconPath: <TbCategory /> },
     { path: 'all-packages', label: 'Packages', iconPath: <LuPackage2 /> },
     { path: 'all-users', label: 'Users', iconPath: <FiUsers /> },
     { path: 'all-teams', label: 'Teams', iconPath: <PiMicrosoftTeamsLogo /> },

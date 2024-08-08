@@ -45,7 +45,7 @@ const routes = [
       { path: "package", element: <PackageInformation />, type: "admin" },
       { path: "create-package", element: <CreatePackage />, type: "admin" },
       { path: "admin-account", element: <Account />, type: "admin" },
-      { path: "all-categories", element: <AllCategories />, type: "admin" },
+      { path: "all-events", element: <AllCategories />, type: "admin" },
       { path: "create-category", element: <CreateCategory />, type: "admin" },
       { path: "edit-category", element: <EditCategory />, type: "admin" },
       { path: "all-matches", element: <AllMatches />, type: "admin" },
