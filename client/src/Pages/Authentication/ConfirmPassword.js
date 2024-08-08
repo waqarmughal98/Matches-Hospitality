@@ -74,7 +74,7 @@ const ConfirmPassword = () => {
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
-                <div className='col-span-5 bg-primaryBlack rounded-xl p-10 min-h-[100vh]'>
+                <div className='col-span-5 bg-primaryBlack rounded-xl p-12'>
                     <div className='grid grid-cols-12 gap-9'>
                         <div className='col-span-12'>
                             <SecondaryButton />
@@ -95,10 +95,10 @@ const ConfirmPassword = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-7'>
                                 <div className='col-span-12'>
-                                    <LabelInput type='password' showEyeIcon={true} name="new_password" value={forgetPassworddata.new_password} showEyeIcon={true} onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter Your New Password' />
+                                    <LabelInput type='password' showEyeIcon={true} name="new_password" value={forgetPassworddata.new_password}  onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter Your New Password' />
                                 </div>
                                 <div className='col-span-12'>
-                                    <LabelInput type='password' showEyeIcon={true} value={confirmPassword} showEyeIcon={true} onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
+                                    <LabelInput type='password' showEyeIcon={true} value={confirmPassword}  onChange={(e)=>setConfirmPassword(e.target.value)} label='Confirm Password' />
                                 </div>
                                 <div className='col-span-12'>
                                     <PrimaryButton onClick={changePassword}  size='large' color='green'>

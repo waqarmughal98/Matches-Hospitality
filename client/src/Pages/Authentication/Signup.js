@@ -50,7 +50,7 @@ const Signup = () => {
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
-                <div className='col-span-5 bg-primaryBlack rounded-xl p-10'>
+                <div className='col-span-5 bg-primaryBlack rounded-xl p-12'>
                     <div className='grid grid-cols-12 gap-5'>
                         <div className='col-span-12'>
                             <SecondaryButton />

@@ -245,7 +245,7 @@ const NewPackage = () => {
                             <div className='col-span-12 border p-5 border-[#5C5C5C] rounded-xl'>
                                 <div className='flex justify-between'>
                                     <div className='flex gap-2 items-center'>
-                                        <PrimaryInput prefix={"$"} field="number" name="price" value={info.price} onChange={handleChange} className='text-lg' />
+                                        <PrimaryInput prefix={"$"} field="number" placeholder='Price' name="price" value={info.price} onChange={handleChange} className='text-lg' />
                                         <div className='flex flex-col gap-y-2'>
                                             <svg onClick={() => setInfo(prevInfo => ({ ...prevInfo, price: (Number(prevInfo.price) + 1).toString() }))} className='cursor-pointer' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="15.6" height="15.6" rx="5" fill="#88F67E" />
