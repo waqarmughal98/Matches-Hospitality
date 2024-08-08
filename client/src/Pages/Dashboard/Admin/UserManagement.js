@@ -131,7 +131,7 @@ const UserManagement = () => {
               className="sr-only peer"
               onChange={() => handleToggleStatus(row.row.original._id, row.getValue('status'))}
             />
-            <div className="relative w-9 h-4 py-2 bg-white/90 peer-focus:outline-none rounded-full after:bg-red-600 peer-checked:after:translate-x-3 peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[4.8px] after:start-[4px] after:rounded-full after:h-1.5 after:w-4 after:transition-all"></div>
+            <div className="relative w-8 h-4 py-2 bg-white/90 peer-focus:outline-none rounded-full after:bg-red-600 peer-checked:after:translate-x-3 peer-checked:after:bg-primaryGreen after:content-[''] after:absolute after:top-[1.99px] after:start-[4px] after:rounded-full after:h-3 after:w-3 after:transition-all"></div>
             <span className="ms-4 text-base text-white/80">{row.getValue('status') === 'active' ? 'Active' : 'Deactivated'}</span>
           </label>
         </div>
@@ -157,7 +157,7 @@ const UserManagement = () => {
               <div className='headerText'>
                 Users Management
               </div>
-              <PrimaryButton size='medium' onClick={handleBackdrop}>Create User</PrimaryButton>
+              <PrimaryButton size='medium' onClick={handleBackdrop}>Create New User</PrimaryButton>
             </div>
           </div>
           <div className='col-span-12'>

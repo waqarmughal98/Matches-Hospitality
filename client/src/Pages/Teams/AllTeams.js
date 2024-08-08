@@ -123,7 +123,7 @@ const AllTeams = () => {
         <div className='flex justify-between items-center'>
           <h1 className='headerText'>All Teams</h1>
           <PrimaryButton size='medium' onClick={handleCreateBackdrop}>
-            Create Team
+            Create New Team
           </PrimaryButton>
         </div>
       </div>

@@ -60,12 +60,12 @@ const Sidebar = () => {
                         <Link
                             key={item.path}
                             to={item.path}
-                            className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === `/${item.path}` ? 'border-l-2 border-primaryGreen rounded-r-3xl' : ''}`}
+                            className={`flex items-center gap-3 py-2 mt-2 text-gray-100 ${currentPath === `/${item.path}` ? 'border-l-2 border-primaryGreen rounded-r-3xl' : 'border-l-2 border-transparent'}`}
                         >
                             {/* <svg className="text-white ms-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.iconPath} />
                             </svg> */}
-                            <div className='ms-5 text-2xl'>
+                            <div className='ms-[1.4rem] text-2xl'>
                                 {item.iconPath}
                             </div>
 

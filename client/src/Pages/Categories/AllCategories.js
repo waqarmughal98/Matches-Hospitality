@@ -108,9 +108,9 @@ const AllCategories = () => {
         <div className='grid grid-cols-12 gap-y-10'>
             <div className='col-span-12 text-white'>
                 <div className='flex justify-between items-center'>
-                    <h1 className='font-semibold text-3xl'>All Categories</h1>
+                    <h1 className='font-semibold text-3xl'>All Events</h1>
                     <PrimaryButton size='medium' onClick={CreateCategory}>
-                        Create Category
+                        Create New Event
                     </PrimaryButton>
                 </div>
             </div>

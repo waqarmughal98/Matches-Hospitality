@@ -57,7 +57,7 @@ const Login = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-3'>
                                 <div className='col-span-12 jumperHeading'>
-                                    UEFA Champions League Hospitality Packages
+                                    Signin to your Account
                                 </div>
                                 <div className='col-span-12 text-sm text-white '>
                                     lorem ipsum is simply a dummy text

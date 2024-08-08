@@ -9,6 +9,8 @@ import { PrimaryButton } from '../../Components/UiElements/Buttons'
 import profile from '../../../src/assets/images/userdashboard/event1.jpg'
 import { useAppContext } from '../../UseContext/ContextProvider'
 import { axiosInstance, URL as API_URL, axiosInstance2 } from '../../utilities/ConstantData'
+import { FaRegStar } from "react-icons/fa";
+
 import { useNavigate } from 'react-router-dom';
 export const AdminProfile = () => {
     const { handleErrors, setProfileUpdation } = useAppContext()
@@ -164,7 +166,7 @@ export const AdminProfile = () => {
                     <div className='flex-1 bg-black/60 rounded-b-md'></div>
                     <div className='absolute h-full w-full flex items-center px-5 text-white gap-5'>
                         <div className='h-40 w-40 rounded-full relative'>
-                            <img src={`uploads/${profileImage}`} className='absolute h-full w-full rounded-full' />
+                            <img src={`uploads/${profileImage}`} className='absolute h-full w-full rounded-full border border-borderInput/30' />
                             <div
                                 className="absolute cursor-pointer bg-primaryGreen right-2 bottom-4 h-7 w-7 rounded-lg flex items-center justify-center"
                                 onClick={() => handleIconClick()}
@@ -190,10 +192,10 @@ export const AdminProfile = () => {
                 <div className='grid grid-cols-12 space-x-5'>
                     <div className='col-span-3 card rounded-lg'>
                         <div className='flex flex-col'>
-                            <label className='Info border-b border-borderInput px-7 py-5 headerText'>Info</label>
+                            <label className='Info border-b border-borderInput px-7 py-5 headerText mt-[0.8rem]'>Details</label>
                             <div className='flex flex-col gap-y-7 p-7'>
                                 <div className='flex flex-col'>
-                                    <div className='flex gap-x-3'>
+                                    <div className='flex gap-x-4'>
                                         <CgProfile className='text-2xl mt-1' />
                                         <div className='flex flex-col'>
                                             <label className='primaryText'>Name</label>
@@ -202,7 +204,7 @@ export const AdminProfile = () => {
                                     </div>
                                 </div>
                                 <div className='flex flex-col'>
-                                    <div className='flex gap-x-3'>
+                                    <div className='flex gap-x-4'>
                                         <MdOutlineMailOutline className='text-2xl mt-1' />
                                         <div className='flex flex-col'>
                                             <label className='primaryText'>Email</label>
@@ -211,8 +213,8 @@ export const AdminProfile = () => {
                                     </div>
                                 </div>
                                 <div className='flex flex-col'>
-                                    <div className='flex gap-x-3'>
-                                        <CiStar className='text-2xl mt-1' />
+                                    <div className='flex gap-x-4'>
+                                        <FaRegStar className='text-2xl mt-1' />
                                         <div className='flex flex-col'>
                                             <label className='primaryText'>Role</label>
                                             <p className='text-sm'>{userData?.userType == "ap%4k45a5sd" ? 'Admin' : 'User'}</p>
