@@ -8,7 +8,7 @@ import { LabelInput } from '../../Components/UiElements/TextInputs'
 import { PrimaryButton } from '../../Components/UiElements/Buttons'
 import profile from '../../../src/assets/images/userdashboard/event1.jpg'
 import { useAppContext } from '../../UseContext/ContextProvider'
-import { axiosInstance, URL as API_URL } from '../../utilities/ConstantData'
+import { axiosInstance, URL as API_URL, axiosInstance2 } from '../../utilities/ConstantData'
 import { useNavigate } from 'react-router-dom';
 export const AdminProfile = () => {
     const { handleErrors, setProfileUpdation } = useAppContext()
@@ -35,7 +35,9 @@ export const AdminProfile = () => {
 
     const handleFileChange = (e) => {
         const image = e.target.files[0];
+        console.log(image,'Image')
         setProfileFile(image)
+        updateProfile(image)
     }
 
     const handleIconClick = () => {
@@ -111,25 +113,29 @@ export const AdminProfile = () => {
         }
     }
 
-    const updateUserData = () => {
+    const updateUserData = (data) => {
         try {
             let user = JSON.parse(localStorage.getItem('userData'));
             user.userName = userName;
-            user.profileImage = profileImage;
+            user.profileImage = data.profileImage;
             localStorage.setItem('userData', JSON.stringify(user));
         } catch (error) {
             console.log(error)
         } finally {
-            setProfileUpdation({ userName, profileImage })
+            setProfileImage(data.profileImage)
+            setProfileUpdation({ userName, profileImage : data.profileImage })
         }
     }
-    const updateProfile = async () => {
-        axiosInstance().patch(`${API_URL}/update-info`, {
-            userName, profileImage
-        })
+    const updateProfile = async (image) => {
+        const data = new FormData();
+        data.append('userName', userName);
+        data.append('profileImage',  image)
+
+        axiosInstance2().patch(`${API_URL}/update-info`, data)
             .then((res) => {
+                const data=res.data.data
+                updateUserData(data)
                 toast.success("Profile updated successfully")
-                updateUserData()
             })
             .catch((error) => {
                 const errors = error?.response?.data?.errors
@@ -158,7 +164,7 @@ export const AdminProfile = () => {
                     <div className='flex-1 bg-black/60 rounded-b-md'></div>
                     <div className='absolute h-full w-full flex items-center px-5 text-white gap-5'>
                         <div className='h-40 w-40 rounded-full relative'>
-                            <img src={profile} className='absolute h-full w-full rounded-full' />
+                            <img src={`uploads/${profileImage}`} className='absolute h-full w-full rounded-full' />
                             <div
                                 className="absolute cursor-pointer bg-primaryGreen right-2 bottom-4 h-7 w-7 rounded-lg flex items-center justify-center"
                                 onClick={() => handleIconClick()}
@@ -174,7 +180,7 @@ export const AdminProfile = () => {
                             </div>
                         </div>
                         <div className='flex flex-col gap-2 pt-24'>
-                            <div className='headerText'>{userData?.userName}</div>
+                            <div className='headerText'>{userName}</div>
                             <div className=''>Admin</div>
                         </div>
                     </div>

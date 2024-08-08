@@ -328,11 +328,14 @@ const updateUserInfo = asyncHandler(async (req, res) => {
 
     await user.save();
 
-    const token = generateToken(user._id.toString());
-
     res.status(200).json({
       success: true,
       message: 'User info updated successfully',
+      data:{
+        userName : user.userName,
+        profileImage : user.profileImage
+
+      }
     });
   } catch (error) {
     handleError(res, 400, 'Something went wrong');
@@ -350,8 +353,10 @@ const checkUserExists = asyncHandler(async (req, res) => {
     try {
       const user = await User.findOne({ email });
   
-      if (!user) {
-        return res.status(404).json({ success: false, message: 'User does not exist' });
+      if (user) {
+        return res.status(404).json({ success: false, errors: 'User with this email is already exists' });
+      }else{
+        return res.status(200).json({ success: true, message: 'User with this email not exists' });
       }
     } catch (error) {
       handleError(res, 500, 'Something went wrong');

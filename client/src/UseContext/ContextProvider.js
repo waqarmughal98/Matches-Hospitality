@@ -17,6 +17,7 @@ export const ContextProvider = ({ children }) => {
   const [MatchesData, setMatchesData] = useState([])
   const [profileUpdation, setProfileUpdation] = useState()
   const [signUpDetails, setSignUpDetails] = useState({
+    userName:'',
     email: "",
     password: ""
   })

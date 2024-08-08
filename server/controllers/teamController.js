@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Team = require('../models/teamModel');
+const Event = require('../models/eventModel');
 const handleError = require('../utils/errorHandler');
 
 
@@ -61,18 +62,23 @@ const deleteTeam = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deletedTeam = await Team.findByIdAndDelete(id);
-
-    if (!deletedTeam) {
+    // Check if team exists
+    const team = await Team.findById(id);
+    if (!team) {
       return handleError(res, 404, 'Team not found');
     }
 
-    res.status(200).json({ success: true, message: 'Team deleted successfully' });
+    // Delete associated events
+    await Event.deleteMany({ $or: [{ team1: id }, { team2: id }] });
+
+    // Delete the team
+    await Team.findByIdAndDelete(id);
+
+    res.status(200).json({ success: true, message: 'Team and associated events deleted successfully' });
   } catch (error) {
     handleError(res, 400, 'Something went wrong');
   }
 });
-
 // Get All Teams
 const getAllTeams = asyncHandler(async (req, res) => {
   try {

@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Category = require('../models/categoryModel');
+const Team = require('../models/teamModel');
+const Event = require('../models/eventModel');
 const handleError = require('../utils/errorHandler');
 
 // Create Category
@@ -60,18 +62,24 @@ const deleteCategory = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
-    const deletedCategory = await Category.findByIdAndDelete(id);
-
-    if (!deletedCategory) {
+    // Check if category exists
+    const category = await Category.findById(id);
+    if (!category) {
       return handleError(res, 404, 'Category not found');
     }
 
-    res.status(200).json({ success: true, message: 'Category deleted successfully' });
+    // Delete associated teams and events
+    await Team.deleteMany({ categoryId: id });
+    await Event.deleteMany({ 'category._id': id });
+
+    // Delete the category
+    await Category.findByIdAndDelete(id);
+
+    res.status(200).json({ success: true, message: 'Category and associated teams and events deleted successfully' });
   } catch (error) {
     handleError(res, 400, 'Something went wrong');
   }
 });
-
 // Get All Categories
 const getAllCategories = asyncHandler(async (req, res) => {
   try {
