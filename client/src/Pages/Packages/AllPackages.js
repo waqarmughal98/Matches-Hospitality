@@ -133,7 +133,7 @@ const AllPackages = () => {
                                                             <h1 className='text-3xl font-bold'>
                                                                 {item.name}
                                                             </h1>
-                                                            <p className='text-white/50 text-sm'>
+                                                            <p className='text-white/50 text-sm truncate-multiline'  style={{ '--line-clamp': 4 }}>
                                                                 {item.description}
                                                             </p>
                                                             <div className='flex justify-between items-center'>
