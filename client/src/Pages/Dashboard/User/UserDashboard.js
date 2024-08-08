@@ -14,6 +14,8 @@ const UserDashboard = () => {
   useEffect(()=>{
     if(categoryData.length==0){
       fetchData()
+    }else{
+      setLoading(false)
     }
   },[])
 
