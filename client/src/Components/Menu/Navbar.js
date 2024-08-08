@@ -1,13 +1,14 @@
 import React from 'react'
 import { ProfileDropdown } from '../UiElements/Dropdowns'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     return (
         <nav className={`bg-primaryBlack border-gray-200 md:px-16 px-8 sticky top-0 !z-30`}>
             <div className="flex flex-wrap items-center justify-between py-4">
-                <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="/assets/images/svgs/navbar/match-logo.svg" alt="match Logo" width='120' />
-                </a>
+                <Link to='/dashboard' className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="/assets/images/svgs/navbar/match-logo.svg" alt="match Logo" width='120' className='mt-1' />
+                </Link>
                 <div className="flex lg:order-1">
                     <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search" aria-expanded="false" className="lg:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 me-1">
                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

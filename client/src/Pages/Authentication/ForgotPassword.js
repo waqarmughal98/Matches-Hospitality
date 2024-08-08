@@ -48,7 +48,7 @@ const ForgotPassword = () => {
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
-                <div className='col-span-5 bg-primaryBlack rounded-xl p-10'>
+                <div className='col-span-5 bg-primaryBlack rounded-xl p-12'>
                     <div className='grid grid-cols-12 gap-9'>
                         <div className='col-span-12'>
                             <SecondaryButton />
@@ -71,7 +71,7 @@ const ForgotPassword = () => {
                                 <div className='col-span-12'>
                                     <LabelInput name="email" value={forgetPassworddata.email} showEyeIcon={true}  onChange={(e)=>forgetPasswordsSetter(e)}  label='Enter your email address' />
                                 </div>
-                                <div className='col-span-12 pb-10'>
+                                <div className='col-span-12'>
                                     <PrimaryButton disabled={loading} onClick={handleClick} size='large' color='green'>
                                         {loading ?  "Sending otp..." : "Confirm email Address"}
                                     </PrimaryButton>

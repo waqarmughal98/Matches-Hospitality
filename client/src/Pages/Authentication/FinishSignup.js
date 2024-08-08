@@ -68,7 +68,7 @@ const FinishSignup = () => {
     return (
         <AuthLayout backgroundImage={loginBanner}>
             <div className='grid grid-cols-12'>
-                <div className='col-span-5 bg-primaryBlack rounded-xl p-10'>
+                <div className='col-span-5 bg-primaryBlack rounded-xl p-12'>
                     <div className='grid grid-cols-12 gap-9'>
                         <div className='col-span-12'>
                             <SecondaryButton />
@@ -99,7 +99,7 @@ const FinishSignup = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-span-12 mt-3'>
+                        <div className='col-span-12'>
                             <PrimaryButton onClick={handleCreateAccount} disabled={loading} size='large' color='green'>
                                 {loading ? 'Creating account...' : 'Create Account'}
                             </PrimaryButton>

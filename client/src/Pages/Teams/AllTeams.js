@@ -135,10 +135,10 @@ const AllTeams = () => {
               <div key={index} className='group relative text-white grid xl:col-span-2 md:col-span-12 col-span-12 items-center min-h-44 rounded-xl bg-cover bg-center border-primaryBorder border-[1px] bg-gradient-to-t from-primaryGreen/10 py-5 to-transparent'>
                 <div className='flex flex-col items-center gap-y-3'>
                   <div className='h-[7rem] w-[7rem] relative '>
-                    <img className='flex-shrink-0 object-scale-down absolute h-full w-full' src={`/uploads/${item.logo}`} alt='logo' width={70} />
+                    <img className='flex-shrink-0 object-scale-down absolute h-full w-full border border-borderInput/20 rounded-lg backdrop-blur-3xl' src={`/uploads/${item.logo}`} alt='logo' width={70} />
                   </div>
                   <div className='flex flex-col items-center gap-y-2'>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col items-center'>
                       <p className='text-lg font-semibold'>{item.name || ""}</p>
                       <p>{item.categoryName || ""}</p>
                     </div>
