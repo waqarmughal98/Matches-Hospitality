@@ -114,7 +114,7 @@ const UserManagement = () => {
       header: 'Last Payment Date',
       cell: (row) => (
         <span>
-          10-2-2024
+          10-02-2024
         </span>
       ),
       accessorKey: 'date',
