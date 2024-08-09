@@ -13,7 +13,7 @@ const AllCategories = () => {
     const navigate = useNavigate()
     const [categoryData, setCategoryData] = useState([])
     const CreateCategory = () => {
-        navigate('/create-category')
+        navigate('/create-event')
     }
 
     useEffect(() => {
@@ -78,7 +78,7 @@ const AllCategories = () => {
     const handleEdit = (id) => {
         const selectedCategory = categoryData.find(item => item._id === id);
         setSelectedEditCategory(selectedCategory);
-        navigate("/edit-category");
+        navigate("/edit-event");
     }
 
     const handleShowBackdrop = (id) => {
