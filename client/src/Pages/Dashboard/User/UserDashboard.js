@@ -12,11 +12,7 @@ const UserDashboard = () => {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    if(categoryData.length==0){
       fetchData()
-    }else{
-      setLoading(false)
-    }
   },[])
 
   const fetchData = async () => {

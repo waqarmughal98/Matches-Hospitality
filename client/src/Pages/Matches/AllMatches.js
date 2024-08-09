@@ -13,12 +13,8 @@ const AllMatches = () => {
   
     useEffect(()=>{
         fetchData()
-        if(categoryData.length==0){
-            fetchCategories()
-        }
-        if(PackageData.length==0){
-            fetchPackages()
-        }
+        fetchCategories()
+        fetchPackages()
       },[])
 
       const fetchData = async () => {

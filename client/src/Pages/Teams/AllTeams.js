@@ -11,16 +11,14 @@ import Loader from '../../Components/UiElements/Loader';
 import { toast } from 'react-toastify';
 import CreateTeamModal from '../../Components/Modal/Team/CreateTeamModal';
 const AllTeams = () => {
-  const { showBackdropWithContent, categoryData, setCategoryData, handleErrors, closeModal } = useAppContext()
+  const { showBackdropWithContent,setCategoryData, handleErrors, closeModal } = useAppContext()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const [TeamData, setTeamData] = useState([])
   const [updation, setUpdation] = useState()
   useEffect(() => {
     fetchData()
-    if (categoryData.length == 0) {
-      fetchCategories()
-    }
+    fetchCategories()
   }, [updation])
 
   const fetchData = async () => {
