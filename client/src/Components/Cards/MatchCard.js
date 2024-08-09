@@ -69,7 +69,7 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
                 <div className='col-span-3'>
                     { data?.team1 && <div className='flex flex-col gap-2 items-center'>
                         <div className='h-16 w-16 relative'>
-                        <img src={`${StorageURL}/uploads/${data?.team1?.logo}`} className='absolute h-full w-full object-scale-down' alt='logo' width={imageWidth} />
+                        <img src={`${StorageURL}/${data?.team1?.logo}`} className='absolute h-full w-full object-scale-down' alt='logo' width={imageWidth} />
                         </div>
                         <p className='text-white font-semibold text-xs'>{data?.team1?.name}</p>
                     </div>
@@ -89,7 +89,7 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
                 <div className='col-span-3'>
                     {data?.team2 && <div className='flex flex-col gap-2 items-center'>
                       <div className='h-16 w-16 relative'>
-                         <img src={`${StorageURL}/uploads/${data?.team2?.logo}`} className='absolute h-full w-full object-scale-down' alt='logo' width={imageWidth} />
+                         <img src={`${StorageURL}/${data?.team2?.logo}`} className='absolute h-full w-full object-scale-down' alt='logo' width={imageWidth} />
                         </div>
                         <p className='text-white font-semibold text-xs'>{data?.team2?.name}</p>
                     </div>}

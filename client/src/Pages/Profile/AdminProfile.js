@@ -8,7 +8,7 @@ import { LabelInput } from '../../Components/UiElements/TextInputs'
 import { PrimaryButton } from '../../Components/UiElements/Buttons'
 import profile from '../../../src/assets/images/userdashboard/event1.jpg'
 import { useAppContext } from '../../UseContext/ContextProvider'
-import { axiosInstance, URL as API_URL, axiosInstance2 } from '../../utilities/ConstantData'
+import { axiosInstance, URL as API_URL, axiosInstance2, StorageURL } from '../../utilities/ConstantData'
 import { FaRegStar } from "react-icons/fa";
 
 import { useNavigate } from 'react-router-dom';
@@ -166,7 +166,7 @@ export const AdminProfile = () => {
                     <div className='flex-1 bg-black/60 rounded-b-md'></div>
                     <div className='absolute h-full w-full flex items-center px-5 text-white gap-5'>
                         <div className='h-40 w-40 rounded-full relative'>
-                            <img src={`uploads/${profileImage}`} className='absolute h-full w-full rounded-full border border-borderInput/30' />
+                            <img src={`${StorageURL}/${profileImage}`} className='absolute h-full w-full rounded-full border border-borderInput/30' />
                             <div
                                 className="absolute cursor-pointer bg-primaryGreen right-2 bottom-4 h-7 w-7 rounded-lg flex items-center justify-center"
                                 onClick={() => handleIconClick()}

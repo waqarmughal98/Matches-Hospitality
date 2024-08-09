@@ -3,12 +3,10 @@ const Team = require('../models/teamModel');
 const Event = require('../models/eventModel');
 const handleError = require('../utils/errorHandler');
 
-
-
 // Create Team
 const createTeam = asyncHandler(async (req, res) => {
   try {
-    const { name, categoryId , categoryName} = req.body;
+    const { name, categoryId, categoryName, status } = req.body;
     const logo = req.file ? req.file.filename : '';
 
     if (!logo) {
@@ -19,7 +17,8 @@ const createTeam = asyncHandler(async (req, res) => {
       name,
       logo,
       categoryId,
-      categoryName: categoryName || "" 
+      categoryName: categoryName || "",
+      status: status || 'active'
     });
 
     await newTeam.save();
@@ -34,17 +33,17 @@ const createTeam = asyncHandler(async (req, res) => {
 const editTeam = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, categoryId , categoryName } = req.body;
+    const { name, categoryId, categoryName, status } = req.body;
     const logo = req.file ? req.file.filename : undefined;
 
     const updateFields = {
       ...(name && { name }),
       ...(categoryId && { categoryId }),
       ...(categoryName && { categoryName }),
+      ...(status && { status }),
       ...(logo && { logo }),
     };
 
-    
     const updatedTeam = await Team.findByIdAndUpdate(id, updateFields, { new: true });
 
     if (!updatedTeam) {
@@ -62,16 +61,13 @@ const deleteTeam = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Check if team exists
     const team = await Team.findById(id);
     if (!team) {
       return handleError(res, 404, 'Team not found');
     }
 
-    // Delete associated events
     await Event.deleteMany({ $or: [{ team1: id }, { team2: id }] });
 
-    // Delete the team
     await Team.findByIdAndDelete(id);
 
     res.status(200).json({ success: true, message: 'Team and associated events deleted successfully' });
@@ -79,7 +75,7 @@ const deleteTeam = asyncHandler(async (req, res) => {
     handleError(res, 400, 'Something went wrong');
   }
 });
-// Get All Teams
+
 const getAllTeams = asyncHandler(async (req, res) => {
   try {
     const teams = await Team.find();
@@ -89,21 +85,51 @@ const getAllTeams = asyncHandler(async (req, res) => {
   }
 });
 
-// Get Teams by Category ID
 const getTeamsByCategoryId = asyncHandler(async (req, res) => {
-    try {
-      const { categoryId } = req.params;
-      const teams = await Team.find({ categoryId });
-      res.status(200).json({ success: true, data: teams });
-    } catch (error) {
-      handleError(res, 400, 'Something went wrong');
+  try {
+    const { categoryId } = req.params;
+    const teams = await Team.find({ categoryId });
+    res.status(200).json({ success: true, data: teams });
+  } catch (error) {
+    handleError(res, 400, 'Something went wrong');
+  }
+});
+
+const activateDeactivateTeam = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body; 
+
+    if (!['active', 'inactive'].includes(status)) {
+      return handleError(res, 400, 'Invalid status value');
     }
-  });
+
+    const updatedTeam = await Team.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    if (!updatedTeam) {
+      return handleError(res, 404, 'Team not found');
+    }
+
+    await Event.updateMany(
+      { $or: [{ team1: id }, { team2: id }] },
+      { status }
+    );
+
+    res.status(200).json({ success: true, data: updatedTeam });
+  } catch (error) {
+    handleError(res, 400, 'Something went wrong');
+  }
+});
 
 module.exports = {
   createTeam,
   editTeam,
   deleteTeam,
   getAllTeams,
-  getTeamsByCategoryId
+  getTeamsByCategoryId,
+  activateDeactivateTeam
 };

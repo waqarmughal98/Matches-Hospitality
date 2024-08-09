@@ -15,7 +15,12 @@ const CategorySchema = new mongoose.Schema({
   banner_image: {
     type: String,
     required: [true, 'Banner image is required'],
-  }
+  },
+  status: {
+    type: String,
+    enum: ['active', 'inactive'],
+    default: 'active',
+  },
 }, {
   timestamps: true,
 });

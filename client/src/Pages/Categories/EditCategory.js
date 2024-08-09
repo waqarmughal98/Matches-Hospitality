@@ -3,7 +3,7 @@ import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Butt
 import { LabelInput } from '../../Components/UiElements/TextInputs';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../UseContext/ContextProvider';
-import { axiosInstance2, URL as Api_URl } from '../../utilities/ConstantData';
+import { axiosInstance2, URL as Api_URl, StorageURL } from '../../utilities/ConstantData';
 import { toast } from 'react-toastify';
 const EditCategory = () => {
     const { selectedEditCategory , handleErrors} = useAppContext();
@@ -155,7 +155,7 @@ const EditCategory = () => {
                                         >
                                             {typeof Data.categoryLogo=="string" ? (
                                                 <img
-                                                    src ={`../../uploads/${selectedEditCategory.logo}`}
+                                                    src ={`${StorageURL}/${selectedEditCategory.logo}`}
                                                     alt={"logo"}
                                                     width={30}
                                                     className='absolute w-full h-full object-cover rounded-lg'
@@ -200,7 +200,7 @@ const EditCategory = () => {
                                         >
                                             {typeof Data.categoryBanner=="string" ? (
                                                 <img
-                                                    src={`../../uploads/${selectedEditCategory.banner_image}`}
+                                                    src={`${StorageURL}/${selectedEditCategory.banner_image}`}
                                                     alt={"Banner image"}
                                                     width={30}
                                                     className='absolute w-full h-full object-cover rounded-lg'

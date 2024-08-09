@@ -42,10 +42,10 @@ const UserDashboard = () => {
 };
 
   const slides = categoryData.length>0 &&  categoryData.map((item, index) => (
-    <div key={index} className='min-h-56 rounded-xl bg-cover bg-center border border-borderInput flex items-end p-5' style={{ backgroundImage: `url("/uploads/${item.banner_image}")` }}>
+    <div key={index} className='min-h-56 rounded-xl bg-cover bg-center border border-borderInput flex items-end p-5' style={{ backgroundImage: `url("${StorageURL}/${item.banner_image}")` }}>
       <div className='flex items-end h-full text-white'>
         <div className='flex flex-col gap-y-5'>
-          {item.logo && <img src={`${StorageURL}/uploads/${item.logo}`} alt='logo' width={40} />}
+          {item.logo && <img src={`${StorageURL}/${item.logo}`} alt='logo' width={40} />}
           <div>
             <p className='font-semibold text-lg'>{item.name}</p>
             <p className='w-2/4 text-sm'>{item.description}</p>

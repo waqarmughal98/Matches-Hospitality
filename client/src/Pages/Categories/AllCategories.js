@@ -52,7 +52,7 @@ const AllCategories = () => {
 
     const handleDelete = async (id) => {
         axiosInstance().delete(`${URL}/category/delete/${id}`)
-            .then((res) => {
+            .then(() => {
                 filterCategory(id)
                 closeModal()
                 toast.success("Category, associated teams and events deleted successfully")
@@ -104,6 +104,7 @@ const AllCategories = () => {
         )
         showBackdropWithContent(content)
     }
+
     return loading ? <Loader /> : (
         <div className='grid grid-cols-12 gap-y-10'>
             <div className='col-span-12 text-white'>
@@ -117,13 +118,13 @@ const AllCategories = () => {
             <div className='col-span-12'>
                 <div className='grid grid-cols-12 gap-5'>
                     {categoryData.map((item, index) => (
-                        <div key={index} className='group relative xl:col-span-4 md:col-span-12 col-span-12 min-h-56 rounded-xl bg-cover bg-center border-primaryBorder border-[1px]' style={{ backgroundImage: `url("/uploads/${item.banner_image}")` }}>
+                        <div key={index} className='group relative xl:col-span-4 md:col-span-12 col-span-12 min-h-56 rounded-xl bg-cover bg-center border-primaryBorder border-[1px]' style={{ backgroundImage: `url("${StorageURL}/${item.banner_image}")` }}>
                             <div className="absolute rounded-xl inset-0 bg-gradient-to-b from-transparent to-primaryGreen/40 opacity-0 group-hover:opacity-30 transition-opacity duration-100 ease-linear h-full w-full"></div>
                             <div className='grid grid-cols-12 items-end absolute h-full w-full p-5 text-white group justify-between'>
                                 <div className='col-span-8 group'>
                                     <div className='grid grid-cols-12'>
                                         <div className='col-span-12'>
-                                            {item.logo && <img src={`${StorageURL}/uploads/${item.logo}`} alt='logo' width={60} />}
+                                            {item.logo && <img src={`${StorageURL}/${item.logo}`} alt='logo' width={60} />}
                                         </div>
                                         <div className='col-span-12'>
                                             <div className='grid grid-cols-12'>

@@ -4,7 +4,8 @@ const {
   editTeam,
   deleteTeam,
   getAllTeams,
-  getTeamsByCategoryId
+  getTeamsByCategoryId,
+  activateDeactivateTeam
 } = require('../controllers/teamController');
 const { validateTeam } = require('../middleware/validationMiddleware');
 const protect = require('../middleware/authMiddleware');
@@ -18,5 +19,6 @@ router.put('/edit/:id', protect, isAdmin, upload.single('logo'), editTeam);
 router.delete('/delete/:id', protect, isAdmin, deleteTeam);
 router.get('/all', protect, getAllTeams);
 router.get('/filter-by-category/:categoryId', protect, getTeamsByCategoryId);
+router.patch('/change-status/:id', protect, isAdmin, activateDeactivateTeam);
 
 module.exports = router;

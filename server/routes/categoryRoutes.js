@@ -5,6 +5,7 @@ const {
   editCategory,
   deleteCategory,
   getAllCategories,
+  activateDeactivateCategory
 } = require('../controllers/categoryController');
 const { validateCategory } = require('../middleware/validationMiddleware');
 const protect = require('../middleware/authMiddleware');
@@ -17,5 +18,6 @@ router.post('/create', protect, isAdmin, upload.fields([{ name: 'logo', maxCount
 router.put('/edit/:id', protect,isAdmin, upload.fields([{ name: 'logo', maxCount: 1 }, { name: 'banner_image', maxCount: 1 }]), editCategory);
 router.delete('/delete/:id', protect, isAdmin,deleteCategory);
 router.get('/all', protect,getAllCategories);
+router.patch('/change-status/:id', protect,isAdmin, activateDeactivateCategory);
 
 module.exports = router;

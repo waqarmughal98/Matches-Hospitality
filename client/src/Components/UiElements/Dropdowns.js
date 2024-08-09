@@ -67,7 +67,7 @@ export const ProfileDropdown = () => {
       >
         <img
           className="w-10 h-10 rounded-full flex items-center object-cover"
-          src={userData?.profileImage != "" ? `${StorageURL}/uploads/${userData?.profileImage}` : `assets/images/svgs/navbar/profile.png`}
+          src={userData?.profileImage != "" ? `${StorageURL}/${userData?.profileImage}` : `assets/images/svgs/navbar/profile.png`}
           alt="Avatar"
         />
         <span className="font-medium truncate max-w-[7.5rem] text-white">{userData?.userName || ''}</span>
@@ -258,7 +258,7 @@ const Dropdown = ({
             <div className='flex items-center gap-5'>
               {selectedItem?.logo && (
                 <img
-                  src={`${StorageURL}/uploads/${selectedItem.logo}`}
+                  src={`${StorageURL}/${selectedItem.logo}`}
                   alt='Selected'
                   className='w-7 h-7 rounded-full bg-gray-400 object-cover me-2'
                 />
@@ -291,7 +291,7 @@ const Dropdown = ({
                   >
                     {hasImage && item.logo && (
                       <img
-                        src={`${StorageURL}/uploads/${item.logo}`}
+                        src={`${StorageURL}/${item.logo}`}
                         alt={item.name}
                         loading='lazy'
                         className='w-7 h-7 rounded-full bg-gray-400 object-cover me-2'

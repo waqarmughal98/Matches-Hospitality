@@ -121,7 +121,7 @@ const EditTeamModal = ({selectedItem,setUpdation}) => {
                         <div  className='cursor-pointer flex justify-center items-center flex-col gap-4'>
                             {typeof selectedFile=="string" ? (
                                 <img
-                                    src={`${StorageURL}/uploads/${selectedFile}`}
+                                    src={`${StorageURL}/${selectedFile}`}
                                     alt='Profile Preview'
                                     className='w-full h-full rounded-full object-cover absolute'
                                 />

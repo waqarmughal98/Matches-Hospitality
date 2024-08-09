@@ -18,6 +18,11 @@ const TeamSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Category Name is required'],
   },
+  status: {
+    type: String,
+    enum: ['active', 'inactive'],
+    default: 'active', 
+  },
 }, {
   timestamps: true,
 });
