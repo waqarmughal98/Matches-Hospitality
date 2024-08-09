@@ -57,10 +57,10 @@ const Login = () => {
                         <div className='col-span-12'>
                             <div className='grid grid-cols-12 gap-3'>
                                 <div className='col-span-12 jumperHeading'>
-                                    Signin to your Account
+                                    Sign in to your Account
                                 </div>
                                 <div className='col-span-12 text-sm text-white '>
-                                    lorem ipsum is simply a dummy text
+                                    Please add your credentials to access the system.
                                 </div>
                             </div>
                         </div>
