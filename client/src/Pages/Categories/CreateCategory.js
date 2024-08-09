@@ -94,8 +94,8 @@ const CreateCategory = () => {
                     <div className='col-span-12'>
                         <LabelInput
                             value={formData.categoryName || ''}
-                            label='Category Name'
-                            placeholder='Name...'
+                            label='Event Name'
+                            placeholder='Event Name'
                             onChange={(e) => setFormData({ ...formData, categoryName: e.target.value })}
                         />
                     </div>
@@ -109,8 +109,8 @@ const CreateCategory = () => {
                                     value={formData.categoryDescription || ''}
                                     id="description"
                                     rows="6"
-                                    className="block p-2.5 w-full text-sm bg-transparent rounded-lg border border-borderInput focus:outline-none focus:border-primaryGreen"
-                                    placeholder="Description..."
+                                    className="block p-2.5 w-full px-4 bg-transparent rounded-lg border border-borderInput focus:outline-none focus:border-primaryGreen"
+                                    placeholder="Event Description"
                                     onChange={(e) => setFormData({ ...formData, categoryDescription: e.target.value })}
                                 />
                             </div>

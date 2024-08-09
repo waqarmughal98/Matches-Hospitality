@@ -38,19 +38,19 @@ const AdminDashboard = () => {
   const userData = [
     {
       users: 'Total User',
-      numberOfUsers: '54,272'
+      numberOfUsers: '272'
     },
     {
-      users: 'Total User',
-      numberOfUsers: '12,098'
+      users: 'Total Revenue',
+      numberOfUsers: '$92,098'
     },
     {
-      users: 'Total User',
-      numberOfUsers: '23,765'
+      users: 'Total Bookings',
+      numberOfUsers: '765'
     },
     {
-      users: 'Total User',
-      numberOfUsers: '98,656'
+      users: 'Total Events',
+      numberOfUsers: '56'
     }
   ]
   return loading ? <Loader/> : (
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
                                 </svg>
                                 <span className='text-[#00B69B] font-mohol'>8.5%</span>
                                 <span>
-                                  Up from yesterday
+                                  Up from last year
                                 </span>
                               </div>
                             </div>
