@@ -35,8 +35,7 @@ const FinishSignup = () => {
         return true;
     };
 
-
-
+    
     const handleCreateAccount = async () => {
         if (!validation()) {
             return null

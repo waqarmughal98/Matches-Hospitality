@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { URL } from '../../utilities/ConstantData'
 import AuthLayout from '../../ThemeLayout/AuthLayout'
-import { PrimaryButton, SecondaryButton } from '../../Components/UiElements/Buttons'
+import { PrimaryButton } from '../../Components/UiElements/Buttons'
 import { LabelInput } from '../../Components/UiElements/TextInputs'
 import { useAppContext } from '../../UseContext/ContextProvider'
 
@@ -27,8 +27,23 @@ const Login = () => {
         }))
     }
 
+    const validation = () => {
+        if (!loginData.email) {
+            toast.error("Email is required");
+            return false;
+        }
+        if (!loginData.password) {
+            toast.error("Password is required");
+            return false;
+        }
+        return true;
+    };
+
     const handleLoginIn = async (e) => {
         e.preventDefault();
+        if(!validation()){
+            return null
+        }
         setLoading(true)
         axios.post(`${URL}/login`, loginData)
             .then((res) => {
@@ -85,7 +100,7 @@ const Login = () => {
                                     <div className='col-span-12'>
                                         <div className='grid grid-cols-12 gap-3'>
                                             <div className='col-span-12'>
-                                                <PrimaryButton type="submit" disabled={!loginData.email || !loginData.password || loading} size='large' color='green'>
+                                                <PrimaryButton type="submit" disabled={loading} size='large' color='green'>
                                                     {loading ? 'Logging in...' : 'Log in'}
                                                 </PrimaryButton>
                                             </div>
