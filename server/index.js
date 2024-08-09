@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 app.use(cors({
-  origin: 'https://matches-hospitality-server.vercel.app/',
+  origin: 'https://matches-hospitality.vercel.app/',
   methods: ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
