@@ -131,9 +131,9 @@ const AllCategories = () => {
                             <div className="absolute rounded-xl inset-0 bg-gradient-to-b from-transparent to-primaryGreen/40 opacity-0 group-hover:opacity-30 transition-opacity duration-100 ease-linear h-full w-full"></div>
                             <div className='grid grid-cols-12 items-end absolute h-full w-full p-5 text-white group justify-between'>
                                 <div className='col-span-8 group'>
-                                    <div className='grid grid-cols-12'>
-                                        <div className='col-span-12'>
-                                            {item.logo && <img src={`${StorageURL}/${item.logo}`} alt='logo' width={60} />}
+                                    <div className='grid gap-y-3 grid-cols-12'>
+                                        <div className='col-span-12 relative object-contain w-16 h-24'>
+                                            {item.logo && <img className="absolute bottom-0 w-full h-full" src={`${StorageURL}/${item.logo}`} alt='logo'/>}
                                         </div>
                                         <div className='col-span-12'>
                                             <div className='grid grid-cols-12'>
