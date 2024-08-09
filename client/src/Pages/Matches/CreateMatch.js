@@ -216,7 +216,7 @@ const CreateMatch = () => {
             <div className='col-span-12'>
                 <div className='grid grid-cols-12 gap-y-10'>
                     <div className='col-span-12 headerText'>
-                        {action === "create" ? "Create Match" : "Edit Match"}
+                        {action === "create" ? "Create New Match" : "Edit Match Details"}
                     </div>
                     <div className='lg:col-span-6 col-span-12'>
                         <div className='grid grid-cols-12 gap-y-5'>
