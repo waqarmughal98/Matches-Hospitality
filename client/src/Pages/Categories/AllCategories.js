@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { toast } from 'react-toastify';
-import { axiosInstance, URL } from '../../utilities/ConstantData';
+import { axiosInstance, StorageURL, URL } from '../../utilities/ConstantData';
 import Loader from '../../Components/UiElements/Loader';
 const AllCategories = () => {
     const { handleErrors, showBackdropWithContent, closeModal, setSelectedEditCategory } = useAppContext()
@@ -123,7 +123,7 @@ const AllCategories = () => {
                                 <div className='col-span-8 group'>
                                     <div className='grid grid-cols-12'>
                                         <div className='col-span-12'>
-                                            {item.logo && <img src={`/uploads/${item.logo}`} alt='logo' width={60} />}
+                                            {item.logo && <img src={`${StorageURL}/uploads/${item.logo}`} alt='logo' width={60} />}
                                         </div>
                                         <div className='col-span-12'>
                                             <div className='grid grid-cols-12'>

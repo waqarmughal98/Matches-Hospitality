@@ -3,7 +3,7 @@ import { LabelInput } from '../../UiElements/TextInputs';
 import Dropdown from '../../UiElements/Dropdowns';
 import { PrimaryButton } from '../../UiElements/Buttons';
 import { useAppContext } from '../../../UseContext/ContextProvider';
-import { URL as API_URL, axiosInstance2 } from '../../../utilities/ConstantData';
+import { URL as API_URL, axiosInstance2, StorageURL } from '../../../utilities/ConstantData';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 const EditTeamModal = ({selectedItem,setUpdation}) => {
@@ -121,7 +121,7 @@ const EditTeamModal = ({selectedItem,setUpdation}) => {
                         <div  className='cursor-pointer flex justify-center items-center flex-col gap-4'>
                             {typeof selectedFile=="string" ? (
                                 <img
-                                    src={`/uploads/${selectedFile}`}
+                                    src={`${StorageURL}/uploads/${selectedFile}`}
                                     alt='Profile Preview'
                                     className='w-full h-full rounded-full object-cover absolute'
                                 />
