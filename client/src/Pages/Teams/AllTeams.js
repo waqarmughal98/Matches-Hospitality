@@ -141,7 +141,7 @@ const AllTeams = () => {
                       <p className='text-sm'>{item.categoryName || ""}</p>
                     </div>
                     <div className='flex items-center gap-x-3 py-1 rounded-md text-xs w-fit'>
-                      <div className='flex gap-x-3 items-center border-borderInput border px-2 py-1 rounded-md cursor-pointer' onClick={() => handleEditShowBackdrop(item)}>
+                      <div className='flex gap-x-2 items-center border-borderInput border px-2 py-1 rounded-md cursor-pointer' onClick={() => handleEditShowBackdrop(item)}>
                         Edit <MdOutlineEdit />
                       </div>
                       <div onClick={() => handleBackdrop(item._id)} className='flex gap-x-1  items-center text-white bg-red-700 px-2 py-1 rounded-md cursor-pointer font-semibold'>
