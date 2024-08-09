@@ -6,14 +6,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 app.use(cors({
   origin: 'https://matches-hospitality-server.vercel.app/'
 }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const authRouter = require('./routes/authRoutes.js');
 const packageRouter = require('./routes/packageRoutes.js');
