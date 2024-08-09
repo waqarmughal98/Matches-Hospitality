@@ -1,8 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Packages from '../../../Components/Dashboard/Packages'
 import Revenue from '../../../Components/Dashboard/Revenue'
+import { toast } from 'react-toastify'
+import { useAppContext } from '../../../UseContext/ContextProvider'
+import { useNavigate } from 'react-router-dom'
+import { axiosInstance, URL } from '../../../utilities/ConstantData'
+import Loader from '../../../Components/UiElements/Loader'
 
 const AdminDashboard = () => {
+  const navigate = useNavigate()
+  const {handleErrors, PackageData ,setPackageData} = useAppContext()
+  const [loading , setLoading] = useState(true)
+
+  useEffect(()=>{
+      fetchData()
+    },[])
+
+    const fetchData = async () => {
+      axiosInstance().get(`${URL}/package/all`)
+      .then((res)=>{
+          setLoading(false)
+          const data = res.data.data;
+          setPackageData(data)
+      })
+      .catch ((error)=> {
+          setLoading(false)
+          const errors=error?.response?.data?.errors
+          const statusCode=error?.response?.status
+          if(statusCode==401){
+              toast.error(errors);
+              navigate("/Login")
+          }else{
+              handleErrors(error)
+          }
+      })
+  };
   const userData = [
     {
       users: 'Total User',
@@ -21,7 +53,7 @@ const AdminDashboard = () => {
       numberOfUsers: '98,656'
     }
   ]
-  return (
+  return loading ? <Loader/> : (
     <div className='text-white'>
       <div className='grid grid-cols-12 lg:gap-x-10 gap-y-8'>
         <div className='col-span-12'>
@@ -65,7 +97,7 @@ const AdminDashboard = () => {
           </div>
           </div>
         </div>
-        <Packages/>
+        <Packages data={PackageData}/>
         <Revenue />
       </div>
     </div>

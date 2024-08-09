@@ -100,7 +100,7 @@ const NewPackage = () => {
             return false;
         }
         if (!info.price) {
-            toast.error("Price pf package is required");
+            toast.error("Price of package is required");
             setLoading2(false)
             return false;
         }
