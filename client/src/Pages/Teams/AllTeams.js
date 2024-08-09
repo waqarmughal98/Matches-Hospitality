@@ -6,7 +6,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import EditTeamModal from '../../Components/Modal/Team/EditTeamModal';
 import DeleteModal from '../../Components/Modal/DeleteModal';
-import { axiosInstance, URL } from '../../utilities/ConstantData';
+import { axiosInstance, StorageURL, URL } from '../../utilities/ConstantData';
 import Loader from '../../Components/UiElements/Loader';
 import { toast } from 'react-toastify';
 import CreateTeamModal from '../../Components/Modal/Team/CreateTeamModal';
