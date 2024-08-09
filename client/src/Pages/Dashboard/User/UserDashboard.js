@@ -48,7 +48,7 @@ const UserDashboard = () => {
           {item.logo && <img src={`${StorageURL}/${item.logo}`} alt='logo' width={40} />}
           <div>
             <p className='font-semibold text-lg'>{item.name}</p>
-            <p className='w-2/4 text-sm'>{item.description}</p>
+            <p className='w-2/4 text-sm truncate-multiline' style={{ '--line-clamp': 4 }}>{item.description}</p>
           </div>
         </div>
         <div className='h-6 w-6 flex-shrink-0 rounded-full bg-primaryGreen flex justify-center items-center  shadow-primaryGreen shadow-sm'>

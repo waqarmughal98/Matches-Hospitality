@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import loginBanner from '../../../src/assets/webp/auth/signup-banner.webp'
 import logo from '../../../src/assets/svgs/navbar/match-logo.svg'
 // import google from '../../../src/assets/svgs/auth/google.svg'
@@ -14,7 +14,7 @@ import axios from 'axios'
 const Signup = () => {
   const { signUpDetails,signUpDetailsSetter,isEmailValidate,handleErrors}  = useAppContext()
   const navigate = useNavigate();
-
+  const [loading , setLoading] = useState(false)
   const validation = () => {
         if (!signUpDetails.userName) {
             toast.error("Full name is required");
@@ -38,11 +38,14 @@ const Signup = () => {
   };
 
   const checkUserExists=()=>{
+    setLoading(true)
     axios.post(`${URL}/check-user-exists`, {email : signUpDetails.email})
     .then((res) => {
+        setLoading(false)
         navigate('/finish-signup'); 
     })
     .catch((error) => {
+        setLoading(false)
         handleErrors(error)
     })
   }
@@ -71,7 +74,7 @@ const Signup = () => {
                             <div className='grid grid-cols-12'>
                                 <div className='col-span-12 mt-3'>
                                     <PrimaryButton  onClick={handleClick}  size='large' color='green'>
-                                            Get Started
+                                            {loading ? "Validating email address..."  : "Get Started"}
                                     </PrimaryButton>
                                 </div>
                                 {/* <div className='col-span-12'>
