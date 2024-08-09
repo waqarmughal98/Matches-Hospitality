@@ -19,28 +19,37 @@ const MatchCard = ({ data, onClick, width, overlay }) => {
     };
     
     const handleDelete = async (id) => {
-        axiosInstance().delete(`${URL}/event/delete/${id}`)
-        .then((res)=>{
-            filterCategory(id)
-            closeModal()
-            toast.success("Match deleted successfully")
-        })
-        .catch ((error)=> {
-            const errors=error?.response?.data?.errors
-            const statusCode=error?.response?.status
-            if(statusCode==401){
-                toast.error(errors);
-                try {
-                    localStorage.removeItem('userData')
-                  } catch (error) {
-                    console.log(error)
-                  } finally {
-                    navigate("/Login")
-                  }
-            }else{
-                handleErrors(error)
+        const deleteRequest = axiosInstance().delete(`${URL}/event/delete/${id}`);    
+        toast.promise(
+            deleteRequest,
+            {
+                pending: 'Deleting match...',
+                success: 'Match deleted successfully',
+                error: (error) => {
+                    const errors = error?.response?.data?.errors;
+                    const statusCode = error?.response?.status;
+    
+                    if (statusCode === 401) {
+                        try {
+                            localStorage.removeItem('userData');
+                        } catch (e) {
+                            console.log(e);
+                        } finally {
+                            navigate("/Login");
+                        }
+                        return errors || 'Unauthorized access. Redirecting to login.';
+                    } else {
+                        handleErrors(error);
+                        return errors || 'An error occurred while deleting the match';
+                    }
+                }
             }
-        })
+        ).then(() => {
+            filterCategory(id);
+            closeModal();
+        }).catch((error) => {
+            console.error(error);
+        });
     };
 
     const handleBackdrop = () => {

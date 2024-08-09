@@ -151,7 +151,7 @@ const EditTeamModal = ({selectedItem,setUpdation}) => {
                     </div>
                     <div className='col-span-12'>
                         <div className='flex flex-col gap-5 justify-center m-auto'>
-                            <LabelInput name="Name" value={name || selectedItem.name} onChange={(e)=>setName(e.target.value)} label='Team Name' />
+                            <LabelInput name="Name" value={name} onChange={(e)=>setName(e.target.value)} label='Team Name' />
                             <Dropdown
                                 id="Categoty"
                                 title="Category"

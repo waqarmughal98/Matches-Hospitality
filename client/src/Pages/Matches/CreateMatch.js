@@ -165,7 +165,7 @@ const CreateMatch = () => {
         if(action=="create"){
             axiosInstance().post(`${API_URL}/event/create`, data)
             .then((res) => {
-                handleResponse("crated")
+                handleResponse("created")
             })
             .catch((error) => {
                 handleCatch(error)

@@ -82,30 +82,43 @@ const AllTeams = () => {
     setTeamData(prevData => prevData.filter(team => team._id !== id));
   };
 
+
   const handleDelete = async (id) => {
-    axiosInstance().delete(`${URL}/team/delete/${id}`)
-      .then((res) => {
-        filterCategory(id)
-        closeModal()
-        toast.success("Team and associated events deleted successfully")
-      })
-      .catch((error) => {
-        const errors = error?.response?.data?.errors
-        const statusCode = error?.response?.status
-        if (statusCode == 401) {
-          toast.error(errors);
-          try {
-            localStorage.removeItem('userData')
-          } catch (error) {
-            console.log(error)
-          } finally {
-            navigate("/Login")
+    const deleteRequest = axiosInstance().delete(`${URL}/team/delete/${id}`);
+    toast.promise(
+        deleteRequest,
+        {
+            pending: 'Deleting team...',
+            success: 'Team and associated matches deleted successfully',
+            error: (error) => {
+                const errors = error?.response?.data?.errors;
+                const statusCode = error?.response?.status;
+
+                if (statusCode === 401) {
+                    // Handle unauthorized error
+                    try {
+                        localStorage.removeItem('userData');
+                    } catch (e) {
+                        console.log(e);
+                    } finally {
+                        navigate("/Login");
+                    }
+                    return errors || 'Unauthorized access. Redirecting to login.';
+                } else {
+                    handleErrors(error);
+                    return errors || 'An error occurred while deleting the team';
+                }
+            }
           }
-        } else {
-          handleErrors(error)
-        }
-      })
+      ).then(() => {
+          filterCategory(id);
+          closeModal();
+      }).catch((error) => {
+          console.error(error);
+      });
   };
+
+
 
 
   const handleBackdrop = (id) => {

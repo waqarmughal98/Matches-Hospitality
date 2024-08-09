@@ -51,28 +51,37 @@ const AllCategories = () => {
     };
 
     const handleDelete = async (id) => {
-        axiosInstance().delete(`${URL}/category/delete/${id}`)
-            .then(() => {
-                filterCategory(id)
-                closeModal()
-                toast.success("Category, associated teams and events deleted successfully")
-            })
-            .catch((error) => {
-                const errors = error?.response?.data?.errors
-                const statusCode = error?.response?.status
-                if (statusCode == 401) {
-                    toast.error(errors);
-                    try {
-                        localStorage.removeItem('userData')
-                    } catch (error) {
-                        console.log(error)
-                    } finally {
-                        navigate("/Login")
+        const deleteRequest = axiosInstance().delete(`${URL}/category/delete/${id}`);
+        toast.promise(
+            deleteRequest,
+            {
+                pending: 'Deleting Event...',
+                success: 'Event, associated teams, and matches deleted successfully',
+                error: (error) => {
+                    const errors = error?.response?.data?.errors;
+                    const statusCode = error?.response?.status;
+                    
+                    if (statusCode === 401) {
+                        try {
+                            localStorage.removeItem('userData');
+                        } catch (e) {
+                            console.log(e);
+                        } finally {
+                            navigate("/Login");
+                        }
+                    } else {
+                        handleErrors(error);
                     }
-                } else {
-                    handleErrors(error)
+    
+                    return errors || 'An error occurred while deleting';
                 }
-            })
+            }
+        ).then(() => {
+            filterCategory(id);
+            closeModal();
+        }).catch((error) => {
+            console.error(error);
+        });
     };
 
     const handleEdit = (id) => {
@@ -90,7 +99,7 @@ const AllCategories = () => {
                         <span class="sr-only">Close modal</span>
                     </button>
                     <svg class="text-white   dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                    <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete this category? Deleting this category will also remove all associated teams and events. </p>
+                    <p class="mb-4 text-gray-500 dark:text-gray-300">Are you sure you want to delete this event? Deleting this event will also remove all associated teams and matches. </p>
                     <div class="flex justify-center items-center space-x-4">
                         <button onClick={() => closeModal()} data-modal-toggle="deleteModal" type="button" class="py-2 px-3 text-sm font-medium text-gray-300 bg-transparent rounded-lg border border-borderInput focus:z-10 transition-opacity duration-100 ease-linear">
                             No, cancel
