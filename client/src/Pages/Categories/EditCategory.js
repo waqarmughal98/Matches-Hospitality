@@ -116,7 +116,7 @@ const EditCategory = () => {
                         <LabelInput
                             value={Data.name}
                             label='Event Name'
-                            placeholder='Name...'
+                            placeholder='Event Name'
                             onChange={(e) => setData({ ...Data, name: e.target.value })}
                         />
                     </div>
@@ -130,8 +130,8 @@ const EditCategory = () => {
                                     value={Data.description}
                                     id="description"
                                     rows="6"
-                                    className="block p-2.5 w-full text-sm bg-transparent rounded-lg border border-[#454545] focus:ring-primaryGreen focus:border-primaryBlack"
-                                    placeholder="Description..."
+                                    className="block p-2.5 w-full px-4 bg-transparent rounded-lg border border-borderInput focus:outline-none focus:border-primaryGreen"
+                                    placeholder="Event Description"
                                     onChange={(e) => setData({ ...Data, description: e.target.value })}
                                 />
                             </div>
