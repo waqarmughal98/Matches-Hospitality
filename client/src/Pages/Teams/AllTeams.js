@@ -130,15 +130,15 @@ const AllTeams = () => {
           TeamData.length>0 ?
           <div className='grid grid-cols-12 gap-7'>
             {TeamData.map((item, index) => (
-              <div key={index} className='group relative text-white grid xl:col-span-2 md:col-span-12 col-span-12 items-center min-h-44 rounded-xl bg-cover bg-center border-primaryBorder border-[1px] bg-gradient-to-t from-primaryGreen/10 py-5 to-transparent'>
-                <div className='flex flex-col items-center gap-y-3'>
-                  <div className='h-[7rem] w-[7rem] relative '>
+              <div key={index} className='group relative text-white grid xl:col-span-3 md:col-span-12 col-span-12 items-center min-h-44 rounded-xl bg-cover bg-center border-primaryBorder border-[1px] bg-gradient-to-t from-primaryGreen/10 py-5 to-transparent'>
+                <div className='flex items-center justify-center gap-x-3'>
+                  <div className='h-[7rem] w-[7rem] relative flex justify-center items-center'>
                     <img className='flex-shrink-0 object-scale-down absolute h-full w-full border border-borderInput/20 rounded-lg backdrop-blur-3xl' src={`/uploads/${item.logo}`} alt='logo' width={70} />
                   </div>
                   <div className='flex flex-col items-center gap-y-2'>
                     <div className='flex flex-col items-center'>
                       <p className='text-lg font-semibold'>{item.name || ""}</p>
-                      <p>{item.categoryName || ""}</p>
+                      <p className='text-sm'>{item.categoryName || ""}</p>
                     </div>
                     <div className='flex items-center gap-x-3 py-1 rounded-md text-xs w-fit'>
                       <div className='flex gap-x-3 items-center border-borderInput border px-2 py-1 rounded-md cursor-pointer' onClick={() => handleEditShowBackdrop(item)}>
