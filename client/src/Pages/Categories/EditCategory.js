@@ -115,7 +115,7 @@ const EditCategory = () => {
                     <div className='col-span-12'>
                         <LabelInput
                             value={Data.name}
-                            label='Category Name'
+                            label='Event Name'
                             placeholder='Name...'
                             onChange={(e) => setData({ ...Data, name: e.target.value })}
                         />
@@ -123,7 +123,7 @@ const EditCategory = () => {
                     <div className='col-span-12'>
                         <div className='grid grid-cols-12 gap-3'>
                             <div className='col-span-12'>
-                                <label htmlFor="description" className="block text-base font-semibold">Category Description</label>
+                                <label htmlFor="description" className="block primaryText">Event Description</label>
                             </div>
                             <div className='col-span-12'>
                                 <textarea
@@ -141,7 +141,7 @@ const EditCategory = () => {
                         <div className='grid grid-cols-12 lg:gap-x-10 gap-y-10'>
                             <div className='md:col-span-6 col-span-12'>
                                 <div className='flex flex-col gap-y-3'>
-                                    <label htmlFor='categoryLogo'>Category Logo</label>
+                                    <label htmlFor='categoryLogo'>Event Logo</label>
                                     <div className='border relative border-borderInput min-h-36 rounded-lg'>
                                         <input
                                             type='file'
@@ -186,7 +186,7 @@ const EditCategory = () => {
                             </div>
                             <div className='md:col-span-6 col-span-12'>
                                 <div className='flex flex-col gap-y-3'>
-                                    <label htmlFor='categoryBanner'>Category Banner</label>
+                                    <label htmlFor='categoryBanner'>Event Banner</label>
                                     <div className='border relative border-borderInput min-h-36 rounded-lg'>
                                         <input
                                             type='file'
@@ -232,7 +232,7 @@ const EditCategory = () => {
                         </div>
                     </div>
                     <div className='col-span-12 mt-5'>
-                        <PrimaryButton onClick={()=>HandleEdit()} size='large'>{loading ? "Updating category..." : "Update Category"}</PrimaryButton>
+                        <PrimaryButton onClick={()=>HandleEdit()} size='large'>{loading ? "Updating event..." : "Update Event"}</PrimaryButton>
                     </div>
                 </div>
             </div>
